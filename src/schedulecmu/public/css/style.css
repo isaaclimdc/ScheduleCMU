@@ -33,6 +33,16 @@ h3 {
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
+h4 {
+    font-size: 22px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    color: #222;
+    font-weight: bold;
+    text-shadow: 0px 2px 3px #aaa;
+    font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
+}
+
 p {
     color: #222;
     text-shadow: 0px 2px 3px #555 inset;
@@ -50,9 +60,14 @@ p {
 
 .static_page h1 {
     font-size: 140px;
+    text-shadow: 0px 2px 3px #555;
     font-weight: bold;
     text-align: right;
     margin-bottom: 50px;
+}
+
+.static_page p {
+    text-shadow: 0px 1px 2px #555;
 }
 
 @media screen and (max-width: 760px) {
@@ -102,8 +117,8 @@ p {
 
 #hdrtitle img {
     float: left;
-    margin: 5px;
-    width: 100%;
+    margin: 10px;
+    width: 80%;
     height: auto !important;
 }
 
