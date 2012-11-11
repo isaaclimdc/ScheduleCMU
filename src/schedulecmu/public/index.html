@@ -9,34 +9,47 @@
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/skeleton.css" />
+	<link rel="stylesheet" type="text/css" href="css/layout.css" />	
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-	<!-- Header -->
-	<div id="header">
-		<div id="hdrtitle">
-			<img src="images/hdrlogo.png" alt="ScheduleCMU" />
-			<h1>cheduleCMU</h1>
+		<!-- Header -->
+		<div id="header">
+			<div class="container">
+				<div id="hdrtitle" class="eight columns">
+					<img src="images/hdrlogo.png" alt="ScheduleCMU" />
+					<h1>cheduleCMU</h1>
+				</div>
+				<div class="three columns"></div>
+				<div id="nav" class="five columns">
+					<a href="#">Contact</a>
+					<a href="#">Help</a>
+					<a href="#">About</a>
+				</div>
+			</div>
 		</div>
-
-		<div id="nav">
-			<a href="#">Contact</a>
-			<a href="#">Help</a>
-			<a href="#">About</a>
+		<br class="clear"/>
+		<!-- Content -->
+		<div class="container">
+			<div id="content" class="row">
+				<div id="leftside" class="twelve columns">
+					<h2 class="ten columns">A brand new way to schedule your classes at CMU.</h2>
+					<iframe id="introvid" width="640" height="360" src="http://www.youtube.com/embed/6PdY1c_C-Qk" frameborder="0" allowfullscreen></iframe>
+				</div>
+				<div id="sidebar" class="four columns">
+					<a href="#" onclick="javascript:alert('Login!');" class="full-width button">Log In With Facebook</a>
+				</div>
+			</div>
 		</div>
-	</div>
-
-	<!-- Content -->
-	<div id="content" class="center">
-		<h2>A brand new way to schedule your classes at CMU.</h2>
-		<iframe id="introvid" width="640" height="360" src="http://www.youtube.com/embed/6PdY1c_C-Qk" frameborder="0" allowfullscreen></iframe>
-
-		<div id="fbloginbtn" onClick="javascript:alert('Login!');"></div>
-	</div>
-
-	<!-- Footer -->
-	<div id="footer">
-		
+		<br class="clear" />
+		<!-- Footer -->
+		<div id="footer">
+			<div class="container">
+				<!-- footer content goes here -->
+			</div>
+		</div>
 	</div>
 </body>
 </html>
