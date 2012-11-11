@@ -36,9 +36,39 @@ p {
     font-family: Arial, sans-serif;
 }
 
-/* IDs */
+/* Classes */
 
-#header, #footer {
+.static_page {
+    height: 100%;
+    padding: 10%;
+    overflow: hidden;
+}
+
+.static_page h1 {
+    font-size: 140px;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 760px) {
+  .static_page { padding: 6%; }
+  .static_page h1 { font-size: 100px; }
+}
+
+@media screen and (max-width: 400px) {
+    .static_page { padding: 2%; }
+    .static_page h1 { font-size: 60px; }
+}
+
+.centered {
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.blue {
     background: #368eda; /* Old browsers */
     background: -moz-linear-gradient(top, #368eda 0%, #2a6ca7 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#368eda), color-stop(100%,#2a6ca7)); /* Chrome,Safari4+ */
@@ -48,6 +78,13 @@ p {
     background: linear-gradient(to bottom, #368eda 0%,#2a6ca7 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#368eda', endColorstr='#2a6ca7',GradientType=0 ); /* IE6-9 */
 }
+
+.static_page p {
+    color: #fff;
+    font-size: 16px;
+}
+
+/* IDs */
 
 #header a {
     padding-left: 10px;
@@ -59,7 +96,9 @@ p {
 
 #hdrtitle img {
     float: left;
-    margin-left: 10px;
+    margin: 5px;
+    width: 100%;
+    height: auto !important;
 }
 
 #nav {
@@ -81,4 +120,9 @@ p {
 #introvid {
     margin-top: 30px;
     box-shadow: 0px 0px 10px #cccccc;
+}
+
+#dog {
+    width: 100%;
+    height: auto !important;
 }
