@@ -30,6 +30,12 @@ h3 {
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
+p {
+    color: #000000;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
 /* IDs */
 
 #header, #footer {
@@ -43,6 +49,14 @@ h3 {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#368eda', endColorstr='#2a6ca7',GradientType=0 ); /* IE6-9 */
 }
 
+#header a {
+    padding-left: 10px;
+}
+
+#footer p {
+    color: #ffffff;
+}
+
 #hdrtitle img {
     float: left;
     margin-left: 10px;
@@ -50,15 +64,21 @@ h3 {
 
 #nav {
     text-align: right;
+    margin-top: 15px;
     float: right;
 }
 
 #nav a {
     font-size: 20px;
+    text-decoration: none;
     color: #ffffff;
 }
 
+#nav a:hover {
+    text-decoration: underline;
+}
+
 #introvid {
-    margin-top: 50px;
+    margin-top: 30px;
     box-shadow: 0px 0px 10px #cccccc;
 }
