@@ -15,23 +15,27 @@ h1 {
     font-size: 60px;
     color: #ffffff;
     padding: 10px;
+    text-shadow: 0px 2px 3px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
 h2 {
     font-size: 36px;
-    color: #000000;
+    color: #222;
+    text-shadow: 0px 2px 3px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
 h3 {
     font-size: 20px;
     color: #ffffff;
+    text-shadow: 0px 2px 3px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
 p {
-    color: #000000;
+    color: #222;
+    text-shadow: 0px 2px 3px #555 inset;
     font-size: 14px;
     font-family: Arial, sans-serif;
 }
@@ -88,10 +92,12 @@ p {
 
 #header a {
     padding-left: 10px;
+    text-shadow: 0px 2px 3px #555;
 }
 
 #footer p {
     color: #ffffff;
+    text-shadow: 0px 1px 2px #555;
 }
 
 #hdrtitle img {
@@ -117,8 +123,21 @@ p {
     text-decoration: underline;
 }
 
-#introvid {
-    margin-top: 30px;
+#leftside {
+    float: left;
+}
+
+#sidebar {
+    float: right;
+}
+
+#leftside h2 {
+    margin-bottom: 20px;
+}
+
+#videowrapper {
+    display: block;
+    margin-bottom: 20px;
     box-shadow: 0px 0px 10px #cccccc;
 }
 
