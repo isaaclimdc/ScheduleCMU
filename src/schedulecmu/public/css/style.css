@@ -2,7 +2,6 @@
 
 html {
 	height: 100%;
-    font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
 body {
@@ -13,7 +12,7 @@ body {
 
 h1 {
     font-size: 60px;
-    color: #ffffff;
+    color: #fff;
     padding: 10px;
     text-shadow: 0px 2px 3px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
@@ -21,14 +20,14 @@ h1 {
 
 h2 {
     font-size: 36px;
-    color: #222;
+    color: #333;
     text-shadow: 0px 2px 3px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
 h3 {
     font-size: 20px;
-    color: #ffffff;
+    color: #fff;
     text-shadow: 0px 2px 3px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
@@ -37,17 +36,44 @@ h4 {
     font-size: 22px;
     padding-bottom: 5px;
     padding-top: 10px;
-    color: #222;
+    color: #333;
     font-weight: bold;
     text-shadow: 0px 2px 3px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
+h5 {
+    font-size: 16px;
+    padding-bottom: 5px;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0px 2px 3px #555;
+    font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
+}
+
 p {
-    color: #222;
+    color: #333;
     text-shadow: 0px 2px 3px #555 inset;
     font-size: 14px;
     font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    position: relative;
+    top: 1px;
+}
+
+li {
+    padding-bottom: 2px;
+    margin: 0;
 }
 
 /* Classes */
@@ -98,6 +124,18 @@ p {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#368eda', endColorstr='#2a6ca7',GradientType=0 ); /* IE6-9 */
 }
 
+.blue a {
+    color: #fff;
+}
+
+.blue p {
+    color: #fff;
+}
+
+.blue li {
+    font-size: 12px;
+}
+
 .static_page p {
     color: #fff;
     font-size: 16px;
@@ -105,37 +143,25 @@ p {
 
 /* IDs */
 
-#header a {
-    padding-left: 10px;
-    text-shadow: 0px 2px 3px #555;
-}
-
-#footer p {
-    color: #ffffff;
-    text-shadow: 0px 1px 2px #555;
-}
-
 #hdrtitle img {
     float: left;
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 80%;
     height: auto !important;
 }
 
 #nav {
     text-align: right;
-    margin-top: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     float: right;
 }
 
 #nav a {
     font-size: 20px;
-    text-decoration: none;
-    color: #ffffff;
-}
-
-#nav a:hover {
-    text-decoration: underline;
+    margin-left: 10px;
+    color: #fff;
 }
 
 #leftside {
@@ -153,7 +179,11 @@ p {
 #videowrapper {
     display: block;
     margin-bottom: 20px;
-    box-shadow: 0px 0px 10px #cccccc;
+    box-shadow: 0px 0px 10px #999;
+}
+
+#copyright {
+    font-size: 12px;
 }
 
 #dog {
