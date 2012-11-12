@@ -14,21 +14,21 @@ h1 {
     font-size: 60px;
     color: #fff;
     padding: 10px;
-    text-shadow: 0px 2px 3px #aaa;
+    text-shadow: 0px 1px 2px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
 h2 {
     font-size: 36px;
     color: #333;
-    text-shadow: 0px 2px 3px #aaa;
+    text-shadow: 0px 1px 2px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
 h3 {
     font-size: 20px;
     color: #fff;
-    text-shadow: 0px 2px 3px #aaa;
+    text-shadow: 0px 1px 2px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
@@ -38,7 +38,7 @@ h4 {
     padding-top: 10px;
     color: #333;
     font-weight: bold;
-    text-shadow: 0px 2px 3px #aaa;
+    text-shadow: 0px 1px 2px #aaa;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
@@ -47,13 +47,13 @@ h5 {
     padding-bottom: 5px;
     color: #fff;
     font-weight: bold;
-    text-shadow: 0px 2px 3px #555;
+    text-shadow: 0px 1px 2px #555;
     font-family: "Trebuchet MS", Tahoma, Arial, sans-serif;
 }
 
 p {
     color: #333;
-    text-shadow: 0px 2px 3px #555 inset;
+    text-shadow: 0px 1px 2px #555 inset;
     font-size: 14px;
     font-family: Arial, sans-serif;
 }
@@ -86,7 +86,7 @@ li {
 
 .static_page h1 {
     font-size: 140px;
-    text-shadow: 0px 2px 3px #555;
+    text-shadow: 0px 1px 2px #555;
     font-weight: bold;
     text-align: right;
     margin-bottom: 50px;
@@ -106,7 +106,7 @@ li {
     .static_page h1 { font-size: 60px; }
 }
 
-.centered {
+#centered {
     margin-left: 20%;
     margin-right: 20%;
     font-size: 20px;
@@ -114,14 +114,12 @@ li {
 }
 
 .blue {
-    background: #368eda; /* Old browsers */
-    background: -moz-linear-gradient(top, #368eda 0%, #2a6ca7 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#368eda), color-stop(100%,#2a6ca7)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #368eda 0%,#2a6ca7 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #368eda 0%,#2a6ca7 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #368eda 0%,#2a6ca7 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #368eda 0%,#2a6ca7 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#368eda', endColorstr='#2a6ca7',GradientType=0 ); /* IE6-9 */
+    background-image: url('images/transparent_texture'), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #368eda), color-stop(100%, #2b71ae));
+    background-image: url('images/transparent_texture'), -webkit-linear-gradient(top, #368eda, #2b71ae);
+    background-image: url('images/transparent_texture'), -moz-linear-gradient(top, #368eda, #2b71ae);
+    background-image: url('images/transparent_texture'), -ms-linear-gradient(top, #368eda, #2b71ae);
+    background-image: url('images/transparent_texture'), -o-linear-gradient(top, #368eda, #2b71ae);
+    background-image: url('images/transparent_texture'), linear-gradient(top, #368eda, #2b71ae);s
 }
 
 .blue a {
@@ -186,7 +184,20 @@ li {
     font-size: 12px;
 }
 
+#errorbutton {
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: 20px;
+    text-align: center;
+    color: #333;
+}
+
+#errorbutton:hover {
+    text-decoration: none;
+}
+
 #dog {
+    /*ADD SUBTLE SHADOW AROUND THE DOG! */
     width: 100%;
     height: auto !important;
 }
