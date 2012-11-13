@@ -1,3 +1,23 @@
+/* Types */
+
+body {
+	background-image: url('images/cream_dust.png');
+}
+
+
+/* Classes */
+
+.blue {
+    background-image: url('images/transparent_texture.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2681d0), color-stop(100%, #185182));
+    background-image: url('images/transparent_texture.png'), -webkit-linear-gradient(top, #2681d0, #185182);
+    background-image: url('images/transparent_texture.png'), -moz-linear-gradient(top, #2681d0, #185182);
+    background-image: url('images/transparent_texture.png'), -ms-linear-gradient(top, #2681d0, #185182);
+    background-image: url('images/transparent_texture.png'), -o-linear-gradient(top, #2681d0, #185182);
+    background-image: url('images/transparent_texture.png'), linear-gradient(top, #2681d0, #185182);
+}
+
+/* IDs */
+
 #login {
 	overflow: hidden;
 	height: 100%;
@@ -14,13 +34,4 @@
 
 #login a {
 	display: none;
-}
-
-.blue {
-    background-image: url('images/transparent_texture.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #368eda), color-stop(100%, #2b71ae));
-    background-image: url('images/transparent_texture.png'), -webkit-linear-gradient(top, #368eda, #2b71ae);
-    background-image: url('images/transparent_texture.png'), -moz-linear-gradient(top, #368eda, #2b71ae);
-    background-image: url('images/transparent_texture.png'), -ms-linear-gradient(top, #368eda, #2b71ae);
-    background-image: url('images/transparent_texture.png'), -o-linear-gradient(top, #368eda, #2b71ae);
-    background-image: url('images/transparent_texture.png'), linear-gradient(top, #368eda, #2b71ae);s
 }

@@ -7,7 +7,7 @@ html {
 body {
 	height: 100%;
     font-family: Tahoma, Arial, sans-serif;
-    background-image: url("../images/debut_light.png");
+    background-image: url("../images/cream_dust.png");
 }
 
 h1 {
@@ -114,12 +114,12 @@ li {
 }
 
 .blue {
-    background-image: url('images/transparent_texture'), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #368eda), color-stop(100%, #2b71ae));
-    background-image: url('images/transparent_texture'), -webkit-linear-gradient(top, #368eda, #2b71ae);
-    background-image: url('images/transparent_texture'), -moz-linear-gradient(top, #368eda, #2b71ae);
-    background-image: url('images/transparent_texture'), -ms-linear-gradient(top, #368eda, #2b71ae);
-    background-image: url('images/transparent_texture'), -o-linear-gradient(top, #368eda, #2b71ae);
-    background-image: url('images/transparent_texture'), linear-gradient(top, #368eda, #2b71ae);s
+    background-image: url('../images/transparent_texture.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2681d0), color-stop(100%, #185182));
+    background-image: url('../images/transparent_texture.png'), -webkit-linear-gradient(top, #2681d0, #185182);
+    background-image: url('../images/transparent_texture.png'), -moz-linear-gradient(top, #2681d0, #185182);
+    background-image: url('../images/transparent_texture.png'), -ms-linear-gradient(top, #2681d0, #185182);
+    background-image: url('../images/transparent_texture.png'), -o-linear-gradient(top, #2681d0, #185182);
+    background-image: url('../images/transparent_texture.png'), linear-gradient(top, #2681d0, #185182);
 }
 
 .blue a {
