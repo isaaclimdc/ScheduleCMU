@@ -106,25 +106,62 @@ li {
         margin-bottom: 1%; }
 }
 
-.blue {
-    background-image: url('../../images/transparent_texture.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2681d0), color-stop(100%, #185182));
-    background-image: url('../../images/transparent_texture.png'), -webkit-linear-gradient(top, #2681d0, #185182);
-    background-image: url('../../images/transparent_texture.png'), -moz-linear-gradient(top, #2681d0, #185182);
-    background-image: url('../../images/transparent_texture.png'), -ms-linear-gradient(top, #2681d0, #185182);
-    background-image: url('../../images/transparent_texture.png'), -o-linear-gradient(top, #2681d0, #185182);
-    background-image: url('../../images/transparent_texture.png'), linear-gradient(top, #2681d0, #185182);
+.red {
+    background-image: url('../../images/transparent_texture.png'), linear-gradient(bottom, #990000 100%, #800000 0%);
+    background-image: url('../../images/transparent_texture.png'), -o-linear-gradient(bottom, #990000 100%, #800000 0%);
+    background-image: url('../../images/transparent_texture.png'), -moz-linear-gradient(bottom, #990000 100%, #800000 0%);
+    background-image: url('../../images/transparent_texture.png'), -webkit-linear-gradient(bottom, #990000 100%, #800000 0%);
+    background-image: url('../../images/transparent_texture.png'), -ms-linear-gradient(bottom, #990000 100%, #800000 0%);
+
+    background-image: url('../../images/transparent_texture.png'), -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(1, #990000),
+        color-stop(0, #800000)
+    );
 }
 
-.blue a {
+.red a {
     color: #fff;
 }
 
-.blue p {
+.red p {
     color: #fff;
 }
 
-.blue li {
+.red li {
     font-size: 12px;
+}
+
+.redbutton {
+    -moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
+    box-shadow:inset 0px 1px 0px 0px #f29c93;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #990000), color-stop(1, #800000) );
+    background:-moz-linear-gradient( center top, #990000 5%, #800000 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#990000', endColorstr='#800000');
+    background-color:#990000;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #d83526;
+    display:inline-block;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #b23e35;
+}.redbutton:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #800000), color-stop(1, #990000) );
+    background:-moz-linear-gradient( center top, #800000 5%, #990000 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#800000', endColorstr='#990000');
+    background-color:#800000;
+}.redbutton:active {
+    position:relative;
+    top:1px;
 }
 
 .static_page p {
@@ -185,35 +222,7 @@ li {
 }
 
 #fblogin {
-    -moz-box-shadow:inset 0px 1px 0px 0px #bee2f9;
-    -webkit-box-shadow:inset 0px 1px 0px 0px #bee2f9;
-    box-shadow:inset 0px 1px 0px 0px #bee2f9;
-    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #63b8ee), color-stop(1, #468ccf) );
-    background:-moz-linear-gradient( center top, #63b8ee 5%, #468ccf 100% );
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#63b8ee', endColorstr='#468ccf');
-    background-color:#63b8ee;
-    -moz-border-radius:6px;
-    -webkit-border-radius:6px;
-    border-radius:6px;
-    border:1px solid #3866a3;
-    color:#14396a;
-    font-family:arial;
-    font-size:15px;
-    font-weight:bold;
-    text-decoration:none;
-    text-shadow:1px 1px 0px #7cacde;
-}
-
-#fblogin:hover {
-    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #468ccf), color-stop(1, #63b8ee) );
-    background:-moz-linear-gradient( center top, #468ccf 5%, #63b8ee 100% );
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#468ccf', endColorstr='#63b8ee');
-    background-color:#468ccf;
-}
-
-#fblogin:active {
-    position:relative;
-    top:1px;
+    color: white;
 }
 
 #videowrapper {
