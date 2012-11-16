@@ -3,4 +3,4 @@
 *~
 *.swp
 
-local/**/*
+local/
