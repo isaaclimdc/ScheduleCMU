@@ -4,6 +4,15 @@ jsdom.env(
     "spring13.html",
     ['http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'],
     function(err, window){
+        function isSubSection(row) {
+            var children = window.$(row).children();
+
+            if (window.$(children[0]).html() === "&nbsp;" && window.$(children[1]).html() === "&nbsp;" && window.$(children[2]).html() === "&nbsp;" && window.$(children[3]).html() !== "&nbsp;")
+                return true;
+            else
+                return false;
+        }
+
         var title = window.$("title").text();
         console.log("Scraping: " + title);
 
@@ -13,6 +22,10 @@ jsdom.env(
         window.$("tr").each(function(index) {
             console.log("----------");
             // console.log(window.$(this).html());
+
+            if (isSubSection(this) === true) {
+                console.log("SAME!");
+            }
 
             var course = new Course();
 
@@ -68,6 +81,12 @@ function Course() {
     this.number = 0;
     this.name = "";
     this.units = 0.0;
+    this.classes = [];
+    return this;
+}
+
+// Class constructor
+function Class() {
     this.section = "";
     this.days = "";
     this.start = "";
