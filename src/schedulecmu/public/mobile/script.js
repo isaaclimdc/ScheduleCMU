@@ -1,6 +1,8 @@
 $(document).ready(function() {
-	$('#login').find('a').css('display', 'inherit');
-	$('#login').find('img').css('margin-top', '10%');
-
-	
+	var docW = $(document).width();
+	if(docW <= 750) {
+		$('#loginGrid').children('.ui-block-a').css('display','none');
+		$('#loginGrid').children('.ui-block-b').removeClass('ui-block-b');
+		$('#loginGrid').removeClass('ui-grid-b');
+	}
 });

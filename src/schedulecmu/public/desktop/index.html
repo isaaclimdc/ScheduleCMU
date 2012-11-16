@@ -5,8 +5,8 @@
 	<title>ScheduleCMU</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="icon" href="images/favicon.png" type="image/x-icon"> 
-	<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon"> 
+	<link rel="icon" href="../images/favicon.png" type="image/x-icon"> 
+	<link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"> 
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/base.css" />
@@ -19,7 +19,7 @@
 	<div id="header" class="blue">
 		<div class="container">
 			<div id="hdrtitle" class="five columns">
-				<a href="#"><img src="images/icon_withtext.png" alt="ScheduleCMU" /></a>
+				<a href="#"><img src="../images/icon_withtext.png" alt="ScheduleCMU" /></a>
 			</div>
 			<div class="six columns"></div>
 			<div id="nav" class="five columns">
@@ -48,7 +48,7 @@
 			<div id="sidebar" class="four columns">
 				<div id="login">
 					<p>Integer tempor sem sed arcu porttitor in aliquet tellus adipiscing. Donec pulvinar ipsum adipiscing nibh rhoncus sit amet blandit magna laoreet. Sed interdum interdum blandit. In eget risus mi. Integer condimentum volutpat vulputate. </p>
-					<a href="#" onclick="javascript:alert('Login!');" class="full-width button">Log In With Facebook</a>
+					<a href="#" id="fblogin" onclick="javascript:alert('Login!');" class="full-width button">Log In With Facebook</a>
 				</div>
 			</div>
 		</div>
@@ -96,10 +96,6 @@
 	</div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script src="scripts/jquery.fitvids.js"></script>
-<script>
-$(document).ready(function() {
-	$("#videowrapper").fitVids();
-});
-</script>
+<script src="scripts/welcome.js"></script>
 </body>
 </html>

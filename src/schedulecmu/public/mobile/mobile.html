@@ -10,17 +10,26 @@
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script src="script.js"></script>
 	<!-- ADD IPHONE ICONS! -->
-	<link rel="icon" href="images/favicon.png" type="image/x-icon"> 
-	<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="../images/favicon.png" type="image/x-icon"> 
+	<link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
 </head> 
 <body> 
 <div data-role="page" data-title="Login" id="login" class="blue">
 	<div data-role="content">
-		<img src="images/icon_extract.png" alt="ScheduleCMU" />
-		<a href="#vertical" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
+		<div id="loginGrid" class="ui-grid-b">
+			<div class="ui-block-a"></div>
+			<div class="ui-block-b">
+				<img src="../images/icon_extract.png" alt="ScheduleCMU" />
+				<a href="#vertical" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
+			</div>
+		
+		</div>
 	</div>
 </div>
+
+
 <div data-role="page" data-title="ScheduleCMU" id="vertical">
+	<!--HEADER-->
 	<div data-role="header" data-position="fixed" class="blue">
 	  <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
 	    <a href="#" data-role="button" data-theme="b" data-iconpos="notext" data-icon="home">left 1</a>
@@ -32,6 +41,8 @@
 	    <a href="#" data-role="button" data-theme="b" data-iconpos="notext" data-icon="search">right 2</a>
 	  </div>
 	</div>
+
+
 	<div data-role="content">
 	</div>
 </div>
