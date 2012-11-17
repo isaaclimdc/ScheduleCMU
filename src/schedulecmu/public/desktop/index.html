@@ -4,9 +4,10 @@
 	<!-- Metadata -->
 	<title>ScheduleCMU</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<meta name="description" content="A brand new way to schedule classes at CMU, wherever you are.">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="icon" href="../images/favicon.png" type="image/x-icon"> 
-	<link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"> 
+	<link rel="icon" href="../images/favicon.png?v=3" type="image/x-icon"> 
+	<link rel="shortcut icon" href="../images/favicon.png?v=3" type="image/x-icon"> 
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/base.css" />
@@ -14,23 +15,25 @@
 	<link rel="stylesheet" type="text/css" href="css/layout.css" />	
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
+
 <body>
 	<!-- Header -->
 	<div id="header" class="red">
 		<div class="container">
-			<div id="hdrtitle" class="five columns">
+			<div id="headerTitle" class="five columns">
 				<a href="index.html"><img src="../images/icon_withtext.png" alt="ScheduleCMU" /></a>
 			</div>
 			<div class="six columns"></div>
 			<div id="nav" class="five columns">
-				<a href="contact.html">Contact</a>
-				<a href="help.html">Help</a>
 				<a href="about.html">About</a>
+				<a href="help.html">Help</a>
+				<a href="contact.html">Contact</a>
 			</div>
 		</div>
 	</div>
 	<br class="clear"/>
-	<!-- Content -->
+
+	<!-- Content Starts Here -->
 	<div class="container">
 		<div id="content" class="row">
 			<div class="sixteen columns">
@@ -39,9 +42,10 @@
 		</div>
 		<div class="row">
 			<div class="eleven columns">
-				<div id="videowrapper">
-					<iframe id="introvid" width="640" height="360" src="http://www.youtube.com/embed/6PdY1c_C-Qk" frameborder="0" allowfullscreen></iframe>
+				<div id="videoWrapper">
+					<iframe id="introVideo" width="640" height="360" src="http://www.youtube.com/embed/6PdY1c_C-Qk" frameborder="0" allowfullscreen></iframe>
 				</div>
+
 				<h4>Have your schedule with you wherever you are. Mobile.</h4>
 				<p>Integer tempor sem sed arcu porttitor in aliquet tellus adipiscing. Donec pulvinar ipsum adipiscing nibh rhoncus sit amet blandit magna laoreet. Sed interdum interdum blandit. In eget risus mi. Integer condimentum volutpat vulputate.</p>
 
@@ -59,13 +63,18 @@
 			<div id="sidebar" class="four columns">
 				<div id="login">
 					<h4>Keep your schedule in check today!</h4>
-					<a href="#" id="fblogin" onclick="javascript:alert('Login!');" class="full-width redbutton button">Log In With Facebook</a>
+					<a href="#" id="fbLoginBtn" onclick="javascript:alert('Login!');" class="full-width redBtn button">Log In With Facebook</a>
+
+					<!-- Temp button -->
+					<a href="schedules/schedule.html" id="fbLoginBtn" class="full-width redBtn button">View Schedule</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<br class="clear" />
+	<!-- Content Ends Here -->
+
 	<!-- Footer -->
+	<br class="clear" />
 	<div id="footer" class="red">
 		<div class="container">
 			<br class="clear" />
@@ -105,8 +114,10 @@
 			</div>
 		</div>
 	</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script src="scripts/jquery.fitvids.js"></script>
-<script src="scripts/welcome.js"></script>
+
+	<!-- JavaScript -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="scripts/jquery.fitvids.js"></script>
+	<script src="scripts/welcome.js"></script>
 </body>
 </html>

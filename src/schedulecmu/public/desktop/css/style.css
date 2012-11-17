@@ -1,4 +1,5 @@
-/* HTML Elements */
+/*********** HTML Elements ***********/
+
 html {
     height: 100%;
 }
@@ -74,7 +75,7 @@ li {
     margin: 0;
 }
 
-/* Classes */
+/*********** Classes ***********/
 
 .static_page {
     height: 100%;
@@ -134,7 +135,7 @@ li {
     font-size: 12px;
 }
 
-.redbutton {
+.redBtn {
     -moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
     -webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
     box-shadow:inset 0px 1px 0px 0px #f29c93;
@@ -154,12 +155,12 @@ li {
     padding:6px 24px;
     text-decoration:none;
     text-shadow:1px 1px 0px #b23e35;
-}.redbutton:hover {
+}.redBtn:hover {
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #800000), color-stop(1, #990000) );
     background:-moz-linear-gradient( center top, #800000 5%, #990000 100% );
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#800000', endColorstr='#990000');
     background-color:#800000;
-}.redbutton:active {
+}.redBtn:active {
     position:relative;
     top:1px;
 }
@@ -174,27 +175,34 @@ li {
     height: 100%;
 }
 
-/* IDs */
+/*********** IDs ***********/
 
-#hdrtitle img {
+/* Header */
+
+#headerTitle img {
     float: left;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 80%;
+    margin-top: 2px;
+    /*margin-bottom: 10px;*/
+    width: 100%;
     height: auto !important;
+    /*height: 60px;*/
 }
 
 #nav {
     text-align: right;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 12px;
     float: right;
 }
 
 #nav a {
     font-size: 20px;
     margin-left: 10px;
-    color: #fff;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#nav a:hover{
+    color: #cccccc;
 }
 
 #leftside {
@@ -221,11 +229,11 @@ li {
     text-align: center;
 }
 
-#fblogin {
+#fbLoginBtn {
     color: white;
 }
 
-#videowrapper {
+#videoWrapper {
     display: block;
     margin-bottom: 20px;
     box-shadow: 0px 0px 10px #999;
@@ -234,6 +242,22 @@ li {
 #copyright {
     font-size: 12px;
 }
+
+/* Schedule */
+
+#calview {
+    height: 600px;
+    background: #bbbbbb;
+    margin-bottom: 50px;
+    border: 1px solid black;
+}
+
+#scheduleVersion {
+    margin-top: -20px;
+    color: gray;
+}
+
+/* 404 */
 
 #errorbutton {
     margin-left: 20%;

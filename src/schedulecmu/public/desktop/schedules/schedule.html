@@ -6,14 +6,14 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<meta name="description" content="A brand new way to schedule classes at CMU, wherever you are.">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="icon" href="../images/favicon.png?v=3" type="image/x-icon"> 
-	<link rel="shortcut icon" href="../images/favicon.png?v=3" type="image/x-icon"> 
+	<link rel="icon" href="../../images/favicon.png?v=3" type="image/x-icon"> 
+	<link rel="shortcut icon" href="../../images/favicon.png?v=3" type="image/x-icon">  
 
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="css/base.css" />
-	<link rel="stylesheet" type="text/css" href="css/skeleton.css" />
-	<link rel="stylesheet" type="text/css" href="css/layout.css" />	
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../css/base.css" />
+	<link rel="stylesheet" type="text/css" href="../css/skeleton.css" />
+	<link rel="stylesheet" type="text/css" href="../css/layout.css" />	
+	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 	<div id="header" class="red">
 		<div class="container">
 			<div id="headerTitle" class="five columns">
-				<a href="index.html"><img src="../images/icon_withtext.png" alt="ScheduleCMU" /></a>
+				<a href="../index.html"><img src="../../images/icon_withtext.png" alt="ScheduleCMU" /></a>
 			</div>
 			<div class="six columns"></div>
 			<div id="nav" class="five columns">
@@ -35,17 +35,32 @@
 
 	<!-- Content Starts Here -->
 	<div class="container">
-		<div class="five columns"><h2></h2></div>
-		<div class="six columns comingsoon">
-			<h2>Coming Soon!</h2>
+		<div id="content" class="row">
+			<div class="twelve columns">
+				<h2 id="semTitle">Fall 2013</h2>
+				<h4 id="scheduleVersion">Schedule 1</h4>
+			</div>
 		</div>
-		<div class="five columns"><h2></h2></div>
+		<div class="row">
+			<div class="twelve columns">
+				<div id="calview">
+					
+				</div>
+				
+			</div>
+			<!-- <div class="one column"></div> -->
+			<div id="sidebar" class="four columns">
+				<div id="login">
+					<h4>Keep your schedule in check today!</h4>
+					<a href="#" id="fblogin" onclick="javascript:alert('Login!');" class="full-width redbutton button">Log In With Facebook</a>
+				</div>
+			</div>
+		</div>
 	</div>
 	<br class="clear" />
 	<!-- Content Ends Here -->
 
 	<!-- Footer -->
-	<br class="clear" />
 	<div id="footer" class="red">
 		<div class="container">
 			<br class="clear" />
@@ -88,5 +103,9 @@
 
 	<!-- JavaScript -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<!-- Accordion -->
+	<script type="text/javascript" src="../scripts/prototype.js"></script>
+	<script type="text/javascript" src="../scripts/effects.js"></script>
+	<script type="text/javascript" src="../scripts/accordion.js"></script>
 </body>
 </html>

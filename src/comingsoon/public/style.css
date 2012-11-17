@@ -5,14 +5,20 @@ html {
 body {
 	height: 100%;
 	overflow: hidden;
-	background: #368eda; /* Old browsers */
-	background: -moz-linear-gradient(top, #368eda 0%, #2a6ca7 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#368eda), color-stop(100%,#2a6ca7)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #368eda 0%,#2a6ca7 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #368eda 0%,#2a6ca7 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #368eda 0%,#2a6ca7 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #368eda 0%,#2a6ca7 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#368eda', endColorstr='#2a6ca7',GradientType=0 ); /* IE6-9 */
+	
+    background-image: url('../../images/transparent_texture.png'), linear-gradient(bottom, #990000 100%, #800000 0%);
+    background-image: url('../../images/transparent_texture.png'), -o-linear-gradient(bottom, #990000 100%, #800000 0%);
+    background-image: url('../../images/transparent_texture.png'), -moz-linear-gradient(bottom, #990000 100%, #800000 0%);
+    background-image: url('../../images/transparent_texture.png'), -webkit-linear-gradient(bottom, #990000 100%, #800000 0%);
+    background-image: url('../../images/transparent_texture.png'), -ms-linear-gradient(bottom, #990000 100%, #800000 0%);
+
+    background-image: url('../../images/transparent_texture.png'), -webkit-gradient(3
+        linear,
+        left bottom,
+        left top,
+        color-stop(1, #990000),
+        color-stop(0, #800000)
+    );
 }
 
 h1 {
