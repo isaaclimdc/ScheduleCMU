@@ -25,9 +25,9 @@
 			</div>
 			<div class="six columns"></div>
 			<div id="nav" class="five columns">
-				<a href="about.html">About</a>
-				<a href="help.html">Help</a>
-				<a href="contact.html">Contact</a>
+				<a href="../about.html">About</a>
+				<a href="../help.html">Help</a>
+				<a href="../contact.html">Contact</a>
 			</div>
 		</div>
 	</div>
@@ -40,19 +40,151 @@
 				<h2 id="semTitle">Fall 2013</h2>
 				<h4 id="scheduleVersion">Schedule 1</h4>
 			</div>
+
+			<div id="toolBox" class="four columns">
+				<form onSubmit="addCourse();">
+					<input type="text" id="addCourseBox" placeholder="e.g. 15451, 21127..."></input>
+				</form>
+				<div id="actionBtns">
+					<div id="browseBtn" onClick="browseCourses();">
+						<img src="../../images/browseBtn.png" />
+					</div>
+					<div id="addEventsBtn" onClick="openEventSheet();">
+						<img src="../../images/addEventsBtn.png" />
+					</div>
+					<div id="shareBtn" onClick="openShareSheet();">
+						<img src="../../images/shareBtn.png" />
+					</div>
+				</div>
+			</div>
+
 		</div>
 		<div class="row">
 			<div class="twelve columns">
 				<div id="calview">
 					
 				</div>
-				
 			</div>
-			<!-- <div class="one column"></div> -->
+
 			<div id="sidebar" class="four columns">
-				<div id="login">
-					<h4>Keep your schedule in check today!</h4>
-					<a href="#" id="fblogin" onclick="javascript:alert('Login!');" class="full-width redbutton button">Log In With Facebook</a>
+				<div id="accordion">
+				    <h3>15-237</h3>
+				    <div>
+				    	<table>
+				    		<tr>
+				    			<td>Class</td>
+				    			<td>Day</td>
+				    			<td>Time</td>
+				    		</tr>
+				    		<tr>
+				    			<td>Lect</td>
+				    			<td>TR</td>
+				    			<td>9:30a - 10:20a</td>
+				    		</tr>
+				    		<tr>
+				    			<td>A</td>
+				    			<td>F</td>
+				    			<td>10:30a - 11:20a</td>
+				    		</tr>
+				    		<tr>
+				    			<td>B</td>
+				    			<td>F</td>
+				    			<td>11:30a - 12:20a</td>
+				    		</tr>
+				    		<tr>
+				    			<td>C</td>
+				    			<td>F</td>
+				    			<td>12:30a - 1:20p</td>
+				    		</tr>
+				    		<tr>
+				    			<td>D</td>
+				    			<td>F</td>
+				    			<td>1:30p - 2:20p</td>
+				    		</tr>
+				    		<tr>
+				    			<td>E</td>
+				    			<td>F</td>
+				    			<td>2:30p - 3:20p</td>
+				    		</tr>
+				    	</table>
+				    </div>
+
+				    <h3>15-150</h3>
+				    <div>
+				        <table>
+				        	<tr>
+				        		<td>Class</td>
+				        		<td>Day</td>
+				        		<td>Time</td>
+				        	</tr>
+				        	<tr>
+				        		<td>Lect</td>
+				        		<td>TR</td>
+				        		<td>9:30a - 10:20a</td>
+				        	</tr>
+				        	<tr>
+				        		<td>A</td>
+				        		<td>W</td>
+				        		<td>10:30a - 11:20a</td>
+				        	</tr>
+				        	<tr>
+				        		<td>B</td>
+				        		<td>W</td>
+				        		<td>11:30a - 12:20a</td>
+				        	</tr>
+				        	<tr>
+				        		<td>C</td>
+				        		<td>W</td>
+				        		<td>12:30a - 1:20p</td>
+				        	</tr>
+				        	<tr>
+				        		<td>D</td>
+				        		<td>W</td>
+				        		<td>1:30p - 2:20p</td>
+				        	</tr>
+				        	<tr>
+				        		<td>E</td>
+				        		<td>W</td>
+				        		<td>2:30p - 3:20p</td>
+				        	</tr>
+				        	<tr>
+				        		<td>F</td>
+				        		<td>W</td>
+				        		<td>2:30p - 3:20p</td>
+				        	</tr>
+				        	<tr>
+				        		<td>G</td>
+				        		<td>W</td>
+				        		<td>2:30p - 3:20p</td>
+				        	</tr>
+				        	<tr>
+				        		<td>H</td>
+				        		<td>W</td>
+				        		<td>2:30p - 3:20p</td>
+				        	</tr>
+				        	<tr>
+				        		<td>W</td>
+				        		<td>W</td>
+				        		<td>2:30p - 3:20p</td>
+				        	</tr>
+				        </table>
+				    </div>
+
+				    <h3>73-100</h3>
+				    <div>
+				    	<table>
+				    		<tr>
+				    			<td>Class</td>
+				    			<td>Day</td>
+				    			<td>Time</td>
+				    		</tr>
+				    		<tr>
+				    			<td>A</td>
+				    			<td>MWF</td>
+				    			<td>9:30a - 10:20a</td>
+				    		</tr>
+				    	</table>
+				    </div>
 				</div>
 			</div>
 		</div>
@@ -103,9 +235,7 @@
 
 	<!-- JavaScript -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-	<!-- Accordion -->
-	<script type="text/javascript" src="../scripts/prototype.js"></script>
-	<script type="text/javascript" src="../scripts/effects.js"></script>
-	<script type="text/javascript" src="../scripts/accordion.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+	<script type="text/javascript" src="../scripts/schedule.js"></script>
 </body>
 </html>

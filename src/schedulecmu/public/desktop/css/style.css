@@ -114,7 +114,7 @@ li {
     background-image: url('../../images/transparent_texture.png'), -webkit-linear-gradient(bottom, #990000 100%, #800000 0%);
     background-image: url('../../images/transparent_texture.png'), -ms-linear-gradient(bottom, #990000 100%, #800000 0%);
 
-    background-image: url('../../images/transparent_texture.png'), -webkit-gradient(
+    background-image: url('../../images/transparent_texture.png'), -webkit-gradient(3
         linear,
         left bottom,
         left top,
@@ -255,6 +255,124 @@ li {
 #scheduleVersion {
     margin-top: -20px;
     color: gray;
+}
+
+#addCourseBox {
+    font-size: 20px;
+    font-family: Tahoma, Arial, sans-serif;
+}
+#addCourseBox:hover {
+    box-shadow: 0px 0px 2px #D96C6E;
+}
+#addCourseBox:focus {
+    box-shadow: 0px 0px 5px #D96C6E;
+}
+
+#actionBtns {
+    height: 40px;
+    background: #eeeeee;
+    border: 1px solid #cccccc;
+}
+#actionBtns img {
+    margin-left: 30%;
+    margin-top: 10%;
+}
+#browseBtn {
+    width: 33%;
+    height: 100%;
+    float: left;
+    border-right: 1px solid #cccccc;
+}
+#browseBtn:hover {
+    background: #dddddd;
+    cursor: pointer;
+}
+#addEventsBtn {
+    width: 34%;
+    height: 100%;
+    float: left;
+    border-right: 1px solid #cccccc;
+}
+#addEventsBtn:hover {
+    background: #dddddd;
+    cursor: pointer;
+}
+#shareBtn {
+    width: 33%;
+    height: 100%;
+    float: left;
+}
+#shareBtn:hover {
+    background: #dddddd;
+    cursor: pointer;
+}
+
+.ui-accordion .ui-accordion-header {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    margin-top: 2px;
+    height: 40px;
+    padding-left: 10px;
+    padding-top: 5px;
+    outline: none;
+    color: #000000;
+    border: 1px solid gray;
+}
+.ui-accordion .ui-accordion-header:nth-child(1) {
+    background-color: #D96C6E;
+}
+.ui-accordion .ui-accordion-header:nth-child(2) {
+    background-color: #DAFFB3;
+}
+.ui-accordion .ui-accordion-header:nth-child(3) {
+    background-color: #9ECFFF;
+}
+.ui-accordion .ui-accordion-header:nth-child(4) {
+    background-color: #FFF799;
+}
+.ui-accordion .ui-accordion-header:nth-child(5) {
+    background-color: #FFBE69;
+}
+.ui-accordion .ui-accordion-header:nth-child(6) {
+    background-color: #C891FF;
+}
+
+.ui-accordion .ui-accordion-content {
+    margin-top: -8px;
+    margin-bottom: -8px;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    background-color: #F2F2F2;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    /*overflow: scroll;
+    max-height: 200px;*/
+}
+
+#accordion table {
+    width: 100%;
+}
+#accordion tr:nth-child(1) {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#accordion tr {
+    height: 30px;
+    font-size: 14px;
+}
+#accordion tr:not(:nth-child(1)):hover {
+    background: rgb(255, 0, 0); /* Fall-back for rgba() */
+    background: rgba(255, 0, 0, 0.3);
+    cursor: pointer;
+}
+#accordion td {
+    padding-left: 10px;
+    padding-top: 4px;
+}
+#accordion td:nth-child(1) {
+    font-weight: bold;
 }
 
 /* 404 */
