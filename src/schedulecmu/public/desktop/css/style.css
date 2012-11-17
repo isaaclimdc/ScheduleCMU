@@ -274,8 +274,7 @@ li {
     border: 1px solid #cccccc;
 }
 #actionBtns img {
-    margin-left: 30%;
-    margin-top: 10%;
+    /* Somehow center these Glyphish icons! */
 }
 #browseBtn {
     width: 33%;
