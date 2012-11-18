@@ -244,10 +244,7 @@ li {
 /* Schedule */
 
 #calview {
-    height: 600px;
-    background: #bbbbbb;
     margin-bottom: 50px;
-    border: 1px solid black;
 }
 
 #scheduleVersion {

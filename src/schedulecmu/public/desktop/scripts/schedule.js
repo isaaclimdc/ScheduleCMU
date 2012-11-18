@@ -9,13 +9,15 @@ $(document).ready(function() {
     var y = date.getFullYear();
     
     $('#calview').fullCalendar({
-        theme: true,
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        editable: true,
+        theme: false,
+        header: false,
+        weekends: false,
+        allDaySlot: false,
+        minTime: 8,
+        maxTime: 20,
+        height: 800,
+        defaultView: 'agendaWeek',
+        editable: false,
         events: [
             {
                 title: 'All Day Event',
@@ -55,12 +57,6 @@ $(document).ready(function() {
                 end: new Date(y, m, d+1, 22, 30),
                 allDay: false
             },
-            {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/'
-            }
         ]
     });
 });
