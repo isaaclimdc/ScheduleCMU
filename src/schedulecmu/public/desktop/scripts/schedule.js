@@ -1,12 +1,12 @@
+var date = new Date();
+var d = date.getDate();
+var m = date.getMonth();
+var y = date.getFullYear();
+
 $(document).ready(function() {
     $(function() {
         $( "#accordion" ).accordion();
     });
-
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
     
     $('#calview').fullCalendar({
         theme: false,
@@ -17,47 +17,7 @@ $(document).ready(function() {
         maxTime: 20,
         height: 800,
         defaultView: 'agendaWeek',
-        editable: false,
-        events: [
-            {
-                title: 'All Day Event',
-                start: new Date(y, m, 1)
-            },
-            {
-                title: 'Long Event',
-                start: new Date(y, m, d-5),
-                end: new Date(y, m, d-2)
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d-3, 16, 0),
-                allDay: false
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d+4, 16, 0),
-                allDay: false
-            },
-            {
-                title: 'Meeting',
-                start: new Date(y, m, d, 10, 30),
-                allDay: false
-            },
-            {
-                title: 'Lunch',
-                start: new Date(y, m, d, 12, 0),
-                end: new Date(y, m, d, 14, 0),
-                allDay: false
-            },
-            {
-                title: 'Birthday Party',
-                start: new Date(y, m, d+1, 19, 0),
-                end: new Date(y, m, d+1, 22, 30),
-                allDay: false
-            },
-        ]
+        editable: false
     });
 });
 
@@ -70,7 +30,7 @@ function addCourse() {
     var accordion = $("#accordion");
 
     // Create <h3> for title
-    var title = $("<h3>").text("15-237");
+    var eventTitle = $("<h3>").text("15-237");
 
     // Create <table> for classes
     var table = $("<table>");
@@ -82,8 +42,20 @@ function addCourse() {
     content.append(table);
 
     // Append h3 then that div into 'accordion'
-    accordion.append(title);
+    accordion.append(eventTitle);
     accordion.append(content);
+
+    var bgColor = eventTitle.css('background-color');
+
+    // Render Event on Calendar Widget
+    $('#calview').fullCalendar('renderEvent', {
+        id: 999,
+        title: eventTitle,
+        start: new Date(y, m, d, 16, 0),
+        end: new Date(y, m, d, 18, 0),
+        allDay: false,
+        backgroundColor: bgColor
+    });
 }
 
 function browseCourses() {

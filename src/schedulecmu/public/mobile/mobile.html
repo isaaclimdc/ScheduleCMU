@@ -4,23 +4,28 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
 	<title>ScheduleCMU</title> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-	<link rel="stylesheet" href="style.css" />
-	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<link rel="stylesheet" href="themes/noBtnDiscs.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+	<link rel="stylesheet" href="style.css" />
 	<script src="script.js"></script>
 	<!-- ADD IPHONE ICONS! -->
 	<link rel="icon" href="../images/favicon.png" type="image/x-icon"> 
 	<link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
 </head> 
 <body> 
-<div data-role="page" data-title="Login" id="login" class="red">
+<div data-role="page" data-title="Login" id="login" data-theme="a" class="red">
 	<div data-role="content">
 		<div id="loginGrid" class="ui-grid-b">
 			<div class="ui-block-a"></div>
 			<div class="ui-block-b">
 				<img src="../images/icon_extract.png" alt="ScheduleCMU" />
-				<a href="#vertical" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
+				<a href="#" onclick="javascript:alert('Login!');" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
+
+				<!-- Temporary Button -->
+				<a href="#vertical" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">See Calendar</a>
 			</div>
 		
 		</div>
@@ -30,20 +35,30 @@
 
 <div data-role="page" data-title="ScheduleCMU" id="vertical">
 	<!--HEADER-->
-	<div data-role="header" data-position="fixed" class="red">
-	  <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
-	    <a href="#" data-role="button" data-theme="d" data-iconpos="notext" data-icon="home">left 1</a>
-	    <a href="#" data-role="button" data-theme="d" data-iconpos="notext" data-icon="grid">left 2</a>
-	  </div>
+	<div data-role="header" data-position="fixed">
 	  <h1>ScheduleCMU</h1>
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-	    <a href="#" data-role="button" data-theme="d" data-iconpos="notext" data-icon="plus">right 1</a>
-	    <a href="#" data-role="button" data-theme="d" data-iconpos="notext" data-icon="search">right 2</a>
+	    <a href="#" data-role="button" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
+	    <a href="#" data-role="button" data-iconpos="notext" data-icon="myapp-cal">right 2</a>
+	    <a href="#" data-role="button" data-iconpos="notext" data-icon="myapp-share">right 2</a>
 	  </div>
 	</div>
 
-
 	<div data-role="content">
+		<input type="text" name="addCourse" id="addCourseBox" placeholder="Add New Course" />
+		<div data-role="collapsible-set">
+
+	<div data-role="collapsible" data-collapsed="false">
+		<h3>15-237</h3>
+		<p>I'm the collapsible set content for section 1.</p>
+		</div>
+		
+		<div data-role="collapsible">
+		<h3>73-100</h3>
+		<p>I'm the collapsible set content for section 2.</p>
+		</div>
+		
+	</div>
 	</div>
 </div>
 </body>
