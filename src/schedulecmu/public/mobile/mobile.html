@@ -8,8 +8,9 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-
+	<link rel="stylesheet" href="../desktop/css/fullcalendar.css" />
 	<link rel="stylesheet" href="style.css" />
+	<script src="../desktop/scripts/fullcalendar.min.js"></script>
 	<script src="script.js"></script>
 	<!-- ADD IPHONE ICONS! -->
 	<link rel="icon" href="../images/favicon.png" type="image/x-icon"> 
@@ -47,19 +48,21 @@
 	<div data-role="content">
 		<input type="text" name="addCourse" id="addCourseBox" placeholder="Add New Course" />
 		<div data-role="collapsible-set">
+			<div data-role="collapsible" data-content-theme="a" data-collapsed="false">
+				<h3>15-237</h3>
+				<p>I'm the collapsible set content for section 1.</p>
+			</div>
+			<div data-role="collapsible" data-content-theme="a">
+				<h3>73-100</h3>
+				<p>I'm the collapsible set content for section 2.</p>
+			</div>		
+		</div>
+	</div>
+</div>
 
-	<div data-role="collapsible" data-collapsed="false">
-		<h3>15-237</h3>
-		<p>I'm the collapsible set content for section 1.</p>
-		</div>
-		
-		<div data-role="collapsible">
-		<h3>73-100</h3>
-		<p>I'm the collapsible set content for section 2.</p>
-		</div>
-		
-	</div>
-	</div>
+
+<div data-role="page" data-title="ScheduleCMU" id="horizontal">
+	<div id="calview" data-role="content"></div>
 </div>
 </body>
 </html>
