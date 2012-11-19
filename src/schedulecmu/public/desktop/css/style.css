@@ -188,7 +188,7 @@ li {
 
 #nav {
     text-align: right;
-    margin-top: 10px;
+    margin-top: 7px;
     float: right;
 }
 
@@ -275,7 +275,7 @@ li {
     margin: 4px auto;
 }
 #browseBtn {
-    width: 32%;
+    width: 33%;
     height: 100%;
     float: left;
     border-right: 1px solid #cccccc;
@@ -295,7 +295,7 @@ li {
     cursor: pointer;
 }
 #shareBtn {
-    width: 32%;
+    width: 33%;
     height: 100%;
     float: left;
 }
