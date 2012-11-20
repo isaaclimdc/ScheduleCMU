@@ -17,7 +17,12 @@ $(document).ready(function() {
         maxTime: 20,
         height: 800,
         defaultView: 'agendaWeek',
-        editable: false
+        editable: false,
+        columnFormat: {
+            month: 'dddd',
+            week: 'dddd',
+            day: 'dddd'
+        }
     });
 });
 
