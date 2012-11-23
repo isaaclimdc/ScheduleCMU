@@ -43,7 +43,7 @@
 			</div>
 
 			<div id="toolBox" class="four columns">
-				<form onSubmit="addCourse();">
+				<form id="addCourseForm">
 					<input type="text" id="addCourseBox" placeholder="e.g. 15451, 21127..."></input>
 				</form>
 				<div id="actionBtns">
@@ -213,174 +213,204 @@
 				<div id="accordion">
 
 					<!-- Start Course Entry -->
-				    <h3>15-237</h3>
-				    <div>
-				    	<p>Cross Platform Mobile Web Apps</p>
-				    	<table>
-				    		<tr>
-				    			<td>Class</td>
-				    			<td>Day</td>
-				    			<td>Time</td>
-				    		</tr>
-				    		<tr>
-				    			<td>Lect</td>
-				    			<td>TR</td>
-				    			<td>9:30a - 10:20a</td>
-				    		</tr>
-				    		<tr>
-				    			<td>A</td>
-				    			<td>F</td>
-				    			<td>10:30a - 11:20a</td>
-				    		</tr>
-				    		<tr>
-				    			<td>B</td>
-				    			<td>F</td>
-				    			<td>11:30a - 12:20a</td>
-				    		</tr>
-				    		<tr>
-				    			<td>C</td>
-				    			<td>F</td>
-				    			<td>12:30a - 1:20p</td>
-				    		</tr>
-				    		<tr>
-				    			<td>D</td>
-				    			<td>F</td>
-				    			<td>1:30p - 2:20p</td>
-				    		</tr>
-				    		<tr>
-				    			<td>E</td>
-				    			<td>F</td>
-				    			<td>2:30p - 3:20p</td>
-				    		</tr>
-				    	</table>
+					<div class="group">
+						<h3>15-237</h3>
+						<div>
+							<div class="contentHdr">
+								<p>Cross Platform Mobile Web Apps</p>
+								<p class="del" onClick="deleteCourse();">delete</p>
+								<p class="info" onClick="infoCourse();">info</p>
+								<hr>
+							</div>
+							<table>
+								<tr>
+									<td>Class</td>
+									<td>Day</td>
+									<td>Time</td>
+								</tr>
+								<tr>
+									<td>Lect</td>
+									<td>TR</td>
+									<td>9:30a - 10:20a</td>
+								</tr>
+								<tr>
+									<td>A</td>
+									<td>F</td>
+									<td>10:30a - 11:20a</td>
+								</tr>
+								<tr>
+									<td>B</td>
+									<td>F</td>
+									<td>11:30a - 12:20a</td>
+								</tr>
+								<tr>
+									<td>C</td>
+									<td>F</td>
+									<td>12:30a - 1:20p</td>
+								</tr>
+								<tr>
+									<td>D</td>
+									<td>F</td>
+									<td>1:30p - 2:20p</td>
+								</tr>
+								<tr>
+									<td>E</td>
+									<td>F</td>
+									<td>2:30p - 3:20p</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- End Course Entry -->
 
-				    	<!-- <img src="../images/del.png" onClick="addToSchedule(this);"/> -->
-				    	<p id="del" onClick="deleteCourse();">delete</p>
-				    	<p id="info" onClick="infoCourse();">info</p
-				    	</a>
-				    </div>
-				    <!-- End Course Entry -->
+					<!-- Start Course Entry -->
+					<div class="group">
+						<h3>15-150</h3>
+						<div>
+							<div class="contentHdr">
+								<p>Principles of Functional Programming</p>
+								<p class="del" onClick="deleteCourse();">delete</p>
+								<p class="info" onClick="infoCourse();">info</p>
+								<hr>
+							</div>
+							<table>
+								<tr>
+									<td>Class</td>
+									<td>Day</td>
+									<td>Time</td>
+								</tr>
+								<tr>
+									<td>Lect</td>
+									<td>TR</td>
+									<td>9:30a - 10:20a</td>
+								</tr>
+								<tr>
+									<td>A</td>
+									<td>W</td>
+									<td>10:30a - 11:20a</td>
+								</tr>
+								<tr>
+									<td>B</td>
+									<td>W</td>
+									<td>11:30a - 12:20a</td>
+								</tr>
+								<tr>
+									<td>C</td>
+									<td>W</td>
+									<td>12:30a - 1:20p</td>
+								</tr>
+								<tr>
+									<td>D</td>
+									<td>W</td>
+									<td>1:30p - 2:20p</td>
+								</tr>
+								<tr>
+									<td>E</td>
+									<td>W</td>
+									<td>2:30p - 3:20p</td>
+								</tr>
+								<tr>
+									<td>F</td>
+									<td>W</td>
+									<td>2:30p - 3:20p</td>
+								</tr>
+								<tr>
+									<td>G</td>
+									<td>W</td>
+									<td>2:30p - 3:20p</td>
+								</tr>
+								<tr>
+									<td>H</td>
+									<td>W</td>
+									<td>2:30p - 3:20p</td>
+								</tr>
+								<tr>
+									<td>W</td>
+									<td>W</td>
+									<td>2:30p - 3:20p</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- End Course Entry -->
 
-				    <!-- Start Course Entry -->
-				    <h3>15-150</h3>
-				    <div>
-				    	<p>Principles of Functional Programming</p>
-				        <table>
-				        	<tr>
-				        		<td>Class</td>
-				        		<td>Day</td>
-				        		<td>Time</td>
-				        	</tr>
-				        	<tr>
-				        		<td>Lect</td>
-				        		<td>TR</td>
-				        		<td>9:30a - 10:20a</td>
-				        	</tr>
-				        	<tr>
-				        		<td>A</td>
-				        		<td>W</td>
-				        		<td>10:30a - 11:20a</td>
-				        	</tr>
-				        	<tr>
-				        		<td>B</td>
-				        		<td>W</td>
-				        		<td>11:30a - 12:20a</td>
-				        	</tr>
-				        	<tr>
-				        		<td>C</td>
-				        		<td>W</td>
-				        		<td>12:30a - 1:20p</td>
-				        	</tr>
-				        	<tr>
-				        		<td>D</td>
-				        		<td>W</td>
-				        		<td>1:30p - 2:20p</td>
-				        	</tr>
-				        	<tr>
-				        		<td>E</td>
-				        		<td>W</td>
-				        		<td>2:30p - 3:20p</td>
-				        	</tr>
-				        	<tr>
-				        		<td>F</td>
-				        		<td>W</td>
-				        		<td>2:30p - 3:20p</td>
-				        	</tr>
-				        	<tr>
-				        		<td>G</td>
-				        		<td>W</td>
-				        		<td>2:30p - 3:20p</td>
-				        	</tr>
-				        	<tr>
-				        		<td>H</td>
-				        		<td>W</td>
-				        		<td>2:30p - 3:20p</td>
-				        	</tr>
-				        	<tr>
-				        		<td>W</td>
-				        		<td>W</td>
-				        		<td>2:30p - 3:20p</td>
-				        	</tr>
-				        </table>
-				    </div>
-				    <!-- End Course Entry -->
+					<!-- Start Course Entry -->
+					<div class="group">
+						<h3>73-100</h3>
+						<div>
+							<div class="contentHdr">
+								<p>Principles of Economics and Other Extremely Long Coursenames For Social Develepment and Public Policy For No Purpose</p>
+								<p class="del" onClick="deleteCourse();">delete</p>
+								<p class="info" onClick="infoCourse();">info</p>
+								<hr>
+							</div>
+							<table>
+								<tr>
+									<td>Class</td>
+									<td>Day</td>
+									<td>Time</td>
+								</tr>
+								<tr>
+									<td>A</td>
+									<td>MWF</td>
+									<td>9:30a - 10:20a</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- End Course Entry -->
 
-				    <!-- Start Course Entry -->
-				    <h3>73-100</h3>
-				    <div>
-				    	<p>Principles of Economics</p>
-				    	<table>
-				    		<tr>
-				    			<td>Class</td>
-				    			<td>Day</td>
-				    			<td>Time</td>
-				    		</tr>
-				    		<tr>
-				    			<td>A</td>
-				    			<td>MWF</td>
-				    			<td>9:30a - 10:20a</td>
-				    		</tr>
-				    	</table>
-				    </div>
-				    <!-- End Course Entry -->
+					<!-- Start Course Entry -->
+					<div class="group">
+						<h3>57-173</h3>
+						<div>
+							<div class="contentHdr">
+								<p>Survey of Western Music History</p>
+								<p class="del" onClick="deleteCourse();">delete</p>
+								<p class="info" onClick="infoCourse();">info</p>
+								<hr>
+							</div>
+							<table>
+								<tr>
+									<td>Class</td>
+									<td>Day</td>
+									<td>Time</td>
+								</tr>
+								<tr>
+									<td>A</td>
+									<td>MWF</td>
+									<td>9:30a - 10:20a</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- End Course Entry -->
 
-				    <!-- Start Course Entry -->
-				    <h3>57-173</h3>
-				    <div>
-				    	<p>Survey of Western Music History</p>
-				    	<table>
-				    		<tr>
-				    			<td>Class</td>
-				    			<td>Day</td>
-				    			<td>Time</td>
-				    		</tr>
-				    		<tr>
-				    			<td>A</td>
-				    			<td>MWF</td>
-				    			<td>9:30a - 10:20a</td>
-				    		</tr>
-				    	</table>
-				    </div>
-				    <!-- End Course Entry -->
-
-				    <!-- Start Course Entry -->
-				    <h3>15-213</h3>
-				    <div>
-				    	<p>Introduction to Computer Systems</p>
-				    	<table>
-				    		<tr>
-				    			<td>Class</td>
-				    			<td>Day</td>
-				    			<td>Time</td>
-				    		</tr>
-				    		<tr>
-				    			<td>A</td>
-				    			<td>MWF</td>
-				    			<td>9:30a - 10:20a</td>
-				    		</tr>
-				    	</table>
-				    </div>
-				    <!-- End Course Entry -->
+					<!-- Start Course Entry -->
+					<div class="group">
+						<h3>15-213</h3>
+						<div>
+							<div class="contentHdr">
+								<p>Introduction to Computer Systems</p>
+								<p class="del" onClick="deleteCourse();">delete</p>
+								<p class="info" onClick="infoCourse();">info</p>
+								<hr>
+							</div>
+							<table>
+								<tr>
+									<td>Class</td>
+									<td>Day</td>
+									<td>Time</td>
+								</tr>
+								<tr>
+									<td>A</td>
+									<td>MWF</td>
+									<td>9:30a - 10:20a</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- End Course Entry -->
 
 				</div>
 			</div>

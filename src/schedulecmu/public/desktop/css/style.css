@@ -234,7 +234,7 @@ li {
 #videoWrapper {
     display: block;
     margin-bottom: 20px;
-    box-shadow: 0px 0px 10px #999;
+    box-shadow: 0px 0px 5px #999999;
 }
 
 #copyright {
@@ -314,65 +314,103 @@ li {
     padding-top: 5px;
     outline: none;
     color: #000000;
-    border: 1px solid gray;
+    border: 1px solid #cccccc;
+    border-bottom: none;
     background-color: #D96C6E;
 }
-.ui-accordion .ui-accordion-header:nth-child(1) {
+.ui-accordion .group:nth-child(1) .ui-accordion-header {
     background-color: #D96C6E;
 }
-.ui-accordion .ui-accordion-header:nth-child(3) {
+.ui-accordion .group:nth-child(2) .ui-accordion-header {
     background-color: #BEFF7A;
 }
-.ui-accordion .ui-accordion-header:nth-child(5) {
+.ui-accordion .group:nth-child(3) .ui-accordion-header {
     background-color: #9ECFFF;
 }
-.ui-accordion .ui-accordion-header:nth-child(7) {
+.ui-accordion .group:nth-child(4) .ui-accordion-header {
     background-color: #FFF257;
 }
-.ui-accordion .ui-accordion-header:nth-child(9) {
+.ui-accordion .group:nth-child(5) .ui-accordion-header {
     background-color: #C891FF;
 }
-.ui-accordion .ui-accordion-header:nth-child(11) {
+.ui-accordion .group:nth-child(6) .ui-accordion-header {
     background-color: #FFBE69;
 }
 
 .ui-accordion .ui-accordion-content {
     margin-top: -8px;
     margin-bottom: 8px;
-    padding-top: 5px;
     padding-bottom: 15px;
-    background-color: #F2F2F2;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
-    border-bottom: 1px solid gray;
-    overflow-y: scroll;
+    background-color: #eeeeee;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
     overflow-x: hidden;
-    max-height: 300px;
 }
+
+#accordion .contentHdr {
+    padding-top: 5px;
+    /*background-color: #dddddd;*/
+}
+.ui-accordion .group:nth-child(1) .contentHdr {
+    background-color: #D96C6E;
+}
+.ui-accordion .group:nth-child(2) .contentHdr {
+    background-color: #BEFF7A;
+}
+.ui-accordion .group:nth-child(3) .contentHdr {
+    background-color: #9ECFFF;
+}
+.ui-accordion .group:nth-child(4) .contentHdr {
+    background-color: #FFF257;
+}
+.ui-accordion .group:nth-child(5) .contentHdr {
+    background-color: #C891FF;
+}
+.ui-accordion .group:nth-child(6) .contentHdr {
+    background-color: #FFBE69;
+}
+
 #accordion p {
     padding-top: 4px;
     padding-left: 10px;
     width: 90%;
     font-size: 16px;
-    font-style:italic;
+    font-weight: bold;
 }
-#accordion #del {
+#accordion .del {
     float: right;
-    color: red;
-    text-align: center;
+    color: #bb0000;
     font-size: 14px;
-    margin-top: 5px;
+    margin-top: -20px;
+    margin-right: 50px;
+    width: 10px;
+    height: 10px;
+    font-style: italic;
+    font-weight: normal;
 }
-#accordion #info {
+#accordion .del:hover {
+    cursor: pointer;
+    color: #ff0000;
+}
+#accordion .info {
     float: right;
-    margin-top: -45px;
-    margin-right: -70px;
-    text-align: center;
+    margin-top: -20px;
+    margin-right: 30px;
     font-size: 14px;
+    width: 10px;
+    height: 10px;
+    font-style: italic;
+    font-weight: normal;
+}
+#accordion .info:hover {
+    cursor: pointer;
+    color: #888888;
 }
 
 #accordion table {
     width: 100%;
+    margin-top: -20px;
 }
 #accordion tr:nth-child(1) {
     font-weight: bold;

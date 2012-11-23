@@ -2,7 +2,7 @@
 
 var allCourses =
 [
-  { Num : 15122
+  { Num : "15122"
     Name : "Principles of Imperative Computation"
     Units : "10.0"
     Semester : 120

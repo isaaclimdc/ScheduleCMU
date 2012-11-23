@@ -4,8 +4,31 @@ var m = date.getMonth();
 var y = date.getFullYear();
 
 $(document).ready(function() {
+    window.accordionOpts = {
+        heightStyle: "content",
+        collapsible: true,
+        header: "> div > h3",
+        animate: "easeOutCubic"
+    };
+
+    window.accordionSortOpts = {
+        axis: "y",
+        handle: "h3",
+        stop: function( event, ui ) {
+            // IE doesn't register the blur when sorting
+            // so trigger focusout handlers to remove .ui-state-focus
+            ui.item.children( "h3" ).triggerHandler( "focusout" );
+        }
+    };
+
     $(function() {
-        $( "#accordion" ).accordion();
+        $("#accordion").accordion(window.accordionOpts).sortable(window.accordionSortOpts);
+    });
+
+    // When the user presses enter to add course box
+    $("#addCourseForm").submit(function(e){
+        e.preventDefault();
+        addCourse();
     });
     
     $('#calview').fullCalendar({
@@ -147,14 +170,100 @@ function shareTwitter() {
 
 function addCourse() {
     var inputStr = $("#addCourseBox").val();
-    alert("Adding " + inputStr + "...");
 
     // Query database for 'inputStr'
+    var course =
+    { Num : "15122",
+      Name : "Principles of Imperative Computation",
+      Units : "10.0",
+      Semester : 120,
+      Sections : [ { Num : "Lec 1",
+                     Mini : undefined,
+                     Instructor : "Platzer",
+                     Classes : [ { Day : "T",
+                                   Start : "01:30PM",
+                                   End : "02:50PM",
+                                   Loc : "GHC 4102" },
+                                 { Day : "R",
+                                   Start : "01:30PM",
+                                   End : "02:50PM",
+                                   Loc : "GHC 4102" } ],
+                     Subsections : [ { Num : "A",
+                                       Mini : undefined,
+                                       Instructor : "Bharadwaj",
+                                       Classes : [ { Day : "W",
+                                                     Start : "01:30PM",
+                                                     End : "02:20PM",
+                                                     Loc : "GHC 5304" },
+                                                   { Day : "F",
+                                                     Start : "01:30PM",
+                                                     End : "02:20PM",
+                                                     Loc : "GHC 5304" } ],
+                                       Subsections : undefined },
+                                     { Num : "B",
+                                       Mini : undefined,
+                                       Instructor : "Chopra",
+                                       Classes : [ { Day : "W",
+                                                     Start : "02:30PM",
+                                                     End : "03:20PM",
+                                                     Loc : "GHC 5305" },
+                                                   { Day : "F",
+                                                     Start : "02:30PM",
+                                                     End : "03:20PM",
+                                                     Loc : "GHC 5305" } ],
+                                       Subsections : undefined } ] },
+                   { Num : "Lec 2",
+                     Mini : undefined,
+                     Instructor : "Gunawardena",
+                     Classes : [ { Day : "T",
+                                   Start : "03:30PM",
+                                   End : "04:50PM",
+                                   Loc : "GHC 4102" },
+                                 { Day : "R",
+                                   Start : "03:30PM",
+                                   End : "04:50PM",
+                                   Loc : "GHC 4102" } ],
+                     Subsections : [ { Num : "C",
+                                       Mini : undefined,
+                                       Instructor : "Horowitz",
+                                       Classes : [ { Day : "W",
+                                                     Start : "01:30PM",
+                                                     End : "02:50PM",
+                                                     Loc : "GHC 5306" },
+                                                   { Day : "F",
+                                                     Start : "01:30PM",
+                                                     End : "02:50PM",
+                                                     Loc : "GHC 5306" } ],
+                                       Subsections : undefined },
+                                     { Num : "D",
+                                       Mini : undefined,
+                                       Instructor : "Lim",
+                                       Classes : [ { Day : "W",
+                                                     Start : "02:30PM",
+                                                     End : "03:50PM",
+                                                     Loc : "GHC 5307" },
+                                                   { Day : "F",
+                                                     Start : "02:30PM",
+                                                     End : "03:50PM",
+                                                     Loc : "GHC 5307" } ],
+                                       Subsections : undefined } ] } ] };
+    var courseNum = course.Num;
+    var courseName = course.Name;
+    var courseUnits = course.Units;
 
     var accordion = $("#accordion");
 
     // Create <h3> for title
-    var eventTitle = $("<h3>").text("15-237");
+    var title = $("<h3>").text(courseNum);
+
+    // Create contentHdr
+    var contentHdr = $("<div>").addClass("contentHdr");
+    contentHdr.append($("<p>").text(courseName));
+    var del = $("<p>").addClass("del").attr("onClick", "deleteCourse();").text("delete");
+    var info = $("<p>").addClass("info").attr("onClick", "infoCourse();").text("info");
+    contentHdr.append(del);
+    contentHdr.append(info);
+    contentHdr.append("<hr>");
 
     // Create <table> for classes
     var table = $("<table>");
@@ -163,23 +272,30 @@ function addCourse() {
 
     // Append table into a div
     var content = $("<div>");
+    content.append(contentHdr);
     content.append(table);
 
-    // Append h3 then that div into 'accordion'
-    accordion.append(eventTitle);
-    accordion.append(content);
+    // Append title h3 then content div into a group
+    var group = $("<div>").addClass("group");
+    group.append(title);
+    group.append(content);
 
-    var bgColor = eventTitle.css('background-color');
+    // Append group into accordion and refresh. Expand the recently added
+    window.accordionOpts.active = "h3:last";
+    accordion.append(group).accordion('destroy').accordion(window.accordionOpts).sortable(window.accordionSortOpts);
+    
 
-    // Render Event on Calendar Widget
-    $('#calview').fullCalendar('renderEvent', {
-        id: 999,
-        title: eventTitle,
-        start: new Date(y, m, d, 16, 0),
-        end: new Date(y, m, d, 18, 0),
-        allDay: false,
-        backgroundColor: bgColor
-    });
+    // var bgColor = title.css('background-color');
+
+    // // Render Event on Calendar Widget
+    // $('#calview').fullCalendar('renderEvent', {
+    //     id: 999,
+    //     title: courseNum,
+    //     start: new Date(y, m, d, 16, 0),
+    //     end: new Date(y, m, d, 18, 0),
+    //     allDay: false,
+    //     backgroundColor: bgColor
+    // });
 }
 
 function deleteCourse() {
