@@ -24,8 +24,6 @@ $(document).ready(function() {
             day: 'dddd'
         }
     });
-
-    $("#eventsLink").trigger('click');
 });
 
 /*** CourseBrowser ***/
@@ -60,10 +58,9 @@ function processEventForm() {
     var startTime = $("#eventFormStartTime").val();
     var endTime = $("#eventFormEndTime").val();
     var location = $("#eventFormLocation").val();
-    var name = $("#eventFormName").val();
     var andrew = $("#eventFormAndrew").val();
 
-    //alert("Course: " + courseNum + "\nType: " + type + "\nTitle: " + title + "\nStart time: " + startTime + "\nEnd time: " + endTime + "\nLocation: " + location + "\nName: " + name + "\nAndrew ID: " + andrew);
+    //alert("Course: " + courseNum + "\nType: " + type + "\nTitle: " + title + "\nStart time: " + startTime + "\nEnd time: " + endTime + "\nLocation: " + location + "\nAndrew ID: " + andrew);
 
     var results = {
         "courseNum" : courseNum,
@@ -72,7 +69,6 @@ function processEventForm() {
         "startTime" : startTime,
         "endTime": endTime,
         "location": location,
-        "name": name,
         "andrew": andrew
     };
 
@@ -82,6 +78,7 @@ function processEventForm() {
         /* Process the valid data here */
 
         /* When done, close the fancybox dialog */
+        $.fancybox.close(false);
     }
 }
 
@@ -108,9 +105,6 @@ function validateEventForm(res) {
     if (res.location.length === 0) {
         toChange.push("#eventFormLocation");
     }
-    if (res.name.length === 0) {
-        toChange.push("#eventFormName");
-    }
     if (res.andrew.length === 0) {
         toChange.push("#eventFormAndrew");
     }
@@ -126,6 +120,28 @@ function validateEventForm(res) {
     }
 }
 
+/*** ShareView ***/
+
+$("#shareLink").fancybox({
+    "scrolling" : "no",
+    "titleShow" : false,
+});
+
+function exportGoogleCal() {
+    alert("Exporting to Google Calendar...");
+}
+
+function downloadAppleCal() {
+    alert("Downloading for Apple Calendar...");
+}
+
+function shareFacebook() {
+    alert("Sharing on Facebook...");
+}
+
+function shareTwitter() {
+    alert("Sharing on Twitter...");
+}
 
 /*** Main screen ***/
 
@@ -166,17 +182,10 @@ function addCourse() {
     });
 }
 
-function browseCourses() {
-    alert("Browse!");
-    // Open modal sheet to browse courses
+function deleteCourse() {
+    alert("Deleting course");
 }
 
-function openEventSheet() {
-    alert("Events!");
-    // Open modal sheet for course events
-}
-
-function openShareSheet() {
-    alert("Share!");
-    // Open modal sheet for sharing services
+function infoCourse() {
+    alert("Getting course info");
 }
