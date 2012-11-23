@@ -372,6 +372,94 @@ li {
     font-weight: bold;
 }
 
+/* CourseBrowser */
+#courseBrowser {
+    width: 650px;
+    height: 400px;
+}
+
+#courseBrowserHdr {
+    width: 100%;
+    /*box-shadow: 0px 0px 10px #777777;*/
+}
+
+#courseBrowserForm input {
+    width: 80%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 16px;
+    font-family: Tahoma, Arial, sans-serif;
+}
+#courseBrowserForm input:hover {
+    box-shadow: 0px 0px 2px #D96C6E;
+}
+#courseBrowserForm input:focus {
+    box-shadow: 0px 0px 5px #D96C6E;
+}
+
+#courseBrowserBody {
+    width: 100%;
+    max-height: 350px;
+    overflow: scroll;
+}
+
+.courseBrowserRow {
+    width: 100%;
+    height: 50px;
+    background: #eeeeee;
+    display: inline-block;
+    margin-bottom: -5px;
+}
+.courseBrowserRow:nth-child(odd) {
+    background: #ffffff;
+}
+.courseBrowserRow:hover {
+    background: rgb(255, 0, 0); /* Fall-back for rgba() */
+    background: rgba(255, 0, 0, 0.3);
+    cursor: default;
+}
+.courseBrowserRow h1 {
+    font-size: 18px;
+    font-weight: normal;
+    color: #000000;
+    text-shadow: none;
+
+    margin-top: -10px;
+    float: left;
+}
+.courseBrowserRow h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    text-shadow: none;
+
+    width: 380px;
+    margin-top: 5px;
+    margin-left: 10px;
+    float: left;
+}
+.courseBrowserRow h3 {
+    font-size: 18px;
+    font-weight: normal;
+    color: #000000;
+    text-shadow: none;
+
+    width: 100px;
+    margin-top: 8px;
+    margin-left: 20px;
+    float: left;
+}
+.courseBrowserRow img {
+    margin-top: 17px;
+    margin-left: 20px;
+    float: left;
+}
+.courseBrowserRow img:hover {
+    cursor: pointer;
+}
+
 /* 404 */
 
 #errorbutton {

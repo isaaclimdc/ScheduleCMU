@@ -24,7 +24,29 @@ $(document).ready(function() {
             day: 'dddd'
         }
     });
+
+    $("#browseLink").trigger('click');
 });
+
+/*** CourseBrowser ***/
+
+$("#browseLink").fancybox({
+    "scrolling" : "no",
+    "titleShow" : false,
+});
+
+function searchForCourse() {
+    var searchStr = $("#courseBrowserForm input").val();
+    alert("Searching for " + searchStr + "...");
+}
+
+function addToSchedule(img) {
+    var row = $(img).parent();
+    var num = $(row).children("h1").html();
+    alert("Adding " + num + " to schedule...");
+}
+
+/*** Main screen ***/
 
 function addCourse() {
     var inputStr = $("#addCourseBox").val();
