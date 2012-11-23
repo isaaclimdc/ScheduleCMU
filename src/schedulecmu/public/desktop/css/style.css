@@ -460,6 +460,25 @@ li {
     cursor: pointer;
 }
 
+/* EventBrowser */
+#eventForm {
+
+}
+#eventForm input {
+    font-size: 16px;
+    font-family: Tahoma, Arial, sans-serif;
+}
+#eventForm input:hover {
+    box-shadow: 0px 0px 2px #D96C6E;
+}
+#eventForm input:focus {
+    box-shadow: 0px 0px 5px #D96C6E;
+}
+#eventForm select {
+    font-size: 16px;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
 /* 404 */
 
 #errorbutton {

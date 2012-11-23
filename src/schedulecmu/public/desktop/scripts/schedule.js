@@ -25,7 +25,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#browseLink").trigger('click');
+    $("#eventsLink").trigger('click');
 });
 
 /*** CourseBrowser ***/
@@ -45,6 +45,87 @@ function addToSchedule(img) {
     var num = $(row).children("h1").html();
     alert("Adding " + num + " to schedule...");
 }
+
+/*** EventBrowser ***/
+
+$("#eventsLink").fancybox({
+    "scrolling" : "no",
+    "titleShow" : false,
+});
+
+function processEventForm() {
+    var courseNum = $("#eventFormCourseNum").val();
+    var type = $("#eventFormType").val();
+    var title = $("#eventFormTitle").val();
+    var startTime = $("#eventFormStartTime").val();
+    var endTime = $("#eventFormEndTime").val();
+    var location = $("#eventFormLocation").val();
+    var name = $("#eventFormName").val();
+    var andrew = $("#eventFormAndrew").val();
+
+    //alert("Course: " + courseNum + "\nType: " + type + "\nTitle: " + title + "\nStart time: " + startTime + "\nEnd time: " + endTime + "\nLocation: " + location + "\nName: " + name + "\nAndrew ID: " + andrew);
+
+    var results = {
+        "courseNum" : courseNum,
+        "type" : type,
+        "title" : title,
+        "startTime" : startTime,
+        "endTime": endTime,
+        "location": location,
+        "name": name,
+        "andrew": andrew
+    };
+
+    if (validateEventForm(results) === true) {
+        alert("valid!");
+
+        /* Process the valid data here */
+
+        /* When done, close the fancybox dialog */
+    }
+}
+
+/* Perform form data validation */
+function validateEventForm(res) {
+    function isNumber(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+    var toChange = [];
+
+    if (isNumber(parseInt(res.courseNum)) === false) {
+        toChange.push("#eventFormCourseNum");
+    }
+    if (res.courseNum.length !== 5) {
+        toChange.push("#eventFormCourseNum");
+    }
+    if (res.title.length === 0) {
+        toChange.push("#eventFormTitle");
+    }
+    if (parseInt(res.endTime) <= parseInt(res.startTime)) {
+        toChange.push("#eventFormEndTime");
+    }
+    if (res.location.length === 0) {
+        toChange.push("#eventFormLocation");
+    }
+    if (res.name.length === 0) {
+        toChange.push("#eventFormName");
+    }
+    if (res.andrew.length === 0) {
+        toChange.push("#eventFormAndrew");
+    }
+
+    if (toChange.length === 0)
+        return true;
+    else {
+        $.map(toChange, function(val, i) {
+            $(val).css("border", "2px solid red");
+        });
+
+        return false;
+    }
+}
+
 
 /*** Main screen ***/
 
