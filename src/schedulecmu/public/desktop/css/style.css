@@ -348,9 +348,9 @@ li {
     overflow-x: hidden;
 }
 
-#accordion .contentHdr {
+.ui-accordion .group .contentHdr {
     padding-top: 5px;
-    /*background-color: #dddddd;*/
+    background-color: #D96C6E;
 }
 .ui-accordion .group:nth-child(1) .contentHdr {
     background-color: #D96C6E;

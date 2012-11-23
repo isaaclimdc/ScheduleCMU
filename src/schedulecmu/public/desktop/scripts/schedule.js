@@ -259,8 +259,8 @@ function addCourse() {
     // Create contentHdr
     var contentHdr = $("<div>").addClass("contentHdr");
     contentHdr.append($("<p>").text(courseName));
-    var del = $("<p>").addClass("del").attr("onClick", "deleteCourse();").text("delete");
-    var info = $("<p>").addClass("info").attr("onClick", "infoCourse();").text("info");
+    var del = $("<p>").addClass("del").attr("onClick", "deleteCourse(this);").text("delete");
+    var info = $("<p>").addClass("info").attr("onClick", "infoCourse(this);").text("info");
     contentHdr.append(del);
     contentHdr.append(info);
     contentHdr.append("<hr>");
@@ -298,8 +298,15 @@ function addCourse() {
     // });
 }
 
-function deleteCourse() {
-    alert("Deleting course");
+function deleteCourse(p) {
+    // Get to enclosing group (3 levels up)
+    var group = $(p).parent().parent().parent();
+
+    // Remove the group then refresh accordion
+    group.remove();
+    $("#accordion").accordion('destroy').accordion(window.accordionOpts).sortable(window.accordionSortOpts);
+
+    // Send updated course list to server
 }
 
 function infoCourse() {
