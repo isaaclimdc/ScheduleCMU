@@ -378,11 +378,18 @@ li {
     font-size: 16px;
     font-weight: bold;
 }
+#accordion .units {
+    float: left;
+    font-size: 14px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    height: 20px;
+    font-weight: normal;
+}
 #accordion .del {
     float: right;
     color: #bb0000;
     font-size: 14px;
-    margin-top: -20px;
     margin-right: 50px;
     width: 10px;
     height: 10px;
@@ -395,7 +402,6 @@ li {
 }
 #accordion .info {
     float: right;
-    margin-top: -20px;
     margin-right: 30px;
     font-size: 14px;
     width: 10px;

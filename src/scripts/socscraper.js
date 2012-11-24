@@ -89,11 +89,28 @@ jsdom.env(
 
         /* Process the data in cols into a Course */
         function processCourse(cols) {
+            function processCourseNum(numStr) {
+                /* "15237" is length 5. They should all be like this.
+                 * If not, return numStr unchanged.
+                 */
+                if (numStr.length !== 5)
+                    return numStr;
+
+                var dept = numStr.substring(0, 2);
+                var course = numStr.substring(2);
+
+                return dept + "-" + course;
+            }
+
+            function processUnits(unitsStr) {
+
+            }
+
             // Create a new Course
             var newCourse = new Course();
 
             // Get number, name, units, semester
-            newCourse.Num = extractHTML(cols[0]);
+            newCourse.Num = processCourseNum(extractHTML(cols[0]));
             newCourse.Name = extractHTML(cols[1]);
             newCourse.Units = extractHTML(cols[2]);
             newCourse.Semester = globalSem;
@@ -103,11 +120,27 @@ jsdom.env(
 
         /* Process the data in cols into a Class for a specific day */
         function processClass(cols, day) {
+            function processTime(timeStr) {
+                /* "02:50PM" is length 7. They should all be like
+                 * this. If not, return timeStr unchanged.
+                 */
+                if (timeStr.length !== 7)
+                    return timeStr;
+
+                var hours = (timeStr.substring(0, 1) === "0") ?
+                            timeStr.substring(1, 2) :
+                            timeStr.substring(0, 2);
+                var mins = timeStr.substring(3, 5);
+                var ampm = (timeStr.substring(5, 7) === "AM") ? "a" : "p";
+
+                return hours + ":" + mins + ampm;
+            }
+
             var newClass = new Class();
 
             newClass.Day = day
-            newClass.Start = extractHTML(cols[5]);
-            newClass.End = extractHTML(cols[6]);
+            newClass.Start = processTime(extractHTML(cols[5]));
+            newClass.End = processTime(extractHTML(cols[6]));
             newClass.Loc = extractHTML(cols[7]);
 
             return newClass;
@@ -119,13 +152,13 @@ jsdom.env(
             var newSection = new Section();
 
             // Get Section number, instructor
-            var courseNum = extractHTML(cols[3]);
-            newSection.Num = courseNum;
+            var sectionNum = extractHTML(cols[3]);
+            newSection.Num = sectionNum;
             newSection.Instructor = extractHTML(cols[8]);
 
             // Get Mini or not
-            if (courseNum.length === 2) {
-                var miniNum = parseInt(courseNum.substring(1, 2));
+            if (sectionNum.length === 2) {
+                var miniNum = parseInt(sectionNum.substring(1, 2));
                 newSection.Mini = (miniNum - 1) % 2;
             }
 
@@ -222,7 +255,7 @@ jsdom.env(
                     currentSection = undefined;
                 }
 
-                if (currentCourse !== undefined && !isNaN(currentCourse.Num)) {
+                if (currentCourse !== undefined && currentCourse.Num.length === 6) {
                     allCourses.push(currentCourse);
                     currentCourse = undefined;
                 }
@@ -238,7 +271,7 @@ jsdom.env(
         });
 
         // Push the last currentCourse
-        if (!isNaN(currentCourse.Num)) {
+        if (currentCourse.Num.length === 6) {
             currentCourse.Sections.push(currentSection);
             allCourses.push(currentCourse);
         }

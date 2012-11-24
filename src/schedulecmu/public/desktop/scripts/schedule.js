@@ -171,123 +171,265 @@ function shareTwitter() {
 function addCourse() {
     var inputStr = $("#addCourseBox").val();
 
-    // Query database for 'inputStr'
+    /* Query database for 'inputStr' */
+
+    /* Returns something like this */
     var course =
-    { Num : "15122",
-      Name : "Principles of Imperative Computation",
-      Units : "10.0",
-      Semester : 120,
-      Sections : [ { Num : "Lec 1",
-                     Mini : undefined,
-                     Instructor : "Platzer",
-                     Classes : [ { Day : "T",
-                                   Start : "01:30PM",
-                                   End : "02:50PM",
-                                   Loc : "GHC 4102" },
-                                 { Day : "R",
-                                   Start : "01:30PM",
-                                   End : "02:50PM",
-                                   Loc : "GHC 4102" } ],
-                     Subsections : [ { Num : "A",
-                                       Mini : undefined,
-                                       Instructor : "Bharadwaj",
-                                       Classes : [ { Day : "W",
-                                                     Start : "01:30PM",
-                                                     End : "02:20PM",
-                                                     Loc : "GHC 5304" },
-                                                   { Day : "F",
-                                                     Start : "01:30PM",
-                                                     End : "02:20PM",
-                                                     Loc : "GHC 5304" } ],
-                                       Subsections : undefined },
-                                     { Num : "B",
-                                       Mini : undefined,
-                                       Instructor : "Chopra",
-                                       Classes : [ { Day : "W",
-                                                     Start : "02:30PM",
-                                                     End : "03:20PM",
-                                                     Loc : "GHC 5305" },
-                                                   { Day : "F",
-                                                     Start : "02:30PM",
-                                                     End : "03:20PM",
-                                                     Loc : "GHC 5305" } ],
-                                       Subsections : undefined } ] },
-                   { Num : "Lec 2",
-                     Mini : undefined,
-                     Instructor : "Gunawardena",
-                     Classes : [ { Day : "T",
-                                   Start : "03:30PM",
-                                   End : "04:50PM",
-                                   Loc : "GHC 4102" },
-                                 { Day : "R",
-                                   Start : "03:30PM",
-                                   End : "04:50PM",
-                                   Loc : "GHC 4102" } ],
-                     Subsections : [ { Num : "C",
-                                       Mini : undefined,
-                                       Instructor : "Horowitz",
-                                       Classes : [ { Day : "W",
-                                                     Start : "01:30PM",
-                                                     End : "02:50PM",
-                                                     Loc : "GHC 5306" },
-                                                   { Day : "F",
-                                                     Start : "01:30PM",
-                                                     End : "02:50PM",
-                                                     Loc : "GHC 5306" } ],
-                                       Subsections : undefined },
-                                     { Num : "D",
-                                       Mini : undefined,
-                                       Instructor : "Lim",
-                                       Classes : [ { Day : "W",
-                                                     Start : "02:30PM",
-                                                     End : "03:50PM",
-                                                     Loc : "GHC 5307" },
-                                                   { Day : "F",
-                                                     Start : "02:30PM",
-                                                     End : "03:50PM",
-                                                     Loc : "GHC 5307" } ],
-                                       Subsections : undefined } ] } ] };
+    {
+            Num: '73-230',
+            Sections: [
+                {
+                    Classes: [
+                        {
+                            End: '10:20a',
+                            Loc: 'POS MN AUD',
+                            Day: 'M',
+                            Start: '9:00a'
+                        },
+                        {
+                            End: '10:20a',
+                            Loc: 'POS MN AUD',
+                            Day: 'W',
+                            Start: '9:00a'
+                        }
+                    ],
+                    Num: 'Lec 1',
+                    Subsections: [
+                        {
+                            Classes: [
+                                {
+                                    End: '10:20a',
+                                    Loc: 'POS MN AUD',
+                                    Day: 'F',
+                                    Start: '9:00a'
+                                }
+                            ],
+                            Num: 'A',
+                            Instructor: 'Instructor TBA'
+                        },
+                        {
+                            Classes: [
+                                {
+                                    End: '10:20a',
+                                    Loc: 'SH 214',
+                                    Day: 'F',
+                                    Start: '9:00a'
+                                }
+                            ],
+                            Num: 'B',
+                            Instructor: 'Instructor TBA'
+                        }
+                    ],
+                    Instructor: 'Groeger'
+                },
+                {
+                    Classes: [
+                        {
+                            End: '11:50a',
+                            Loc: 'POS MN AUD',
+                            Day: 'M',
+                            Start: '10:30a'
+                        },
+                        {
+                            End: '11:50a',
+                            Loc: 'POS MN AUD',
+                            Day: 'W',
+                            Start: '10:30a'
+                        }
+                    ],
+                    Num: 'Lec 2',
+                    Subsections: [
+                        {
+                            Classes: [
+                                {
+                                    End: '11:50a',
+                                    Loc: 'POS MN AUD',
+                                    Day: 'F',
+                                    Start: '10:30a'
+                                }
+                            ],
+                            Num: 'C',
+                            Instructor: 'Instructor TBA'
+                        },
+                        {
+                            Classes: [
+                                {
+                                    End: '11:50a',
+                                    Loc: 'HH B131',
+                                    Day: 'F',
+                                    Start: '10:30a'
+                                }
+                            ],
+                            Num: 'D',
+                            Instructor: 'Instructor TBA'
+                        }
+                    ],
+                    Instructor: 'Groeger'
+                },
+                {
+                    Classes: [
+                        {
+                            End: '11:50a',
+                            Loc: 'HH B131',
+                            Day: 'M',
+                            Start: '10:30a'
+                        },
+                        {
+                            End: '11:50a',
+                            Loc: 'HH B131',
+                            Day: 'W',
+                            Start: '10:30a'
+                        }
+                    ],
+                    Num: 'Lec 3',
+                    Subsections: [
+                        {
+                            Classes: [
+                                {
+                                    End: '11:50a',
+                                    Loc: 'WEH 5421',
+                                    Day: 'F',
+                                    Start: '10:30a'
+                                }
+                            ],
+                            Num: 'E',
+                            Instructor: 'Instructor TBA'
+                        },
+                        {
+                            Classes: [
+                                {
+                                    End: '11:50a',
+                                    Loc: 'GHC 4307',
+                                    Day: 'F',
+                                    Start: '10:30a'
+                                }
+                            ],
+                            Num: 'F',
+                            Instructor: 'Instructor TBA'
+                        }
+                    ],
+                    Instructor: 'Instructor TBA'
+                },
+                {
+                    Classes: [
+                        {
+                            End: '10:20a',
+                            Loc: 'CMB 1064',
+                            Day: 'U',
+                            Start: '9:30a'
+                        },
+                        {
+                            End: '10:20a',
+                            Loc: 'CMB 1064',
+                            Day: 'T',
+                            Start: '9:30a'
+                        }
+                    ],
+                    Num: 'Lec 4',
+                    Subsections: [
+                        {
+                            Classes: [
+                                {
+                                    End: '10:20a',
+                                    Loc: 'CMB 1064',
+                                    Day: 'R',
+                                    Start: '9:30a'
+                                }
+                            ],
+                            Num: 'W',
+                            Instructor: 'Sileo'
+                        },
+                        {
+                            Classes: [
+                                {
+                                    End: '1:50p',
+                                    Loc: 'CMB 2152',
+                                    Day: 'R',
+                                    Start: '1:00p'
+                                }
+                            ],
+                            Num: 'X',
+                            Instructor: 'Sileo'
+                        }
+                    ],
+                    Instructor: 'Sileo'
+                }
+            ],
+            Name: 'Intermediate Microeconomics',
+            Units: '9.0',
+            Semester: 131
+        };
+
     var courseNum = course.Num;
     var courseName = course.Name;
     var courseUnits = course.Units;
 
     var accordion = $("#accordion");
 
-    // Create <h3> for title
+    /* Create <h3> for title */
     var title = $("<h3>").text(courseNum);
 
-    // Create contentHdr
+    /* Create contentHdr */
     var contentHdr = $("<div>").addClass("contentHdr");
     contentHdr.append($("<p>").text(courseName));
+    var units = $("<p>").addClass("units").text(courseUnits + " units");
     var del = $("<p>").addClass("del").attr("onClick", "deleteCourse(this);").text("delete");
     var info = $("<p>").addClass("info").attr("onClick", "infoCourse(this);").text("info");
+    contentHdr.append(units);
     contentHdr.append(del);
     contentHdr.append(info);
     contentHdr.append("<hr>");
 
-    // Create <table> for classes
+    /* Create <table> for classes */
     var table = $("<table>");
 
-    // Extract data from Course object, append into tr's and td's
+    /* First append the header */
+    var hdrRow = $("<tr>");
+    hdrRow.append(newCol("Class"));
+    hdrRow.append(newCol("Day"));
+    hdrRow.append(newCol("Time"));
+    table.append(hdrRow);
 
-    // Append table into a div
+    /* Extract data from Course object, append into tr's and td's */
+    var sectionsArr = course.Sections;
+    if (sectionsArr !== undefined) {
+        for (var i = 0; i < sectionsArr.length; i++) {
+            var section = sectionsArr[i];
+            var classesArr = section.Classes;
+
+            /* Take care of the main lecture/class first */
+            processClasses(classesArr, table, section.Num);
+
+            /* Now take care of the subsections (recitations) */
+            var subsectionsArr = section.Subsections;
+            if (subsectionsArr !== undefined) {
+                for (j = 0; j < subsectionsArr.length; j++) {
+                    var subsection = subsectionsArr[j];
+                    var subclassesArr = subsection.Classes;
+
+                    processClasses(subclassesArr, table, subsection.Num);
+                }
+            }
+        }
+    }
+
+    /* Append table into a div */
     var content = $("<div>");
     content.append(contentHdr);
     content.append(table);
 
-    // Append title h3 then content div into a group
+    /* Append title h3 then content div into a group */
     var group = $("<div>").addClass("group");
     group.append(title);
     group.append(content);
 
-    // Append group into accordion and refresh. Expand the recently added
+    /* Append group into accordion and refresh. Expand the recently added */
     window.accordionOpts.active = "h3:last";
     accordion.append(group).accordion('destroy').accordion(window.accordionOpts).sortable(window.accordionSortOpts);
-    
 
     // var bgColor = title.css('background-color');
 
-    // // Render Event on Calendar Widget
+    // /* Render Event on Calendar Widget */
     // $('#calview').fullCalendar('renderEvent', {
     //     id: 999,
     //     title: courseNum,
@@ -296,6 +438,92 @@ function addCourse() {
     //     allDay: false,
     //     backgroundColor: bgColor
     // });
+}
+
+/* Some helper functions for processing courses */
+
+/* Process the classes of a "section" (both lecture and recitation).
+ * table is a jQuery object. num is the Num field of the section we're
+ * processing. This function appends to the DOM in-place.
+ */
+function processClasses(classesArr, table, num) {
+    if (areSameTime(classesArr) === true) {
+        /* If all classes in this section start at the same time,
+         * we only need 1 row.
+         */
+        var row = $("<tr>");
+
+        /* Append the section number */
+        row.append(newCol(num));
+        
+        var daysStr = "";
+        for (var i = 0; i < classesArr.length; i++) {
+            /* Concat into a single string like "MWF" */
+            daysStr += classesArr[i].Day;
+        }
+
+        /* Done concatenating, so append the day(s) */
+        row.append(newCol(daysStr));
+
+        /* Append the time. Since they start and end at the same
+         * time, use index 0.
+         */
+        var startTime = classesArr[0].Start;
+        var endTime = classesArr[0].End;
+        row.append(newCol(makeTimeStr(startTime, endTime)));
+
+        /* Done. Append new row to the table */
+        table.append(row);
+    }
+    else {
+        /* Otherwise, need 1 row per day */
+        for (var i = 0; i < classesArr.length; i++) {
+            var row = $("<tr>");
+
+            /* Append section num if first row, a space otherwise */
+            if (i === 0) {
+                row.append(newCol(num));
+            }
+            else {
+                row.append(newCol("&nbsp;"));
+            }
+
+            /* Append the day */
+            row.append(newCol(classesArr[i].Day));
+
+            /* Append the time */
+            var startTime = classesArr[i].Start;
+            var endTime = classesArr[i].End;
+            row.append(newCol(makeTimeStr(startTime, endTime)));
+
+            /* Done with row. Append to table */
+            table.append(row);
+        }
+    }
+}
+
+/* Checks whether all classes in a class array occur at the same
+ * time on their designated days
+ */
+function areSameTime(classesArr) {
+    for (var i = 0; i < classesArr.length - 1; i++) {
+        var thisClass = classesArr[i];
+        var nextClass = classesArr[i+1];
+        if (thisClass.Start !== nextClass.Start ||
+            thisClass.End !== nextClass.End) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function newCol(str) {
+    return $("<td>").html(str);
+}
+
+function makeTimeStr(start, end) {
+    return start + " - " + end;
 }
 
 function deleteCourse(p) {
