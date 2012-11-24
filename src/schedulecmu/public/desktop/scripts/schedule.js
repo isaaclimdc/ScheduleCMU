@@ -3,6 +3,8 @@ var d = date.getDate();
 var m = date.getMonth();
 var y = date.getFullYear();
 
+var listedCourses = [];
+
 $(document).ready(function() {
     window.accordionOpts = {
         heightStyle: "content",
@@ -360,6 +362,9 @@ function addCourse() {
             Semester: 131
         };
 
+    /* Add the new course to the global listedCourses */
+    listedCourses.push(course);
+
     var courseNum = course.Num;
     var courseName = course.Name;
     var courseUnits = course.Units;
@@ -527,7 +532,7 @@ function makeTimeStr(start, end) {
 }
 
 function deleteCourse(p) {
-    // Get to enclosing group (3 levels up)
+    /* Get to enclosing group (3 levels up) */
     var group = $(p).parent().parent().parent();
 
     // Remove the group then refresh accordion
@@ -537,6 +542,44 @@ function deleteCourse(p) {
     // Send updated course list to server
 }
 
-function infoCourse() {
-    alert("Getting course info");
+/*** Course Info Viewer ***/
+
+$("#courseInfoLink").fancybox({
+    "scrolling" : "no",
+    "titleShow" : false,
+});
+
+function infoCourse(infoLink) {
+    /* Get to enclosing group (3 levels up) */
+    var clickedIndex = $(infoLink).parent().parent().parent().index();
+    
+    /* Get this course from the global listedCourses */
+    var course = listedCourses[clickedIndex];
+    
+    /* Create the modal view and populate with the desired course */
+    var browser = $("<div>").attr({
+        "id": "courseInfoBrowser",
+        "style": "display:none"
+    });
+
+    var header = $("<div>").attr("id", "courseInfoHeader");
+    var headerNum = $("<h2>").text(course.Num);
+    var headerName = $("<h3>").text(course.Name);
+    var headerUnits = $("<h4>").text(course.Units + " Units");
+
+    header.append(headerNum);
+    header.append(headerName);
+    header.append(headerUnits);
+    header.append($("<hr>"));
+
+    browser.append(header);
+
+
+
+
+    /* Done. Append it anywhere in content */
+    $("#content").append(browser);
+
+    /* Open it */
+    $("#courseInfoLink").click();
 }

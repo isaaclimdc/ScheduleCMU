@@ -575,6 +575,29 @@ li {
     margin-top: 13px;
 }
 
+/* Course Info Browser */
+#courseInfoBrowser {
+    width: 750px;
+    height: 500px;
+}
+#courseInfoBrowser #courseInfoHeader h2 {
+    float: left;
+    margin-bottom: -30px;
+}
+#courseInfoBrowser #courseInfoHeader h3 {
+    color: #000000;
+    text-shadow: none;
+    float: left;
+    margin-left: 20px;
+    margin-top: -3px;
+}
+#courseInfoBrowser #courseInfoHeader h4 {
+    color: #777777;
+    font-size: 16px;
+    text-shadow: none;
+    clear: both;
+}
+
 /* 404 */
 
 #errorbutton {
