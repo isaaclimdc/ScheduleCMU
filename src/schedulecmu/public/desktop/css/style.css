@@ -11,8 +11,8 @@ body {
 }
 
 h1 {
-    font-size: 60px;
-    color: #fff;
+    font-size: 50px;
+    color: #000000;
     padding: 10px;
     text-shadow: 0px 1px 2px #aaa;
     font-family: Tahoma, Arial, sans-serif;
@@ -33,7 +33,7 @@ h3 {
 }
 
 h4 {
-    font-size: 22px;
+    font-size: 26px;
     padding-bottom: 5px;
     padding-top: 10px;
     color: #333;
@@ -53,7 +53,7 @@ h5 {
 p {
     color: #333;
     text-shadow: 0px 1px 2px #555 inset;
-    font-size: 14px;
+    font-size: 18px;
     font-family: Arial, sans-serif;
 }
 
@@ -223,7 +223,6 @@ li {
 #centered {
     margin-left: 20%;
     margin-right: 20%;
-    font-size: 20px;
     text-align: center;
 }
 
@@ -231,14 +230,39 @@ li {
     color: white;
 }
 
-#videoWrapper {
+#introVideo {
     display: block;
-    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 60px;
     box-shadow: 0px 0px 5px #999999;
 }
 
 #copyright {
     font-size: 12px;
+}
+
+/* Marketing */
+#marketing #title {
+    text-align: center;
+    margin-top: 20px;
+}
+#marketing h4 {
+    margin-bottom: 10px;
+}
+#marketing a:not(#fbLoginBtn) {
+    color: red;
+    font-weight: bold;
+}
+#marketing img {
+    margin-top: 20px;
+}
+#marketing img:not(#noShadow) {
+    box-shadow: 0px 0px 10px #999999;
+}
+#marketing .row {
+    margin-bottom: 150px;
 }
 
 /* Schedule */
