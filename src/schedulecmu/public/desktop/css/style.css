@@ -255,6 +255,11 @@ li {
     color: red;
     font-weight: bold;
 }
+#marketing li {
+    list-style-type: circle;
+    margin-left: 40px;
+    font-size: 16px;
+}
 #marketing img {
     margin-top: 20px;
 }
