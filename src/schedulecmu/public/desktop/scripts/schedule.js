@@ -587,6 +587,8 @@ function infoCourse(infoLink) {
 
     browser.append(header);
 
+    var tableRows = $("#accordion").children();
+
 
 
 

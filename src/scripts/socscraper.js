@@ -185,7 +185,8 @@ jsdom.env(
             // Get Mini or not
             if (sectionNum.length === 2) {
                 var miniNum = parseInt(sectionNum.substring(1, 2));
-                newSection.Mini = (miniNum - 1) % 2;
+                if (miniNum <= 4)
+                    newSection.Mini = (miniNum - 1) % 2;
             }
 
             var dayField = extractHTML(cols[4]);
