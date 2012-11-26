@@ -265,16 +265,25 @@ jsdom.env(
             else if (isClass(this) === true) {
                 /* This row starts a new Class */
 
-                // Process days. 1 day is 1 Class object
                 var dayField = extractHTML(cols[4]);
-                for (var i = 0; i < dayField.length; i++) {
-                  if (!/\s/.test(dayField.charAt(i))) {
-                    var newClass = processClass(cols, dayField.charAt(i));
+
+                if (dayField === "TBA") {
+                    var newClass = processClass(cols, dayField);
+
+                    // newClass is fully populated. Add into classes array
+                    newSection.Classes.push(newClass);
+                }
+                else {
+                    // Process days. 1 day is 1 Class object
+                    for (var i = 0; i < dayField.length; i++) {
+                      if (!/\s/.test(dayField.charAt(i))) {
+                        var newClass = processClass(cols, dayField.charAt(i));
 
                     // newClass is fully populated. Add into classes array
                     currentSection.Classes.push(newClass);
-                  }
                 }
+            }
+        }
             }
             else {
                 /* This row starts a new Course */
