@@ -28,7 +28,8 @@ var inspect = require("eyes").inspector({
 });
 
 function dumpAndAdd(arr, course) {
-  CourseModel.create(course, function(err, saved) {
+  var modeled = new CourseModel(course);
+  modeled.save(function(err) {
     if (err) {
       inspect(course);
       console.log(err);
