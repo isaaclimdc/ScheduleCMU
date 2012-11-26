@@ -232,8 +232,15 @@ jsdom.env(
         
         // Loop through each <tr> row
         window.$("tr").each(function(rowIdx) {
+            /* Take care of ALL edge cases */
             if (rowIdx < 2) return true;
             if (isDeptHeader(this)) return true;
+            var badCourse = extractHTML(cols[1]);
+            if (badCourse === "3D Media Studio II:" ||
+                badCourse === "Wearables" ||
+                badCourse === "Move It" ||
+                badCourse === "Multiples" ||)
+                return true;
 
             // The array of the columns in this row
             var cols = window.$(this).children();
@@ -300,8 +307,10 @@ jsdom.env(
                 }
 
                 // Create a new Course
+                if (extractHTML(cols[3]) === "&nbsp;") {
                 var newCourse = processCourse(cols);
                 currentCourse = newCourse;
+            }
 
                 // Create a new Section
                 var newSection = processSection(cols);
