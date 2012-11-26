@@ -6,15 +6,49 @@ $(document).ready(function() {
 		$('#loginGrid').removeClass('ui-grid-b');
 	}
 
-	$('#calview').fullCalendar({
+    var docH = $('#gridview').height();
+    console.log(docH);
+    $('#calview').fullCalendar({
         theme: false,
         header: false,
         weekends: false,
         allDaySlot: false,
         minTime: 8,
-        maxTime: 20,
-        height: 800,
+        contentHeight: docH,
         defaultView: 'agendaWeek',
-        editable: false
+        editable: false,
+        columnFormat: {
+            month: 'dddd',
+            week: 'dddd',
+            day: 'dddd'
+        }
+    });
+
+
+    $("input[type='radio']").click(function () {
+        var selection=$(this).val();
+        var newselection = "#" + selection;
+        $.mobile.changePage( newselection, {
+            transition: "flip",
+            reverse: true,
+            changeHash: true
+        });
+        $('input[type="radio"]').filter('[value="'+selection+'"]').attr('checked', true); 
     });
 });
+
+function exportGoogleCal() {
+    alert("Exporting to Google Calendar...");
+}
+
+function downloadAppleCal() {
+    alert("Downloading for Apple Calendar...");
+}
+
+function shareFacebook() {
+    alert("Sharing on Facebook...");
+}
+
+function shareTwitter() {
+    alert("Sharing on Twitter...");
+}
