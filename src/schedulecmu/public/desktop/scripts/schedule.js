@@ -1,8 +1,3 @@
-var date = new Date();
-var d = date.getDate();
-var m = date.getMonth();
-var y = date.getFullYear();
-
 var listedCourses = [];
 
 $(document).ready(function() {
@@ -13,18 +8,8 @@ $(document).ready(function() {
         animate: "easeOutCubic"
     };
 
-    window.accordionSortOpts = {
-        axis: "y",
-        handle: "h3",
-        stop: function( event, ui ) {
-            // IE doesn't register the blur when sorting
-            // so trigger focusout handlers to remove .ui-state-focus
-            ui.item.children( "h3" ).triggerHandler( "focusout" );
-        }
-    };
-
     $(function() {
-        $("#accordion").accordion(window.accordionOpts).sortable(window.accordionSortOpts);
+        $("#accordion").accordion(window.accordionOpts);
     });
 
     // When the user presses enter to add course box
@@ -33,7 +18,7 @@ $(document).ready(function() {
         addCourse();
     });
     
-    $('#calview').fullCalendar({
+    $("#calview").fullCalendar({
         theme: false,
         header: false,
         weekends: false,
@@ -47,9 +32,33 @@ $(document).ready(function() {
             month: 'dddd',
             week: 'dddd',
             day: 'dddd'
-        }
+        },
+        events: MyEvents
     });
 });
+
+function MyEvents(start, end, callback) {
+  var events = [];
+  // Setup the meeting on the this weeks "monday"
+  var meeting = new Date(start.getFullYear(), 
+                         start.getMonth(), 
+                         start.getDate(),
+                         4, 30, 00);
+  meeting.setDate((meeting.getDate() - meeting.getDay()) + 1);
+
+  while (meeting <= end) {
+    events.push({
+      id: 2,
+      title: "Monday Meeting",
+      start: new Date(meeting.valueOf()),
+      allDay: false
+    });
+    // increase by one week
+    meeting.setDate(meeting.getDate() + 7);
+  }
+
+  callback(events);
+}
 
 /*** CourseBrowser ***/
 
@@ -430,19 +439,23 @@ function addCourse() {
 
     /* Append group into accordion and refresh. Expand the recently added */
     window.accordionOpts.active = "h3:last";
-    accordion.append(group).accordion('destroy').accordion(window.accordionOpts).sortable(window.accordionSortOpts);
+    accordion.append(group).accordion('destroy').accordion(window.accordionOpts);
 
-    // var bgColor = title.css('background-color');
+    var bgColor = title.css('background-color');
 
-    // /* Render Event on Calendar Widget */
-    // $('#calview').fullCalendar('renderEvent', {
-    //     id: 999,
-    //     title: courseNum,
-    //     start: new Date(y, m, d, 16, 0),
-    //     end: new Date(y, m, d, 18, 0),
-    //     allDay: false,
-    //     backgroundColor: bgColor
-    // });
+    var startD = new Date(2012, 11, 26, 12, 30, 0, 0);
+    var endD = new Date(2012, 11, 26, 13, 30, 0, 0);
+
+    /* Render Event on Calendar Widget */
+    $("#calview").fullCalendar("renderEvent", {
+        id: 1,
+        title: courseNum,
+        start: startD,
+        end: endD,
+        allDay: false,
+        backgroundColor: bgColor,
+        stick: true
+    });
 }
 
 /* Some helper functions for processing courses */
@@ -537,7 +550,7 @@ function deleteCourse(p) {
 
     // Remove the group then refresh accordion
     group.remove();
-    $("#accordion").accordion('destroy').accordion(window.accordionOpts).sortable(window.accordionSortOpts);
+    $("#accordion").accordion('destroy').accordion(window.accordionOpts);
 
     // Send updated course list to server
 }
