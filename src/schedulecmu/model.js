@@ -1,13 +1,4 @@
 function getCourseModel(Schema, mongoose) {
-  var ClassSchema = new Schema({
-    Day: {type: String, match: /^TBA$|^[MTWRFSU]$/},
-    Start: {type: String}, //TODO? Store these as numbers in the scraper ??
-    End: {type: String},
-    //Currently matches string types "GHC 4401", "DH A301", "TBA", "GYM THSTL" 
-    Loc: {type: String, match: /(^[A-Za-z]+\s[A-Z]?[0-9]+[A-Z]*$)|^TBA$|(^[A-Za-z]+\s[A-Za-z]+$)/}
-  });
-
-
   /* For the recurring schema, I tried to model data accepted by an interface like Google Calendar's
    * It would be great if we could build a similar interface */
   var RecurSchema = new Schema({
@@ -23,7 +14,7 @@ function getCourseModel(Schema, mongoose) {
     //Num: Number - This should be handled client side, right?
     Type: {type: Number}, //Since we have a drop down list of 4 types of events       
     Title: {type: String},
-    Loc: {type: String, default: null, match: /(^[A-Za-z]+\s[A-Z]?[0-9]+[A-Z]*$)|^TBA$|(^[A-Za-z]+\s[A-Za-z]+$)/} ,
+    Loc: {type: String, default: null} ,
     DateTime: {type: Date},
 
     /* The state is the sum of reliabilities of people
@@ -45,18 +36,28 @@ function getCourseModel(Schema, mongoose) {
     Recur_Frequency: {type: Number, default: null} //Repeats every n days / weeks / months - depending on the ocurence field
   });
 
+
+
+  var ClassSchema = new Schema({
+    Day: {type: String, match: /^TBA$|^[MTWRFSU]$/},
+    Start: {type: String}, //TODO? Store these as numbers in the scraper ??
+    End: {type: String},
+    //Currently matches string types "GHC 4401", "DH A301", "TBA", "GYM THSTL" 
+    Loc: {type: String}
+  });
+
   var SectionSchema = new Schema();
   SectionSchema.add({
     //Matches between 1 and 3 (in case of TBA) alphanumeric characters
-    Num: {type: String, match: /^[A-Za-z0-9]{1,3}^/}, 
+    Num: {type: String, match: /^[a-zA-Z]+[0-9]*$/}, 
     Instructor: {type: String}, //TODO convert TBA to nulls
-    Mini: {type: Number, min: 0, max: 1, default: null}, //TODO? Check if this works.... 
+    Mini: {type: Number, min: 0, max: 1, default: null},
     Classes: [ClassSchema],
     Subsections: [SectionSchema]
   });
 
   var CourseSchema = new Schema({
-    Num: {type: Number, min: 10000, max: 99999}, //Restricts to five digits
+    Num: {type: String, match: /^[0-9]{1,2}-[0-9]{3}$/},
     Name: String,
     Semester: Number,
     Description: {type: String, default: null},

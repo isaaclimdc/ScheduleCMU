@@ -31,6 +31,7 @@ function dumpAndAdd(arr, course) {
   CourseModel.create(course, function(err, saved) {
     if (err) {
       inspect(course);
+      console.log(err);
       return;
     }
   });
@@ -275,16 +276,16 @@ jsdom.env(
                     currentSection.Classes.push(newClass);
                 }
                 else {
-                    // Process days. 1 day is 1 Class object
-                    for (var i = 0; i < dayField.length; i++) {
-                      if (!/\s/.test(dayField.charAt(i))) {
-                        var newClass = processClass(cols, dayField.charAt(i));
+                  // Process days. 1 day is 1 Class object
+                  for (var i = 0; i < dayField.length; i++) {
+                  if (!/\s/.test(dayField.charAt(i))) {
+                      var newClass = processClass(cols, dayField.charAt(i));
 
-                    // newClass is fully populated. Add into classes array
-                    currentSection.Classes.push(newClass);
+                      // newClass is fully populated. Add into classes array
+                      currentSection.Classes.push(newClass);
+                  }
+                  }
                 }
-            }
-        }
             }
             else {
                 /* This row starts a new Course */
