@@ -4,7 +4,7 @@ function getCourseModel(Schema, mongoose) {
     Start: {type: String}, //TODO? Store these as numbers in the scraper ??
     End: {type: String},
     //Currently matches string types "GHC 4401", "DH A301", "TBA", "GYM THSTL" 
-    Loc: {type: String, match: /(^[A-Za-z]+\s[A-Z]?[0-9]+[A-Z]?$)|^TBA$|(^[A-Za-z]+\s[A-Za-z]+$)/}
+    Loc: {type: String, match: /(^[A-Za-z]+\s[A-Z]?[0-9]+[A-Z]*$)|^TBA$|(^[A-Za-z]+\s[A-Za-z]+$)/}
   });
 
 
@@ -23,7 +23,7 @@ function getCourseModel(Schema, mongoose) {
     //Num: Number - This should be handled client side, right?
     Type: {type: Number}, //Since we have a drop down list of 4 types of events       
     Title: {type: String},
-    Loc: {type: String, default: null, match: /(^[A-Za-z]+\s[A-Z]?[0-9]+[A-Z]?$)|^TBA$|(^[A-Za-z]+\s[A-Za-z]+$)/} ,
+    Loc: {type: String, default: null, match: /(^[A-Za-z]+\s[A-Z]?[0-9]+[A-Z]*$)|^TBA$|(^[A-Za-z]+\s[A-Za-z]+$)/} ,
     DateTime: {type: Date},
 
     /* The state is the sum of reliabilities of people
