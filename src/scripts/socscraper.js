@@ -31,7 +31,7 @@ function dumpAndAdd(arr, course) {
   CourseModel.create(course, function(err, saved) {
     if (err) {
       inspect(course);
-      process.exit(1);
+      return;
     }
   });
   arr.push(course);
