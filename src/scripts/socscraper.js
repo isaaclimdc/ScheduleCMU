@@ -41,9 +41,6 @@ jsdom.env(
     scheduleToScrape,
     ['http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'],
     function(err, window) {
-        /* Globals */
-        window.currentlyBadCourse = false;
-        
         /* Helper functions */
 
         /* Identify if a row contains data about a section */
@@ -84,20 +81,6 @@ jsdom.env(
                     return false;
             
             return true;
-        }
-
-        function isBadRow(row) {
-            var children = window.$(row).children();
-
-            if (window.$(children[0]).html() !== "&nbsp;" &&
-                window.$(children[1]).html() !== "&nbsp;" &&
-                window.$(children[2]).html() !== "&nbsp;" &&
-                window.$(children[3]).html() === "&nbsp;") {
-                window.currentlyBadCourse = true;
-                return true;
-            }
-            else
-                return false;
         }
 
         /* Pull out just the raw text */
@@ -249,16 +232,11 @@ jsdom.env(
         
         // Loop through each <tr> row
         window.$("tr").each(function(rowIdx) {
-            // The array of the columns in this row
-            var cols = window.$(this).children();
-
-            /* Take care of ALL edge cases */
             if (rowIdx < 2) return true;
             if (isDeptHeader(this)) return true;
-            if (window.currentlyBadCourse === true)
-                return true;
-            if (isBadRow(this) === true)
-                return true;
+
+            // The array of the columns in this row
+            var cols = window.$(this).children();
 
             if (isSection(this) === true) {
                 /* This row starts a new Section */
@@ -309,8 +287,6 @@ jsdom.env(
             }
             else {
                 /* This row starts a new Course */
-
-                window.currentlyBadCourse = false;
 
                 // Before doing anything, push currentCourse
                 if (currentSection !== undefined) {
