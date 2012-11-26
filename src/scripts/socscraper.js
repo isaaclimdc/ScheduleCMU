@@ -239,7 +239,7 @@ jsdom.env(
             if (badCourse === "3D Media Studio II:" ||
                 badCourse === "Wearables" ||
                 badCourse === "Move It" ||
-                badCourse === "Multiples" ||)
+                badCourse === "Multiples")
                 return true;
 
             // The array of the columns in this row
