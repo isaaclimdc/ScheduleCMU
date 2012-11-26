@@ -509,6 +509,7 @@ li {
     background: #eeeeee;
     display: inline-block;
     margin-bottom: -5px;
+    overflow: hidden;
 }
 .courseBrowserRow:nth-child(odd) {
     background: #ffffff;
