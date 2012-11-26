@@ -271,7 +271,7 @@ jsdom.env(
                     var newClass = processClass(cols, dayField);
 
                     // newClass is fully populated. Add into classes array
-                    newSection.Classes.push(newClass);
+                    currentSection.Classes.push(newClass);
                 }
                 else {
                     // Process days. 1 day is 1 Class object
