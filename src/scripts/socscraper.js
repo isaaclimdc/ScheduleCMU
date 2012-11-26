@@ -232,6 +232,9 @@ jsdom.env(
         
         // Loop through each <tr> row
         window.$("tr").each(function(rowIdx) {
+            // The array of the columns in this row
+            var cols = window.$(this).children();
+
             /* Take care of ALL edge cases */
             if (rowIdx < 2) return true;
             if (isDeptHeader(this)) return true;
@@ -241,9 +244,6 @@ jsdom.env(
                 badCourse === "Move It" ||
                 badCourse === "Multiples")
                 return true;
-
-            // The array of the columns in this row
-            var cols = window.$(this).children();
 
             if (isSection(this) === true) {
                 /* This row starts a new Section */
