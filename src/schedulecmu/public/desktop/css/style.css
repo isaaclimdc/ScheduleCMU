@@ -608,6 +608,7 @@ li {
 #courseInfoBrowser {
     width: 750px;
     height: 500px;
+    /*overflow-y: scroll;*/
 }
 #courseInfoBrowser #courseInfoHeader h2 {
     float: left;
@@ -625,6 +626,29 @@ li {
     font-size: 16px;
     text-shadow: none;
     clear: both;
+}
+#courseInfoBrowser #courseInfoBody {
+    height: 400px;
+    margin-top: -30px;
+    overflow-y: scroll;
+}
+#courseInfoBrowser table tr:nth-child(1) {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#courseInfoBrowser table {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+#courseInfoBrowser #courseInfoBody h3 {
+    margin-top: 20px;
+    color: #000000;
+    text-shadow: none;
+    font-size: 20px;
+}
+#courseInfoBrowser #courseInfoBody p {
+    font-size: 14px;
 }
 
 /* 404 */
