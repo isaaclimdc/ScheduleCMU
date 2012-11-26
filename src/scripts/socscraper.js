@@ -27,8 +27,6 @@ var inspect = require("eyes").inspector({
     maxLength: 100000000000    // Computers nowadays have big memories right?
 });
 
-window.currentlyBadCourse = false;
-
 function dumpAndAdd(arr, course) {
   CourseModel.create(course, function(err, saved) {
     if (err) {
@@ -43,6 +41,9 @@ jsdom.env(
     scheduleToScrape,
     ['http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'],
     function(err, window) {
+        /* Globals */
+        window.currentlyBadCourse = false;
+        
         /* Helper functions */
 
         /* Identify if a row contains data about a section */
