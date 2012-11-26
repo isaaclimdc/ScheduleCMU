@@ -307,10 +307,8 @@ jsdom.env(
                 }
 
                 // Create a new Course
-                if (extractHTML(cols[3]) === "&nbsp;") {
                 var newCourse = processCourse(cols);
                 currentCourse = newCourse;
-            }
 
                 // Create a new Section
                 var newSection = processSection(cols);
