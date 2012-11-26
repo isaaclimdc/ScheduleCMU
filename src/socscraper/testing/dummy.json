@@ -1,0 +1,437 @@
+[
+  {
+    "Name":"Intermediate Microeconomics",
+    "Num":"73-230",
+    "Sections":[
+      {
+        "Classes":[
+          {
+            "Day":"M",
+            "End":"10:20a",
+            "Loc":"POS MN AUD",
+            "Start":"9:00a"
+          },
+          {
+            "Day":"W",
+            "End":"10:20a",
+            "Loc":"POS MN AUD",
+            "Start":"9:00a"
+          }
+        ],
+        "Instructor":"Groeger",
+        "Num":"Lec 1",
+        "Subsections":[
+          {
+            "Classes":[
+              {
+                "Day":"F",
+                "End":"10:20a",
+                "Loc":"POS MN AUD",
+                "Start":"9:00a"
+              }
+            ],
+            "Instructor":"Instructor TBA",
+            "Num":"A"
+          },
+          {
+            "Classes":[
+              {
+                "Day":"F",
+                "End":"10:20a",
+                "Loc":"SH 214",
+                "Start":"9:00a"
+              }
+            ],
+            "Instructor":"Instructor TBA",
+            "Num":"B"
+          }
+        ]
+      },
+      {
+        "Classes":[
+          {
+            "Day":"M",
+            "End":"11:50a",
+            "Loc":"POS MN AUD",
+            "Start":"10:30a"
+          },
+          {
+            "Day":"W",
+            "End":"11:50a",
+            "Loc":"POS MN AUD",
+            "Start":"10:30a"
+          }
+        ],
+        "Instructor":"Groeger",
+        "Num":"Lec 2",
+        "Subsections":[
+          {
+            "Classes":[
+              {
+                "Day":"F",
+                "End":"11:50a",
+                "Loc":"POS MN AUD",
+                "Start":"10:30a"
+              }
+            ],
+            "Instructor":"Instructor TBA",
+            "Num":"C"
+          },
+          {
+            "Classes":[
+              {
+                "Day":"F",
+                "End":"11:50a",
+                "Loc":"HH B131",
+                "Start":"10:30a"
+              }
+            ],
+            "Instructor":"Instructor TBA",
+            "Num":"D"
+          }
+        ]
+      },
+      {
+        "Classes":[
+          {
+            "Day":"M",
+            "End":"11:50a",
+            "Loc":"HH B131",
+            "Start":"10:30a"
+          },
+          {
+            "Day":"W",
+            "End":"11:50a",
+            "Loc":"HH B131",
+            "Start":"10:30a"
+          }
+        ],
+        "Instructor":"Instructor TBA",
+        "Num":"Lec 3",
+        "Subsections":[
+          {
+            "Classes":[
+              {
+                "Day":"F",
+                "End":"11:50a",
+                "Loc":"WEH 5421",
+                "Start":"10:30a"
+              }
+            ],
+            "Instructor":"Instructor TBA",
+            "Num":"E"
+          },
+          {
+            "Classes":[
+              {
+                "Day":"F",
+                "End":"11:50a",
+                "Loc":"GHC 4307",
+                "Start":"10:30a"
+              }
+            ],
+            "Instructor":"Instructor TBA",
+            "Num":"F"
+          }
+        ]
+      },
+      {
+        "Classes":[
+          {
+            "Day":"U",
+            "End":"10:20a",
+            "Loc":"CMB 1064",
+            "Start":"9:30a"
+          },
+          {
+            "Day":"T",
+            "End":"10:20a",
+            "Loc":"CMB 1064",
+            "Start":"9:30a"
+          }
+        ],
+        "Instructor":"Sileo",
+        "Num":"Lec 4",
+        "Subsections":[
+          {
+            "Classes":[
+              {
+                "Day":"R",
+                "End":"10:20a",
+                "Loc":"CMB 1064",
+                "Start":"9:30a"
+              }
+            ],
+            "Instructor":"Sileo",
+            "Num":"W"
+          },
+          {
+            "Classes":[
+              {
+                "Day":"R",
+                "End":"1:50p",
+                "Loc":"CMB 2152",
+                "Start":"1:00p"
+              }
+            ],
+            "Instructor":"Sileo",
+            "Num":"X"
+          }
+        ]
+      }
+    ],
+    "Semester":131,
+    "Units":"9.0"
+  },
+  {
+    "Name":"Computational Bio-Modeling and Visulization",
+    "Num":"42-640",
+    "Sections":[
+      {
+        "Classes":[
+          {
+            "Day":"M",
+            "End":"1:20p",
+            "Loc":"WEH 5415",
+            "Start":"11:30a"
+          },
+          {
+            "Day":"W",
+            "End":"1:20p",
+            "Loc":"WEH 5415",
+            "Start":"11:30a"
+          }
+        ],
+        "Instructor":"Zhang",
+        "Num":"A"
+      }
+    ],
+    "Semester":131,
+    "Units":"12.0"
+  },
+  {
+    "Name":"Costume Construction II",
+    "Num":"54-444",
+    "Sections":[
+      {
+        "Classes":[
+          {
+            "Day":"T",
+            "End":"12:20p",
+            "Loc":"PCA 308",
+            "Start":"10:30a"
+          },
+          {
+            "Day":"R",
+            "End":"12:20p",
+            "Loc":"PCA 308",
+            "Start":"10:30a"
+          }
+        ],
+        "Instructor":"Anderson",
+        "Num":"A"
+      }
+    ],
+    "Semester":131,
+    "Units":"6.0"
+  },
+  {
+    "Name":"Research Training History",
+    "Num":"79-198",
+    "Sections":[
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Instructor TBA",
+        "Num":"A"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Devine",
+        "Num":"B"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Instructor TBA",
+        "Num":"C"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Instructor TBA",
+        "Num":"D"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Devine",
+        "Num":"E"
+      }
+    ],
+    "Semester":131,
+    "Units":"9.0"
+  },
+  {
+    "Name":"Web Services",
+    "Num":"08-706",
+    "Sections":[
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Kesden",
+        "Mini":0,
+        "Num":"A3"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Kesden",
+        "Mini":0,
+        "Num":"B3"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Kesden",
+        "Mini":0,
+        "Num":"C3"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Kesden",
+        "Mini":0,
+        "Num":"D3"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Kesden",
+        "Mini":0,
+        "Num":"E3"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Kesden",
+        "Mini":0,
+        "Num":"F3"
+      },
+      {
+        "Classes":[
+          {
+            "Day":"TBA",
+            "End":"",
+            "Loc":"TBA",
+            "Start":""
+          }
+        ],
+        "Instructor":"Kesden",
+        "Mini":0,
+        "Num":"G3"
+      }
+    ],
+    "Semester":131,
+    "Units":"8.0"
+  },
+  {
+    "Name":"Physiology",
+    "Num":"42-202",
+    "Sections":[
+      {
+        "Classes":[
+          {
+            "Day":"M",
+            "End":"1:20p",
+            "Loc":"DH 2302",
+            "Start":"12:30p"
+          },
+          {
+            "Day":"W",
+            "End":"1:20p",
+            "Loc":"DH 2302",
+            "Start":"12:30p"
+          },
+          {
+            "Day":"F",
+            "End":"1:20p",
+            "Loc":"DH 2302",
+            "Start":"12:30p"
+          }
+        ],
+        "Instructor":"Campbell",
+        "Num":"A"
+      }
+    ],
+    "Semester":131,
+    "Units":"9.0"
+  }
+]
