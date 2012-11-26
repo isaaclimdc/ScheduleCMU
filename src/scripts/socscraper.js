@@ -27,6 +27,8 @@ var inspect = require("eyes").inspector({
     maxLength: 100000000000    // Computers nowadays have big memories right?
 });
 
+window.currentlyBadCourse = false;
+
 function dumpAndAdd(arr, course) {
   CourseModel.create(course, function(err, saved) {
     if (err) {
@@ -81,6 +83,20 @@ jsdom.env(
                     return false;
             
             return true;
+        }
+
+        function isBadRow(row) {
+            var children = window.$(row).children();
+
+            if (window.$(children[0]).html() !== "&nbsp;" &&
+                window.$(children[1]).html() !== "&nbsp;" &&
+                window.$(children[2]).html() !== "&nbsp;" &&
+                window.$(children[3]).html() === "&nbsp;") {
+                window.currentlyBadCourse = true;
+                return true;
+            }
+            else
+                return false;
         }
 
         /* Pull out just the raw text */
@@ -238,11 +254,9 @@ jsdom.env(
             /* Take care of ALL edge cases */
             if (rowIdx < 2) return true;
             if (isDeptHeader(this)) return true;
-            var badCourse = extractHTML(cols[1]);
-            if (badCourse === "3D Media Studio II:" ||
-                badCourse === "Wearables" ||
-                badCourse === "Move It" ||
-                badCourse === "Multiples")
+            if (window.currentlyBadCourse === true)
+                return true;
+            if (isBadRow(this) === true)
                 return true;
 
             if (isSection(this) === true) {
@@ -294,6 +308,8 @@ jsdom.env(
             }
             else {
                 /* This row starts a new Course */
+
+                window.currentlyBadCourse = false;
 
                 // Before doing anything, push currentCourse
                 if (currentSection !== undefined) {
