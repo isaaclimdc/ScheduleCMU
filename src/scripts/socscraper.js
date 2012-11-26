@@ -13,10 +13,29 @@ var scheduleToScrape = "spring13.html";
 // Comment out for network file
 // var scheduleToScrape = "https://enr-apps.as.cmu.edu/assets/SOC/sched_layout_fall.htm";
 
+// DB Stuff
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var db = require('./db.js').dbConnect(mongoose);
+var CourseModel = require('./model.js').getCourseModel(Schema, db);
+
+
+// Scraping Stuff
 var jsdom = require("jsdom");
 var inspect = require("eyes").inspector({
     maxLength: 100000000000    // Computers nowadays have big memories right?
 });
+
+function dumpAndAdd(arr, course) {
+  CourseModel.create(course, function(err, saved) {
+    if (err) {
+      inspect(course);
+      process.exit(1);
+    }
+  });
+  arr.push(course);
+}
 
 jsdom.env(
     scheduleToScrape,
@@ -28,7 +47,10 @@ jsdom.env(
         function isSection(row) {
             var children = window.$(row).children();
 
-            if (window.$(children[0]).html() === "&nbsp;" && window.$(children[1]).html() === "&nbsp;" && window.$(children[2]).html() === "&nbsp;" && window.$(children[3]).html() !== "&nbsp;")
+            if (window.$(children[0]).html() === "&nbsp;" &&
+                window.$(children[1]).html() === "&nbsp;" &&
+                window.$(children[2]).html() === "&nbsp;" &&
+                window.$(children[3]).html() !== "&nbsp;")
                 return true;
             else
                 return false;
@@ -38,7 +60,10 @@ jsdom.env(
         function isClass(row) {
             var children = window.$(row).children();
 
-            if (window.$(children[0]).html() === "&nbsp;" && window.$(children[1]).html() === "&nbsp;" && window.$(children[2]).html() === "&nbsp;" && window.$(children[3]).html() === "&nbsp;")
+            if (window.$(children[0]).html() === "&nbsp;" &&
+                window.$(children[1]).html() === "&nbsp;" &&
+                window.$(children[2]).html() === "&nbsp;" &&
+                window.$(children[3]).html() === "&nbsp;")
                 return true;
             else
                 return false;
@@ -102,8 +127,9 @@ jsdom.env(
                 return dept + "-" + course;
             }
 
+            //TODO change how we store units?
             function processUnits(unitsStr) {
-
+              return unitsStr;
             }
 
             // Create a new Course
@@ -112,7 +138,7 @@ jsdom.env(
             // Get number, name, units, semester
             newCourse.Num = processCourseNum(extractHTML(cols[0]));
             newCourse.Name = extractHTML(cols[1]);
-            newCourse.Units = extractHTML(cols[2]);
+            newCourse.Units = processUnits(extractHTML(cols[2]));
             newCourse.Semester = globalSem;
 
             return newCourse;
@@ -172,10 +198,12 @@ jsdom.env(
             else {
                 // Process days. 1 day is 1 Class object
                 for (var i = 0; i < dayField.length; i++) {
+                  if (!/\s/.test(dayField.charAt(i))) {
                     var newClass = processClass(cols, dayField.charAt(i));
 
                     // newClass is fully populated. Add into classes array
                     newSection.Classes.push(newClass);
+                  }
                 }
             }
 
@@ -240,10 +268,12 @@ jsdom.env(
                 // Process days. 1 day is 1 Class object
                 var dayField = extractHTML(cols[4]);
                 for (var i = 0; i < dayField.length; i++) {
+                  if (!/\s/.test(dayField.charAt(i))) {
                     var newClass = processClass(cols, dayField.charAt(i));
 
                     // newClass is fully populated. Add into classes array
                     currentSection.Classes.push(newClass);
+                  }
                 }
             }
             else {
@@ -256,7 +286,7 @@ jsdom.env(
                 }
 
                 if (currentCourse !== undefined && currentCourse.Num.length === 6) {
-                    allCourses.push(currentCourse);
+                    dumpAndAdd(allCourses, currentCourse);
                     currentCourse = undefined;
                 }
 
@@ -273,11 +303,11 @@ jsdom.env(
         // Push the last currentCourse
         if (currentCourse.Num.length === 6) {
             currentCourse.Sections.push(currentSection);
-            allCourses.push(currentCourse);
+            dumpAndAdd(allCourses, currentCourse);
+            currentCourse = undefined;
         }
 
-        // console.log(allCourses);
-        inspect(allCourses);
+        //inspect(allCourses);
 });
 
 /* Object constructors */

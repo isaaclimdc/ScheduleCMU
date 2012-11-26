@@ -29,11 +29,10 @@ if (!Array.prototype.filter)
 
 
 var express = require('express');
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
 var app = express();
 
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var db = require('./db.js').dbConnect(mongoose);
 var Course = require('./model.js').getCourseModel(Schema, db);
