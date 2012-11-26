@@ -13,10 +13,14 @@ $(document).ready(function() {
     /* Populate the page with the user's courses */
     fetchUserCourses();
 
-    // When the user presses enter to add course box
+    // When the user presses enter in forms
     $("#addCourseForm").submit(function(e){
         e.preventDefault();
         requestAndAddCourse();
+    });
+    $("#courseBrowserForm").submit(function(e){
+        e.preventDefault();
+        searchForCourseInCourseBrowser();
     });
 
     /* Set up FullCalendar */
@@ -67,33 +71,53 @@ function stopSpinner() {
     window.spinner.stop();
 }
 
-function fetchUserCourses() {
+/* A convenient wrapper for $.ajax that automatically starts and stops
+ * the spinner (spin.js), and does error checking. Requires an argument
+ * opts: { url: string , success: fn, error (optional) : fn }
+ */
+function performAjaxRequest(opts) {
     startSpinner();
 
     $.ajax({
-        url: "http://isaacl.net/projects/schedulecmu/dummy.json",
-        // url: "../../../scripts/dummy.json",
-        success: function(result, status, xhr) {
-            console.log(result);
-            // window.listedCourses = JSON.parse(result);
-            // console.log(window.listedCourses);
-
-            window.listedCourses = result;
+        url: opts.url,
+        success: function(result, status) {
+            /* Always log the request status */
             console.log(status);
 
-            for (var i = 0; i < window.listedCourses.length; i++) {
-                addCourse(window.listedCourses[i]);
-            }
+            /* Perform user callback */
+            opts.success(result, status);
 
             stopSpinner();
         },
         error: function(xhr, status, error) {
-            console.log("Error: " + status + " with HTTP error: " + error);
+            if (opts.error !== undefined)
+                opts.error(xhr, status, error);
+            else
+                console.log("Error: " + status + " with HTTP error: " + error);
+            
             stopSpinner();
         },
         statusCode: {
             200: function() {  },
             404: function() { console.log("PAGE NOT FOUND!"); }
+        }
+    });
+}
+
+function fetchUserCourses() {
+    performAjaxRequest({
+        url: "http://isaacl.net/projects/schedulecmu/dummy.json",
+        // url: "../../../scripts/dummy.json",
+        success: function(result, status) {
+            // window.listedCourses = JSON.parse(result);
+            // console.log(window.listedCourses);
+
+            console.log(result);
+            window.listedCourses = result;
+
+            for (var i = 0; i < window.listedCourses.length; i++) {
+                addCourse(window.listedCourses[i]);
+            }
         }
     });
 }
@@ -125,18 +149,49 @@ function MyEvents(start, end, callback) {
 
 $("#browseLink").fancybox({
     "scrolling" : "no",
-    "titleShow" : false,
+    "titleShow" : false
 });
 
-function searchForCourse() {
+function searchForCourseInCourseBrowser() {
     var searchStr = $("#courseBrowserForm input").val();
-    alert("Searching for " + searchStr + "...");
+
+    /* Query our server */
+    performAjaxRequest({
+        url: "http://isaacl.net/projects/schedulecmu/dummy2.json",
+        success: function(result, status) {
+            // console.log(result);
+            window.mostRecentSearchResults = result;
+
+            for (var i = 0; i < result.length; i++) {
+                addToCourseBrowser(result[i]);
+            }
+        }
+    });
+}
+
+function addToCourseBrowser(course) {
+    var row = $('<div>').addClass("courseBrowserRow");
+    row.attr("onClick", "showInfoFromBrowser(this)");
+    row.append($('<h1>').text(course.Num));
+    row.append($('<h2>').text(course.Name));
+    row.append($('<h3>').text(makeUnitsStr(course.Units)));
+    row.append($('<img>').attr({
+        "src" : "../images/plus.png",
+        "onClick" : "addToSchedule(this)"
+    }));
+
+    $('#courseBrowserBody').append(row);
 }
 
 function addToSchedule(img) {
-    var row = $(img).parent();
-    var num = $(row).children("h1").html();
-    alert("Adding " + num + " to schedule...");
+    var clickedIndex = $(img).parent().index();
+    console.log(clickedIndex);
+    console.log(window.mostRecentSearchResults);
+
+    var course = window.mostRecentSearchResults[clickedIndex];
+    window.listedCourses.push(course);
+
+    addCourse(course);
 }
 
 /*** EventBrowser ***/
@@ -240,6 +295,10 @@ function shareTwitter() {
 
 /*** Main screen ***/
 
+function makeUnitsStr(units) {
+    return units + " units";
+}
+
 function requestAndAddCourse() {
     var inputStr = $("#addCourseBox").val();
 
@@ -299,9 +358,9 @@ function addCourse(course) {
     /* Create contentHdr */
     var contentHdr = $("<div>").addClass("contentHdr");
     contentHdr.append($("<p>").text(courseName));
-    var units = $("<p>").addClass("units").text(courseUnits + " units");
+    var units = $("<p>").addClass("units").text(makeUnitsStr(courseUnits));
     var del = $("<p>").addClass("del").attr("onClick", "deleteCourse(this);").text("delete");
-    var info = $("<p>").addClass("info").attr("onClick", "infoCourse(this);").text("info");
+    var info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
     contentHdr.append(units);
     contentHdr.append(del);
     contentHdr.append(info);
@@ -506,13 +565,27 @@ $("#courseInfoLink").fancybox({
     "titleShow" : false,
 });
 
-function infoCourse(infoLink) {
+function showInfoFromAccordion(infoLink) {
     /* Get to enclosing group (3 levels up) */
     var clickedIndex = $(infoLink).parent().parent().parent().index();
-    
+
     /* Get this course from the global window.listedCourses */
     var course = window.listedCourses[clickedIndex];
-    
+
+    showInCourseInfoBrowser(course);
+}
+
+function showInfoFromBrowser(infoLink) {
+    /* Get to enclosing group (3 levels up) */
+    var clickedIndex = $(infoLink).index();
+
+    /* Get this course from the global window.listedCourses */
+    var course = window.mostRecentSearchResults[clickedIndex];
+
+    showInCourseInfoBrowser(course);
+}
+
+function showInCourseInfoBrowser(course) {
     /* Create the modal view and populate with the desired course */
     var browser = $('#courseInfoBrowser');
     if (browser.length === 0) {
@@ -528,7 +601,7 @@ function infoCourse(infoLink) {
     var header = $("<div>").attr("id", "courseInfoHeader");
     var headerNum = $("<h2>").text(course.Num);
     var headerName = $("<h3>").text(course.Name);
-    var headerUnits = $("<h4>").text(course.Units + " Units");
+    var headerUnits = $("<h4>").text(makeUnitsStr(course.Units));
 
     header.append(headerNum);
     header.append(headerName);
