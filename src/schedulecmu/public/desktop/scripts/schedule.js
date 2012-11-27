@@ -22,25 +22,6 @@ $(document).ready(function() {
         e.preventDefault();
         searchForCourseInCourseBrowser();
     });
-
-    /* Set up FullCalendar */
-    $("#calview").fullCalendar({
-        theme: false,
-        header: false,
-        weekends: false,
-        allDaySlot: false,
-        minTime: 8,
-        maxTime: 20,
-        height: 800,
-        defaultView: 'agendaWeek',
-        editable: false,
-        columnFormat: {
-            month: 'dddd',
-            week: 'dddd',
-            day: 'dddd'
-        },
-        events: MyEvents
-    });
 });
 
 function startSpinner() {
@@ -118,6 +99,29 @@ function fetchUserCourses() {
             for (var i = 0; i < window.listedCourses.length; i++) {
                 addCourse(window.listedCourses[i]);
             }
+
+            /* Set up FullCalendar */
+            $("#calview").fullCalendar({
+                theme: false,
+                header: false,
+                weekends: false,
+                allDaySlot: false,
+                minTime: 8,
+                maxTime: 20,
+                height: 800,
+                defaultView: 'agendaWeek',
+                editable: false,
+                columnFormat: {
+                    month: 'dddd',
+                    week: 'dddd',
+                    day: 'dddd'
+                },
+                timeFormat: {
+                    /* Don't display time in title in agenda view */
+                    agenda: ''
+                },
+                events: populateCalendar
+            });
         }
     });
 }
@@ -127,24 +131,28 @@ function populateCalendar(start, end, callback) {
 
     for (var i = 0; i < window.listedCourses.length; i++) {
         var course = window.listedCourses[i];
-        addCourseToCalendar(course, events);
+        var groupInAccordion = $('#accordion').children()[i];
+        var color = $(groupInAccordion).children("h3").css("background-color");
+
+        addCourseToCalendar(course, events, color);
     }
 
+    console.log(events.length + " events added");
     callback(events);
 }
 
-function addCourseToCalendar(course, events) {
+function addCourseToCalendar(course, events, color) {
     /* Extract data from Course object, append into tr's and td's */
     var sectionsArr = course.Sections;
-    var sem = parseInt(course.Semester);
-    var year = sem / 10;
+    // var sem = parseInt(course.Semester);
+    var sem = parseInt("20120");
 
     if (sectionsArr !== undefined) {
         for (var i = 0; i < sectionsArr.length; i++) {
             var section = sectionsArr[i];
 
             /* Take care of the main lecture/class first */
-            addClassesToCalendar(section, events);
+            addClassesToCalendar(section, events, course.Num, color, sem);
 
             /* Now take care of the subsections (recitations) */
             var subsectionsArr = section.Subsections;
@@ -152,46 +160,127 @@ function addCourseToCalendar(course, events) {
                 for (j = 0; j < subsectionsArr.length; j++) {
                     var subsection = subsectionsArr[j];
 
-                    processClasses(subsection, table, fullDetails);
+                    addClassesToCalendar(subsection, events, course.Num, color, sem);
                 }
             }
         }
     }
 }
 
-function addClassesToCalendar(section, events) {
+function addClassesToCalendar(section, events, courseNum, color, sem) {
     var classesArr = section.Classes;
 
-    var sem = 
+    var year = Math.floor(sem / 10);
+    var encodedSem = sem % 10;
+    var month;
+    if (encodedSem === 0)
+        month = 8   /* Fall starts August */
+    else if (encodedSem === 1)
+        month = 1   /* Spring starts January */
+    else if (encodedSem === 2)
+        month = 6   /* Summer I starts June */
+    else if (encodedSem === 3)
+        month = 7   /* Summer II starts July */
+
+    /* The first day of the month that a semester begins */
+    var semStartDate = new Date(year, month, 1, 10, 0);
+    var semEndDate = new Date(year, month+5, 1, 10, 0); /* Give buffer of 1 month */
 
     for (var i = 0; i < classesArr.length; i++) {
+        var aClass = classesArr[i];
+        var date = getNearestDate(aClass.Day, semStartDate);
+        var sArr = processTimeStr(aClass.Start);
+        var eArr = processTimeStr(aClass.End);
 
-        var classTime = new Date(2012, 10, )
+        var startDate = new Date(year, date.getMonth(), date.getDate(), sArr[0], sArr[1]);
+        var endDate = new Date(year, date.getMonth(), date.getDate(), eArr[0], eArr[1]);
+
+        while (startDate <= semEndDate) {
+            events.push({
+                id: 2,
+                title: courseNum,
+                color: color,
+                start: new Date(startDate.valueOf()),
+                end: new Date(endDate.valueOf()),
+                allDay: false
+            });
+
+            /* Push forward by one week */
+            startDate.setDate(startDate.getDate() + 7);
+            endDate.setDate(endDate.getDate() + 7);
+        }
     }
 }
 
-function MyEvents(start, end, callback) {
-    var events = [];
+/* Returns the nearest date relative to today */
+function getNearestDate(dayStr, semDate) {
+    var firstDayOfSem = semDate.getDay();
 
-  var meeting = new Date(start.getFullYear(), 
-   start.getMonth(), 
-   start.getDate(),
-   16, 30, 00);
-  meeting.setDate((meeting.getDate() - meeting.getDay()) + 1);
+    /* WE SHOULD DO THIS SERVER-SIDE */
+    var classDay;
+    if (dayStr === "U")
+        classDay = 0;
+    else if (dayStr === "M")
+        classDay = 1;
+    else if (dayStr === "T")
+        classDay = 2;
+    else if (dayStr === "W")
+        classDay = 3;
+    else if (dayStr === "R")
+        classDay = 4;
+    else if (dayStr === "F")
+        classDay = 5;
+    else if (dayStr === "S")
+        classDay = 6;
 
-  while (meeting <= end) {
-    events.push({
-      id: 2,
-      title: "Monday Meeting",
-      start: new Date(meeting.valueOf()),
-      allDay: false
-  });
-    // increase by one week
-    meeting.setDate(meeting.getDate() + 7);
+    var diff = classDay - firstDayOfSem;  /* Could be <0 */
+    var newDate = 1 + diff;  /* Offset from 1st of month */
+
+    /* In case overflows to previous month */
+    if (newDate < 0)
+        newDate += 7;
+
+    return new Date(semDate.getFullYear(), semDate.getMonth(), newDate, 10, 0);
 }
 
-callback(events);
+/* Splits a time string like "12:50p" into an array [12,50],
+ * and converts to military time. */
+function processTimeStr(timeStr) {
+    var arr = timeStr.split(":");
+    var isPM = (timeStr.charAt(timeStr.length-1) === "p") ? true : false;
+
+    var hours = parseInt(arr[0]);
+    var minutes = parseInt(arr[1]);
+
+    /* mod 24 to take care of midnight, lol */
+    arr[0] = (isPM === true && hours !== 12) ? (hours + 12) % 24 : hours;
+    arr[1] = minutes;
+
+    return arr;
 }
+
+// function MyEvents(start, end, callback) {
+//     var events = [];
+
+//   var meeting = new Date(start.getFullYear(), 
+//    start.getMonth(), 
+//    start.getDate(),
+//    16, 30, 00);
+//   meeting.setDate((meeting.getDate() - meeting.getDay()) + 1);
+
+//   while (meeting <= end) {
+//     events.push({
+//       id: 2,
+//       title: "Monday Meeting",
+//       start: new Date(meeting.valueOf()),
+//       allDay: false
+//   });
+//     // increase by one week
+//     meeting.setDate(meeting.getDate() + 7);
+// }
+
+// callback(events);
+// }
 
 /*** CourseBrowser ***/
 
@@ -436,21 +525,8 @@ function addCourse(course) {
     window.accordionOpts.active = "h3:last";
     accordion.append(group).accordion('destroy').accordion(window.accordionOpts);
 
-    var bgColor = title.css('background-color');
-
-    var startD = new Date(2012, 11, 26, 12, 30, 0, 0);
-    var endD = new Date(2012, 11, 26, 13, 30, 0, 0);
-
-    /* Render Event on Calendar Widget */
-    $("#calview").fullCalendar("renderEvent", {
-        id: 1,
-        title: courseNum,
-        start: startD,
-        end: endD,
-        allDay: false,
-        backgroundColor: bgColor,
-        stick: true
-    });
+    /* Re-render Events on FullCalendar */
+    $("#calview").fullCalendar("rerenderEvents");
 }
 
 /* Some helper functions for processing courses into table form */
