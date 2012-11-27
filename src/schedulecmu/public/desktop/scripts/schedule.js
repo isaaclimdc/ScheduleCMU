@@ -127,22 +127,24 @@ function populateCalendar(start, end, callback) {
 
     for (var i = 0; i < window.listedCourses.length; i++) {
         var course = window.listedCourses[i];
-
-
+        addCourseToCalendar(course, events);
     }
 
     callback(events);
 }
 
-function addCourseToCalendar(course) {
+function addCourseToCalendar(course, events) {
     /* Extract data from Course object, append into tr's and td's */
     var sectionsArr = course.Sections;
+    var sem = parseInt(course.Semester);
+    var year = sem / 10;
+
     if (sectionsArr !== undefined) {
         for (var i = 0; i < sectionsArr.length; i++) {
             var section = sectionsArr[i];
 
             /* Take care of the main lecture/class first */
-            addClassToCalendar(section);
+            addClassesToCalendar(section, events);
 
             /* Now take care of the subsections (recitations) */
             var subsectionsArr = section.Subsections;
@@ -157,8 +159,15 @@ function addCourseToCalendar(course) {
     }
 }
 
-function addClassToCalendar(section) {
+function addClassesToCalendar(section, events) {
+    var classesArr = section.Classes;
 
+    var sem = 
+
+    for (var i = 0; i < classesArr.length; i++) {
+
+        var classTime = new Date(2012, 10, )
+    }
 }
 
 function MyEvents(start, end, callback) {

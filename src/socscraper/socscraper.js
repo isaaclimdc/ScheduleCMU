@@ -93,11 +93,8 @@ jsdom.env(
         /* Convert a string like "Semester: Spring 2013" into a number 131. */
         function extractSemester(str) {
             var words = str.split(" ");
-            var year = parseInt(words[words.length-1]);
+            var result = parseInt(words[words.length-1]);
             var sem = words[1];
-
-            // We'll be good for 100 years
-            var result = year % 100;
 
             // Move forward 1 digit
             result *= 10;
@@ -278,14 +275,14 @@ jsdom.env(
                 }
                 else {
                   // Process days. 1 day is 1 Class object
-                  for (var i = 0; i < dayField.length; i++) {
-                  if (!/\s/.test(dayField.charAt(i))) {
-                      var newClass = processClass(cols, dayField.charAt(i));
+                    for (var i = 0; i < dayField.length; i++) {
+                        if (!/\s/.test(dayField.charAt(i))) {
+                            var newClass = processClass(cols, dayField.charAt(i));
 
-                      // newClass is fully populated. Add into classes array
-                      currentSection.Classes.push(newClass);
-                  }
-                  }
+                            // newClass is fully populated. Add into classes array
+                            currentSection.Classes.push(newClass);
+                        }
+                    }
                 }
             }
             else {
