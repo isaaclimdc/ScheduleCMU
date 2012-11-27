@@ -283,7 +283,8 @@ a.fc-event {
 	border-color: #36c;     /* default BORDER color */
 	background-color: #36c; /* default BACKGROUND color */
 	color: #000;            /* default TEXT color */
-	font-size: 16px;  /* I modified this (Isaac) */
+	font-size: 12px;  /* I modified this (Isaac) */
+	line-height: 1.4;
 	text-align: center;  /* I modified this (Isaac) */
 	}
 	

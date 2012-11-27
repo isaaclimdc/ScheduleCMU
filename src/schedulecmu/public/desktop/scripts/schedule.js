@@ -126,6 +126,7 @@ function fetchUserCourses() {
     });
 }
 
+/* This is the main function that is called to populate FullCalendar */
 function populateCalendar(start, end, callback) {
     var events = [];
 
@@ -141,6 +142,7 @@ function populateCalendar(start, end, callback) {
     callback(events);
 }
 
+/* Adds a single course to FullCalendar */
 function addCourseToCalendar(course, events, color) {
     /* Extract data from Course object, append into tr's and td's */
     var sectionsArr = course.Sections;
@@ -167,6 +169,7 @@ function addCourseToCalendar(course, events, color) {
     }
 }
 
+/* Adds all classes of a course to FullCalendar */
 function addClassesToCalendar(section, events, courseNum, color, sem) {
     var classesArr = section.Classes;
 
@@ -197,7 +200,7 @@ function addClassesToCalendar(section, events, courseNum, color, sem) {
         while (startDate <= semEndDate) {
             events.push({
                 id: 2,
-                title: courseNum,
+                title: courseNum + "\n" + aClass.Loc,
                 color: color,
                 start: new Date(startDate.valueOf()),
                 end: new Date(endDate.valueOf()),
@@ -211,7 +214,7 @@ function addClassesToCalendar(section, events, courseNum, color, sem) {
     }
 }
 
-/* Returns the nearest date relative to today */
+/* Returns the nearest date relative to the start of the semester */
 function getNearestDate(dayStr, semDate) {
     var firstDayOfSem = semDate.getDay();
 
@@ -244,7 +247,7 @@ function getNearestDate(dayStr, semDate) {
 
 /* Splits a time string like "12:50p" into an array [12,50],
  * and converts to military time
-  */
+ */
 function processTimeStr(timeStr) {
     var arr = timeStr.split(":");
     var isPM = (timeStr.charAt(timeStr.length-1) === "p") ? true : false;
