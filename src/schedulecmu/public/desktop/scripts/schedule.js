@@ -100,7 +100,7 @@ function fetchUserCourses() {
                 addCourse(window.listedCourses[i]);
             }
 
-            /* Set up FullCalendar */
+            /* Only set up FullCalendar when all courses have been parsed. */
             $("#calview").fullCalendar({
                 theme: false,
                 header: false,
@@ -145,7 +145,7 @@ function addCourseToCalendar(course, events, color) {
     /* Extract data from Course object, append into tr's and td's */
     var sectionsArr = course.Sections;
     // var sem = parseInt(course.Semester);
-    var sem = parseInt("20120");
+    var sem = parseInt("122"); /* Override for debugging */
 
     if (sectionsArr !== undefined) {
         for (var i = 0; i < sectionsArr.length; i++) {
@@ -170,17 +170,15 @@ function addCourseToCalendar(course, events, color) {
 function addClassesToCalendar(section, events, courseNum, color, sem) {
     var classesArr = section.Classes;
 
-    var year = Math.floor(sem / 10);
+    var year = 2000 + Math.floor(sem / 10);
     var encodedSem = sem % 10;
     var month;
     if (encodedSem === 0)
-        month = 8   /* Fall starts August */
-    else if (encodedSem === 1)
         month = 1   /* Spring starts January */
+    else if (encodedSem === 1)
+        month = 6   /* Summer starts June */
     else if (encodedSem === 2)
-        month = 6   /* Summer I starts June */
-    else if (encodedSem === 3)
-        month = 7   /* Summer II starts July */
+        month = 8   /* Fall starts August */
 
     /* The first day of the month that a semester begins */
     var semStartDate = new Date(year, month, 1, 10, 0);
@@ -195,6 +193,7 @@ function addClassesToCalendar(section, events, courseNum, color, sem) {
         var startDate = new Date(year, date.getMonth(), date.getDate(), sArr[0], sArr[1]);
         var endDate = new Date(year, date.getMonth(), date.getDate(), eArr[0], eArr[1]);
 
+        /* Logic in order to have recurring events */
         while (startDate <= semEndDate) {
             events.push({
                 id: 2,
@@ -244,7 +243,8 @@ function getNearestDate(dayStr, semDate) {
 }
 
 /* Splits a time string like "12:50p" into an array [12,50],
- * and converts to military time. */
+ * and converts to military time
+  */
 function processTimeStr(timeStr) {
     var arr = timeStr.split(":");
     var isPM = (timeStr.charAt(timeStr.length-1) === "p") ? true : false;
@@ -258,29 +258,6 @@ function processTimeStr(timeStr) {
 
     return arr;
 }
-
-// function MyEvents(start, end, callback) {
-//     var events = [];
-
-//   var meeting = new Date(start.getFullYear(), 
-//    start.getMonth(), 
-//    start.getDate(),
-//    16, 30, 00);
-//   meeting.setDate((meeting.getDate() - meeting.getDay()) + 1);
-
-//   while (meeting <= end) {
-//     events.push({
-//       id: 2,
-//       title: "Monday Meeting",
-//       start: new Date(meeting.valueOf()),
-//       allDay: false
-//   });
-//     // increase by one week
-//     meeting.setDate(meeting.getDate() + 7);
-// }
-
-// callback(events);
-// }
 
 /*** CourseBrowser ***/
 

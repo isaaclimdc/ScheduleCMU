@@ -93,20 +93,20 @@ jsdom.env(
         /* Convert a string like "Semester: Spring 2013" into a number 131. */
         function extractSemester(str) {
             var words = str.split(" ");
-            var result = parseInt(words[words.length-1]);
+            var year = parseInt(words[words.length-1]);
             var sem = words[1];
+
+            var result = year % 100;
 
             // Move forward 1 digit
             result *= 10;
 
-            if (sem === "Fall")
-                result += 0;  // Fall = 0
-            else if (sem === "Spring")
-                result += 1;  // Spring = 1
-            else if (sem === "Summer" && words[2] === "One")
-                result += 2;  // Summer One = 2
-            else if (sem === "Summer" && words[2] === "Two")
-                result += 3;  // Summer Two = 3
+            if (sem === "Spring")
+                result += 0;  // Spring = 0
+            else if (sem === "Summer")
+                result += 1;  // Summer = 1
+            else if (sem === "Fall")
+                result += 2;  // Fall = 2
 
             return result;
         }
