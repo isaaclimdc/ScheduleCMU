@@ -107,7 +107,7 @@ function performAjaxRequest(opts) {
 function fetchUserCourses() {
     performAjaxRequest({
         url: "http://isaacl.net/projects/schedulecmu/dummy.json",
-        // url: "../../../scripts/dummy.json",
+        // url: "../../../scripts/out/dummy.json",
         success: function(result, status) {
             // window.listedCourses = JSON.parse(result);
             // console.log(window.listedCourses);
@@ -122,13 +122,52 @@ function fetchUserCourses() {
     });
 }
 
+function populateCalendar(start, end, callback) {
+    var events = [];
+
+    for (var i = 0; i < window.listedCourses.length; i++) {
+        var course = window.listedCourses[i];
+
+
+    }
+
+    callback(events);
+}
+
+function addCourseToCalendar(course) {
+    /* Extract data from Course object, append into tr's and td's */
+    var sectionsArr = course.Sections;
+    if (sectionsArr !== undefined) {
+        for (var i = 0; i < sectionsArr.length; i++) {
+            var section = sectionsArr[i];
+
+            /* Take care of the main lecture/class first */
+            addClassToCalendar(section);
+
+            /* Now take care of the subsections (recitations) */
+            var subsectionsArr = section.Subsections;
+            if (subsectionsArr !== undefined) {
+                for (j = 0; j < subsectionsArr.length; j++) {
+                    var subsection = subsectionsArr[j];
+
+                    processClasses(subsection, table, fullDetails);
+                }
+            }
+        }
+    }
+}
+
+function addClassToCalendar(section) {
+
+}
+
 function MyEvents(start, end, callback) {
-  var events = [];
-  // Setup the meeting on the this weeks "monday"
+    var events = [];
+
   var meeting = new Date(start.getFullYear(), 
-                         start.getMonth(), 
-                         start.getDate(),
-                         4, 30, 00);
+   start.getMonth(), 
+   start.getDate(),
+   16, 30, 00);
   meeting.setDate((meeting.getDate() - meeting.getDay()) + 1);
 
   while (meeting <= end) {
@@ -137,12 +176,12 @@ function MyEvents(start, end, callback) {
       title: "Monday Meeting",
       start: new Date(meeting.valueOf()),
       allDay: false
-    });
+  });
     // increase by one week
     meeting.setDate(meeting.getDate() + 7);
-  }
+}
 
-  callback(events);
+callback(events);
 }
 
 /*** CourseBrowser ***/
