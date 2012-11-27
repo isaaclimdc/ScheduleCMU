@@ -4931,526 +4931,6 @@ Semester: Spring 2013
         path: 'Day',
         type: 'regexp' } } }
 [36m{
-    [1mNum[22m: [32m'03-251'[36m,
-    [1mName[22m: [32m'Introduction to Computational Molecular Biology'[36m,
-    [1mSections[22m: [
-        {
-            [1mMini[22m: [35m0[36m,
-            [1mNum[22m: [32m'13'[36m,
-            [1mInstructor[22m: [32m'Schwartz'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m0[36m,
-            [1mNum[22m: [32m'A3'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'12:50p'[36m,
-                    [1mLoc[22m: [32m'BH 140E'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m0[36m,
-            [1mNum[22m: [32m'B3'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'2:20p'[36m,
-                    [1mLoc[22m: [32m'BH 140E'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'1:00p'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m0[36m,
-            [1mNum[22m: [32m'C3'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'3:50p'[36m,
-                    [1mLoc[22m: [32m'BH 140E'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'6.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'03-252'[36m,
-    [1mName[22m: [32m'Introduct to Computational Cell Biology'[36m,
-    [1mSections[22m: [
-        {
-            [1mMini[22m: [35m1[36m,
-            [1mNum[22m: [32m'14'[36m,
-            [1mInstructor[22m: [32m'Murphy'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m1[36m,
-            [1mNum[22m: [32m'A4'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'12:50p'[36m,
-                    [1mLoc[22m: [32m'BH 140E'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m1[36m,
-            [1mNum[22m: [32m'B4'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'2:20p'[36m,
-                    [1mLoc[22m: [32m'BH 140E'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'1:00p'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m1[36m,
-            [1mNum[22m: [32m'C4'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'3:50p'[36m,
-                    [1mLoc[22m: [32m'BH 140E'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'6.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'09-101'[36m,
-    [1mName[22m: [32m'Introduction to Experimental Chemistry'[36m,
-    [1mSections[22m: [
-        {
-            [1mMini[22m: [35m1[36m,
-            [1mNum[22m: [32m'W4'[36m,
-            [1mInstructor[22m: [32m'Murphy'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'5:50p'[36m,
-                    [1mLoc[22m: [32m'CMB 2196'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'3:00p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'3:50p'[36m,
-                    [1mLoc[22m: [32m'CMB 2196'[36m,
-                    [1mDay[22m: [32m'U'[36m,
-                    [1mStart[22m: [32m'3:00p'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m0[36m,
-            [1mNum[22m: [32m'13'[36m,
-            [1mInstructor[22m: [32m'Vuocolo'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2302'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m0[36m,
-            [1mNum[22m: [32m'A3'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2303'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'3.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.1.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'12-735'[36m,
-    [1mName[22m: [32m'Special Topics: Urban Systems Modeling'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'A`'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'PH 7F'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'9:00a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'PH 7F'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'9:00a'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'12.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'02-251'[36m,
-    [1mName[22m: [32m'Introduction to computational Molecular Biology'[36m,
-    [1mSections[22m: [
-        {
-            [1mMini[22m: [35m0[36m,
-            [1mNum[22m: [32m'13'[36m,
-            [1mInstructor[22m: [32m'Schwartz'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m0[36m,
-            [1mNum[22m: [32m'A3'[36m,
-            [1mInstructor[22m: [32m'Schwartz'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'3:20p'[36m,
-                    [1mLoc[22m: [32m'BH 140E'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'6.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'02-252'[36m,
-    [1mName[22m: [32m'Introduction to Computational Cell Biology'[36m,
-    [1mSections[22m: [
-        {
-            [1mMini[22m: [35m1[36m,
-            [1mNum[22m: [32m'14'[36m,
-            [1mInstructor[22m: [32m'Murphy'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'HH B103'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mMini[22m: [35m1[36m,
-            [1mNum[22m: [32m'A4'[36m,
-            [1mInstructor[22m: [32m'Murphy'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'3:20p'[36m,
-                    [1mLoc[22m: [32m'BH 140E'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'6.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'48-405'[36m,
-    [1mName[22m: [32m'Architecture Design Studio: Systems Integration'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Loftness'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'M'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'M'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'M'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'M'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'CFA 200'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'2:50p'[36m,
-                    [1mLoc[22m: [32m'MM A14'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'F'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m''[36m,
-                            [1mLoc[22m: [32m'TBA'[36m,
-                            [1mDay[22m: [32m'TBA'[36m,
-                            [1mStart[22m: [32m''[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'2:50p'[36m,
-                    [1mLoc[22m: [32m'MM 203'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'18.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.1.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
     [1mNum[22m: [32m'&nbsp;'[36m,
     [1mName[22m: [32m'Wearables'[36m,
     [1mSections[22m: [
@@ -6206,357 +5686,6 @@ Semester: Spring 2013
         path: 'Num',
         type: 'regexp' } } }
 [36m{
-    [1mNum[22m: [32m'70-122'[36m,
-    [1mName[22m: [32m'Introduction to Accounting'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Kaiser'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'9:20a'[36m,
-                            [1mLoc[22m: [32m'IA SIM AU'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'8:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'9:20a'[36m,
-                            [1mLoc[22m: [32m'PH 125B'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'8:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'9:20a'[36m,
-                            [1mLoc[22m: [32m'PH 126A'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'8:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'9:20a'[36m,
-                    [1mLoc[22m: [32m'IA SIM AU'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'8:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'9:20a'[36m,
-                    [1mLoc[22m: [32m'IA SIM AU'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'8:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Kaiser'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'IA SIM AU'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'E'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'PH 125B'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'F'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'PH 126A'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'IA SIM AU'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'9:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'IA SIM AU'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'9:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 3'[36m,
-            [1mInstructor[22m: [32m'Kekre'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'W'[36m,
-                    [1mInstructor[22m: [32m'Kekre'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:50p'[36m,
-                            [1mLoc[22m: [32m'CMB 1213'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'1:00p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'X'[36m,
-                    [1mInstructor[22m: [32m'Kekre'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'CMB 1213'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'Y'[36m,
-                    [1mInstructor[22m: [32m'Kekre'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:50p'[36m,
-                            [1mLoc[22m: [32m'CMB 1213'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'2:00p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'1:50p'[36m,
-                    [1mLoc[22m: [32m'CMB 1213'[36m,
-                    [1mDay[22m: [32m'U'[36m,
-                    [1mStart[22m: [32m'1:00p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'1:50p'[36m,
-                    [1mLoc[22m: [32m'CMB 1213'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'1:00p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'9.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.1.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.2.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'70-208'[36m,
-    [1mName[22m: [32m'Regression Analysis'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'W'[36m,
-            [1mInstructor[22m: [32m'Gasper'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'9:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 1185'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'8:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'9:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 1064'[36m,
-                    [1mDay[22m: [32m'U'[36m,
-                    [1mStart[22m: [32m'8:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'9:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 1064'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'8:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Ferreyra'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'IA SIM AU'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'HBH 237'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'PH 125B'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'IA SIM AU'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'IA SIM AU'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Ferreyra'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'IA SIM AU'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'E'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'SH 208'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'F'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'SH 222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'12:20p'[36m,
-                    [1mLoc[22m: [32m'IA SIM AU'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'12:20p'[36m,
-                    [1mLoc[22m: [32m'IA SIM AU'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'9.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.1.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.2.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
     [1mNum[22m: [32m'&nbsp;'[36m,
     [1mName[22m: [32m'The Charles Eliot Norton Lectures in Perspective'[36m,
     [1mSections[22m: [
@@ -6649,169 +5778,6 @@ Semester: Spring 2013
   name: 'ValidationError',
   errors: 
    { Num: 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'09-106'[36m,
-    [1mName[22m: [32m'Modern Chemistry II'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Yaron'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'7:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5302'[36m,
-                            [1mDay[22m: [32m'T'[36m,
-                            [1mStart[22m: [32m'6:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'7:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5302'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'6:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'8:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5302'[36m,
-                            [1mDay[22m: [32m'T'[36m,
-                            [1mStart[22m: [32m'7:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'8:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5302'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'7:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'7:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5415'[36m,
-                            [1mDay[22m: [32m'T'[36m,
-                            [1mStart[22m: [32m'6:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'7:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5415'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'6:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'8:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5415'[36m,
-                            [1mDay[22m: [32m'T'[36m,
-                            [1mStart[22m: [32m'7:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'8:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5415'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'7:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'12:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2210'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'12:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2210'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'12:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2210'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Murphy'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'W'[36m,
-                    [1mInstructor[22m: [32m'Murphy'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'CMB 2196'[36m,
-                            [1mDay[22m: [32m'M'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'CMB 2196'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 2196'[36m,
-                    [1mDay[22m: [32m'U'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 2196'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 2196'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'10.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.1.Num': 
       { message: 'Validator "regexp" failed for path Num',
         name: 'ValidatorError',
         path: 'Num',
@@ -6914,621 +5880,6 @@ Semester: Spring 2013
   name: 'ValidationError',
   errors: 
    { Num: 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'15-110'[36m,
-    [1mName[22m: [32m'Principles of Computing'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'W'[36m,
-            [1mInstructor[22m: [32m'Fossati'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'CMB 2035'[36m,
-                    [1mDay[22m: [32m'U'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'CMB 2035'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'CMB 2035'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'X'[36m,
-            [1mInstructor[22m: [32m'Fossati'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'CMB 2035'[36m,
-                    [1mDay[22m: [32m'U'[36m,
-                    [1mStart[22m: [32m'3:00p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'CMB 2035'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'3:00p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'CMB 2035'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'3:00p'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Gunawardena, Kaynar'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'GHC 5205'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'GHC 5205'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5205'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5205'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'E'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5205'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'F'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'3:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5205'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'2:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'G'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5205'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'3:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'3:20p'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'3:20p'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'3:20p'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Gunawardena, Kaynar'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'H'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'GHC 5201'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'I'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'GHC 5201'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'J'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5201'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'K'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5201'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'L'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5201'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'M'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'3:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5201'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'2:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'N'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5201'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'3:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'3:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'3:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'F'[36m,
-                    [1mStart[22m: [32m'3:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'10.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.2.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.3.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'15-122'[36m,
-    [1mName[22m: [32m'Principles of Imperative Computation'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Simmons, Platzer'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'E'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'F'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'3:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'2:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'3:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'2:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'G'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'3:30p'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'4:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 5222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'3:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'9:00a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'9:00a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 3'[36m,
-            [1mInstructor[22m: [32m'Razak'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'W'[36m,
-                    [1mInstructor[22m: [32m'Razak'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'CMB 1185'[36m,
-                            [1mDay[22m: [32m'M'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        },
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'CMB 1185'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'CMB 1185'[36m,
-                    [1mDay[22m: [32m'U'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'CMB 1185'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'10.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.1.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'15-451'[36m,
-    [1mName[22m: [32m'Algorithm Design and Analysis'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Sleator, Miller'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'DH 1217'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'DH 1217'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'DH 1217'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'3:20p'[36m,
-                            [1mLoc[22m: [32m'DH 1217'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'2:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'12:00p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'GHC 4401'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'12:00p'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Cooper'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'W'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:50p'[36m,
-                            [1mLoc[22m: [32m'CMB 2147'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'2:00p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'3:50p'[36m,
-                    [1mLoc[22m: [32m'CMB 2147'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'3:50p'[36m,
-                    [1mLoc[22m: [32m'CMB 2147'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'2:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'12.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.1.Num': 
       { message: 'Validator "regexp" failed for path Num',
         name: 'ValidatorError',
         path: 'Num',
@@ -7653,527 +6004,6 @@ Semester: Spring 2013
   name: 'ValidationError',
   errors: 
    { Num: 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'73-100'[36m,
-    [1mName[22m: [32m'Principles of Economics'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Kesten'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5415'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'TBD TBD'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'TBD TBD'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 4623'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'E'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'PH A19'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'F'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'PH A20'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'12:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2315'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'12:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2315'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'11:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Kesten'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'H'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'PH 226A'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'I'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'DH 1212'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'J'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'PH 125C'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'K'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 7500'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'L'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'PH A18A'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'M'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'BH A53'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2315'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'DH 2315'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'9.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.1.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'73-230'[36m,
-    [1mName[22m: [32m'Intermediate Microeconomics'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Groeger'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'POS MN AUD'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'9:00a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'SH 214'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'9:00a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'POS MN AUD'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'9:00a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'POS MN AUD'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'9:00a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Groeger'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:50a'[36m,
-                            [1mLoc[22m: [32m'POS MN AUD'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:50a'[36m,
-                            [1mLoc[22m: [32m'HH B131'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'POS MN AUD'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'POS MN AUD'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 3'[36m,
-            [1mInstructor[22m: [32m'Instructor TBA'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'E'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:50a'[36m,
-                            [1mLoc[22m: [32m'WEH 5421'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'F'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:50a'[36m,
-                            [1mLoc[22m: [32m'GHC 4307'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'HH B131'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'HH B131'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 4'[36m,
-            [1mInstructor[22m: [32m'Sileo'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'W'[36m,
-                    [1mInstructor[22m: [32m'Sileo'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'CMB 1064'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'X'[36m,
-                    [1mInstructor[22m: [32m'Sileo'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:50p'[36m,
-                            [1mLoc[22m: [32m'CMB 2152'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'1:00p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 1064'[36m,
-                    [1mDay[22m: [32m'U'[36m,
-                    [1mStart[22m: [32m'9:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'10:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 1064'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'9:30a'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'9.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.1.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.2.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.3.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'73-240'[36m,
-    [1mName[22m: [32m'Intermediate Macroeconomics'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Petrosky-Nadeau'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'POS MN AUD'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 4211'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'2:50p'[36m,
-                    [1mLoc[22m: [32m'POS MN AUD'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'2:50p'[36m,
-                    [1mLoc[22m: [32m'POS MN AUD'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Petrosky-Nadeau'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'POS MN AUD'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'DH 1112'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'POS MN AUD'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'3:00p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'4:20p'[36m,
-                    [1mLoc[22m: [32m'POS MN AUD'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'3:00p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'9.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.1.Num': 
       { message: 'Validator "regexp" failed for path Num',
         name: 'ValidatorError',
         path: 'Num',
@@ -9239,589 +7069,6 @@ Semester: Spring 2013
         path: 'Num',
         type: 'regexp' } } }
 [36m{
-    [1mNum[22m: [32m'67-272'[36m,
-    [1mName[22m: [32m'Application Design and Development'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'W'[36m,
-            [1mInstructor[22m: [32m'Phelps'[36m,
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 2035'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'10:00a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:20a'[36m,
-                    [1mLoc[22m: [32m'CMB 2035'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'10:00a'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Heimann'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Heimann'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'9:20p'[36m,
-                            [1mLoc[22m: [32m'TBA'[36m,
-                            [1mDay[22m: [32m'T'[36m,
-                            [1mStart[22m: [32m'7:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Heimann'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:50a'[36m,
-                            [1mLoc[22m: [32m'TBA'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'10:00a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Heimann'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'9:20p'[36m,
-                            [1mLoc[22m: [32m'TBA'[36m,
-                            [1mDay[22m: [32m'W'[36m,
-                            [1mStart[22m: [32m'7:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'2:50p'[36m,
-                    [1mLoc[22m: [32m'BH A53'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'2:50p'[36m,
-                    [1mLoc[22m: [32m'BH A53'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                }
-            ]
-        },
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Heimann'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Heimann'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'9:20p'[36m,
-                            [1mLoc[22m: [32m'TBA'[36m,
-                            [1mDay[22m: [32m'R'[36m,
-                            [1mStart[22m: [32m'7:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'E'[36m,
-                    [1mInstructor[22m: [32m'Heimann'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'9:20p'[36m,
-                            [1mLoc[22m: [32m'TBA'[36m,
-                            [1mDay[22m: [32m'M'[36m,
-                            [1mStart[22m: [32m'7:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'PH A22'[36m,
-                    [1mDay[22m: [32m'T'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'11:50a'[36m,
-                    [1mLoc[22m: [32m'PH A22'[36m,
-                    [1mDay[22m: [32m'R'[36m,
-                    [1mStart[22m: [32m'10:30a'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'9.0'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.1.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' },
-     'Sections.2.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'&nbsp;'[36m,
-    [1mName[22m: [32m'Globalization Through History'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 1'[36m,
-            [1mInstructor[22m: [32m'Rouse'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'A'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 6423'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'B'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5415'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'C'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'GHC 4307'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'D'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'PH A22'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'E'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'SH 222'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'F'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'10:20a'[36m,
-                            [1mLoc[22m: [32m'PH A21'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'9:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'G'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'PH A18C'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'H'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'PH A22'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'I'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'PH 225B'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'J'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'PH A18C'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'PH 100'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'PH 100'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'&nbsp;'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'&nbsp;'[36m,
-    [1mName[22m: [32m'Globalization Through History'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 2'[36m,
-            [1mInstructor[22m: [32m'Rouse'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'K'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'PH A22'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'L'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5403'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'M'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 4709'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'N'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'11:20a'[36m,
-                            [1mLoc[22m: [32m'WEH 8427'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'10:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'O'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'HBH 237'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'P'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'BH 237B'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'2:20p'[36m,
-                    [1mLoc[22m: [32m'PH 100'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'2:20p'[36m,
-                    [1mLoc[22m: [32m'PH 100'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'&nbsp;'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'&nbsp;'[36m,
-    [1mName[22m: [32m'Latin America and Global Environment'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 3'[36m,
-            [1mInstructor[22m: [32m'Soluri'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'Q'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5310'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'R'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'WEH 5310'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'PH A18A'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'PH A18A'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'&nbsp;'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'&nbsp;'[36m,
-    [1mName[22m: [32m'U.S. Foreign Policy in the Middle East Since 1945'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 4'[36m,
-            [1mInstructor[22m: [32m'Eisenberg'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'S'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'1:20p'[36m,
-                            [1mLoc[22m: [32m'PH A18C'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'12:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'T'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'PH A18B'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'PH A18B'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'1:20p'[36m,
-                    [1mLoc[22m: [32m'PH A18B'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'12:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'&nbsp;'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
-    [1mNum[22m: [32m'&nbsp;'[36m,
-    [1mName[22m: [32m'U.S. Foreign Policy in the Middle East Since 1945'[36m,
-    [1mSections[22m: [
-        {
-            [1mNum[22m: [32m'Lec 5'[36m,
-            [1mInstructor[22m: [32m'Eisenberg'[36m,
-            [1mSubsections[22m: [
-                {
-                    [1mNum[22m: [32m'U'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'2:20p'[36m,
-                            [1mLoc[22m: [32m'BH 237B'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'1:30p'[36m
-                        }
-                    ]
-                },
-                {
-                    [1mNum[22m: [32m'V'[36m,
-                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
-                    [1mClasses[22m: [
-                        {
-                            [1mEnd[22m: [32m'12:20p'[36m,
-                            [1mLoc[22m: [32m'BH 237B'[36m,
-                            [1mDay[22m: [32m'F'[36m,
-                            [1mStart[22m: [32m'11:30a'[36m
-                        }
-                    ]
-                }
-            ],
-            [1mClasses[22m: [
-                {
-                    [1mEnd[22m: [32m'2:20p'[36m,
-                    [1mLoc[22m: [32m'PH A18B'[36m,
-                    [1mDay[22m: [32m'M'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                },
-                {
-                    [1mEnd[22m: [32m'2:20p'[36m,
-                    [1mLoc[22m: [32m'PH A18B'[36m,
-                    [1mDay[22m: [32m'W'[36m,
-                    [1mStart[22m: [32m'1:30p'[36m
-                }
-            ]
-        }
-    ],
-    [1mSemester[22m: [35m131[36m,
-    [1mUnits[22m: [32m'&nbsp;'[36m
-}[36m[0m
-{ message: 'Validation failed',
-  name: 'ValidationError',
-  errors: 
-   { 'Sections.0.Num': 
-      { message: 'Validator "regexp" failed for path Num',
-        name: 'ValidatorError',
-        path: 'Num',
-        type: 'regexp' } } }
-[36m{
     [1mNum[22m: [32m'&nbsp;'[36m,
     [1mName[22m: [32m'Vienna at the Turn of the Century'[36m,
     [1mSections[22m: [
@@ -10376,6 +7623,450 @@ Semester: Spring 2013
                     [1mLoc[22m: [32m'TBA'[36m,
                     [1mDay[22m: [32m'F'[36m,
                     [1mStart[22m: [32m'11:30a'[36m
+                }
+            ]
+        }
+    ],
+    [1mSemester[22m: [35m131[36m,
+    [1mUnits[22m: [32m'&nbsp;'[36m
+}[36m[0m
+{ message: 'Validation failed',
+  name: 'ValidationError',
+  errors: 
+   { Num: 
+      { message: 'Validator "regexp" failed for path Num',
+        name: 'ValidatorError',
+        path: 'Num',
+        type: 'regexp' } } }
+[36m{
+    [1mNum[22m: [32m'&nbsp;'[36m,
+    [1mName[22m: [32m'Globalization Through History'[36m,
+    [1mSections[22m: [
+        {
+            [1mNum[22m: [32m'Lec 1'[36m,
+            [1mInstructor[22m: [32m'Rouse'[36m,
+            [1mSubsections[22m: [
+                {
+                    [1mNum[22m: [32m'A'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'1:20p'[36m,
+                            [1mLoc[22m: [32m'WEH 6423'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'12:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'B'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'1:20p'[36m,
+                            [1mLoc[22m: [32m'WEH 5415'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'12:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'C'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'1:20p'[36m,
+                            [1mLoc[22m: [32m'GHC 4307'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'12:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'D'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'1:20p'[36m,
+                            [1mLoc[22m: [32m'PH A22'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'12:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'E'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'1:20p'[36m,
+                            [1mLoc[22m: [32m'SH 222'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'12:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'F'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'10:20a'[36m,
+                            [1mLoc[22m: [32m'PH A21'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'9:30a'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'G'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'11:20a'[36m,
+                            [1mLoc[22m: [32m'PH A18C'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'10:30a'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'H'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'12:20p'[36m,
+                            [1mLoc[22m: [32m'PH A22'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'11:30a'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'I'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'2:20p'[36m,
+                            [1mLoc[22m: [32m'PH 225B'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'1:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'J'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'12:20p'[36m,
+                            [1mLoc[22m: [32m'PH A18C'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'11:30a'[36m
+                        }
+                    ]
+                }
+            ],
+            [1mClasses[22m: [
+                {
+                    [1mEnd[22m: [32m'1:20p'[36m,
+                    [1mLoc[22m: [32m'PH 100'[36m,
+                    [1mDay[22m: [32m'M'[36m,
+                    [1mStart[22m: [32m'12:30p'[36m
+                },
+                {
+                    [1mEnd[22m: [32m'1:20p'[36m,
+                    [1mLoc[22m: [32m'PH 100'[36m,
+                    [1mDay[22m: [32m'W'[36m,
+                    [1mStart[22m: [32m'12:30p'[36m
+                }
+            ]
+        }
+    ],
+    [1mSemester[22m: [35m131[36m,
+    [1mUnits[22m: [32m'&nbsp;'[36m
+}[36m[0m
+{ message: 'Validation failed',
+  name: 'ValidationError',
+  errors: 
+   { Num: 
+      { message: 'Validator "regexp" failed for path Num',
+        name: 'ValidatorError',
+        path: 'Num',
+        type: 'regexp' } } }
+[36m{
+    [1mNum[22m: [32m'&nbsp;'[36m,
+    [1mName[22m: [32m'Globalization Through History'[36m,
+    [1mSections[22m: [
+        {
+            [1mNum[22m: [32m'Lec 2'[36m,
+            [1mInstructor[22m: [32m'Rouse'[36m,
+            [1mSubsections[22m: [
+                {
+                    [1mNum[22m: [32m'K'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'2:20p'[36m,
+                            [1mLoc[22m: [32m'PH A22'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'1:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'L'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'2:20p'[36m,
+                            [1mLoc[22m: [32m'WEH 5403'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'1:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'M'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'2:20p'[36m,
+                            [1mLoc[22m: [32m'WEH 4709'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'1:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'N'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'11:20a'[36m,
+                            [1mLoc[22m: [32m'WEH 8427'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'10:30a'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'O'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'12:20p'[36m,
+                            [1mLoc[22m: [32m'HBH 237'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'11:30a'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'P'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'1:20p'[36m,
+                            [1mLoc[22m: [32m'BH 237B'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'12:30p'[36m
+                        }
+                    ]
+                }
+            ],
+            [1mClasses[22m: [
+                {
+                    [1mEnd[22m: [32m'2:20p'[36m,
+                    [1mLoc[22m: [32m'PH 100'[36m,
+                    [1mDay[22m: [32m'M'[36m,
+                    [1mStart[22m: [32m'1:30p'[36m
+                },
+                {
+                    [1mEnd[22m: [32m'2:20p'[36m,
+                    [1mLoc[22m: [32m'PH 100'[36m,
+                    [1mDay[22m: [32m'W'[36m,
+                    [1mStart[22m: [32m'1:30p'[36m
+                }
+            ]
+        }
+    ],
+    [1mSemester[22m: [35m131[36m,
+    [1mUnits[22m: [32m'&nbsp;'[36m
+}[36m[0m
+{ message: 'Validation failed',
+  name: 'ValidationError',
+  errors: 
+   { Num: 
+      { message: 'Validator "regexp" failed for path Num',
+        name: 'ValidatorError',
+        path: 'Num',
+        type: 'regexp' } } }
+[36m{
+    [1mNum[22m: [32m'&nbsp;'[36m,
+    [1mName[22m: [32m'Latin America and Global Environment'[36m,
+    [1mSections[22m: [
+        {
+            [1mNum[22m: [32m'Lec 3'[36m,
+            [1mInstructor[22m: [32m'Soluri'[36m,
+            [1mSubsections[22m: [
+                {
+                    [1mNum[22m: [32m'Q'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'1:20p'[36m,
+                            [1mLoc[22m: [32m'WEH 5310'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'12:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'R'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'12:20p'[36m,
+                            [1mLoc[22m: [32m'WEH 5310'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'11:30a'[36m
+                        }
+                    ]
+                }
+            ],
+            [1mClasses[22m: [
+                {
+                    [1mEnd[22m: [32m'1:20p'[36m,
+                    [1mLoc[22m: [32m'PH A18A'[36m,
+                    [1mDay[22m: [32m'M'[36m,
+                    [1mStart[22m: [32m'12:30p'[36m
+                },
+                {
+                    [1mEnd[22m: [32m'1:20p'[36m,
+                    [1mLoc[22m: [32m'PH A18A'[36m,
+                    [1mDay[22m: [32m'W'[36m,
+                    [1mStart[22m: [32m'12:30p'[36m
+                }
+            ]
+        }
+    ],
+    [1mSemester[22m: [35m131[36m,
+    [1mUnits[22m: [32m'&nbsp;'[36m
+}[36m[0m
+{ message: 'Validation failed',
+  name: 'ValidationError',
+  errors: 
+   { Num: 
+      { message: 'Validator "regexp" failed for path Num',
+        name: 'ValidatorError',
+        path: 'Num',
+        type: 'regexp' } } }
+[36m{
+    [1mNum[22m: [32m'&nbsp;'[36m,
+    [1mName[22m: [32m'U.S. Foreign Policy in the Middle East Since 1945'[36m,
+    [1mSections[22m: [
+        {
+            [1mNum[22m: [32m'Lec 4'[36m,
+            [1mInstructor[22m: [32m'Eisenberg'[36m,
+            [1mSubsections[22m: [
+                {
+                    [1mNum[22m: [32m'S'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'1:20p'[36m,
+                            [1mLoc[22m: [32m'PH A18C'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'12:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'T'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'2:20p'[36m,
+                            [1mLoc[22m: [32m'PH A18B'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'1:30p'[36m
+                        }
+                    ]
+                }
+            ],
+            [1mClasses[22m: [
+                {
+                    [1mEnd[22m: [32m'1:20p'[36m,
+                    [1mLoc[22m: [32m'PH A18B'[36m,
+                    [1mDay[22m: [32m'M'[36m,
+                    [1mStart[22m: [32m'12:30p'[36m
+                },
+                {
+                    [1mEnd[22m: [32m'1:20p'[36m,
+                    [1mLoc[22m: [32m'PH A18B'[36m,
+                    [1mDay[22m: [32m'W'[36m,
+                    [1mStart[22m: [32m'12:30p'[36m
+                }
+            ]
+        }
+    ],
+    [1mSemester[22m: [35m131[36m,
+    [1mUnits[22m: [32m'&nbsp;'[36m
+}[36m[0m
+{ message: 'Validation failed',
+  name: 'ValidationError',
+  errors: 
+   { Num: 
+      { message: 'Validator "regexp" failed for path Num',
+        name: 'ValidatorError',
+        path: 'Num',
+        type: 'regexp' } } }
+[36m{
+    [1mNum[22m: [32m'&nbsp;'[36m,
+    [1mName[22m: [32m'U.S. Foreign Policy in the Middle East Since 1945'[36m,
+    [1mSections[22m: [
+        {
+            [1mNum[22m: [32m'Lec 5'[36m,
+            [1mInstructor[22m: [32m'Eisenberg'[36m,
+            [1mSubsections[22m: [
+                {
+                    [1mNum[22m: [32m'U'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'2:20p'[36m,
+                            [1mLoc[22m: [32m'BH 237B'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'1:30p'[36m
+                        }
+                    ]
+                },
+                {
+                    [1mNum[22m: [32m'V'[36m,
+                    [1mInstructor[22m: [32m'Instructor TBA'[36m,
+                    [1mClasses[22m: [
+                        {
+                            [1mEnd[22m: [32m'12:20p'[36m,
+                            [1mLoc[22m: [32m'BH 237B'[36m,
+                            [1mDay[22m: [32m'F'[36m,
+                            [1mStart[22m: [32m'11:30a'[36m
+                        }
+                    ]
+                }
+            ],
+            [1mClasses[22m: [
+                {
+                    [1mEnd[22m: [32m'2:20p'[36m,
+                    [1mLoc[22m: [32m'PH A18B'[36m,
+                    [1mDay[22m: [32m'M'[36m,
+                    [1mStart[22m: [32m'1:30p'[36m
+                },
+                {
+                    [1mEnd[22m: [32m'2:20p'[36m,
+                    [1mLoc[22m: [32m'PH A18B'[36m,
+                    [1mDay[22m: [32m'W'[36m,
+                    [1mStart[22m: [32m'1:30p'[36m
                 }
             ]
         }

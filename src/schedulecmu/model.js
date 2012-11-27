@@ -49,7 +49,7 @@ function getCourseModel(Schema, mongoose) {
   var SectionSchema = new Schema();
   SectionSchema.add({
     //Matches between 1 and 3 (in case of TBA) alphanumeric characters
-    Num: {type: String, match: /^[a-zA-Z]+[0-9]*$/}, 
+    Num: {type: String}, 
     Instructor: {type: String}, //TODO convert TBA to nulls
     Mini: {type: Number, min: 0, max: 1, default: null},
     Classes: [ClassSchema],
