@@ -67,7 +67,7 @@ function performAjaxRequest(opts) {
 
 function fetchUserCourses() {
     performAjaxRequest({
-        url: "../testdata/dummy2.json",
+        url: "../testdata/dummy1.json",
         success: function(result, status) {
             // window.listedCourses = JSON.parse(result);
             // console.log(window.listedCourses);
