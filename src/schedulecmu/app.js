@@ -24,9 +24,11 @@ app.get('/api/courses', function(req, res) {
   }
   // TODO figure out how to check for minis (best way)
   // Optional::
+
   if (req.query.instructor) {
 
   }
+
   if (req.query.building) {
 
   }
@@ -45,11 +47,18 @@ app.get('/api/courses', function(req, res) {
   });
 });
 
+
+//For the form /api/courses/131-15-122
 app.get('/api/courses/:course', function(req, res) {
   var semester = parseInt(req.params.course.slice(0,3));
-  var course = parseInt(req.params.course.slice(3,8));
-  Course.findOne({semester: semester, course: course}, function(err, course) {
-    res.send(course); // TODO add error checking
+  var course = req.params.course.slice(4,10);
+  var next = req.params.course.slice(9);
+  Course.findOne({Semester: semester, Num: course}, function(err, course) {
+	  if(next.length > 2 && next.slice(2).match(/^section/)){
+	      //handle sections here
+	  }
+	  else   
+	      res.send(course); // TODO add error checking
   });
 });
 
