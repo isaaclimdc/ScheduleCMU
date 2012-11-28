@@ -52,13 +52,32 @@ app.get('/api/courses', function(req, res) {
 app.get('/api/courses/:course', function(req, res) {
   var semester = parseInt(req.params.course.slice(0,3));
   var course = req.params.course.slice(4,10);
-  var next = req.params.course.slice(9);
+  var next = req.params.course.slice(9) + '/'; //TODO: add this '/' only if it's not at the end
   Course.findOne({Semester: semester, Num: course}, function(err, course) {
 	  if(next.length > 2 && next.slice(2).match(/^section/)){
-	      //handle sections here
+	      var delimit = next.slice(10).indexOf('/'); //TODO: Error check here - this is unsafe
+	      if (delimit == -1)
+		  console.log("ERROR"); //TODO: throw an error
+	      else {
+		  var secNum = next.slice(10, delimit);
+		  var section = course.Sections.findOne({Num: secNum});
+		  var next1 = next.slice(delimit);
+		  if(next1.length > 1 && next1.slice(1).match(/^subsection/)){
+		      var delimit = next.slice(12).indexOf('/');
+		      if (delimit == -1)
+			  console.log("ERROR"); //TODO: throw an error                                                                                              
+		      else {
+			  var subsecNum = next.slice(12, delimit);
+			  var subsection = section.Subsections.findOne({Num: subSecNum});
+			  res.send(subsection);
+		      }
+		  }
+		  else
+		      res.send(section);
+	      }
 	  }
 	  else   
-	      res.send(course); // TODO add error checking
+	     res.send(course); // TODO add error checking
   });
 });
 
