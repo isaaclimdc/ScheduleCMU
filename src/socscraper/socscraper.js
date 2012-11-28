@@ -15,10 +15,9 @@ var scheduleToScrape = "spring13.html";
 
 // DB Stuff
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
 var db = require('./db.js').dbConnect(mongoose);
-var CourseModel = require('./model.js').getCourseModel(Schema, db);
+var CourseModel = require('./model.js')(mongoose, db);
 
 
 // Scraping Stuff
@@ -135,10 +134,10 @@ jsdom.env(
             var newCourse = new Course();
 
             // Get number, name, units, semester
-            newCourse.Num = processCourseNum(extractHTML(cols[0]));
-            newCourse.Name = extractHTML(cols[1]);
-            newCourse.Units = processUnits(extractHTML(cols[2]));
-            newCourse.Semester = globalSem;
+            newCourse.num = processCourseNum(extractHTML(cols[0]));
+            newCourse.name = extractHTML(cols[1]);
+            newCourse.units = processUnits(extractHTML(cols[2]));
+            newCourse.semester = globalSem;
 
             return newCourse;
         }
@@ -163,10 +162,10 @@ jsdom.env(
 
             var newClass = new Class();
 
-            newClass.Day = day
-            newClass.Start = processTime(extractHTML(cols[5]));
-            newClass.End = processTime(extractHTML(cols[6]));
-            newClass.Loc = extractHTML(cols[7]);
+            newClass.day = day
+            newClass.start = processTime(extractHTML(cols[5]));
+            newClass.end = processTime(extractHTML(cols[6]));
+            newClass.loc = extractHTML(cols[7]);
 
             return newClass;
         }
@@ -178,14 +177,14 @@ jsdom.env(
 
             // Get Section number, instructor
             var sectionNum = extractHTML(cols[3]);
-            newSection.Num = sectionNum;
-            newSection.Instructor = extractHTML(cols[8]);
+            newSection.num = sectionNum;
+            newSection.instructor = extractHTML(cols[8]);
 
             // Get Mini or not
             if (sectionNum.length === 2) {
                 var miniNum = parseInt(sectionNum.substring(1, 2));
                 if (miniNum <= 4)
-                    newSection.Mini = (miniNum - 1) % 2;
+                    newSection.mini = (miniNum - 1) % 2;
             }
 
             var dayField = extractHTML(cols[4]);
@@ -193,7 +192,7 @@ jsdom.env(
                 var newClass = processClass(cols, dayField);
 
                 // newClass is fully populated. Add into classes array
-                newSection.Classes.push(newClass);
+                newSection.classes.push(newClass);
             }
             else {
                 // Process days. 1 day is 1 Class object
@@ -202,7 +201,7 @@ jsdom.env(
                     var newClass = processClass(cols, dayField.charAt(i));
 
                     // newClass is fully populated. Add into classes array
-                    newSection.Classes.push(newClass);
+                    newSection.classes.push(newClass);
                   }
                 }
             }
@@ -243,9 +242,9 @@ jsdom.env(
                 var sectionNum = extractHTML(cols[3]);
 
                 // A lecture detected, so start a new Section
-                if (sectionNum.substring(0, 3) === "Lec" || currentSection.Num.substring(0, 3) !== "Lec") {
+                if (sectionNum.substring(0, 3) === "Lec" || currentSection.num.substring(0, 3) !== "Lec") {
                     // Before doing anything, push currentSection
-                    currentCourse.Sections.push(currentSection);
+                    currentCourse.sections.push(currentSection);
                     currentSection = undefined;
 
                     // Create a new Section
@@ -257,9 +256,9 @@ jsdom.env(
                     var newSubSection = processSection(cols);
                     // newSubSection.Subsections is undefined;
 
-                    if (currentSection.Subsections === undefined)
-                        currentSection.Subsections = [];
-                    currentSection.Subsections.push(newSubSection);
+                    if (currentSection.subsections === undefined)
+                        currentSection.subsections = [];
+                    currentSection.subsections.push(newSubSection);
                 }
             }
             else if (isClass(this) === true) {
@@ -271,7 +270,7 @@ jsdom.env(
                     var newClass = processClass(cols, dayField);
 
                     // newClass is fully populated. Add into classes array
-                    currentSection.Classes.push(newClass);
+                    currentSection.classes.push(newClass);
                 }
                 else {
                   // Process days. 1 day is 1 Class object
@@ -280,7 +279,7 @@ jsdom.env(
                             var newClass = processClass(cols, dayField.charAt(i));
 
                             // newClass is fully populated. Add into classes array
-                            currentSection.Classes.push(newClass);
+                            currentSection.classes.push(newClass);
                         }
                     }
                 }
@@ -290,11 +289,11 @@ jsdom.env(
 
                 // Before doing anything, push currentCourse
                 if (currentSection !== undefined) {
-                    currentCourse.Sections.push(currentSection);
+                    currentCourse.sections.push(currentSection);
                     currentSection = undefined;
                 }
 
-                if (currentCourse !== undefined && currentCourse.Num.length === 6) {
+                if (currentCourse !== undefined && currentCourse.num.length === 6) {
                     dumpAndAdd(allCourses, currentCourse);
                     currentCourse = undefined;
                 }
@@ -310,8 +309,8 @@ jsdom.env(
         });
 
         // Push the last currentCourse
-        if (currentCourse.Num.length === 6) {
-            currentCourse.Sections.push(currentSection);
+        if (currentCourse.num.length === 6) {
+            currentCourse.sections.push(currentSection);
             dumpAndAdd(allCourses, currentCourse);
             currentCourse = undefined;
         }
@@ -323,29 +322,29 @@ jsdom.env(
 
 // Course constructor
 function Course() {
-    this.Num;
-    this.Name;
-    this.Units;
-    this.Semester;
-    this.Sections = [];
+    this.num;
+    this.name;
+    this.units;
+    this.semester;
+    this.sections = [];
     return this;
 }
 
 // Section constructor
 function Section() {
-    this.Num;
-    this.Mini;
-    this.Instructor;
-    this.Classes = [];
-    this.Subsections;
+    this.num;
+    this.mini;
+    this.instructor;
+    this.classes = [];
+    this.subsections;
     return this;
 }
 
 // Class constructor
 function Class() {
-    this.Day;
-    this.Start;
-    this.End;
-    this.Loc;
+    this.day;
+    this.start;
+    this.end;
+    this.loc;
     return this;
 }

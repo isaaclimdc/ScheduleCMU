@@ -1,4 +1,7 @@
-function getCourseModel(Schema, mongoose) {
+function getCourseModel(mongoose, db) {
+  var Schema = mongoose.Schema;
+
+
   /* For the recurring schema, I tried to model data accepted by an interface like Google Calendar's
    * It would be great if we could build a similar interface */
   var RecurSchema = new Schema({
@@ -9,7 +12,6 @@ function getCourseModel(Schema, mongoose) {
     Frequency: {type: Number, default: null} //Repeats every n days / weeks / months - depending on the ocurence field
   });
     
-
   var EventSchema = new Schema({
     //Num: Number - This should be handled client side, right?
     Type: {type: Number}, //Since we have a drop down list of 4 types of events       
@@ -39,36 +41,36 @@ function getCourseModel(Schema, mongoose) {
 
 
   var ClassSchema = new Schema({
-    Day: {type: String, match: /^TBA$|^[MTWRFSU]$/},
-    Start: {type: String}, //TODO? Store these as numbers in the scraper ??
-    End: {type: String},
+    day: {type: String, match: /^TBA$|^[MTWRFSU]$/},
+    start: {type: String}, //TODO? Store these as numbers in the scraper ??
+    end: {type: String},
     //Currently matches string types "GHC 4401", "DH A301", "TBA", "GYM THSTL" 
-    Loc: {type: String}
+    loc: {type: String}
   });
 
   var SectionSchema = new Schema();
   SectionSchema.add({
     //Matches between 1 and 3 (in case of TBA) alphanumeric characters
-    Num: {type: String}, 
-    Instructor: {type: String}, //TODO convert TBA to nulls
-    Mini: {type: Number, min: 0, max: 1, default: null},
-    Classes: [ClassSchema],
-    Subsections: [SectionSchema]
+    num: {type: String}, 
+    instructor: {type: String}, //TODO convert TBA to nulls
+    mini: {type: Number, min: 0, max: 1, default: null},
+    classes: [ClassSchema],
+    subsections: [SectionSchema]
   });
 
   var CourseSchema = new Schema({
-    Num: {type: String, match: /^[0-9]{1,2}-[0-9]{3}$/},
-    Name: String,
-    Semester: Number,
-    Description: {type: String, default: null},
+    num: {type: String, match: /^[0-9]{1,2}-[0-9]{3}$/},
+    name: String,
+    semester: Number,
+    description: {type: String, default: null},
     URL: {type: String, default: null},
-    Units: String,
-    Sections: [SectionSchema],
-    CourseEvents: [EventSchema]
+    units: String,
+    sections: [SectionSchema],
+    course_events: [EventSchema]
   });
 
-  return mongoose.model('Course', CourseSchema);
+  return db.model('Course', CourseSchema);
 }
 
 
-module.exports.getCourseModel = getCourseModel;
+module.exports = getCourseModel;
