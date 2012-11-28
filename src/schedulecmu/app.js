@@ -11,9 +11,7 @@ var Course = require('./model.js').getCourseModel(Schema, db);
 app.get('/api/courses', function(req, res) {
   var query = Course.find({});
   if (req.query.dept) {
-    query = query.$where(function() {
-      return (this.Num.slice(0,2) === req.query.dept);
-    });
+      query = query.$where('this.Num.match(/^' + req.query.dept + '/)'); 
   }
   if (req.query.name) {
 
@@ -55,6 +53,10 @@ app.get('/api/courses/:course', function(req, res) {
   });
 });
 
+app.use(function(err, req, res, next){
+	console.log("ERROR");
+	console.error(err.stack);
+    });
 
 
 /* Serve static files from the public directory */
