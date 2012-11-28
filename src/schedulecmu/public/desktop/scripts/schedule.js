@@ -67,8 +67,7 @@ function performAjaxRequest(opts) {
 
 function fetchUserCourses() {
     performAjaxRequest({
-        url: "http://isaacl.net/projects/schedulecmu/dummy.json",
-        // url: "../../../scripts/out/dummy.json",
+        url: "../testdata/dummy2.json",
         success: function(result, status) {
             // window.listedCourses = JSON.parse(result);
             // console.log(window.listedCourses);
@@ -227,7 +226,7 @@ function searchForCourseInCourseBrowser() {
 
     /* Query our server */
     performAjaxRequest({
-        url: "http://isaacl.net/projects/schedulecmu/dummy2.json",
+        url: "../testdata/dummy2.json",
         success: function(result, status) {
             window.mostRecentSearchResults = result;
 
@@ -366,7 +365,7 @@ function requestAndAddCourse() {
     var inputStr = $("#addCourseBox").val();
 
     // var urlReq = "blablabla/api?course=" + inputStr;
-    var urlReq = "http://isaacl.net/projects/schedulecmu/dummy2.json";
+    var urlReq = "../testdata/dummy2.json";
 
     /* Query database for 'inputStr' */
     performAjaxRequest({
