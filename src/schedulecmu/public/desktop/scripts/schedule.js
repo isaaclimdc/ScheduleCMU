@@ -12,6 +12,7 @@ $(document).ready(function() {
 
     /* Populate the page with the user's courses */
     fetchUserCourses();
+    fetchUserSections();
 
     // When the user presses enter in forms
     $("#addCourseForm").submit(function(e){
@@ -21,6 +22,11 @@ $(document).ready(function() {
     $("#courseBrowserForm").submit(function(e){
         e.preventDefault();
         searchForCourseInCourseBrowser();
+    });
+    $(".courseBrowserRow img").click(function(e) {
+        //do something
+        console.log("CLICKED");
+        e.stopPropagation();
     });
 });
 
@@ -126,6 +132,17 @@ function fetchUserCourses() {
     });
 }
 
+function fetchUserSections() {
+    window.userSections =
+    [
+        {"Section" : 1, "Subsection" : 0},
+        {"Section" : 0, "Subsection" : 0},
+        {"Section" : 0, "Subsection" : 0},
+        {"Section" : 1, "Subsection" : 2},
+        {"Section" : 0, "Subsection" : 2}
+    ];
+}
+
 /* This is the main function that is called to populate FullCalendar */
 function populateCalendar(start, end, callback) {
     var events = [];
@@ -135,7 +152,7 @@ function populateCalendar(start, end, callback) {
         var groupInAccordion = $('#accordion').children()[i];
         var color = $(groupInAccordion).children("h3").css("background-color");
 
-        addCourseToCalendar(course, events, color);
+        addCourseToCalendar(course, i, events, color);
     }
 
     console.log(events.length + " events added");
@@ -143,31 +160,66 @@ function populateCalendar(start, end, callback) {
 }
 
 /* Adds a single course to FullCalendar */
-function addCourseToCalendar(course, events, color) {
-    /* Extract data from Course object, append into tr's and td's */
-    var sectionsArr = course.Sections;
+function addCourseToCalendar(course, idx, events, color) {
     // var sem = parseInt(course.Semester);
     var sem = parseInt("122"); /* Override for debugging */
 
+    var sectionsToAdd = window.userSections[idx];
+    var sectIdxToAdd;
+    var subsectIdxToAdd;
+    console.log(sectionsToAdd);
+
+    if (sectionsToAdd === undefined) {
+        sectIdxToAdd = 0;
+        subsectIdxToAdd = 0;
+        console.log("CAME HERE");
+    }
+    else {
+        sectIdxToAdd = sectionsToAdd.Section;
+        subsectIdxToAdd = sectionsToAdd.Subsection;
+    }
+
+    if (subsectIdxToAdd < 0)
+        subsectIdxToAdd = 0;
+
+    var sectionsArr = course.Sections;
     if (sectionsArr !== undefined) {
-        for (var i = 0; i < sectionsArr.length; i++) {
-            var section = sectionsArr[i];
-
-            /* Take care of the main lecture/class first */
-            addClassesToCalendar(section, events, course.Num, color, sem);
-
-            /* Now take care of the subsections (recitations) */
-            var subsectionsArr = section.Subsections;
-            if (subsectionsArr !== undefined) {
-                for (j = 0; j < subsectionsArr.length; j++) {
-                    var subsection = subsectionsArr[j];
-
-                    addClassesToCalendar(subsection, events, course.Num, color, sem);
-                }
-            }
-        }
+        var section = sectionsArr[sectIdxToAdd];
+        addClassesToCalendar(section, events, course.Num, color, sem);
+    }
+    var subsectionsArr = section.Subsections;
+    if (subsectionsArr !== undefined) {
+        var subsection = subsectionsArr[subsectIdxToAdd];
+        addClassesToCalendar(subsection, events, course.Num, color, sem);
     }
 }
+
+/* Adds a single course to FullCalendar */
+// function addCourseToCalendar(course, events, color) {
+//     /* Extract data from Course object, append into tr's and td's */
+//     var sectionsArr = course.Sections;
+//     // var sem = parseInt(course.Semester);
+//     var sem = parseInt("122"); /* Override for debugging */
+
+//     if (sectionsArr !== undefined) {
+//         for (var i = 0; i < sectionsArr.length; i++) {
+//             var section = sectionsArr[i];
+
+//             /* Take care of the main lecture/class first */
+//             addClassesToCalendar(section, events, course.Num, color, sem);
+
+//             /* Now take care of the subsections (recitations) */
+//             var subsectionsArr = section.Subsections;
+//             if (subsectionsArr !== undefined) {
+//                 for (j = 0; j < subsectionsArr.length; j++) {
+//                     var subsection = subsectionsArr[j];
+
+//                     addClassesToCalendar(subsection, events, course.Num, color, sem);
+//                 }
+//             }
+//         }
+//     }
+// }
 
 /* Adds all classes of a course to FullCalendar */
 function addClassesToCalendar(section, events, courseNum, color, sem) {
@@ -196,11 +248,13 @@ function addClassesToCalendar(section, events, courseNum, color, sem) {
         var startDate = new Date(year, date.getMonth(), date.getDate(), sArr[0], sArr[1]);
         var endDate = new Date(year, date.getMonth(), date.getDate(), eArr[0], eArr[1]);
 
+        var courseNumName = courseNum + " (" + section.Num + ")";
+
         /* Logic in order to have recurring events */
         while (startDate <= semEndDate) {
             events.push({
-                id: 2,
-                title: courseNum + "\n" + aClass.Loc,
+                id: courseNumName,
+                title: courseNumName + "\n" + aClass.Loc,
                 color: color,
                 start: new Date(startDate.valueOf()),
                 end: new Date(endDate.valueOf()),
@@ -276,7 +330,6 @@ function searchForCourseInCourseBrowser() {
     performAjaxRequest({
         url: "http://isaacl.net/projects/schedulecmu/dummy2.json",
         success: function(result, status) {
-            // console.log(result);
             window.mostRecentSearchResults = result;
 
             for (var i = 0; i < result.length; i++) {
@@ -424,35 +477,127 @@ function requestAndAddCourse() {
     /* Returns a Course object */
     /* Dummy data */
     var course = {
-        Num: '54-300',
+        Num: '15-213',
         Sections: [
             {
                 Classes: [
                     {
-                        End: '',
-                        Loc: 'DNM DNM',
-                        Day: 'TBA',
-                        Start: ''
-                    }
-                ],
-                Num: 'A',
-                Instructor: 'Arons'
-            },
-            {
-                Classes: [
+                        End: '2:50p',
+                        Loc: 'GHC 4401',
+                        Day: 'T',
+                        Start: '1:30p'
+                    },
                     {
-                        End: '',
-                        Loc: 'DNM DNM',
-                        Day: 'TBA',
-                        Start: ''
+                        End: '2:50p',
+                        Loc: 'GHC 4401',
+                        Day: 'R',
+                        Start: '1:30p'
                     }
                 ],
-                Num: 'B',
-                Instructor: 'Chemers'
+                Num: 'Lec',
+                Subsections: [
+                    {
+                        Classes: [
+                            {
+                                End: '10:20a',
+                                Loc: 'WEH 5302',
+                                Day: 'M',
+                                Start: '9:30a'
+                            }
+                        ],
+                        Num: 'A',
+                        Instructor: 'Instructor TBA'
+                    },
+                    {
+                        Classes: [
+                            {
+                                End: '11:20a',
+                                Loc: 'WEH 5302',
+                                Day: 'M',
+                                Start: '10:30a'
+                            }
+                        ],
+                        Num: 'B',
+                        Instructor: 'Instructor TBA'
+                    },
+                    {
+                        Classes: [
+                            {
+                                End: '12:20p',
+                                Loc: 'WEH 5302',
+                                Day: 'M',
+                                Start: '11:30a'
+                            }
+                        ],
+                        Num: 'C',
+                        Instructor: 'Instructor TBA'
+                    },
+                    {
+                        Classes: [
+                            {
+                                End: '1:20p',
+                                Loc: 'WEH 5302',
+                                Day: 'M',
+                                Start: '12:30p'
+                            }
+                        ],
+                        Num: 'D',
+                        Instructor: 'Instructor TBA'
+                    },
+                    {
+                        Classes: [
+                            {
+                                End: '2:20p',
+                                Loc: 'WEH 5302',
+                                Day: 'M',
+                                Start: '1:30p'
+                            }
+                        ],
+                        Num: 'E',
+                        Instructor: 'Instructor TBA'
+                    },
+                    {
+                        Classes: [
+                            {
+                                End: '3:20p',
+                                Loc: 'WEH 5302',
+                                Day: 'M',
+                                Start: '2:30p'
+                            }
+                        ],
+                        Num: 'F',
+                        Instructor: 'Instructor TBA'
+                    },
+                    {
+                        Classes: [
+                            {
+                                End: '4:20p',
+                                Loc: 'WEH 5302',
+                                Day: 'M',
+                                Start: '3:30p'
+                            }
+                        ],
+                        Num: 'G',
+                        Instructor: 'Instructor TBA'
+                    },
+                    {
+                        Classes: [
+                            {
+                                End: '5:20p',
+                                Loc: 'WEH 5320',
+                                Day: 'M',
+                                Start: '4:30p'
+                            }
+                        ],
+                        Num: 'H',
+                        Instructor: 'Instructor TBA'
+                    }
+                ],
+                Instructor: 'Goldstein, Rowe'
             }
         ],
-        Name: 'Dramaturgy Research Hours',
-        Units: '1-12',
+        Name: 'Introduction to Computer Systems',
+        Units: '12.0',
         Semester: 131
     };
 
@@ -506,7 +651,7 @@ function addCourse(course) {
     accordion.append(group).accordion('destroy').accordion(window.accordionOpts);
 
     /* Re-render Events on FullCalendar */
-    $("#calview").fullCalendar("rerenderEvents");
+    $("#calview").fullCalendar("refetchEvents");
 }
 
 /* Some helper functions for processing courses into table form */
@@ -535,7 +680,7 @@ function insertCourseIntoTable(course, table, fullDetails) {
             var section = sectionsArr[i];
 
             /* Take care of the main lecture/class first */
-            processClasses(section, table, fullDetails);
+            processClasses(section, table, fullDetails, i);
 
             /* Now take care of the subsections (recitations) */
             var subsectionsArr = section.Subsections;
@@ -543,7 +688,7 @@ function insertCourseIntoTable(course, table, fullDetails) {
                 for (j = 0; j < subsectionsArr.length; j++) {
                     var subsection = subsectionsArr[j];
 
-                    processClasses(subsection, table, fullDetails);
+                    processClasses(subsection, table, fullDetails, i, j);
                 }
             }
         }
@@ -555,7 +700,7 @@ function insertCourseIntoTable(course, table, fullDetails) {
  * fullDetails is a boolean whether to append all details or not. 
  * This function appends to the DOM in-place.
  */
-function processClasses(section, table, fullDetails) {
+function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
     var classesArr = section.Classes;
 
     if (areSameTime(classesArr) === true) {
@@ -589,6 +734,15 @@ function processClasses(section, table, fullDetails) {
             row.append(newCol(theClass.Loc));
         }
 
+        /* Add metadata for the section indexes */
+        row.attr("onClick", "rowSelected(this);");
+        row.attr("sect", sectIdx);
+
+        if (subsectIdx === undefined)
+            row.attr("id", "notSubsection");
+        else
+            row.attr("subsect", subsectIdx);
+
         /* Done. Append new row to the table */
         table.append(row);
     }
@@ -619,10 +773,37 @@ function processClasses(section, table, fullDetails) {
                 row.append(newCol(theClass.Loc));
             }
 
+            /* Add metadata for the section indexes */
+            row.attr("onClick", "rowSelected(this);");
+            row.attr("sect", sectIdx);
+
+            if (subsectIdx !== undefined)
+                row.attr("subsect", subsectIdx);
+
             /* Done with row. Append to table */
             table.append(row);
         }
     }
+}
+
+function rowSelected(tr) {
+    var row = $(tr)
+    var clickedIndex = row.parent().parent().parent().parent().index();
+    var sectIdx = parseInt(row.attr("sect"));
+    var subsectIdx = parseInt(row.attr("subsect"));
+
+    if (isNaN(subsectIdx))
+        subsectIdx = -1;
+
+    console.log(clickedIndex + " " + sectIdx + " " + subsectIdx);
+
+    window.userSections[clickedIndex] = {
+        "Section" : sectIdx,
+        "Subsection" : subsectIdx
+    };
+
+    /* Re-render Events on FullCalendar */
+    $("#calview").fullCalendar("refetchEvents");
 }
 
 /* Checks whether all classes in a class array occur at the same
@@ -660,6 +841,10 @@ function deleteCourse(p) {
 
     // Send updated course list to server
     window.listedCourses.splice(clickedIndex, 1);
+    window.userSections.splice(clickedIndex, 1);
+
+    /* Re-render Events on FullCalendar */
+    $("#calview").fullCalendar("refetchEvents");
 }
 
 /*** Course Info Viewer ***/
@@ -685,6 +870,12 @@ function showInfoFromBrowser(infoLink) {
 
     /* Get this course from the global window.listedCourses */
     var course = window.mostRecentSearchResults[clickedIndex];
+
+    $("#courseInfoLink").fancybox({
+        "afterClose": function() {
+            $("#browseLink").click();
+        }
+    });
 
     showInCourseInfoBrowser(course);
 }
