@@ -10,10 +10,6 @@ $(document).ready(function() {
         $("#accordion").accordion(window.accordionOpts);
     });
 
-    /* Populate the page with the user's courses */
-    fetchUserCourses();
-    fetchUserSections();
-
     // When the user presses enter in forms
     $("#addCourseForm").submit(function(e){
         e.preventDefault();
@@ -25,38 +21,14 @@ $(document).ready(function() {
     });
     $(".courseBrowserRow img").click(function(e) {
         //do something
-        console.log("CLICKED");
+        console.log("CAN'T GET THIS TO WORK!!");
         e.stopPropagation();
     });
+
+    /* Populate the page with the user's courses */
+    fetchUserCourses();
+    fetchUserSections();
 });
-
-function startSpinner() {
-    /* Spin.js */
-    var opts = {
-      lines: 15, // The number of lines to draw
-      length: 9, // The length of each line
-      width: 2, // The line thickness
-      radius: 26, // The radius of the inner circle
-      corners: 1, // Corner roundness (0..1)
-      rotate: 0, // The rotation offset
-      color: '#000', // #rgb or #rrggbb
-      speed: 1, // Rounds per second
-      trail: 60, // Afterglow percentage
-      shadow: false, // Whether to render a shadow
-      hwaccel: false, // Whether to use hardware acceleration
-      className: 'spinner', // The CSS class to assign to the spinner
-      zIndex: 2e9, // The z-index (defaults to 2000000000)
-      top: 'auto', // Top position relative to parent in px
-      left: 'auto' // Left position relative to parent in px
-    };
-
-    var target = document.getElementsByTagName("body")[0];
-    window.spinner = new Spinner(opts).spin(target);
-}
-
-function stopSpinner() {
-    window.spinner.stop();
-}
 
 /* A convenient wrapper for $.ajax that automatically starts and stops
  * the spinner (spin.js), and does error checking. Requires an argument
@@ -90,6 +62,8 @@ function performAjaxRequest(opts) {
         }
     });
 }
+
+/**** Fetch Data ****/
 
 function fetchUserCourses() {
     performAjaxRequest({
@@ -143,6 +117,8 @@ function fetchUserSections() {
     ];
 }
 
+/**** FullCalendar ****/
+
 /* This is the main function that is called to populate FullCalendar */
 function populateCalendar(start, end, callback) {
     var events = [];
@@ -167,12 +143,10 @@ function addCourseToCalendar(course, idx, events, color) {
     var sectionsToAdd = window.userSections[idx];
     var sectIdxToAdd;
     var subsectIdxToAdd;
-    console.log(sectionsToAdd);
 
     if (sectionsToAdd === undefined) {
         sectIdxToAdd = 0;
         subsectIdxToAdd = 0;
-        console.log("CAME HERE");
     }
     else {
         sectIdxToAdd = sectionsToAdd.Section;
@@ -193,33 +167,6 @@ function addCourseToCalendar(course, idx, events, color) {
         addClassesToCalendar(subsection, events, course.Num, color, sem);
     }
 }
-
-/* Adds a single course to FullCalendar */
-// function addCourseToCalendar(course, events, color) {
-//     /* Extract data from Course object, append into tr's and td's */
-//     var sectionsArr = course.Sections;
-//     // var sem = parseInt(course.Semester);
-//     var sem = parseInt("122"); /* Override for debugging */
-
-//     if (sectionsArr !== undefined) {
-//         for (var i = 0; i < sectionsArr.length; i++) {
-//             var section = sectionsArr[i];
-
-//             /* Take care of the main lecture/class first */
-//             addClassesToCalendar(section, events, course.Num, color, sem);
-
-//             /* Now take care of the subsections (recitations) */
-//             var subsectionsArr = section.Subsections;
-//             if (subsectionsArr !== undefined) {
-//                 for (j = 0; j < subsectionsArr.length; j++) {
-//                     var subsection = subsectionsArr[j];
-
-//                     addClassesToCalendar(subsection, events, course.Num, color, sem);
-//                 }
-//             }
-//         }
-//     }
-// }
 
 /* Adds all classes of a course to FullCalendar */
 function addClassesToCalendar(section, events, courseNum, color, sem) {
@@ -268,54 +215,6 @@ function addClassesToCalendar(section, events, courseNum, color, sem) {
     }
 }
 
-/* Returns the nearest date relative to the start of the semester */
-function getNearestDate(dayStr, semDate) {
-    var firstDayOfSem = semDate.getDay();
-
-    /* WE SHOULD DO THIS SERVER-SIDE */
-    var classDay;
-    if (dayStr === "U")
-        classDay = 0;
-    else if (dayStr === "M")
-        classDay = 1;
-    else if (dayStr === "T")
-        classDay = 2;
-    else if (dayStr === "W")
-        classDay = 3;
-    else if (dayStr === "R")
-        classDay = 4;
-    else if (dayStr === "F")
-        classDay = 5;
-    else if (dayStr === "S")
-        classDay = 6;
-
-    var diff = classDay - firstDayOfSem;  /* Could be <0 */
-    var newDate = 1 + diff;  /* Offset from 1st of month */
-
-    /* In case overflows to previous month */
-    if (newDate < 0)
-        newDate += 7;
-
-    return new Date(semDate.getFullYear(), semDate.getMonth(), newDate, 10, 0);
-}
-
-/* Splits a time string like "12:50p" into an array [12,50],
- * and converts to military time
- */
-function processTimeStr(timeStr) {
-    var arr = timeStr.split(":");
-    var isPM = (timeStr.charAt(timeStr.length-1) === "p") ? true : false;
-
-    var hours = parseInt(arr[0]);
-    var minutes = parseInt(arr[1]);
-
-    /* mod 24 to take care of midnight, lol */
-    arr[0] = (isPM === true && hours !== 12) ? (hours + 12) % 24 : hours;
-    arr[1] = minutes;
-
-    return arr;
-}
-
 /*** CourseBrowser ***/
 
 $("#browseLink").fancybox({
@@ -347,17 +246,14 @@ function addToCourseBrowser(course) {
     row.append($('<h3>').text(makeUnitsStr(course.Units)));
     row.append($('<img>').attr({
         "src" : "../images/plus.png",
-        "onClick" : "addToSchedule(this)"
+        "onClick" : "addToAccordion(this)"
     }));
 
     $('#courseBrowserBody').append(row);
 }
 
-function addToSchedule(img) {
+function addToAccordion(img) {
     var clickedIndex = $(img).parent().index();
-    console.log(clickedIndex);
-    console.log(window.mostRecentSearchResults);
-
     var course = window.mostRecentSearchResults[clickedIndex];
     window.listedCourses.push(course);
 
@@ -379,8 +275,6 @@ function processEventForm() {
     var endTime = $("#eventFormEndTime").val();
     var location = $("#eventFormLocation").val();
     var andrew = $("#eventFormAndrew").val();
-
-    //alert("Course: " + courseNum + "\nType: " + type + "\nTitle: " + title + "\nStart time: " + startTime + "\nEnd time: " + endTime + "\nLocation: " + location + "\nAndrew ID: " + andrew);
 
     var results = {
         "courseNum" : courseNum,
@@ -440,7 +334,7 @@ function validateEventForm(res) {
     }
 }
 
-/*** ShareView ***/
+/**** ShareView ****/
 
 $("#shareLink").fancybox({
     "scrolling" : "no",
@@ -463,148 +357,40 @@ function shareTwitter() {
     alert("Sharing on Twitter...");
 }
 
-/*** Main screen ***/
+/*** Accordion ***/
 
-function makeUnitsStr(units) {
-    return units + " units";
-}
-
+/* Called when the user presses "return" at the add course box. Queries
+ * our database and parses the response into the accordion and calview
+ */
 function requestAndAddCourse() {
     var inputStr = $("#addCourseBox").val();
 
+    // var urlReq = "blablabla/api?course=" + inputStr;
+    var urlReq = "http://isaacl.net/projects/schedulecmu/dummy2.json";
+
     /* Query database for 'inputStr' */
+    performAjaxRequest({
+        url : urlReq,
+        success : function(result, status) {
+            var course;
 
-    /* Returns a Course object */
-    /* Dummy data */
-    var course = {
-        Num: '15-213',
-        Sections: [
-            {
-                Classes: [
-                    {
-                        End: '2:50p',
-                        Loc: 'GHC 4401',
-                        Day: 'T',
-                        Start: '1:30p'
-                    },
-                    {
-                        End: '2:50p',
-                        Loc: 'GHC 4401',
-                        Day: 'R',
-                        Start: '1:30p'
-                    }
-                ],
-                Num: 'Lec',
-                Subsections: [
-                    {
-                        Classes: [
-                            {
-                                End: '10:20a',
-                                Loc: 'WEH 5302',
-                                Day: 'M',
-                                Start: '9:30a'
-                            }
-                        ],
-                        Num: 'A',
-                        Instructor: 'Instructor TBA'
-                    },
-                    {
-                        Classes: [
-                            {
-                                End: '11:20a',
-                                Loc: 'WEH 5302',
-                                Day: 'M',
-                                Start: '10:30a'
-                            }
-                        ],
-                        Num: 'B',
-                        Instructor: 'Instructor TBA'
-                    },
-                    {
-                        Classes: [
-                            {
-                                End: '12:20p',
-                                Loc: 'WEH 5302',
-                                Day: 'M',
-                                Start: '11:30a'
-                            }
-                        ],
-                        Num: 'C',
-                        Instructor: 'Instructor TBA'
-                    },
-                    {
-                        Classes: [
-                            {
-                                End: '1:20p',
-                                Loc: 'WEH 5302',
-                                Day: 'M',
-                                Start: '12:30p'
-                            }
-                        ],
-                        Num: 'D',
-                        Instructor: 'Instructor TBA'
-                    },
-                    {
-                        Classes: [
-                            {
-                                End: '2:20p',
-                                Loc: 'WEH 5302',
-                                Day: 'M',
-                                Start: '1:30p'
-                            }
-                        ],
-                        Num: 'E',
-                        Instructor: 'Instructor TBA'
-                    },
-                    {
-                        Classes: [
-                            {
-                                End: '3:20p',
-                                Loc: 'WEH 5302',
-                                Day: 'M',
-                                Start: '2:30p'
-                            }
-                        ],
-                        Num: 'F',
-                        Instructor: 'Instructor TBA'
-                    },
-                    {
-                        Classes: [
-                            {
-                                End: '4:20p',
-                                Loc: 'WEH 5302',
-                                Day: 'M',
-                                Start: '3:30p'
-                            }
-                        ],
-                        Num: 'G',
-                        Instructor: 'Instructor TBA'
-                    },
-                    {
-                        Classes: [
-                            {
-                                End: '5:20p',
-                                Loc: 'WEH 5320',
-                                Day: 'M',
-                                Start: '4:30p'
-                            }
-                        ],
-                        Num: 'H',
-                        Instructor: 'Instructor TBA'
-                    }
-                ],
-                Instructor: 'Goldstein, Rowe'
+            /* Returns a Course object */
+            for (var i = 0; i < result.length; i++) {
+                if (result[i].Num === inputStr) {
+                    course = result[i];
+
+                    /* Add the new course to the global window.listedCourses */
+                    window.listedCourses.push(course);
+
+                    addCourse(course);
+
+                    return;
+                }
             }
-        ],
-        Name: 'Introduction to Computer Systems',
-        Units: '12.0',
-        Semester: 131
-    };
 
-    /* Add the new course to the global window.listedCourses */
-    window.listedCourses.push(course);
-
-    addCourse(course);
+            console.log("Course not found");
+        }
+    });
 }
 
 function addCourse(course) {
@@ -786,6 +572,7 @@ function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
     }
 }
 
+/* Called when a row in the accordion is selected */
 function rowSelected(tr) {
     var row = $(tr)
     var clickedIndex = row.parent().parent().parent().parent().index();
@@ -794,8 +581,6 @@ function rowSelected(tr) {
 
     if (isNaN(subsectIdx))
         subsectIdx = -1;
-
-    console.log(clickedIndex + " " + sectIdx + " " + subsectIdx);
 
     window.userSections[clickedIndex] = {
         "Section" : sectIdx,
@@ -806,30 +591,7 @@ function rowSelected(tr) {
     $("#calview").fullCalendar("refetchEvents");
 }
 
-/* Checks whether all classes in a class array occur at the same
- * time on their designated days
- */
-function areSameTime(classesArr) {
-    for (var i = 0; i < classesArr.length - 1; i++) {
-        var thisClass = classesArr[i];
-        var nextClass = classesArr[i+1];
-        if (thisClass.Start !== nextClass.Start ||
-            thisClass.End !== nextClass.End) {
-            return false;
-        }
-    }
-
-    return true;
-}
-
-function newCol(str) {
-    return $("<td>").html(str);
-}
-
-function makeTimeStr(start, end) {
-    return start + " - " + end;
-}
-
+/* Called when "delete" is clicked */
 function deleteCourse(p) {
     /* Get to enclosing group (3 levels up) */
     var group = $(p).parent().parent().parent();
@@ -847,7 +609,7 @@ function deleteCourse(p) {
     $("#calview").fullCalendar("refetchEvents");
 }
 
-/*** Course Info Viewer ***/
+/**** CourseInfo ****/
 
 $("#courseInfoLink").fancybox({
     "scrolling" : "no",
@@ -918,11 +680,11 @@ function showInCourseInfoBrowser(course) {
     body.append($("<h3>").text("Description"));
     body.append($("<p>").text("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante."));
     body.append($("<h3>").text("Prerequisites"));
-    body.append($("<p>").text("15-151, 76-101, or 21-127"));
+    body.append($("<p>").text("15-151, 76-101, or 21-127 (Dummy data)"));
     body.append($("<h3>").text("Corequisites"));
-    body.append($("<p>").text("None"));
+    body.append($("<p>").text("None (Dummy data)"));
     body.append($("<h3>").text("Cross-listed Courses"));
-    body.append($("<p>").text("None"));
+    body.append($("<p>").text("None (Dummy data)"));
 
     /* Done, append the whole body */
     browser.append(body);
@@ -932,4 +694,123 @@ function showInCourseInfoBrowser(course) {
 
     /* Open it */
     $("#courseInfoLink").click();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**** Helper functions ****/
+
+function startSpinner() {
+    /* Spin.js */
+    var opts = {
+      lines: 15, // The number of lines to draw
+      length: 9, // The length of each line
+      width: 2, // The line thickness
+      radius: 26, // The radius of the inner circle
+      corners: 1, // Corner roundness (0..1)
+      rotate: 0, // The rotation offset
+      color: '#000', // #rgb or #rrggbb
+      speed: 1, // Rounds per second
+      trail: 60, // Afterglow percentage
+      shadow: false, // Whether to render a shadow
+      hwaccel: false, // Whether to use hardware acceleration
+      className: 'spinner', // The CSS class to assign to the spinner
+      zIndex: 2e9, // The z-index (defaults to 2000000000)
+      top: 'auto', // Top position relative to parent in px
+      left: 'auto' // Left position relative to parent in px
+    };
+
+    var target = document.getElementsByTagName("body")[0];
+    window.spinner = new Spinner(opts).spin(target);
+}
+
+function stopSpinner() {
+    window.spinner.stop();
+}
+
+/* Returns the nearest date relative to the start of the semester */
+function getNearestDate(dayStr, semDate) {
+    var firstDayOfSem = semDate.getDay();
+
+    /* WE SHOULD DO THIS SERVER-SIDE */
+    var classDay;
+    if (dayStr === "U")
+        classDay = 0;
+    else if (dayStr === "M")
+        classDay = 1;
+    else if (dayStr === "T")
+        classDay = 2;
+    else if (dayStr === "W")
+        classDay = 3;
+    else if (dayStr === "R")
+        classDay = 4;
+    else if (dayStr === "F")
+        classDay = 5;
+    else if (dayStr === "S")
+        classDay = 6;
+
+    var diff = classDay - firstDayOfSem;  /* Could be <0 */
+    var newDate = 1 + diff;  /* Offset from 1st of month */
+
+    /* In case overflows to previous month */
+    if (newDate < 0)
+        newDate += 7;
+
+    return new Date(semDate.getFullYear(), semDate.getMonth(), newDate, 10, 0);
+}
+
+/* Splits a time string like "12:50p" into an array [12,50],
+ * and converts to military time
+ */
+function processTimeStr(timeStr) {
+    var arr = timeStr.split(":");
+    var isPM = (timeStr.charAt(timeStr.length-1) === "p") ? true : false;
+
+    var hours = parseInt(arr[0]);
+    var minutes = parseInt(arr[1]);
+
+    /* mod 24 to take care of midnight, lol */
+    arr[0] = (isPM === true && hours !== 12) ? (hours + 12) % 24 : hours;
+    arr[1] = minutes;
+
+    return arr;
+}
+
+function makeUnitsStr(units) {
+    return units + " units";
+}
+
+function newCol(str) {
+    return $("<td>").html(str);
+}
+
+function makeTimeStr(start, end) {
+    return start + " - " + end;
+}
+
+/* Checks whether all classes in a class array occur at the same
+ * time on their designated days
+ */
+function areSameTime(classesArr) {
+    for (var i = 0; i < classesArr.length - 1; i++) {
+        var thisClass = classesArr[i];
+        var nextClass = classesArr[i+1];
+        if (thisClass.Start !== nextClass.Start ||
+            thisClass.End !== nextClass.End) {
+            return false;
+        }
+    }
+
+    return true;
 }
