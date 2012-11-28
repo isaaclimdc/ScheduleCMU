@@ -11,16 +11,16 @@ var Course = require('./model.js')(mongoose, db);
 app.get('/api/courses', function(req, res) {
   var query = Course.find({});
   if (req.query.dept) {
-      query = query.$where('this.Num.match(/^' + req.query.dept + '/)'); 
+      query = query.$where('this.num.match(/^' + req.query.dept + '/)'); 
   }
   if (req.query.name) {
 
   }
   if (req.query.number) {
-    query = query.where('Num', req.query.number);  
+    query = query.where('num', req.query.number);  
   }
   if (req.query.semester) {
-    query = query.where('Semester', parseInt(req.query.semester));
+    query = query.where('semester', parseInt(req.query.semester));
   }
   // TODO figure out how to check for minis (best way)
   // Optional::
@@ -33,7 +33,7 @@ app.get('/api/courses', function(req, res) {
 
   }
 
-  query = query.select("Num Semester _id");
+  query = query.select("-sections -__v -course_events");
   query.exec(function(err, courses) {
     if (err) {
       console.log(err);
