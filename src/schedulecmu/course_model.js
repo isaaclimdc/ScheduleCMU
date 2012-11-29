@@ -27,7 +27,7 @@ function getCourseModel(mongoose, db) {
       Days: [{type: String, match: /^[MTWRFSU]$/}], //Optional
       Occurence: {type: Number, default: null}, //Various dropdown options - daily, weekly, monthly, etc
       Frequency: {type: Number, default: null} //Repeats every n days / weeks / months - depending on the ocurence field
-  });
+  }});
 
 
 
