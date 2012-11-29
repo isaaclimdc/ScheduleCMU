@@ -24,7 +24,6 @@ $(document).ready(function() {
         }
     });
 
-
     $("input[type='radio']").click(function () {
         var selection=$(this).val();
         var newselection = "#" + selection;
@@ -32,23 +31,6 @@ $(document).ready(function() {
             transition: "flip",
             reverse: true,
             changeHash: true
-        });
-        $('input[type="radio"]').filter('[value="'+selection+'"]').attr('checked', true); 
+        }); 
     });
 });
-
-function exportGoogleCal() {
-    alert("Exporting to Google Calendar...");
-}
-
-function downloadAppleCal() {
-    alert("Downloading for Apple Calendar...");
-}
-
-function shareFacebook() {
-    alert("Sharing on Facebook...");
-}
-
-function shareTwitter() {
-    alert("Sharing on Twitter...");
-}

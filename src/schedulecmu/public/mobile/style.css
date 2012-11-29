@@ -24,6 +24,13 @@ body {
     );
 }
 
+.makeitsmall {
+    height: 30px;
+    width: auto !important;
+    margin: 2px 44% 1px 44%;
+    float: center;
+}
+
 .center {
 	display: block;
 	margin-left: auto;
