@@ -1,16 +1,6 @@
 function getCourseModel(mongoose, db) {
   var Schema = mongoose.Schema;
 
-
-  /* For the recurring schema, I tried to model data accepted by an interface like Google Calendar's
-   * It would be great if we could build a similar interface */
-  var RecurSchema = new Schema({
-    StartDate: {type: Date, default: null},
-    EndDate: {type: Date, default: null},
-    Days: [{type: String, match: /^[MTWRFSU]$/}], //Optional
-    Occurence: {type: Number, default: null}, //Various dropdown options - daily, weekly, monthly, etc
-    Frequency: {type: Number, default: null} //Repeats every n days / weeks / months - depending on the ocurence field
-  });
     
   var EventSchema = new Schema({
     //Num: Number - This should be handled client side, right?
@@ -30,12 +20,13 @@ function getCourseModel(mongoose, db) {
      * for all events */
     Threshold: {type: Number, min: 0, default: 20},
     
-    Recurring: {type: Boolean, default: false},
-    Recur_StartDate: {type: Date, default: null},
-    Recur_EndDate: {type: Date, default: null},
-    Recur_Days: [{type: String, match: /^[MTWRFSU]$/}], //Optional
-    Recur_Occurence: {type: Number, default: null}, //Various dropdown options - daily, weekly, monthly, etc
-    Recur_Frequency: {type: Number, default: null} //Repeats every n days / weeks / months - depending on the ocurence field
+    Recur: {
+      Recurring: {type: Boolean, default: false},
+      StartDate: {type: Date, default: null},
+      EndDate: {type: Date, default: null},
+      Days: [{type: String, match: /^[MTWRFSU]$/}], //Optional
+      Occurence: {type: Number, default: null}, //Various dropdown options - daily, weekly, monthly, etc
+      Frequency: {type: Number, default: null} //Repeats every n days / weeks / months - depending on the ocurence field
   });
 
 
