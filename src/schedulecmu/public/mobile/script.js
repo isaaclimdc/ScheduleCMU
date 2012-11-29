@@ -18,9 +18,9 @@ $(document).ready(function() {
         defaultView: 'agendaWeek',
         editable: false,
         columnFormat: {
-            month: 'dddd',
-            week: 'dddd',
-            day: 'dddd'
+            month: 'ddd',
+            week: 'ddd',
+            day: 'ddd'
         }
     });
 
