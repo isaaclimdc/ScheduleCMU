@@ -25,9 +25,37 @@ $(document).ready(function() {
         e.stopPropagation();
     });
 
+    /* Only set up FullCalendar when all courses have been parsed. */
+    $("#calview").fullCalendar({
+        theme: false,
+        header: false,
+        weekends: false,
+        allDaySlot: false,
+        minTime: 8,
+        maxTime: 20,
+        height: 800,
+        defaultView: 'agendaWeek',
+        editable: false,
+        lazyFetching: true,
+        columnFormat: {
+            month: 'dddd',
+            week: 'dddd',
+            day: 'dddd'
+        },
+        timeFormat: {
+            /* Don't display time in title in agenda view */
+            agenda: ''
+        }
+        // events: populateCalendar
+    });
+
+    /* Initialization */
+    window.userSections = null;
+    window.listedCourses = [];
+
     /* Populate the page with the user's courses */
-    fetchUserCourses();
     fetchUserSections();
+    fetchUserCourses();
 });
 
 /* A convenient wrapper for $.ajax that automatically starts and stops
@@ -66,80 +94,73 @@ function performAjaxRequest(opts) {
 /**** Fetch Data ****/
 
 function fetchUserCourses() {
-    performAjaxRequest({
-        url: "../testdata/dummy1.json",
+    for (var i = 0; i < window.userSections.length; i++) {
+        performAjaxRequest({
+        url: "http://schedulecmu.aws.af.cm/api/courses?number=" + userCourse,
         success: function(result, status) {
-            // window.listedCourses = JSON.parse(result);
-            // console.log(window.listedCourses);
+            
+            var course = (JSON.parse(result))[0];
+            // console.log(course);
 
-            console.log(result);
-            window.listedCourses = result;
+            var courseID = course._id;
+            // console.log(courseID);
 
-            for (var i = 0; i < window.listedCourses.length; i++) {
-                addCourse(window.listedCourses[i]);
-            }
+            performAjaxRequest({
+                url: "http://schedulecmu.aws.af.cm/api/courses/" + courseID,
+                success : function(result, status) {
+                    // console.log(result);
+                    window.listedCourses.push(result);
+                    addCourse(result);
 
-            /* Only set up FullCalendar when all courses have been parsed. */
-            $("#calview").fullCalendar({
-                theme: false,
-                header: false,
-                weekends: false,
-                allDaySlot: false,
-                minTime: 8,
-                maxTime: 20,
-                height: 800,
-                defaultView: 'agendaWeek',
-                editable: false,
-                columnFormat: {
-                    month: 'dddd',
-                    week: 'dddd',
-                    day: 'dddd'
-                },
-                timeFormat: {
-                    /* Don't display time in title in agenda view */
-                    agenda: ''
-                },
-                events: populateCalendar
+                    // var groupInAccordion = $('#accordion').children()[i];
+                    // var color = $(groupInAccordion).children("h3").css("background-color");
+
+                    addCourseToCalendar(result, "red");
+
+
+                }
             });
         }
     });
+}
 }
 
 function fetchUserSections() {
     window.userSections =
     [
-        {"Section" : 1, "Subsection" : 0},
-        {"Section" : 0, "Subsection" : 0},
-        {"Section" : 0, "Subsection" : 0},
-        {"Section" : 1, "Subsection" : 2},
-        {"Section" : 0, "Subsection" : 2}
+        {"num" : "15-210", "section" : 1, "subsection" : 0},
+        {"num" : "11-411", "section" : 0, "subsection" : 0},
+        {"num" : "05-391", "section" : 0, "subsection" : 0},
+        {"num" : "73-100", "section" : 1, "subsection" : 2},
+        {"num" : "70-311", "section" : 0, "subsection" : 2}
     ];
 }
 
 /**** FullCalendar ****/
 
-/* This is the main function that is called to populate FullCalendar */
-function populateCalendar(start, end, callback) {
-    var events = [];
+// /* This is the main function that is called to populate FullCalendar */
+// function populateCalendar(start, end, callback) {
+//     var events = [];
 
-    for (var i = 0; i < window.listedCourses.length; i++) {
-        var course = window.listedCourses[i];
-        var groupInAccordion = $('#accordion').children()[i];
-        var color = $(groupInAccordion).children("h3").css("background-color");
+//     for (var i = 0; i < window.listedCourses.length; i++) {
+//         var course = window.listedCourses[i];
+//         var groupInAccordion = $('#accordion').children()[i];
+//         var color = $(groupInAccordion).children("h3").css("background-color");
 
-        addCourseToCalendar(course, i, events, color);
-    }
+//         addCourseToCalendar(course, i, events, color);
+//     }
 
-    console.log(events.length + " events added");
-    callback(events);
-}
+//     console.log(events.length + " events added");
+//     callback(events);
+// }
 
 /* Adds a single course to FullCalendar */
-function addCourseToCalendar(course, idx, events, color) {
-    // var sem = parseInt(course.Semester);
+function addCourseToCalendar(course, color) {
+    // var sem = parseInt(course.semester);
     var sem = parseInt("122"); /* Override for debugging */
 
-    var sectionsToAdd = window.userSections[idx];
+    var sectionsToAdd = window.userSections[course.num];
+    // console.log(sectionsToAdd);
     var sectIdxToAdd;
     var subsectIdxToAdd;
 
@@ -148,28 +169,31 @@ function addCourseToCalendar(course, idx, events, color) {
         subsectIdxToAdd = 0;
     }
     else {
-        sectIdxToAdd = sectionsToAdd.Section;
-        subsectIdxToAdd = sectionsToAdd.Subsection;
+        sectIdxToAdd = sectionsToAdd.section;
+        subsectIdxToAdd = sectionsToAdd.subsection;
     }
 
     if (subsectIdxToAdd < 0)
         subsectIdxToAdd = 0;
 
-    var sectionsArr = course.Sections;
-    if (sectionsArr !== undefined) {
+    var sectionsArr = course.sections;
+    if (sectionsArr.length !== 0) {
         var section = sectionsArr[sectIdxToAdd];
-        addClassesToCalendar(section, events, course.Num, color, sem);
+        console.log(section);
+        addClassesToCalendar(section, course.num, color, sem);
     }
-    var subsectionsArr = section.Subsections;
-    if (subsectionsArr !== undefined) {
+    var subsectionsArr = section.subsections;
+    console.log(section);
+    if (subsectionsArr.length !== 0) {
         var subsection = subsectionsArr[subsectIdxToAdd];
-        addClassesToCalendar(subsection, events, course.Num, color, sem);
+        console.log(subsection);
+        addClassesToCalendar(subsection, course.num, color, sem);
     }
 }
 
 /* Adds all classes of a course to FullCalendar */
-function addClassesToCalendar(section, events, courseNum, color, sem) {
-    var classesArr = section.Classes;
+function addClassesToCalendar(section, courseNum, color, sem) {
+    var classesArr = section.classes;
 
     var year = 2000 + Math.floor(sem / 10);
     var encodedSem = sem % 10;
@@ -187,25 +211,27 @@ function addClassesToCalendar(section, events, courseNum, color, sem) {
 
     for (var i = 0; i < classesArr.length; i++) {
         var aClass = classesArr[i];
-        var date = getNearestDate(aClass.Day, semStartDate);
-        var sArr = processTimeStr(aClass.Start);
-        var eArr = processTimeStr(aClass.End);
+        var date = getNearestDate(aClass.day, semStartDate);
+        var sArr = processTimeStr(aClass.start);
+        var eArr = processTimeStr(aClass.end);
 
         var startDate = new Date(year, date.getMonth(), date.getDate(), sArr[0], sArr[1]);
         var endDate = new Date(year, date.getMonth(), date.getDate(), eArr[0], eArr[1]);
 
-        var courseNumName = courseNum + " (" + section.Num + ")";
+        var courseNumName = courseNum + " (" + section.num + ")";
 
         /* Logic in order to have recurring events */
         while (startDate <= semEndDate) {
-            events.push({
+            var newEvent = {
                 id: courseNumName,
-                title: courseNumName + "\n" + aClass.Loc,
+                title: courseNumName + "\n" + aClass.loc,
                 color: color,
                 start: new Date(startDate.valueOf()),
                 end: new Date(endDate.valueOf()),
                 allDay: false
-            });
+            };
+
+            $('#calview').fullCalendar('renderEvent', newEvent);
 
             /* Push forward by one week */
             startDate.setDate(startDate.getDate() + 7);
@@ -226,7 +252,8 @@ function searchForCourseInCourseBrowser() {
 
     /* Query our server */
     performAjaxRequest({
-        url: "../testdata/dummy2.json",
+        // url: "../testdata/dummy2.json",
+        url: "http://isaacl.net/projects/schedulecmu/dummy.json",
         success: function(result, status) {
             window.mostRecentSearchResults = result;
 
@@ -240,8 +267,8 @@ function searchForCourseInCourseBrowser() {
 function addToCourseBrowser(course) {
     var row = $('<div>').addClass("courseBrowserRow");
     row.attr("onClick", "showInfoFromBrowser(this)");
-    row.append($('<h1>').text(course.Num));
-    row.append($('<h2>').text(course.Name));
+    row.append($('<h1>').text(course.num));
+    row.append($('<h2>').text(course.name));
     row.append($('<h3>').text(makeUnitsStr(course.Units)));
     row.append($('<img>').attr({
         "src" : "../images/plus.png",
@@ -297,10 +324,6 @@ function processEventForm() {
 
 /* Perform form data validation */
 function validateEventForm(res) {
-    function isNumber(n) {
-      return !isNaN(parseFloat(n)) && isFinite(n);
-    }
-
     var toChange = [];
 
     if (isNumber(parseInt(res.courseNum)) === false) {
@@ -363,29 +386,53 @@ function shareTwitter() {
  */
 function requestAndAddCourse() {
     var inputStr = $("#addCourseBox").val();
+    $.trim(inputStr);
 
-    // var urlReq = "blablabla/api?course=" + inputStr;
-    var urlReq = "../testdata/dummy2.json";
+    /* Only if query is in the form "15-251" or "15251" */
+    if (isNumberString(inputStr)) {
+        var urlReq;
+        var dept;
+        var num;
+
+        if (inputStr.charAt(2) === "-") {
+            dept = inputStr.substring(0, 2);
+            num = inputStr.substring(3);
+        }
+        else {
+            dept = inputStr.substring(0, 2);
+            num = inputStr.substring(2);
+        }
+
+        urlReq = "http://schedulecmu.aws.af.cm/api/courses?number=" + dept + "-" + num;
+    }
+    /* Else if it's "Great theoretical Ideas" */
+    else {
+
+    }
+    
+    // var urlReq = "../testdata/dummy2.json";
 
     /* Query database for 'inputStr' */
     performAjaxRequest({
         url : urlReq,
         success : function(result, status) {
-            var course;
+            console.log(urlReq);
+            console.log(result);
+            // var course;
 
-            /* Returns a Course object */
-            for (var i = 0; i < result.length; i++) {
-                if (result[i].Num === inputStr) {
-                    course = result[i];
+            // /* Returns a Course object */
+            // for (var i = 0; i < result.length; i++) {
+            //     if (result[i].num === inputStr) {
+            //         course = result[i];
 
-                    /* Add the new course to the global window.listedCourses */
-                    window.listedCourses.push(course);
+            //         /* Add the new course to the global window.listedCourses */
+            //         window.listedCourses.push(course);
 
-                    addCourse(course);
+            //         addCourse(course);
 
-                    return;
-                }
-            }
+            //         return;
+            //     }
+            // }
 
             console.log("Course not found");
         }
@@ -393,8 +440,8 @@ function requestAndAddCourse() {
 }
 
 function addCourse(course) {
-    var courseNum = course.Num;
-    var courseName = course.Name;
+    var courseNum = course.num;
+    var courseName = course.name;
     var courseUnits = course.Units;
 
     var accordion = $("#accordion");
@@ -459,7 +506,7 @@ function insertCourseIntoTable(course, table, fullDetails) {
     table.append(hdrRow);
 
     /* Extract data from Course object, append into tr's and td's */
-    var sectionsArr = course.Sections;
+    var sectionsArr = course.sections;
     if (sectionsArr !== undefined) {
         for (var i = 0; i < sectionsArr.length; i++) {
             var section = sectionsArr[i];
@@ -468,7 +515,7 @@ function insertCourseIntoTable(course, table, fullDetails) {
             processClasses(section, table, fullDetails, i);
 
             /* Now take care of the subsections (recitations) */
-            var subsectionsArr = section.Subsections;
+            var subsectionsArr = section.subsections;
             if (subsectionsArr !== undefined) {
                 for (j = 0; j < subsectionsArr.length; j++) {
                     var subsection = subsectionsArr[j];
@@ -486,7 +533,7 @@ function insertCourseIntoTable(course, table, fullDetails) {
  * This function appends to the DOM in-place.
  */
 function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
-    var classesArr = section.Classes;
+    var classesArr = section.classes;
 
     if (areSameTime(classesArr) === true) {
         /* If all classes in this section start at the same time,
@@ -495,12 +542,12 @@ function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
         var row = $("<tr>");
 
         /* Append the section number */
-        row.append(newCol(section.Num));
+        row.append(newCol(section.num));
         
         var daysStr = "";
         for (var i = 0; i < classesArr.length; i++) {
             /* Concat into a single string like "MWF" */
-            daysStr += classesArr[i].Day;
+            daysStr += classesArr[i].day;
         }
 
         /* Done concatenating, so append the day(s) */
@@ -510,13 +557,13 @@ function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
          * time, use index 0.
          */
         var theClass = classesArr[0];
-        var startTime = theClass.Start;
-        var endTime = theClass.End;
+        var startTime = theClass.start;
+        var endTime = theClass.end;
         row.append(newCol(makeTimeStr(startTime, endTime)));
 
         if (fullDetails === true) {
-            row.append(newCol(section.Instructor));
-            row.append(newCol(theClass.Loc));
+            row.append(newCol(section.instructor));
+            row.append(newCol(theClass.loc));
         }
 
         /* Add metadata for the section indexes */
@@ -538,24 +585,24 @@ function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
 
             /* Append section num if first row, a space otherwise */
             if (i === 0) {
-                row.append(newCol(section.Num));
+                row.append(newCol(section.num));
             }
             else {
                 row.append(newCol("&nbsp;"));
             }
 
             /* Append the day */
-            row.append(newCol(classesArr[i].Day));
+            row.append(newCol(classesArr[i].day));
 
             /* Append the time */
             var theClass = classesArr[i];
-            var startTime = theClass.Start;
-            var endTime = theClass.End;
+            var startTime = theClass.start;
+            var endTime = theClass.end;
             row.append(newCol(makeTimeStr(startTime, endTime)));
 
             if (fullDetails === true) {
-                row.append(newCol(section.Instructor));
-                row.append(newCol(theClass.Loc));
+                row.append(newCol(section.instructor));
+                row.append(newCol(theClass.loc));
             }
 
             /* Add metadata for the section indexes */
@@ -655,8 +702,8 @@ function showInCourseInfoBrowser(course) {
     }
 
     var header = $("<div>").attr("id", "courseInfoHeader");
-    var headerNum = $("<h2>").text(course.Num);
-    var headerName = $("<h3>").text(course.Name);
+    var headerNum = $("<h2>").text(course.num);
+    var headerName = $("<h3>").text(course.name);
     var headerUnits = $("<h4>").text(makeUnitsStr(course.Units));
 
     header.append(headerNum);
@@ -805,11 +852,20 @@ function areSameTime(classesArr) {
     for (var i = 0; i < classesArr.length - 1; i++) {
         var thisClass = classesArr[i];
         var nextClass = classesArr[i+1];
-        if (thisClass.Start !== nextClass.Start ||
-            thisClass.End !== nextClass.End) {
+        if (thisClass.start !== nextClass.start ||
+            thisClass.end !== nextClass.end) {
             return false;
         }
     }
 
     return true;
+}
+
+/* Just as it sounds */
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function isNumberString(str) {
+    return JSON.stringify(parseInt(str)) == str;
 }
