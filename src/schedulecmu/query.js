@@ -57,7 +57,6 @@ module.exports = function (app, Course) {
   });
 
   app.get('/api/courses/:course/sections/:section', function(req, res) {
-    //TODO what if courses isn't 10 characters?
     var course = req.params.course;
     var section = req.params.section.replace("-"," ");
     console.log(section);
@@ -85,4 +84,21 @@ module.exports = function (app, Course) {
       }
     });
   });
+
+
+  //returns the entire events array associated with an event
+  app.get('/api/courses/:course/events', function(req, res) {
+	  var course = req.params.course;
+	  console.log(course);
+	  Course.findById(course, function(err, course) {
+		  if (err) {
+		      console.log(err);
+		      res.send(404);
+		  } else {
+		      res.send(course.course_events);
+		  }
+	      });
+      });
+
+
 }
