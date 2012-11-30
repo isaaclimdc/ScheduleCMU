@@ -38,9 +38,9 @@ $(document).ready(function() {
         editable: false,
         lazyFetching: true,
         columnFormat: {
-            month: 'dddd',
-            week: 'dddd',
-            day: 'dddd'
+            month: 'ddd',
+            week: 'ddd',
+            day: 'ddd'
         },
         timeFormat: {
             /* Don't display time in title in agenda view */

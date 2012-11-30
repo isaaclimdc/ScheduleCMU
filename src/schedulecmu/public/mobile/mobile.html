@@ -170,11 +170,54 @@
 				<label for="eventFormAndrew">Your Andrew ID</label>
 				<input type="text" id="eventFormAndrew" placeholder="acarnegie"</input>
 			</div>
-
-			<div data-role="button"><a data-transition="slideup" href="#listview">Submit</a></div>
+			<div data-role="button" data-inline="true"><a data-transition="slideup" href="#listview">Cancel</a></div>
+			<div data-role="button" data-inline="true"><a data-transition="slideup" href="#listview">Submit</a></div>
 		</form>
 	</div>
+</div>
+
+<div data-role="page" data-title="ScheduleCMU" id="eventlist">
+	<!--HEADER-->
+	<div data-role="header" data-position="fixed">
+	  <fieldset id="setViewList" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+	     	<input type="radio" name="radio-choice-2" id="radio-choice-21" value="listview" checked="checked" />
+	     	<label for="radio-choice-21">List</label>
+	     	<input type="radio" name="radio-choice-2" id="radio-choice-22" value="gridview"  />
+	     	<label for="radio-choice-22">Grid</label>
+	  </fieldset>
+	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
+	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+	    <a href="#" data-role="button" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
+	    <a href="#eventPop" data-transition="slidedown" data-role="button" data-iconpos="notext" data-icon="myapp-cal">right 2</a>
+	    <a href="#socialPop" data-rel="popup" data-position-to="window" data-transition="slidedown" data-role="button" data-iconpos="notext" data-icon="myapp-share">right 2</a>
+	  </div>
 	</div>
+
+	<div data-role="content">
+		<input type="text" name="addCourse" id="addCourseBox" placeholder="Add New Course" />
+		<div id="accordion" data-role="collapsible-set">
+			<div data-role="collapsible" data-content-theme="a" data-collapsed="false">
+				<h3>15-237</h3>
+				<p>I'm the collapsible set content for section 1.</p>
+			</div>
+			<div data-role="collapsible" data-content-theme="a">
+				<h3>73-100</h3>
+				<p>I'm the collapsible set content for section 2.</p>
+			</div>		
+		</div>
+	</div>
+
+	<div data-role="popup" id="socialPop" class="ui-content">
+		<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+		<h2 style="padding-bottom: 15px;">Share</h2>
+		<ul data-role="listview">
+			<li onclick="exportGoogleCal();"><img src="../images/google.png"/><h3>Export to Google Calendar</h3></li>
+			<li onclick="exportAppleCal();"><img src="../images/applecal.png"/><h3>Download for Apple Calendar</h3></li>
+			<li onclick="shareFacebook();"><img src="../images/fblogo.png"/><h3>Share on Facebook</h3></li>
+			<li onclick="shareTwitter();"><img src="../images/twitterlogo.png"/><h3>Share on Twitter</h3></li>
+		</ul>
+	</div>
+</div>
 
 </body>
 </html>
