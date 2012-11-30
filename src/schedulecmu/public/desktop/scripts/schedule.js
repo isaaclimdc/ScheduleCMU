@@ -1,8 +1,20 @@
+/* Set up globals */
+
+/* Sets this global flag to whether the current browser is a
+ * mobile browser or not, so that we can case on it if necessary.
+ */
+window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+
+/* Base URL for the API */
+window.baseURL = "http://schedulecmu.aws.af.cm/api/";
+
+/* Initialization of arrays */
+window.userSections = [];
+window.listedCourses = [];
+window.events = [];
+
+
 $(document).ready(function() {
-    /* Sets this global flag to whether the current browser is a
-     * mobile browser or not, so that we can case on it if necessary.
-     */
-    window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 
     /* Setup for DESKTOP client */
     if (window.isMobile === false) {
@@ -31,11 +43,6 @@ $(document).ready(function() {
             console.log("CAN'T GET THIS TO WORK!!");
             e.stopPropagation();
         });
-
-        /* Initialization of arrays */
-        window.userSections = [];
-        window.listedCourses = [];
-        window.events = []
 
         /* Only set up FullCalendar when all courses have been parsed. */
         $("#calview").fullCalendar({
@@ -101,7 +108,7 @@ function performAjaxRequest(opts) {
     }
 
     $.ajax({
-        url: opts.url,
+        url: window.baseURL + opts.url,
         success: function(result, status) {
             /* Always log the request status */
             console.log(status);
@@ -148,7 +155,7 @@ function fetchUserSchedule() {
     else
         fetchCourseData(true);
 
-    /* Uncomment once this API is ready */
+    /* Uncomment below and delete above once this API is ready */
     // performAjaxRequest({
     //     url : "",
     //     success : function(result, status) {
@@ -184,7 +191,7 @@ function fetchCourseData(cached) {
         for (var i = 0; i < window.userSections.length; i++) {
 
             performAjaxRequest({
-                url: "http://schedulecmu.aws.af.cm/api/courses/" + window.userSections[i].id,
+                url: "courses/" + window.userSections[i].id,
                 success: function(result, status) {
                     var course = result;
 
@@ -305,7 +312,7 @@ function addClassesToCalendar(section, course, color, sem) {
 }
 
 /*** CourseBrowser ***/
-if(window.isMobile == false) {
+if (window.isMobile === false) {
     $("#browseLink").fancybox({
         "scrolling" : "no",
         "titleShow" : false
@@ -352,7 +359,7 @@ function addToAccordionFromBrowser(img) {
 
 /*** EventBrowser ***/
 
-if(window.isMobile == false ) {
+if (window.isMobile === false ) {
     $("#eventsLink").fancybox({
         "scrolling" : "no",
         "titleShow" : false,
@@ -424,7 +431,7 @@ function validateEventForm(res) {
 
 /**** ShareView ****/
 
-if(window.isMobile == false ) {
+if (window.isMobile === false ) {
     $("#shareLink").fancybox({
         "scrolling" : "no",
         "titleShow" : false,
@@ -471,7 +478,7 @@ function requestAndAddCourse() {
             num = inputStr.substring(2);
         }
 
-        urlReq = "http://schedulecmu.aws.af.cm/api/courses?number=" + dept + "-" + num;
+        urlReq = "courses?number=" + dept + "-" + num;
     }
     /* Else if it's "Great theoretical Ideas" */
     else {
