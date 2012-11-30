@@ -1,4 +1,4 @@
-module.exports = function (app, Course) {
+ module.exports = function (app, Course) {
   app.get('/api/courses', function(req, res) {
     var query = Course.find({});
     if (req.query.dept) {
@@ -8,7 +8,9 @@ module.exports = function (app, Course) {
 
     }
     if (req.query.number) {
-      query = query.where('num', req.query.number);  
+	if(req.query.number.length == 5)
+	    req.query.number = S.substring(0,2) + '-' + S.substring(2); 
+	query = query.where('num', req.query.number);  
     }
     if (req.query.semester) {
       query = query.where('semester', parseInt(req.query.semester));
