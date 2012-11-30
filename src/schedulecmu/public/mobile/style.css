@@ -82,10 +82,3 @@ body {
     margin: 0;
     padding: 0;
 }
-
-#socialPop ul li{
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    height: 50px;
-}

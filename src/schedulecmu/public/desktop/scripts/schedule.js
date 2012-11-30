@@ -59,7 +59,27 @@ $(document).ready(function() {
 
     /* Setup for MOBILE client */
     else {
-
+        var docH = $(window).height() - 40;
+        $('#calview').fullCalendar({
+            theme: false,
+            header: false,
+            weekends: false,
+            allDaySlot: false,
+            minTime: 8,
+            contentHeight: docH,
+            defaultView: 'agendaWeek',
+            editable: false,
+            lazyFetching: true,
+            columnFormat: {
+                month: 'ddd',
+                week: 'ddd',
+                day: 'ddd'
+            },
+            timeFormat: {
+                /* Don't display time in title in agenda view */
+                agenda: ''
+            }
+        });
     }
 
     /* Initialization of arrays */
@@ -82,7 +102,9 @@ $(document).ready(function() {
  * opts: { url: string , success: fn, error (optional) : fn }
  */
 function performAjaxRequest(opts) {
-    startSpinner();
+    if(window.isMobile == false) {
+        startSpinner();
+    }
 
     $.ajax({
         url: opts.url,
@@ -93,7 +115,9 @@ function performAjaxRequest(opts) {
             /* Perform user callback */
             opts.success(result, status);
 
-            stopSpinner();
+            if(window.isMobile == false) {
+                 stopSpinner();
+            }
         },
         error: function(xhr, status, error) {
             if (opts.error !== undefined)
@@ -101,7 +125,9 @@ function performAjaxRequest(opts) {
             else
                 console.log("Error: " + status + " with HTTP error: " + error);
             
-            stopSpinner();
+            if(window.isMobile == false) {
+                 stopSpinner();
+            }
         },
         statusCode: {
             200: function() {  },
@@ -262,11 +288,12 @@ function addClassesToCalendar(section, events, courseNum, color, sem) {
 }
 
 /*** CourseBrowser ***/
-
-$("#browseLink").fancybox({
-    "scrolling" : "no",
-    "titleShow" : false
-});
+if(window.isMobile == false) {
+    $("#browseLink").fancybox({
+        "scrolling" : "no",
+        "titleShow" : false
+    });
+}
 
 function searchForCourseInCourseBrowser() {
     var searchStr = $("#courseBrowserForm input").val();
@@ -309,10 +336,12 @@ function addToAccordion(img) {
 
 /*** EventBrowser ***/
 
-$("#eventsLink").fancybox({
-    "scrolling" : "no",
-    "titleShow" : false,
-});
+if(window.isMobile == false ) {
+    $("#eventsLink").fancybox({
+        "scrolling" : "no",
+        "titleShow" : false,
+    });
+}
 
 function processEventForm() {
     var courseNum = $("#eventFormCourseNum").val();
@@ -379,10 +408,12 @@ function validateEventForm(res) {
 
 /**** ShareView ****/
 
-$("#shareLink").fancybox({
-    "scrolling" : "no",
-    "titleShow" : false,
-});
+if(window.isMobile == false ) {
+    $("#shareLink").fancybox({
+        "scrolling" : "no",
+        "titleShow" : false,
+    });
+}
 
 function exportGoogleCal() {
     alert("Exporting to Google Calendar...");
@@ -676,10 +707,12 @@ function deleteCourse(p) {
 
 /**** CourseInfo ****/
 
-$("#courseInfoLink").fancybox({
-    "scrolling" : "no",
-    "titleShow" : false,
-});
+if(window.isMobile == false ) {
+    $("#courseInfoLink").fancybox({
+        "scrolling" : "no",
+        "titleShow" : false,
+    });
+}
 
 function showInfoFromAccordion(infoLink) {
     /* Get to enclosing group (3 levels up) */
