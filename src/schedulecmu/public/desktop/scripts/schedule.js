@@ -6,7 +6,7 @@
 window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 
 /* Base URL for the API */
-window.baseURL = "http://schedulecmu.aws.af.cm/api/";
+window.baseURL = "http://schedulecmu.aws.af.cm/api";
 
 /* Initialization of arrays */
 window.userSections = [];
@@ -191,7 +191,7 @@ function fetchCourseData(cached) {
         for (var i = 0; i < window.userSections.length; i++) {
 
             performAjaxRequest({
-                url: "courses/" + window.userSections[i].id,
+                url: "/courses/" + window.userSections[i].id,
                 success: function(result, status) {
                     var course = result;
 
@@ -478,7 +478,7 @@ function requestAndAddCourse() {
             num = inputStr.substring(2);
         }
 
-        urlReq = "courses?number=" + dept + "-" + num;
+        urlReq = "/courses?number=" + dept + "-" + num;
     }
     /* Else if it's "Great theoretical Ideas" */
     else {
