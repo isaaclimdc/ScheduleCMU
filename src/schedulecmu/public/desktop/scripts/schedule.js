@@ -103,9 +103,8 @@ $(document).ready(function() {
  * opts: { url: string , success: fn, error (optional) : fn }
  */
 function performAjaxRequest(opts) {
-    if(window.isMobile == false) {
+    if (window.isMobile === false)
         startSpinner();
-    }
 
     $.ajax({
         url: window.baseURL + opts.url,
@@ -114,11 +113,12 @@ function performAjaxRequest(opts) {
             console.log(status);
 
             /* Perform user callback */
+            if (typeof(result) !== "object")
+                result = $.parseJSON(result);
             opts.success(result, status);
 
-            if(window.isMobile == false) {
+            if (window.isMobile === false)
                  stopSpinner();
-            }
         },
         error: function(xhr, status, error) {
             if (opts.error !== undefined)
@@ -126,9 +126,8 @@ function performAjaxRequest(opts) {
             else
                 console.log("Error: " + status + " with HTTP error: " + error);
             
-            if(window.isMobile == false) {
+            if (window.isMobile === false)
                  stopSpinner();
-            }
         },
         statusCode: {
             200: function() {  },
@@ -146,14 +145,16 @@ function fetchUserSchedule() {
         {"id" : "50b64448050c1f770a002117", "section" : 0, "subsection" : 0},
         {"id" : "50b64448050c1f770a001d40", "section" : 0, "subsection" : 0},
         {"id" : "50b64448050c1f770a0012e9", "section" : 1, "subsection" : 4},
-        {"id" : "50b64447050c1f770a0004e4", "section" : 2, "subsection" : 0},
-        {"id" : "50b64448050c1f770a000b25", "section" : 0, "subsection" : 5}
+        {"id" : "50b64447050c1f770a0004e4", "section" : 2, "subsection" : 0}
     ];
 
-    if (localStorage["ScheduleCMUUserCourses"] === undefined)
-        fetchCourseData(false);
-    else
-        fetchCourseData(true);
+    fetchCourseData();
+
+    /* Removed caching feature for now, buggy! */
+    // if (localStorage["org.schedulecmu.usercourses"] === undefined)
+        // fetchCourseData(false);
+    // else
+        // fetchCourseData(true);
 
     /* Uncomment below and delete above once this API is ready */
     // performAjaxRequest({
@@ -161,7 +162,7 @@ function fetchUserSchedule() {
     //     success : function(result, status) {
     //         window.userSections = result;
 
-    //         if (localStorage["ScheduleCMUUserCourses"] === undefined)
+    //         if (localStorage["org.schedulecmu.usercourses"] === undefined)
     //             fetchCourseData(false);
     //         else
     //             fetchCourseData(true);
@@ -169,24 +170,24 @@ function fetchUserSchedule() {
     // });
 }
 
-function fetchCourseData(cached) {
-    if (cached === true) {
-        setTimeout(function() {
-            console.log("Cached! Just parsing now...");
-            getCoursesFromLocalStorage();
+function fetchCourseData() {
+    // if (cached === true) {
+    //     setTimeout(function() {
+    //         console.log("Cached! Just parsing now...");
+    //         getCoursesFromLocalStorage();
 
-            for (var i = 0; i < window.listedCourses.length; i++) {
-                var course = window.listedCourses[i];
+    //         for (var i = 0; i < window.listedCourses.length; i++) {
+    //             var course = window.listedCourses[i];
                 
-                if (window.isMobile === false)
-                    addCourseToAccordion(course);
+    //             if (window.isMobile === false)
+    //                 addCourseToAccordion(course);
 
-                addCourseToCalendar(course);
-            }
-        }, 100);
-    }
-    else {
-        console.log("No cached records found. Fetching from server...");
+    //             addCourseToCalendar(course);
+    //         }
+    //     }, 100);
+    // }
+    // else {
+        // console.log("No cached records found. Fetching from server...");
 
         for (var i = 0; i < window.userSections.length; i++) {
 
@@ -195,9 +196,7 @@ function fetchCourseData(cached) {
                 success: function(result, status) {
                     var course = result;
 
-                    window.listedCourses.push(course);
-
-                    writeCoursesToLocalStorage();
+                    writeCoursesToLocalStorage(course);
 
                     if (window.isMobile === false)
                         addCourseToAccordion(course);
@@ -206,7 +205,7 @@ function fetchCourseData(cached) {
                 }
             });
         }
-    }
+    // }
 }
 
 /**** FullCalendar ****/
@@ -232,6 +231,7 @@ function addCourseToCalendar(course) {
             else if (i == 3) color = "#FFF257";
             else if (i == 4) color = "#C891FF";
             else if (i == 5) color = "#FFBE69";
+            else color = "#D96C6E";
         }
     }
 
@@ -352,7 +352,7 @@ function addToCourseBrowser(course) {
 function addToAccordionFromBrowser(img) {
     var clickedIndex = $(img).parent().index();
     var course = window.mostRecentSearchResults[clickedIndex];
-    window.listedCourses.push(course);
+    writeCoursesToLocalStorage(course);
 
     addCourseToAccordion(course);
 }
@@ -460,47 +460,54 @@ function shareTwitter() {
  * our database and parses the response into the accordion and calview
  */
 function requestAndAddCourse() {
+    /* Remove all whitespace from query string */
     var inputStr = $("#addCourseBox").val();
-    $.trim(inputStr);
+    inputStr = inputStr.replace(/\s/g,'');
 
-    /* Only if query is in the form "15-251" or "15251" */
-    if (isNumberString(inputStr)) {
-        var urlReq;
-        var dept;
-        var num;
+    /* Only works if query is in the form "15-251" or "15251" */
+    var urlReq;
+    var dept;
+    var num;
 
-        if (inputStr.charAt(2) === "-") {
-            dept = inputStr.substring(0, 2);
-            num = inputStr.substring(3);
-        }
-        else {
-            dept = inputStr.substring(0, 2);
-            num = inputStr.substring(2);
-        }
-
-        urlReq = "/courses?number=" + dept + "-" + num;
+    if (inputStr.charAt(2) === "-") {
+        dept = inputStr.substring(0, 2);
+        num = inputStr.substring(3);
     }
-    /* Else if it's "Great theoretical Ideas" */
     else {
-
+        dept = inputStr.substring(0, 2);
+        num = inputStr.substring(2);
     }
+
+    urlReq = "/courses?number=" + dept + "-" + num;
 
     /* Query database for 'inputStr' */
     performAjaxRequest({
         url : urlReq,
         success : function(result, status) {
-            console.log(urlReq);
-            console.log(result);
+            var addCourseBox = $('#addCourseBox').val("").attr("placeholder", "Searching...");
 
-            if (result = null)
-                console.log("Course not found");
+            if (result.length === 0) {
+                addCourseBox.attr("placeholder", "Course not found!");
+                return;
+            }
 
-            var course = result;
+            var courseID = result[0]._id;
 
-            /* Add the new course to the global window.listedCourses */
-            window.listedCourses.push(course);
+            performAjaxRequest({
+                url : "/courses/" + courseID,
+                success : function(result, status) {
+                    var course = result;
 
-            addCourseToAccordion(course);
+                    addCourseBox.attr("placeholder", course.num + " added!");
+
+                    writeCoursesToLocalStorage(course);
+
+                    if (window.isMobile === false)
+                        addCourseToAccordion(course);
+
+                    addCourseToCalendar(course);
+                }
+            });   
         }
     });
 }
@@ -794,7 +801,7 @@ function showInCourseInfoBrowser(course) {
     var header = $("<div>").attr("id", "courseInfoHeader");
     var headerNum = $("<h2>").text(course.num);
     var headerName = $("<h3>").text(course.name);
-    var headerUnits = $("<h4>").text(makeUnitsStr(course.Units));
+    var headerUnits = $("<h4>").text(makeUnitsStr(course.units));
 
     header.append(headerNum);
     header.append(headerName);
@@ -848,10 +855,6 @@ function showInCourseInfoBrowser(course) {
 /**** Helper functions ****/
 
 function startSpinner() {
-    /* Don't render spinner if we're on a mobile device */
-    if (window.isMobile === true)
-        return;
-
     /* Spin.js */
     var opts = {
       lines: 15, // The number of lines to draw
@@ -880,9 +883,6 @@ function startSpinner() {
 }
 
 function stopSpinner() {
-    if (window.isMobile === true)
-        return;
-
     if (window.spinner !== undefined)
     window.spinner.stop();
     window.spinner = undefined;
@@ -969,14 +969,11 @@ function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function isNumberString(str) {
-    return JSON.stringify(parseInt(str)) == str;
-}
-
-function writeCoursesToLocalStorage() {
-    localStorage["ScheduleCMUUserCourses"] = JSON.stringify(window.listedCourses);
+function writeCoursesToLocalStorage(course) {
+    window.listedCourses.push(course);
+    // localStorage["org.schedulecmu.usercourses"] = JSON.stringify(window.listedCourses);
 }
 
 function getCoursesFromLocalStorage() {
-    window.listedCourses = JSON.parse(localStorage["ScheduleCMUUserCourses"]);
+    // window.listedCourses = JSON.parse(localStorage["org.schedulecmu.usercourses"]);
 }
