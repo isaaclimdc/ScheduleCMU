@@ -97,8 +97,6 @@ module.exports = function (app, Course) {
 		  } else {
 		      res.send(course.course_events);
 		  }
-	      });
-      });
-
-
+	  });
+  });
 }
