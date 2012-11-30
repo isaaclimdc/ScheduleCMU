@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
 	<meta name="description" content="A brand new way to schedule classes at CMU, wherever you are.">
 	<title>ScheduleCMU</title> 
+	<link rel="stylesheet" href="themes/jquery.mobile-1.2.0.min.css"/>
 	<link rel="stylesheet" href="themes/scheduleCMU.min.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
@@ -88,6 +89,14 @@
 	  </div>
 	</div>
 	<div id="calview" data-role="content"></div>
+	<div data-role="popup" id="popupMenu">
+		<ul data-role="listview" data-inset="true" style="min-width:210px;">
+			<li data-role="divider">Change View</li>
+			<li><a href="#listview">Courses</a></li>
+			<li><a href="#gridview">Calendar</a></li>
+			<li><a href="#eventlist">Events</a></li>
+		</ul>
+	</div>
 </div>
 
 <!-- Event List Page -->

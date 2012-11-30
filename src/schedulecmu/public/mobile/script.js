@@ -5,14 +5,4 @@ $(document).ready(function() {
 		$('#loginGrid').children('.ui-block-b').removeClass('ui-block-b');
 		$('#loginGrid').removeClass('ui-grid-b');
 	}
-
-    $("input[type='radio']").click(function () {
-        var selection=$(this).val();
-        var newselection = "#" + selection;
-        $.mobile.changePage( newselection, {
-            transition: "flip",
-            reverse: true,
-            changeHash: true
-        }); 
-    });
 });
