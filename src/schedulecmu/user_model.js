@@ -15,7 +15,7 @@ module.exports = function (mongoose, db) {
   });
 
   var BlockSchema = new Schema({
-    course_id: {type: String, match: /^[0-9]{1,2}-[0-9]{3}$/}, 
+    course_id: {type: String}, 
     section_id: {type: String},
     subsection_id: {type: String, default: null}
   });

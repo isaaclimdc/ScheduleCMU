@@ -101,39 +101,29 @@ module.exports = function (app, Course) {
   });
 
 
-  app.post('/api/events', function(req, res) {
+  app.post('/api/courses/:courseid/events', function(req, res) {
           var event = req.body;
           if(event.event_type === undefined)
-              res.send(405); //type unspecified                                                                                                             
-          if(event.title === undefined)
-              res.send(406); //name unspecified                                                                                                             
-          if(event.date_time === undefined)
-              res.send(407); //name unspecified                                                                                                             
-          if(event.course_number === undefined)
-              res.send(408); //name unspecified                                                                                                             
-          if(!event.course_number.match(/^[0-9]{1,2}-[0-9]{3}$/))
-	      res.send(409); //name is not in right format
+              res.send(405); //type unspecified
 
-	  if(event.course_id === undefined)
-	      res.send(410); //id unspecified
+          if(event.title === undefined)
+              res.send(406); //name unspecified
+ 
+          if(event.date_time === undefined)
+              res.send(407); //name unspecified                                                                                                            
+
+	  if(course_id === undefined)
+	      res.send(408); //id unspecified
 
 	  if(event.loc === undefined)
 	      event.loc = null;
 
-          var current_course;
 	  Course.findById(event.course_id, function(err, course) {
                   if (err) {
                       console.log(err);
                       res.send(404);
                   } else {
-		      new_event = {
-			  event_type : event.event_type,
-			  title : event.title,
-			  loc: event.loc,
-			  date_time : event.date_time,
-			  recur : null
-		      }
-                      course = course.course_events.push(new_event);
+                      course = course.course_events.push(event);
 		      course.save();
 		      res.send(course);
                   }
