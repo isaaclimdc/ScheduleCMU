@@ -464,21 +464,8 @@ function requestAndAddCourse() {
     var inputStr = $("#addCourseBox").val();
     inputStr = inputStr.replace(/\s/g,'');
 
-    /* Only works if query is in the form "15-251" or "15251" */
-    var urlReq;
-    var dept;
-    var num;
-
-    if (inputStr.charAt(2) === "-") {
-        dept = inputStr.substring(0, 2);
-        num = inputStr.substring(3);
-    }
-    else {
-        dept = inputStr.substring(0, 2);
-        num = inputStr.substring(2);
-    }
-
-    urlReq = "/courses?number=" + dept + "-" + num;
+    /* Can be "15251" or "15-251". Parsed server-side */
+    var urlReq = "/courses?number=" + inputStr;
 
     /* Query database for 'inputStr' */
     performAjaxRequest({
