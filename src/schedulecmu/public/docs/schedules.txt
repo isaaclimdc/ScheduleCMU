@@ -1,0 +1,17 @@
+Important function calls in schedules.js
+--
+
+/* Populate the page with the user's courses */
+fetchUserSchedule()
+
+/* User presses enter in add course box */
+requestAndAddCourse()
+
+/* User clicks on row in the Accordion to change sections */
+rowSelected()
+
+/* User clicks on "delete" in the Accordion */
+deleteCourse()
+
+/* User clicks on "info" in the Accordion */
+showInfoFromAccordion()
