@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
 	<meta name="description" content="A brand new way to schedule classes at CMU, wherever you are.">
 	<title>ScheduleCMU</title> 
-	<link rel="stylesheet" href="themes/noBtnDiscs.min.css" />
+	<link rel="stylesheet" href="themes/scheduleCMU.min.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
@@ -43,12 +43,7 @@
 <div data-role="page" data-title="ScheduleCMU" id="listview">
 	<!--HEADER-->
 	<div data-role="header" data-position="fixed">
-	  <fieldset id="setViewList" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
-	     	<input type="radio" name="radio-choice-2" id="radio-choice-21" value="listview" checked="checked" />
-	     	<label for="radio-choice-21">List</label>
-	     	<input type="radio" name="radio-choice-2" id="radio-choice-22" value="gridview"  />
-	     	<label for="radio-choice-22">Grid</label>
-	  </fieldset>
+	  <a href="#popupMenu" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
@@ -70,17 +65,21 @@
 			</div>		
 		</div>
 	</div>
+
+	<div data-role="popup" id="popupMenu">
+		<ul data-role="listview" data-inset="true" style="min-width:210px;">
+			<li data-role="divider">Change View</li>
+			<li><a href="#listview">Courses</a></li>
+			<li><a href="#gridview">Calendar</a></li>
+			<li><a href="#eventlist">Events</a></li>
+		</ul>
+	</div>
 </div>
 
 <!-- Calendar Grid Page -->
 <div data-role="page" data-title="ScheduleCMU" id="gridview">
 	<div data-role="header" data-position="fixed">
-	  <fieldset id="setViewGrid" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
-	     	<input type="radio" name="radio-choice-2" id="radio-choice-21" value="listview" />
-	     	<label for="radio-choice-21">List</label>
-	     	<input type="radio" name="radio-choice-2" id="radio-choice-22" value="gridview" checked="checked" />
-	     	<label for="radio-choice-22">Grid</label>
-	  </fieldset>
+	  <a href="#popupMenu" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
@@ -95,12 +94,7 @@
 <div data-role="page" data-title="ScheduleCMU" id="eventlist">
 	<!--HEADER-->
 	<div data-role="header" data-position="fixed">
-	  <fieldset id="setViewList" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
-	     	<input type="radio" name="radio-choice-2" id="radio-choice-21" value="listview" checked="checked" />
-	     	<label for="radio-choice-21">List</label>
-	     	<input type="radio" name="radio-choice-2" id="radio-choice-22" value="gridview"  />
-	     	<label for="radio-choice-22">Grid</label>
-	  </fieldset>
+	  <a href="#popupMenu" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
@@ -121,6 +115,15 @@
 				<p>I'm the collapsible set content for section 2.</p>
 			</div>		
 		</div>
+	</div>
+
+	<div data-role="popup" id="popupMenu">
+		<ul data-role="listview" data-inset="true" style="min-width:210px;">
+			<li data-role="divider">Change View</li>
+			<li><a href="#listview">Courses</a></li>
+			<li><a href="#gridview">Calendar</a></li>
+			<li><a href="#eventlist">Events</a></li>
+		</ul>
 	</div>
 </div>
 
