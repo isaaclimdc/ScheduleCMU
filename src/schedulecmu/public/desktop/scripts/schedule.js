@@ -128,7 +128,7 @@ function performAjaxRequest(opts) {
         },
         error: function(xhr, status, error) {
             if (opts.error !== undefined)
-                opts.error(xhr, status, error);
+                opts.error(status, error);
             else
                 console.log("Error: " + status + " with HTTP error: " + error);
             

@@ -8,23 +8,16 @@ window.fbAsyncInit = function() {
         xfbml      : true  // parse XFBML
     });
 
-    // FB.getLoginStatus(function(response) {
-    //     if (response.status === 'connected') {
-    //         /* Connected! */
-    //         loginToScheduleCMU(response.authResponse);
-    //     }
-    //     else if (response.status === 'not_authorized') {
-    //         /* Not authorized */
-    //         console.log("Authorizing...");
-    //         login();
-    //     }
-    //     else {
-    //         /* Not logged in */
-    //         console.log("Authorizing...");
-    //         login();
-    //     }
-    // });
 };
+
+// Load the SDK Asynchronously
+(function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement('script'); js.id = id; js.async = true;
+    js.src = "http://connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+}(document));
 
 /* Facebook response object:
     {
@@ -60,67 +53,51 @@ function loginToScheduleCMU(fbAuthResponse) {
     var fbID = fbAuthResponse.userID;
     var accessToken = fbAuthResponse.accessToken;
 
-    performAjaxRequest({
-        url : "/users/" + fbID + "?auth_token=" + accessToken,
+    $.ajax({
+        url : "http://schedulecmu.aws.af.cm/api/users/" + fbID + "?auth_token=" + accessToken,
         success : function(result, status) {
             console.log(result);
-        }
-    });
-}
-
-// Load the SDK Asynchronously
-(function(d){
-    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement('script'); js.id = id; js.async = true;
-    js.src = "http://connect.facebook.net/en_US/all.js";
-    ref.parentNode.insertBefore(js, ref);
-}(document));
-
-
-/** Start copy (from schedule.js) **/
-/* Base URL for the API */
-window.baseURL = "http://schedulecmu.aws.af.cm/api";
-
-/* A convenient wrapper for $.ajax that automatically starts and stops
- * the spinner (spin.js), and does error checking. Requires an argument
- * opts: { url: string , success: fn, error (optional) : fn }
- */
-function performAjaxRequest(opts) {
-    if (window.isMobile === false)
-        startSpinner();
-
-    $.ajax({
-        url: (opts.customurl !== undefined) ? opts.customurl : window.baseURL + opts.url,
-        success: function(result, status) {
-            /* Always log the request status */
-            console.log(status);
-
-            /* Parse it if it's not a custom request */
-            if (opts.customurl === undefined) {
-                if (typeof(result) !== "object")
-                    result = $.parseJSON(result);
-            }
-
-            /* Perform user callback */
-            opts.success(result, status);
-
-            if (window.isMobile === false)
-                 stopSpinner();
         },
-        error: function(xhr, status, error) {
-            if (opts.error !== undefined)
-                opts.error(xhr, status, error);
-            else
-                console.log("Error: " + status + " with HTTP error: " + error);
-            
-            if (window.isMobile === false)
-                 stopSpinner();
+        error : function(xhr, status, error) {
+            console.log(error);
         },
         statusCode: {
             200: function() {  },
-            404: function() { console.log("PAGE NOT FOUND!"); }
+            404: function() {
+                console.log("User not found");
+                window.location("login.html#" + fbID);
+            }
         }
     });
 }
-/** End copy **/
+
+$(document).ready(function() {
+    $("#loginForm form").submit(function(e){
+        e.preventDefault();
+        createNewUser();
+    });
+});
+
+function createNewUser() {
+    var url = window.location.pathname;
+    console.log(url);
+    url.indexOf()
+
+
+    $.ajax({
+        type : "PUT",
+        url : "http://schedulecmu.aws.af.cm/api/users/" + fbID,
+        success : function(result, status) {
+            console.log(result);
+        },
+        error : function(xhr, status, error) {
+            console.log(error);
+        },
+        statusCode: {
+            200: function() {  },
+            404: function() {
+                console.log("User not found");
+            }
+        }
+    });
+}
