@@ -68,4 +68,44 @@ module.exports = function (mongoose, db) {
       }
     });
   }
+
+  UserSchema.methods.sendVerifyEmail = function(){
+      var nodemailer = require("nodemailer");
+
+      // create reusable transport method (opens pool of SMTP connections)
+      var smtpTransport = nodemailer.createTransport("SMTP",{
+	      service: "Gmail",
+	      auth: {
+		  user: "schedulecmu@gmail.com",
+		  pass: "$chedule"
+	      }
+	  });
+
+      // setup e-mail data with unicode symbols
+      var mailOptions = {
+	  from: "ScheduleCMU.org <admin@schedulecmu.org>", // sender address
+	  to: this.andrew + "@andrew.cmu.edu", // list of receivers
+	  subject: "Please verify your email address", // Subject line
+	  text: "Go to the following url to verify your email address \n " +
+                "http://schedulecmu.aws.af.cm/api/users?verify=" + this.verify_code +
+        	  "\n This is an auto-generated email. Please do not reply to this mail.",
+	  html: "<div> Click on the link below to verify you email address</div>" +
+	        + "<a href='http://schedulecmu.aws.af.cm/api/users?verify="
+	        + this.verify_code + "'>VERIFY</a>" +
+	        "<div> This is an auto-generated email. Please do not reply to this mail. </div>"
+      }
+
+      // send mail with defined transport object
+      smtpTransport.sendMail(mailOptions, function(error, response){
+	      if(error){
+		  console.log(error);
+	      }else{
+		  console.log("Message sent: " + response.message);
+	      }
+
+	      // if you don't want to use this transport object anymore, uncomment following line
+	      //smtpTransport.close(); // shut down the connection pool, no more messages
+	  });
+  }
+
 }
