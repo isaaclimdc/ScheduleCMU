@@ -365,6 +365,18 @@ li {
 .ui-accordion .group:nth-child(6) .ui-accordion-header {
     background-color: #FFBE69;
 }
+.ui-accordion .group:nth-child(7) .ui-accordion-header {
+    background-color: #FF9EC5;
+}
+.ui-accordion .group:nth-child(8) .ui-accordion-header {
+    background-color: #CFCFCF;
+}
+.ui-accordion .group:nth-child(9) .ui-accordion-header {
+    background-color: #69FF6B;
+}
+.ui-accordion .group:nth-child(10) .ui-accordion-header {
+    background-color: #8FFFFD;
+}
 
 .ui-accordion .ui-accordion-content {
     margin-top: -8px;
@@ -398,6 +410,18 @@ li {
 }
 .ui-accordion .group:nth-child(6) .contentHdr {
     background-color: #FFBE69;
+}
+.ui-accordion .group:nth-child(7) .contentHdr {
+    background-color: #FF9EC5;
+}
+.ui-accordion .group:nth-child(8) .contentHdr {
+    background-color: #CFCFCF;
+}
+.ui-accordion .group:nth-child(9) .contentHdr {
+    background-color: #69FF6B;
+}
+.ui-accordion .group:nth-child(10) .contentHdr {
+    background-color: #8FFFFD;
 }
 
 #accordion p {

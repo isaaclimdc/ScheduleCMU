@@ -174,7 +174,7 @@ function fetchCourseData() {
     // if (cached === true) {
     //     setTimeout(function() {
     //         console.log("Cached! Just parsing now...");
-    //         getCoursesFromLocalStorage();
+    //         getCoursesLocally();
 
     //         for (var i = 0; i < window.listedCourses.length; i++) {
     //             var course = window.listedCourses[i];
@@ -196,7 +196,7 @@ function fetchCourseData() {
                 success: function(result, status) {
                     var course = result;
 
-                    writeCoursesToLocalStorage(course);
+                    saveCourseLocally(course);
 
                     if (window.isMobile === false)
                         addCourseToAccordion(course);
@@ -231,6 +231,10 @@ function addCourseToCalendar(course) {
             else if (i == 3) color = "#FFF257";
             else if (i == 4) color = "#C891FF";
             else if (i == 5) color = "#FFBE69";
+            else if (i == 6) color = "#FF9EC5";
+            else if (i == 7) color = "#CFCFCF";
+            else if (i == 8) color = "#69FF6B";
+            else if (i == 9) color = "#8FFFFD";
             else color = "#D96C6E";
         }
     }
@@ -352,7 +356,7 @@ function addToCourseBrowser(course) {
 function addToAccordionFromBrowser(img) {
     var clickedIndex = $(img).parent().index();
     var course = window.mostRecentSearchResults[clickedIndex];
-    writeCoursesToLocalStorage(course);
+    saveCourseLocally(course);
 
     addCourseToAccordion(course);
 }
@@ -487,7 +491,12 @@ function requestAndAddCourse() {
 
                     addCourseBox.attr("placeholder", course.num + " added!");
 
-                    writeCoursesToLocalStorage(course);
+                    saveCourseLocally(course);
+                    window.userSections.push({
+                        "id" : course._id,
+                        "section" : 0,
+                        "subsection" : 0
+                    });
 
                     if (window.isMobile === false)
                         addCourseToAccordion(course);
@@ -686,9 +695,7 @@ function rowSelected(tr) {
     if (isNaN(subsectIdx))
         subsectIdx = -1;
 
-    console.log(window.userSections);
     var clickedIndex = row.parent().parent().parent().parent().index();
-    console.log(clickedIndex);
 
     var course = window.listedCourses[clickedIndex];
     for (var i = 0; i < window.userSections.length; i++) {
@@ -699,16 +706,17 @@ function rowSelected(tr) {
         }
     }
 
-    console.log(window.events);
-
     /* Re-render Events on FullCalendar */
-    $("#calview").fullCalendar("removeEvents",
+    $("#calview").fullCalendar("clientEvents",
         function(eventToRemove) {
-            return eventToRemove.id === course._id;
+            if (eventToRemove.id === course._id) {
+                window.events.removeObj(eventToRemove);
+            }
         });
 
+    $('#calview').fullCalendar('removeEventSource', window.events);
     addCourseToCalendar(course);
-    $('#calview').fullCalendar('refetchEvents');
+    $('#calview').fullCalendar('addEventSource', window.events);
 }
 
 /* Called when "delete" is clicked */
@@ -723,17 +731,24 @@ function deleteCourse(p) {
 
     var course = window.listedCourses[clickedIndex];
 
-    /* Re-render Events on FullCalendar */
-    $("#calview").fullCalendar("removeEvents",
-        function(eventToRemove) {
-            return eventToRemove.id === course._id;
-        });
-
     // Send updated course list to server
     window.listedCourses.splice(clickedIndex, 1);
-    window.userSections.splice(clickedIndex, 1);
 
-    writeCoursesToLocalStorage();
+    window.userSections = $.grep(window.userSections, function(elt, idx) {
+        if (elt.id === course._id) {
+            // i = idx;
+            return false;
+        }
+        return true;
+    });
+
+    $("#calview").fullCalendar("clientEvents",
+        function(eventToRemove) {
+            if (eventToRemove.id === course._id) {
+                window.events.removeObj(eventToRemove);
+            }
+        });
+
     /* POST HERE */
 }
 
@@ -956,11 +971,15 @@ function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-function writeCoursesToLocalStorage(course) {
+Array.prototype.removeObj = function(obj) {
+    this.splice(this.indexOf(obj), 1);
+}
+
+function saveCourseLocally(course) {
     window.listedCourses.push(course);
     // localStorage["org.schedulecmu.usercourses"] = JSON.stringify(window.listedCourses);
 }
 
-function getCoursesFromLocalStorage() {
+function getCoursesLocally() {
     // window.listedCourses = JSON.parse(localStorage["org.schedulecmu.usercourses"]);
 }
