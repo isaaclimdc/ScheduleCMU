@@ -185,10 +185,8 @@ function fetchCourseData() {
                 }
 
                 window.listedCourses.push(course);
-
-                if (window.isMobile === false)
-                    addCourseToAccordion(course);
-
+                
+                addCourseToAccordion(course);
                 addCourseToCalendar(course);
             }
         });
