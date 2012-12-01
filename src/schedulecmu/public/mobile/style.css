@@ -72,6 +72,11 @@ body {
 	margin: 20px auto 20px auto;
 }
 
+#socialPop img {
+    height: 100%;
+    width: auto !important;
+}
+
 #gridview {
     height: 100%;
 }

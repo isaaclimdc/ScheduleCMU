@@ -137,7 +137,7 @@
 </div>
 
 <!-- Browse Pop Up -->
-<div data-role="page" id="browsePop">
+<div data-role="page" data-overlay-theme="b" id="browsePop">
 	<div data-role="header"><h2>Browse Courses</h2></div>
 	<div data-role="content">
 		<!-- Add Content!!! -->
@@ -145,7 +145,7 @@
 </div>
 
 <!-- New Event Pop-Up -->
-<div data-role="page" id="eventPop">
+<div data-role="page" data-overlay-theme="b" id="eventPop">
 	<div data-role="header"><h2>New course event</h2></div>
 	<div data-role="content">
 		<form id="eventForm" onSubmit="processEventForm();">
@@ -204,14 +204,34 @@
 </div>
 
 <!-- Social Pop Up -->
-<div data-role="page" id="socialPop">
+<div data-role="page" data-overlay-theme="b" id="socialPop">
 	<div data-role="header"><h2>Share</h2></div>
 	<div data-role="content">
 		<ul data-role="listview">
-			<li onclick="exportGoogleCal();"><img src="../images/google.png"/><h3>Export to Google Calendar</h3></li>
-			<li onclick="downloadAppleCal();"><img src="../images/applecal.png"/><h3>Download for Apple Calendar</h3></li>
-			<li onclick="shareFacebook();"><img src="../images/fblogo.png"/><h3>Share on Facebook</h3></li>
-			<li onclick="shareTwitter();"><img src="../images/twitterlogo.png"/><h3>Share on Twitter</h3></li>
+			<li onclick="exportGoogleCal();">
+				<a href="">
+					<img src="../images/google.png"/>
+					<h3>Export to Google Calendar</h3>
+				</a>
+			</li>
+			<li onclick="downloadAppleCal();">
+				<a href="">
+					<img src="../images/applecal.png"/>
+					<h3>Download for Apple Calendar</h3>
+				</a>
+			</li>
+			<li onclick="shareFacebook();">
+				<a href="">
+					<img src="../images/fblogo.png"/>
+					<h3>Share on Facebook</h3>
+				</a>
+			</li>
+			<li onclick="shareTwitter();">
+				<a href="">
+					<img src="../images/twitterlogo.png"/>
+					<h3>Share on Twitter</h3>
+				</a>
+			</li>
 		</ul>
 	</div>
 </div>
