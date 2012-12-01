@@ -65,7 +65,7 @@ function loginToScheduleCMU(fbAuthResponse) {
             200: function() {  },
             404: function() {
                 console.log("User not found");
-                window.location("login.html#" + fbID);
+                window.location("register.html#" + fbID);
             }
         }
     });
