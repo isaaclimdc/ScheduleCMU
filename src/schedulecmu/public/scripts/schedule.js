@@ -15,6 +15,7 @@ window.events = [];
 
 
 $(document).ready(function() {
+    $("#eventFormDate").datepicker();
 
     /* Setup for DESKTOP client */
     if (window.isMobile === false) {
@@ -200,7 +201,6 @@ function fetchCourseData() {
 function addCourseToCalendar(course) {
     // var sem = parseInt(course.semester);
     var sem = parseInt("122"); /* Override for debugging */
-    console.log("in AddCourseToCalendar");
     var sectionsToAdd;
     var color;
     for (var i = 0; i < window.userSections.length; i++) {
@@ -224,8 +224,6 @@ function addCourseToCalendar(course) {
             else color = "#D96C6E";
         }
     }
-
-    console.log("middle");
 
     var sectIdxToAdd;
     var subsectIdxToAdd;
@@ -253,9 +251,7 @@ function addCourseToCalendar(course) {
         addClassesToCalendar(subsection, course, color, sem);
     }
 
-    console.log("before refetch events");
     $('#calview').fullCalendar('refetchEvents');
-    console.log("after refetch events");
 }
 
 /* Adds all classes of a course to FullCalendar */

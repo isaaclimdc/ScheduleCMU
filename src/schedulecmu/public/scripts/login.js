@@ -91,7 +91,7 @@ function createNewUser() {
     var andrewID = $("#andrewBox").val();
 
     $.ajax({
-        type : "PUT",
+        type : "POST",
         url : "http://schedulecmu.aws.af.cm/api/users/" + fbID + andrewID,
         success : function(result, status) {
             console.log(result);
