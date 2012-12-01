@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="themes/jquery.mobile-1.2.0.min.css"/>
 	<link rel="stylesheet" href="themes/scheduleCMU.min.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
-	
 	<link rel="stylesheet" href="../desktop/css/fullcalendar.css" />
 	<link rel="stylesheet" href="style.css" />
 	<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
@@ -27,25 +26,13 @@
 			<div class="ui-block-a"></div>
 			<div class="ui-block-b">
 				<img src="../images/icon_extract.png" alt="ScheduleCMU" />
-				<a href="#" onclick="javascript:alert('Login!');" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
+				<a href="#" onclick="login();" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
 
 				<!-- Temporary Button -->
 				<a href="#gridview" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">See Calendar</a>
 			</div>
 		
 		</div>
-	</div>
-</div>
-
-<!-- Register Page -->
-<div data-role="page" data-title="Register" id="register" data-theme="a">
-	<div data-role="content">
-		<h2>Almost there! We just need your Andrew ID</h2>
-		<form id="registerForm" onSubmit="createNewUser();">
-			<input type="text" id="andrewBox" placeholder="Andrew ID"></input>
-				<span>@andrew.cmu.edu</span>
-			<input type="submit" value="Send verification email">
-		</form>
 	</div>
 </div>
 
