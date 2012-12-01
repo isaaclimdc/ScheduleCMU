@@ -103,33 +103,24 @@
   });
 
 
-  app.post('/api/courses/:courseid/events', function(req, res) {
-          var event = req.body;
-          if(event.event_type === undefined)
-              res.send(405); //type unspecified
+  app.post('/api/courses/:course/events', function(req, res) {
 
-          if(event.title === undefined)
-              res.send(406); //name unspecified
- 
-          if(event.date_time === undefined)
-              res.send(407); //name unspecified                                                                                                            
-
-	  if(course_id === undefined)
-	      res.send(408); //id unspecified
-
-	  if(event.loc === undefined)
-	      event.loc = null;
-
-	  Course.findById(event.course_id, function(err, course) {
-                  if (err) {
-                      console.log(err);
-                      res.send(404);
-                  } else {
-                      course = course.course_events.push(event);
-		      course.save();
-		      res.send(course);
-                  }
-	      });
-      });
+	  Course.findById(course, function(err, course) {
+      if (err) {
+        console.log(err);
+        res.send(404);
+      } else {
+        course = course.course_events.push(req.body);
+        course.save(function (err) {
+          if (err) {
+            console.log(err);
+            res.send(404); //Change to something appropriate
+          } else {
+            res.send(course);
+          }
+        });
+      }
+    });
+  });
 
 }
