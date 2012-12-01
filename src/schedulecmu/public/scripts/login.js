@@ -96,6 +96,9 @@ function createNewUser() {
         if (response.status === 'connected') {
             var accessToken = response.authResponse.accessToken;
 
+            /* Create a new user on the server. Automatically sends
+             * a verification email to their andrew email
+             */
             $.ajax({
                 type : "POST",
                 url : "http://schedulecmu.aws.af.cm/api/users/" + fbID,
@@ -105,7 +108,9 @@ function createNewUser() {
                 },
                 success : function(result, status) {
                     console.log(result);
-                    
+
+                    /* Show them a "sent email" message */
+                    $("#loginForm").append($("<p>").html("We've sent you a verification email!"));
                 },
                 error : function(xhr, status, error) {
                     console.log(error);
