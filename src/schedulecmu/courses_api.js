@@ -104,6 +104,12 @@
 
 
   app.post('/api/courses/:course/events', function(req, res) {
+    if (req.body == null) {
+      res.send("um no.");
+    } else {
+      res.body.threshold = null;
+      res.body.state = 20; //No crowdsourcing for now!
+    }
 
 	  Course.findById(course, function(err, course) {
       if (err) {

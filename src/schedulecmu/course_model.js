@@ -4,7 +4,7 @@ function getCourseModel(mongoose, db) {
     
   var EventSchema = new Schema({
     //Num: Number - This should be handled client side, right?
-    event_ype: {type: Number}, //Since we have a drop down list of 4 types of events       
+    event_type: {type: Number}, //Since we have a drop down list of 4 types of events       
     title: {type: String},
     loc: {type: String, default: null} ,
     date_time: {type: Date},
