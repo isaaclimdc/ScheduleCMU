@@ -112,9 +112,13 @@ function performAjaxRequest(opts) {
             /* Always log the request status */
             console.log(status);
 
+            /* Parse it if it's not a custom request */
+            if (opts.customurl === undefined) {
+                if (typeof(result) !== "object")
+                    result = $.parseJSON(result);
+            }
+
             /* Perform user callback */
-            if (typeof(result) !== "object")
-                result = $.parseJSON(result);
             opts.success(result, status);
 
             if (window.isMobile === false)
@@ -779,58 +783,83 @@ function showInfoFromBrowser(infoLink) {
 }
 
 function showInCourseInfoBrowser(course) {
+    /* TODO: We need to transfer all this server-side */
+    var num = course.num.replace("-", "");
 
-    /* Create the modal view and populate with the desired course */
-    var browser = $('#courseInfoBrowser');
-    if (browser.length === 0) {
-        browser = $("<div>").attr({
-            "id": "courseInfoBrowser",
-            "style": "display:none"
-        });
-    }
-    else {
-        browser.empty();
-    }
+    var semStr;
+    var semNum = course.semester % 10;
+    if (semNum === 0)
+        semStr = "S";  /* Spring */
+    else if (semNum === 1)
+        semStr = "M";  /* Summer */
+    else if (semNum === 2)
+        semStr = "F";  /* Fall */
+    semStr += course.semester / 10;
+    console.log(semStr);
+    
+    performAjaxRequest({
+        customurl : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
+        success : function(result, status) {
+            /* Pulling out the desc, prereq, coreq text */
+            var page = $(result);
+            var allP = page.find("p");
+            var descHdr = $(allP[2]).children("font");
+            var desc = $(descHdr[0]).text();
+            var prereqs = $(descHdr[2]).text();
+            var coreqHdr = $(allP[3]).children("font")[0];
+            var coreqs = $($(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
 
-    var header = $("<div>").attr("id", "courseInfoHeader");
-    var headerNum = $("<h2>").text(course.num);
-    var headerName = $("<h3>").text(course.name);
-    var headerUnits = $("<h4>").text(makeUnitsStr(course.units));
+            /* Create the modal view and populate with the desired course */
+            var browser = $('#courseInfoBrowser');
+            if (browser.length === 0) {
+                browser = $("<div>").attr({
+                    "id": "courseInfoBrowser",
+                    "style": "display:none"
+                });
+            }
+            else {
+                browser.empty();
+            }
 
-    header.append(headerNum);
-    header.append(headerName);
-    header.append(headerUnits);
-    header.append($("<hr>"));
+            var header = $("<div>").attr("id", "courseInfoHeader");
+            var headerNum = $("<h2>").text(course.num);
+            var headerName = $("<h3>").text(course.name);
+            var headerUnits = $("<h4>").text(makeUnitsStr(course.units));
 
-    browser.append(header);
+            header.append(headerNum);
+            header.append(headerName);
+            header.append(headerUnits);
+            header.append($("<hr>"));
 
-    var body = $("<div>").attr("id", "courseInfoBody");
-    var table = $("<table>");
+            browser.append(header);
 
-    /* Here fullDetails = true because we want all details */
-    insertCourseIntoTable(course, table, true);
+            var body = $("<div>").attr("id", "courseInfoBody");
+            var table = $("<table>");
 
-    /* Append the completed table */
-    body.append(table);
+            /* Here fullDetails = true because we want all details */
+            insertCourseIntoTable(course, table, true);
 
-    /* Append other course details */
-    body.append($("<h3>").text("Description"));
-    body.append($("<p>").text("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante."));
-    body.append($("<h3>").text("Prerequisites"));
-    body.append($("<p>").text("15-151, 76-101, or 21-127 (Dummy data)"));
-    body.append($("<h3>").text("Corequisites"));
-    body.append($("<p>").text("None (Dummy data)"));
-    body.append($("<h3>").text("Cross-listed Courses"));
-    body.append($("<p>").text("None (Dummy data)"));
+            /* Append the completed table */
+            body.append(table);
 
-    /* Done, append the whole body */
-    browser.append(body);
+            /* Append other course details */
+            body.append($("<h3>").text("Description"));
+            body.append($("<p>").text(desc));
+            body.append($("<h3>").text("Prerequisites"));
+            body.append($("<p>").text(prereqs));
+            body.append($("<h3>").text("Corequisites"));
+            body.append($("<p>").text(coreqs));
 
-    /* Done. Append it anywhere in content */
-    $("#content").append(browser);
+            /* Done, append the whole body */
+            browser.append(body);
 
-    /* Open it */
-    $("#courseInfoLink").click();
+            /* Done. Append it anywhere in content */
+            $("#content").append(browser);
+
+            /* Open it */
+            $("#courseInfoLink").click();
+        }
+    });
 }
 
 
