@@ -79,7 +79,7 @@ module.exports = function (app, User) {
 			  res.send(401, {error: "Invalid verification code"});
 		      else{
 			  User.update({_id: user._id}, {$set: {verify_code: null}}, function(err){
-				  res.send(404, "We messed up somewhere....");
+				  res.send(404, {error: "We messed up somewhere...."});
 			      });
 		      }
 		  });
