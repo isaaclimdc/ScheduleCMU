@@ -65,7 +65,9 @@ function loginToScheduleCMU(fbAuthResponse) {
             200: function() {  },
             404: function() {
                 console.log("User not found");
-                if(window.isMobile == false) {
+                var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+
+                if (isMobile === false) {
                     window.location.href = "register.html#" + fbID;
                 }
                 else {
