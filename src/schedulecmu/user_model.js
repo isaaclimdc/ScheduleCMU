@@ -7,6 +7,7 @@ module.exports = function (mongoose, db) {
   var Schema = mongoose.Schema;
   var UserSchema = new Schema({
     // the _id field should store the fbid of the user
+    _id: {type: String},
     andrew: {type: String, match: /^[A-Za-z0-9]{3,8}$/},
     auth_token: {type: String, default: null},
     auth_expiry: {type: Number, default: null},

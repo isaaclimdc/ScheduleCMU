@@ -1,5 +1,7 @@
+express = require('express');
+
 module.exports = function (app, User) {
-  app.put('/api/users/:user', function (req, res) {
+  app.post('/api/users/:user', function (req, res) {
     if (req.body.andrew == undefined) {
       res.send(404, {error: "Andrew ID required to create user."});
       return;
@@ -84,6 +86,5 @@ module.exports = function (app, User) {
 		      }
 		  });
 	  }
-      });
-
+  });
 }
