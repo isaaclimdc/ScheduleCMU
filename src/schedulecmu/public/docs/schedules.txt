@@ -15,3 +15,6 @@ deleteCourse()
 
 /* User clicks on "info" in the Accordion */
 showInfoFromAccordion()
+
+/* User searches in the CourseBrowser */
+searchForCourseInCourseBrowser()
