@@ -71,7 +71,7 @@ $(document).ready(function() {
 
     /* Setup for MOBILE client */
     else {
-        var windowheight = $(window).height() - $('#gridviewheader').height();
+        var windowheight = $(document).height() - $('#gridviewheader').height();
         $('#calview').fullCalendar({
             theme: false,
             header: false,
