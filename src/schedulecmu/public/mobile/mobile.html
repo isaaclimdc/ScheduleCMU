@@ -33,7 +33,7 @@
 				<a href="#" onclick="javascript:alert('Login!');" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
 
 				<!-- Temporary Button -->
-				<a href="#listview" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">See Calendar</a>
+				<a href="#gridview" data-role="button" data-transition="slide" data-icon="arrow-r" data-iconpos="right">See Calendar</a>
 			</div>
 		
 		</div>
@@ -79,7 +79,7 @@
 
 <!-- Calendar Grid Page -->
 <div data-role="page" data-title="ScheduleCMU" id="gridview">
-	<div data-role="header" data-position="fixed">
+	<div data-role="header" id="gridviewheader" data-position="fixed">
 	  <a href="#popupMenu" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
@@ -210,25 +210,25 @@
 		<ul data-role="listview">
 			<li onclick="exportGoogleCal();">
 				<a href="">
-					<img src="../images/google.png"/>
+					<img src="../images/google_m.png"/>
 					<h3>Export to Google Calendar</h3>
 				</a>
 			</li>
 			<li onclick="downloadAppleCal();">
 				<a href="">
-					<img src="../images/applecal.png"/>
+					<img src="../images/applecal_m.png"/>
 					<h3>Download for Apple Calendar</h3>
 				</a>
 			</li>
 			<li onclick="shareFacebook();">
 				<a href="">
-					<img src="../images/fblogo.png"/>
+					<img src="../images/facebook_m.png"/>
 					<h3>Share on Facebook</h3>
 				</a>
 			</li>
 			<li onclick="shareTwitter();">
 				<a href="">
-					<img src="../images/twitterlogo.png"/>
+					<img src="../images/twitter_m.png"/>
 					<h3>Share on Twitter</h3>
 				</a>
 			</li>

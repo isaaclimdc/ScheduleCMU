@@ -71,14 +71,15 @@ $(document).ready(function() {
 
     /* Setup for MOBILE client */
     else {
-        var docH = $(window).height() - 40;
+        var windowheight = $(window).height() - $('#gridviewheader').height();
         $('#calview').fullCalendar({
             theme: false,
             header: false,
             weekends: false,
             allDaySlot: false,
             minTime: 8,
-            contentHeight: docH,
+            height: windowheight,
+            contentHeight: windowheight,
             defaultView: 'agendaWeek',
             editable: false,
             lazyFetching: true,
@@ -90,7 +91,8 @@ $(document).ready(function() {
             timeFormat: {
                 /* Don't display time in title in agenda view */
                 agenda: ''
-            }
+            },
+            events: window.events
         });
     }
 
@@ -198,7 +200,7 @@ function fetchCourseData() {
 function addCourseToCalendar(course) {
     // var sem = parseInt(course.semester);
     var sem = parseInt("122"); /* Override for debugging */
-
+    console.log("in AddCourseToCalendar");
     var sectionsToAdd;
     var color;
     for (var i = 0; i < window.userSections.length; i++) {
@@ -222,6 +224,8 @@ function addCourseToCalendar(course) {
             else color = "#D96C6E";
         }
     }
+
+    console.log("middle");
 
     var sectIdxToAdd;
     var subsectIdxToAdd;
@@ -249,7 +253,9 @@ function addCourseToCalendar(course) {
         addClassesToCalendar(subsection, course, color, sem);
     }
 
+    console.log("before refetch events");
     $('#calview').fullCalendar('refetchEvents');
+    console.log("after refetch events");
 }
 
 /* Adds all classes of a course to FullCalendar */
