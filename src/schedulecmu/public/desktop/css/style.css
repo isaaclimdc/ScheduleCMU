@@ -279,11 +279,13 @@ li {
 }
 #loginForm span {
     float: right;
+    font-size: 16px;
+    font-family: Tahoma, Arial, sans-serif;
 }
 #andrewBox {
     font-size: 16px;
     width: 30%;
-    margin-left: 300px;
+    margin-left: auto;
     margin-right: auto;
     font-family: Tahoma, Arial, sans-serif;
 }

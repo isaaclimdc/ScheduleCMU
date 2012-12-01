@@ -79,14 +79,15 @@ $(document).ready(function() {
 });
 
 function createNewUser() {
-    var url = window.location.pathname;
-    console.log(url);
-    url.indexOf()
+    /* Extract FB ID from the url hash */
+    var fbID = window.location.hash.substring(1);
+    console.log(fbID);
 
+    var andrewID = $("#andrewBox").val();
 
     $.ajax({
         type : "PUT",
-        url : "http://schedulecmu.aws.af.cm/api/users/" + fbID,
+        url : "http://schedulecmu.aws.af.cm/api/users/" + fbID + andrewID,
         success : function(result, status) {
             console.log(result);
         },
