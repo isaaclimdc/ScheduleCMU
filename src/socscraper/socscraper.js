@@ -26,22 +26,31 @@ var inspect = require("eyes").inspector({
     maxLength: 100000000000    // Computers nowadays have big memories right?
 });
 
+var total = 0;
+var totalSaved = 0;
+
 function dumpAndAdd(arr, course) {
+  total++;
   var modeled = new CourseModel(course);
   modeled.save(function(err) {
     if (err) {
-      inspect(course);
       console.log(err);
       return;
     }
+    inspect(course);
+    arr.push(course);
+    totalSaved++;
   });
-  arr.push(course);
 }
 
 jsdom.env(
     scheduleToScrape,
     ['http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'],
     function(err, window) {
+        if (err) {
+          console.log(err);
+          return;
+        }
         /* Helper functions */
 
         /* Identify if a row contains data about a section */
@@ -315,6 +324,8 @@ jsdom.env(
             currentCourse = undefined;
         }
 
+        console.log(total);
+        console.log(totalSaved);
         //inspect(allCourses);
 });
 

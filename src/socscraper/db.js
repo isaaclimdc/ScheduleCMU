@@ -3,6 +3,7 @@ function dbConnect(mongoose) {
     var env = JSON.parse(process.env.VCAP_SERVICES);
     var mongo = env['mongodb-1.8'][0]['credentials'];
   } else {
+    //var staticUrl = "mongodb://localhost:27017/test";
     var staticUrl = "mongodb://5acf8044-54a3-4a1b-b3db-a93e04928c9c:d25acfb8-720b-4cca-98b6-a20ff5ee2599@localhost:10000/db";
   }
 

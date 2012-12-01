@@ -7,8 +7,10 @@ var app = express();
 
 var db = require('./db.js').dbConnect(mongoose);
 var Course = require('./course_model.js')(mongoose, db);
+var User = require('./user_model.js')(mongoose, db);
 
 require('./courses_api.js')(app, Course);
+require('./users_api.js')(app, User);
 
 /* Serve static files from the public directory */
 app.use(express.static('public'));
