@@ -694,7 +694,8 @@ function processEventForm() {
         /* Process the valid data here */
 
         /* When done, close the fancybox dialog */
-        $.fancybox.close(false);
+        if(window.isMobile === false) 
+            $.fancybox.close(false);
     }
 }
 
@@ -760,7 +761,7 @@ function shareTwitter() {
 
 /**** CourseInfo ****/
 
-if(window.isMobile == false ) {
+if(window.isMobile === false ) {
     $("#courseInfoLink").fancybox({
         "scrolling" : "no",
         "titleShow" : false,

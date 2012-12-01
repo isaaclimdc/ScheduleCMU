@@ -73,18 +73,22 @@ module.exports = function (app, User) {
   });
 
 
-  app.get('/api/users', function(req, res){
-	  if (req.query.verify) {
-	      //TODO: figure out syntax for findOneAndUpdate
-	      User.findOne({verify_code: req.query.verify}, function(err, user){
-		      if(err)
-			  res.send(401, {error: "Invalid verification code"});
-		      else{
-			  User.update({_id: user._id}, {$set: {verify_code: null}}, function(err){
-				  res.send(404, {error: "We messed up somewhere...."});
-			      });
-		      }
-		  });
-	  }
+  app.post('/api/users/:user/verify', function(req, res){
+    User.findById(req.params.user, function(err, user){
+      if(err || user == undefined) {
+        res.send(404, {error: "We messed up somewhere...."});
+      } else {
+        if (user.verify_code == req.body.verify_code) {
+          user.verify_code = null;
+          user.save(function(err){
+            if (err)
+              res.send(404, {error: "We messed up somewhere...."});
+          });
+          res.send(user);
+        } else {
+          res.send(401, {error: "Invalid verification code"});
+        }
+      }
+    });
   });
 }

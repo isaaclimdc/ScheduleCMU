@@ -89,15 +89,15 @@ module.exports = function (mongoose, db) {
       subject: "Please verify your email address", // Subject line
       text: "Go to the following url to verify your email address \n " +
             "http://schedulecmu.aws.af.cm/api/users?verify=" +
-            this.verify_code + "\n This is an auto-generated email." +
+            this.verify_code + "\n This is an auto-generated email. " +
             "Please do not reply to this mail.",
       html: "<div>Click on the link below to verify your email " +
             "address</div>" +
-            "<div style = \"font-family: 'Cambria'; font-size: 16px; font-color: red\">
-             <a href='http://schedulecmu.aws.af.cm/api/users?verify=" +
-             this.verify_code + "'>VERIFY</a></div>" +
-            "<div style = \"font-size: 8\"> This is an auto-generated email. " +
-            "Please do not reply to this mail. </div>"
+            "<a href='http://schedulecmu.aws.af.cm/api/users?verify=" +
+	          this.verify_code + "'>VERIFY</a>" +
+            "<div> This is an auto-generated email. Please do not reply " +
+            "to this mail. </div>"
+
     }
 
     // send mail with defined transport object
