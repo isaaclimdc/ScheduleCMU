@@ -8,23 +8,35 @@ window.fbAsyncInit = function() {
         xfbml      : true  // parse XFBML
     });
 
-    FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-            /* Connected! */
-            loginToScheduleCMU(response.authResponse);
-        }
-        else if (response.status === 'not_authorized') {
-            /* Not authorized */
-            console.log("Authorizing...");
-            login();
-        }
-        else {
-            /* Not logged in */
-            console.log("Authorizing...");
-            login();
-        }
-    });
+    // FB.getLoginStatus(function(response) {
+    //     if (response.status === 'connected') {
+    //         /* Connected! */
+    //         loginToScheduleCMU(response.authResponse);
+    //     }
+    //     else if (response.status === 'not_authorized') {
+    //         /* Not authorized */
+    //         console.log("Authorizing...");
+    //         login();
+    //     }
+    //     else {
+    //         /* Not logged in */
+    //         console.log("Authorizing...");
+    //         login();
+    //     }
+    // });
 };
+
+/* Facebook response object:
+    {
+        status: 'connected',
+        authResponse: {
+            accessToken: '...',
+            expiresIn:'...',
+            signedRequest:'...',
+            userID:'...'
+        }
+    }
+ */
 
 function login() {
     FB.login(function(response) {
@@ -45,11 +57,11 @@ function loginToScheduleCMU(fbAuthResponse) {
         console.log("Logged in with Facebook as " + response.name + ".");
     });
 
+    var fbID = fbAuthResponse.userID;
     var accessToken = fbAuthResponse.accessToken;
-    console.log(accessToken);
 
     performAjaxRequest({
-        url : "/users/fbid?auth_token=" + accessToken,
+        url : "/users/" + fbid + "?auth_token=" + accessToken,
         success : function(result, status) {
             console.log(result);
         }
