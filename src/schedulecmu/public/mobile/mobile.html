@@ -111,7 +111,6 @@
 	</div>
 
 	<div data-role="content">
-		<input type="text" name="addCourse" id="addCourseBox" placeholder="Add New Course" />
 		<div id="accordion" data-role="collapsible-set">
 			<div data-role="collapsible" data-content-theme="a" data-collapsed="false">
 				<h3>15-237</h3>
@@ -138,7 +137,12 @@
 <div data-role="page" data-overlay-theme="b" id="browsePop">
 	<div data-role="header"><h2>Browse Courses</h2></div>
 	<div data-role="content">
-		<!-- Add Content!!! -->
+		<h2>Browse courses</h2>
+		<form id="courseBrowserForm">
+			<input type="text" placeholder='e.g. "15451", "Computer Science", or "Western Music History"'></input>
+			<input type="submit" value="Search"></input>
+		</form>
+		<div id="courseBrowserBody"></div>
 	</div>
 </div>
 
