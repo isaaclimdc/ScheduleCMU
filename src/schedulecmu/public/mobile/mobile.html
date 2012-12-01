@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="themes/scheduleCMU.min.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile.structure-1.2.0.min.css" />
 	<link rel="stylesheet" href="../desktop/css/fullcalendar.css" />
+	<!--link rel="stylesheet" href="jquery.ui.datepicker.mobile.css" /--> 
 	<link rel="stylesheet" href="style.css" />
 	<link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png">
@@ -55,6 +56,7 @@
 			<div data-role="collapsible" data-content-theme="a" data-collapsed="false">
 				<h3>15-237</h3>
 				<p>I'm the collapsible set content for section 1.</p>
+				<p>I'm the collapsible set content for section 2.</p>
 			</div>
 			<div data-role="collapsible" data-content-theme="a">
 				<h3>73-100</h3>
@@ -109,7 +111,6 @@
 	</div>
 
 	<div data-role="content">
-		<input type="text" name="addCourse" id="addCourseBox" placeholder="Add New Course" />
 		<div id="accordion" data-role="collapsible-set">
 			<div data-role="collapsible" data-content-theme="a" data-collapsed="false">
 				<h3>15-237</h3>
@@ -136,7 +137,12 @@
 <div data-role="page" data-overlay-theme="b" id="browsePop">
 	<div data-role="header"><h2>Browse Courses</h2></div>
 	<div data-role="content">
-		<!-- Add Content!!! -->
+		<h2>Browse courses</h2>
+		<form id="courseBrowserForm">
+			<input type="text" placeholder='e.g. "15451", "Computer Science", or "Western Music History"'></input>
+			<input type="submit" value="Search"></input>
+		</form>
+		<div id="courseBrowserBody"></div>
 	</div>
 </div>
 
@@ -165,6 +171,10 @@
 			<div data-role="fieldcontain">
 				<label for="eventFormLocation">Event Location</label>
 				<input type="text" id="eventFormLocation" placeholder="GHC 4102"</input>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="eventFormDate">Date</label>
+				<input type="date" name="date" id="eventFormDate" value=""  />
 			</div>
 			<div data-role="fieldcontain">
 				<label for="eventFormStartTime">Starts</label>
@@ -234,6 +244,8 @@
 
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<!--script src="../scripts/jQuery.ui.datepicker.js"></script>
+<script src="../scripts/jquery.ui.datepicker.mobile.js"></script-->
 <script src="../scripts/fullcalendar.min.js"></script>
 <script src="../scripts/spin.min.js"></script>
 <script src="../scripts/schedule.js"></script>

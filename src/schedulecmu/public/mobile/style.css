@@ -72,6 +72,16 @@ body {
 	margin: 20px auto 20px auto;
 }
 
+#andrewBox {
+    width: 60%;
+    display: inline;
+}
+#andrewTwo {
+    width: 40%;
+    display: inline;
+    float: right;
+}
+
 #socialPop img {
     height: 100%;
     width: auto !important;

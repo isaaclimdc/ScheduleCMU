@@ -185,10 +185,8 @@ function fetchCourseData() {
                 }
 
                 window.listedCourses.push(course);
-
-                if (window.isMobile === false)
-                    addCourseToAccordion(course);
-
+                
+                addCourseToAccordion(course);
                 addCourseToCalendar(course);
             }
         });
@@ -387,14 +385,22 @@ function addCourseToAccordion(course) {
     content.append(contentHdr);
     content.append(table);
 
-    /* Append title h3 then content div into a group */
-    var group = $("<div>").addClass("group");
-    group.append(title);
-    group.append(content);
+    if(window.isMobile === false) {
+        /* Append title h3 then content div into a group */
+        var group = $("<div>").addClass("group");
+        group.append(title);
+        group.append(content);
 
-    /* Append group into accordion and refresh. Expand the recently added */
-    window.accordionOpts.active = "h3:last";
-    accordion.append(group).accordion('destroy').accordion(window.accordionOpts);
+        /* Append group into accordion and refresh. Expand the recently added */
+        window.accordionOpts.active = "h3:last";
+        accordion.append(group).accordion('destroy').accordion(window.accordionOpts);
+    }
+    else {
+        var group = $("<div data-role='collapsible' data-content-theme='a'>");
+        group.append(title);
+        group.append(content);
+        accordion.append(group);
+    }
 
     /* Re-render Events on FullCalendar */
     $("#calview").fullCalendar("refetchEvents");
@@ -688,7 +694,8 @@ function processEventForm() {
         /* Process the valid data here */
 
         /* When done, close the fancybox dialog */
-        $.fancybox.close(false);
+        if(window.isMobile === false) 
+            $.fancybox.close(false);
     }
 }
 
@@ -754,7 +761,7 @@ function shareTwitter() {
 
 /**** CourseInfo ****/
 
-if(window.isMobile == false ) {
+if(window.isMobile === false ) {
     $("#courseInfoLink").fancybox({
         "scrolling" : "no",
         "titleShow" : false,

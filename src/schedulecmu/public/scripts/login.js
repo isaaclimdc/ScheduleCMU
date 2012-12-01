@@ -89,33 +89,40 @@ $(document).ready(function() {
 function createNewUser() {
     /* Extract FB ID from the url hash */
     var fbID = window.location.hash.substring(1);
-    console.log(fbID);
 
     FB.getLoginStatus(function(response) {
         var andrewID = $("#andrewBox").val();
-        var accessToken;
 
         if (response.status === 'connected') {
-            accessToken = response.authResponse.accessToken;
-        }
+            var accessToken = response.authResponse.accessToken;
 
-        $.ajax({
-            type : "POST",
-            url : "http://schedulecmu.aws.af.cm/api/users/" + fbID,
-            data : {
-                "andrew" : andrewID,
-                "auth_token" : accessToken
-            },
-            success : function(result, status) {
-                console.log(result);
-            },
-            error : function(xhr, status, error) {
-                console.log(error);
-            },
-            statusCode: {
-                200: function() {  },
-                404: function() { console.log("Page not found"); }
-            }
-        });
+            /* Create a new user on the server. Automatically sends
+             * a verification email to their andrew email
+             */
+            $.ajax({
+                type : "POST",
+                url : "http://schedulecmu.aws.af.cm/api/users/" + fbID,
+                data : {
+                    "andrew" : andrewID,
+                    "auth_token" : accessToken
+                },
+                success : function(result, status) {
+                    console.log(result);
+
+                    /* Show them a "sent email" message */
+                    $("#loginForm").append($("<p>").html("We've sent you a verification email!"));
+                },
+                error : function(xhr, status, error) {
+                    console.log(error);
+                },
+                statusCode: {
+                    200: function() {  },
+                    404: function() { console.log("Page not found"); }
+                }
+            });
+        }
+        else {
+            console.log("You are not logged in to Facebook");
+        }
     });
 }
