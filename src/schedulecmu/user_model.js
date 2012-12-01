@@ -108,4 +108,6 @@ module.exports = function (mongoose, db) {
 	  });
   }
 
+  return db.model('User', UserSchema);
+
 }
