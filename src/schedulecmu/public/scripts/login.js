@@ -35,6 +35,7 @@ function login() {
     FB.login(function(response) {
         if (response.authResponse) {
             /* Connected! */
+            window.
             loginToScheduleCMU(response.authResponse);
         }
         else {
@@ -90,22 +91,31 @@ function createNewUser() {
     var fbID = window.location.hash.substring(1);
     console.log(fbID);
 
-    var andrewID = $("#andrewBox").val();
+    FB.getLoginStatus(function(response) {
+        var andrewID = $("#andrewBox").val();
+        var accessToken;
 
-    $.ajax({
-        type : "POST",
-        url : "http://schedulecmu.aws.af.cm/api/users/" + fbID + andrewID,
-        success : function(result, status) {
-            console.log(result);
-        },
-        error : function(xhr, status, error) {
-            console.log(error);
-        },
-        statusCode: {
-            200: function() {  },
-            404: function() {
-                console.log("User not found");
-            }
+        if (response.status === 'connected') {
+            accessToken = response.authResponse.accessToken;
         }
+
+        $.ajax({
+            type : "POST",
+            url : "http://schedulecmu.aws.af.cm/api/users/" + fbID,
+            data : {
+                "andrew" : andrewID,
+                "auth_token" : accessToken
+            },
+            success : function(result, status) {
+                console.log(result);
+            },
+            error : function(xhr, status, error) {
+                console.log(error);
+            },
+            statusCode: {
+                200: function() {  },
+                404: function() { console.log("Page not found"); }
+            }
+        });
     });
 }
