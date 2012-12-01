@@ -665,6 +665,7 @@ function processEventForm() {
     var courseNum = $("#eventFormCourseNum").val();
     var type = $("#eventFormType").val();
     var title = $("#eventFormTitle").val();
+    var date = $("#eventFormDate").val();
     var startTime = $("#eventFormStartTime").val();
     var endTime = $("#eventFormEndTime").val();
     var location = $("#eventFormLocation").val();
@@ -674,6 +675,7 @@ function processEventForm() {
         "courseNum" : courseNum,
         "type" : type,
         "title" : title,
+        "date" : date,
         "startTime" : startTime,
         "endTime": endTime,
         "location": location,
@@ -703,6 +705,7 @@ function validateEventForm(res) {
     if (res.title.length === 0) {
         toChange.push("#eventFormTitle");
     }
+    if (res.date.length)
     if (parseInt(res.endTime) <= parseInt(res.startTime)) {
         toChange.push("#eventFormEndTime");
     }
@@ -798,70 +801,120 @@ function showInCourseInfoBrowser(course) {
         semStr = "F";  /* Fall */
     semStr += course.semester / 10;
     console.log(semStr);
+
+    /* Create the modal view and populate with the desired course */
+    var browser = $('#courseInfoBrowser');
+    if (browser.length === 0) {
+        browser = $("<div>").attr({
+            "id": "courseInfoBrowser",
+            "style": "display:none"
+        });
+    }
+    else {
+        browser.empty();
+    }
+
+    var header = $("<div>").attr("id", "courseInfoHeader");
+    var headerNum = $("<h2>").text(course.num);
+    var headerName = $("<h3>").text(course.name);
+    var headerUnits = $("<h4>").text(makeUnitsStr(course.units));
+
+    header.append(headerNum);
+    header.append(headerName);
+    header.append(headerUnits);
+    header.append($("<hr>"));
+
+    browser.append(header);
+
+    var body = $("<div>").attr("id", "courseInfoBody");
+    var table = $("<table>");
+
+    /* Here fullDetails = true because we want all details */
+    insertCourseIntoTable(course, table, true);
+
+    /* Append the completed table */
+    body.append(table);
+
+    /* Append other course details */
+    body.append($("<h3>").text("Description"));
+    body.append($("<p>").text("Lorem Ipsum"));
+    body.append($("<h3>").text("Prerequisites"));
+    body.append($("<p>").text("Lorem Ipsum"));
+    body.append($("<h3>").text("Corequisites"));
+    body.append($("<p>").text("Lorem Ipsum"));
+
+    /* Done, append the whole body */
+    browser.append(body);
+
+    /* Done. Append it anywhere in content */
+    $("#content").append(browser);
+
+    /* Open it */
+    $("#courseInfoLink").click();
     
-    performAjaxRequest({
-        customurl : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
-        success : function(result, status) {
-            /* Pulling out the desc, prereq, coreq text */
-            var page = $(result);
-            var allP = page.find("p");
-            var descHdr = $(allP[2]).children("font");
-            var desc = $(descHdr[0]).text();
-            var prereqs = $(descHdr[2]).text();
-            var coreqHdr = $(allP[3]).children("font")[0];
-            var coreqs = $($(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
+    // performAjaxRequest({
+    //     customurl : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
+    //     success : function(result, status) {
+    //         /* Pulling out the desc, prereq, coreq text */
+    //         var page = $(result);
+    //         var allP = page.find("p");
+    //         var descHdr = $(allP[2]).children("font");
+    //         var desc = $(descHdr[0]).text();
+    //         var prereqs = $(descHdr[2]).text();
+    //         var coreqHdr = $(allP[3]).children("font")[0];
+    //         var coreqs = $($(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
 
-            /* Create the modal view and populate with the desired course */
-            var browser = $('#courseInfoBrowser');
-            if (browser.length === 0) {
-                browser = $("<div>").attr({
-                    "id": "courseInfoBrowser",
-                    "style": "display:none"
-                });
-            }
-            else {
-                browser.empty();
-            }
+    //         /* Create the modal view and populate with the desired course */
+    //         var browser = $('#courseInfoBrowser');
+    //         if (browser.length === 0) {
+    //             browser = $("<div>").attr({
+    //                 "id": "courseInfoBrowser",
+    //                 "style": "display:none"
+    //             });
+    //         }
+    //         else {
+    //             browser.empty();
+    //         }
 
-            var header = $("<div>").attr("id", "courseInfoHeader");
-            var headerNum = $("<h2>").text(course.num);
-            var headerName = $("<h3>").text(course.name);
-            var headerUnits = $("<h4>").text(makeUnitsStr(course.units));
+    //         var header = $("<div>").attr("id", "courseInfoHeader");
+    //         var headerNum = $("<h2>").text(course.num);
+    //         var headerName = $("<h3>").text(course.name);
+    //         var headerUnits = $("<h4>").text(makeUnitsStr(course.units));
 
-            header.append(headerNum);
-            header.append(headerName);
-            header.append(headerUnits);
-            header.append($("<hr>"));
+    //         header.append(headerNum);
+    //         header.append(headerName);
+    //         header.append(headerUnits);
+    //         header.append($("<hr>"));
 
-            browser.append(header);
+    //         browser.append(header);
 
-            var body = $("<div>").attr("id", "courseInfoBody");
-            var table = $("<table>");
+    //         var body = $("<div>").attr("id", "courseInfoBody");
+    //         var table = $("<table>");
 
-            /* Here fullDetails = true because we want all details */
-            insertCourseIntoTable(course, table, true);
+    //         /* Here fullDetails = true because we want all details */
+    //         insertCourseIntoTable(course, table, true);
 
-            /* Append the completed table */
-            body.append(table);
+    //         /* Append the completed table */
+    //         body.append(table);
 
-            /* Append other course details */
-            body.append($("<h3>").text("Description"));
-            body.append($("<p>").text(desc));
-            body.append($("<h3>").text("Prerequisites"));
-            body.append($("<p>").text(prereqs));
-            body.append($("<h3>").text("Corequisites"));
-            body.append($("<p>").text(coreqs));
+    //         /* Append other course details */
+    //         body.append($("<h3>").text("Description"));
+    //         body.append($("<p>").text(desc));
+    //         body.append($("<h3>").text("Prerequisites"));
+    //         body.append($("<p>").text(prereqs));
+    //         body.append($("<h3>").text("Corequisites"));
+    //         body.append($("<p>").text(coreqs));
 
-            /* Done, append the whole body */
-            browser.append(body);
+    //         /* Done, append the whole body */
+    //         browser.append(body);
 
-            /* Done. Append it anywhere in content */
-            $("#content").append(browser);
+    //         /* Done. Append it anywhere in content */
+    //         $("#content").append(browser);
 
-            /* Open it */
-            $("#courseInfoLink").click();
-        }
-    });
+    //         /* Open it */
+    //         $("#courseInfoLink").click();
+    //     }
+    // });
 }
 
 
