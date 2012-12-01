@@ -66,10 +66,10 @@ function loginToScheduleCMU(fbAuthResponse) {
             404: function() {
                 console.log("User not found");
                 if(window.isMobile == false) {
-                    window.location("register.html#" + fbID);
+                    window.location.href = "register.html#" + fbID;
                 }
                 else {
-                    window.location("../mobile/register.html#" + fbID);
+                    window.location.href = "../mobile/register.html#" + fbID;
                 }
             }
         }

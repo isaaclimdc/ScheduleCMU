@@ -788,20 +788,8 @@ function showInfoFromBrowser(infoLink) {
 }
 
 function showInCourseInfoBrowser(course) {
-    /* TODO: We need to transfer all this server-side */
-    var num = course.num.replace("-", "");
 
-    var semStr;
-    var semNum = course.semester % 10;
-    if (semNum === 0)
-        semStr = "S";  /* Spring */
-    else if (semNum === 1)
-        semStr = "M";  /* Summer */
-    else if (semNum === 2)
-        semStr = "F";  /* Fall */
-    semStr += course.semester / 10;
-    console.log(semStr);
-
+/*** Without description scraping ***/
     /* Create the modal view and populate with the desired course */
     var browser = $('#courseInfoBrowser');
     if (browser.length === 0) {
@@ -851,7 +839,23 @@ function showInCourseInfoBrowser(course) {
 
     /* Open it */
     $("#courseInfoLink").click();
-    
+/*** Without description scraping ***/
+
+/*** With description scraping ***/
+    /* TODO: We need to transfer all this server-side */
+    // var num = course.num.replace("-", "");
+
+    // var semStr;
+    // var semNum = course.semester % 10;
+    // if (semNum === 0)
+    //     semStr = "S";  /* Spring */
+    // else if (semNum === 1)
+    //     semStr = "M";  /* Summer */
+    // else if (semNum === 2)
+    //     semStr = "F";  /* Fall */
+    // semStr += course.semester / 10;
+    // console.log(semStr);
+    // 
     // performAjaxRequest({
     //     customurl : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
     //     success : function(result, status) {
@@ -915,6 +919,7 @@ function showInCourseInfoBrowser(course) {
     //         $("#courseInfoLink").click();
     //     }
     // });
+/*** With description scraping ***/
 }
 
 
