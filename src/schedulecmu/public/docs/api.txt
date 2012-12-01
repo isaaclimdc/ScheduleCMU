@@ -13,3 +13,8 @@ e.g. /courses?number=15-251
 
 /courses?number=<dept>-<num>
 
+
+/* GET the user object with the auth token <fb_auth_token> */
+e.g. /api/users/fbid?auth_token=23092tbjb247oklntg4
+
+/api/users/fbid?auth_token=<fb_auth_token>
