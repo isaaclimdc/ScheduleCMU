@@ -117,6 +117,7 @@ module.exports = function (app, User) {
           res.send(404, {error: "We messed up somewhere...."});
       }
       else {
+          console.log(user);
           var schedulenum = Number(req.params.schedulenum);
           if(user.schedules.length <= schedulenum){
               res.send(401, {error: "Invalid schedule number"});
