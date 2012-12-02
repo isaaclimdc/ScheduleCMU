@@ -196,6 +196,7 @@ function setupPage() {
             /* Don't display time in title in agenda view */
             agenda: ''
         },
+        ignoreTimezone: false,
         events: window.events
     });
 }
@@ -793,12 +794,33 @@ function processEventForm() {
                     success : function(result, status) {
                         console.log(result);
 
-                        /* Refresh FullCalendar */
-                        $('#calview').fullCalendar('refetchEvents');
+                        for (var i = 0; i < window.listedCourses.length; i++) {
+                            if (courseID === window.listedCourses[i]._id) {
+                                var course = window.listedCourses[i];
 
-                        /* When done, close the fancybox dialog */
-                        if (window.isMobile === false) 
-                            $.fancybox.close(false);
+                                /* Delete and re-add this course */
+                                $("#calview").fullCalendar("clientEvents",
+                                    function(eventToRemove) {
+                                        if (eventToRemove.id === courseID) {
+                                            window.events.removeObj(eventToRemove);
+                                        }
+                                    });
+
+                                addCourseToCalendar(course);
+
+                                /* Refresh FullCalendar */
+                                $('#calview').fullCalendar('refetchEvents');
+
+                                /* When done, close the fancybox dialog */
+                                if (window.isMobile === false) 
+                                    $.fancybox.close(false);
+
+                                return;
+                            }
+                        }
+
+                        /* Otherwise, course not found in listedCourses */
+                        $("#eventFormCourseNum").css("border", "2px solid red").val("Please add this course first!");
                     }
                 });
             }
