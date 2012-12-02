@@ -46,7 +46,6 @@
     var course = req.params.course
     var section = req.params.section.replace("-"," ");
     var subsection = req.params.subsec;
-    console.log(subsection);
 
     Course.findById(course, function(err, course) {
       if (err) {
@@ -61,7 +60,6 @@
   app.get('/api/courses/:course/sections/:section', function(req, res) {
     var course = req.params.course;
     var section = req.params.section.replace("-"," ");
-    console.log(section);
 
     Course.findById(course, function(err, course) {
       if (err) {
@@ -76,7 +74,7 @@
   //For the form /api/courses/131-15-122
   app.get('/api/courses/:course', function(req, res) {
     var course = req.params.course;
-    console.log(course);
+
     Course.findById(course, function(err, course) {
       if (err) {
         console.log(err);
@@ -91,7 +89,7 @@
   //returns the entire events array associated with an event
   app.get('/api/courses/:course/events', function(req, res) {
 	  var course = req.params.course;
-	  console.log(course);
+
 	  Course.findById(course, function(err, course) {
 		  if (err) {
 		      console.log(err);
@@ -107,20 +105,21 @@
     if (req.body == null) {
       res.send("um no.");
     } else {
-      req.body.threshold = null;
+      // Values for validity of the event
+      req.body.threshold = 0;
       req.body.state = 20; //No crowdsourcing for now!
-      req.body.event_type = Number(req.body.event_type);
+      // Making sure the types check:
       req.body.start = Date(req.body.start);
       req.body.end = Date(req.body.end);
       req.body.recur = null; //For now
     }
 
 	  Course.findById(req.params.course, function(err, course) {
-      if (err) {
+      if (err || course == undefined) {
         console.log(err);
         res.send(404);
       } else {
-        course = course.course_events.push(req.body);
+        course.course_events.push(req.body);
         course.save(function (err) {
           if (err) {
             console.log(err);
