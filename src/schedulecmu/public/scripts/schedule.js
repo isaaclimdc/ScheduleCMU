@@ -193,7 +193,7 @@ function fetchCourseData() {
             url: "/courses/" + window.userBlocks[i].course_id,
             success: function(result, status) {
                 var course = result;
-                // console.log(course);
+                console.log(course);
 
                 if (course === null) {
                     return;
@@ -264,7 +264,46 @@ function addCourseToCalendar(course) {
         addClassesToCalendar(subsection, course, color, sem);
     }
 
+    addEventsToCalendar(course, color);
+
     $('#calview').fullCalendar('refetchEvents');
+}
+
+function addEventsToCalendar(course, color) {
+    // var year = 2000 + Math.floor(sem / 10);
+    // var encodedSem = sem % 10;
+    // var month;
+    // if (encodedSem === 0)
+    //     month = 1    Spring starts January 
+    // else if (encodedSem === 1)
+    //     month = 6   /* Summer starts June */
+    // else if (encodedSem === 2)
+    //     month = 8   /* Fall starts August */
+
+    // var semEndDate = new Date(year, month+5, 1, 10, 0);
+
+    var courseEvents = course.course_events;
+
+    for (var i = 0; i < courseEvents.length; i++) {
+        var anEvent = courseEvents[i];
+
+        /* Logic in order to have recurring events */
+        // while (startDate <= semEndDate) {
+            window.events.push({
+                id: course._id,
+                title: course.num + "\n" + anEvent.title + "\n" + anEvent.loc,
+                color: color,
+                start: anEvent.start,
+                end: anEvent.end,
+                allDay: false,
+            });
+            console.log("Event added!");
+
+        //     /* Push forward by one week */
+        //     startDate.setDate(startDate.getDate() + 7);
+        //     endDate.setDate(endDate.getDate() + 7);
+        // }
+    }
 }
 
 /* Adds all classes of a course to FullCalendar */
