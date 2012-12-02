@@ -108,9 +108,7 @@
       // Values for validity of the event
       req.body.threshold = 0;
       req.body.state = 20; //No crowdsourcing for now!
-      // Making sure the types check:
-      req.body.start = Date(req.body.start);
-      req.body.end = Date(req.body.end);
+
       req.body.recur = null; //For now
     }
 

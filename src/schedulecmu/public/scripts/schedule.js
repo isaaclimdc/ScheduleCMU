@@ -746,8 +746,8 @@ function processEventForm() {
                         "event_type" : type,
                         "title" : title,
                         "loc" : location,
-                        "start" : startDate.toString(),
-                        "end" : endDate.toString()
+                        "start" : startDate,
+                        "end" : endDate
                     },
                     success : function(result, status) {
                         console.log(result);
