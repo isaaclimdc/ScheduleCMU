@@ -137,7 +137,7 @@ module.exports = function (app, User) {
               }
               if(!existing){
                   console.log("doesn't");
-                  course_blocks.push[new_block];
+                  course_blocks.push(new_block);
               }
               console.log(course_blocks);
               schedule.course_blocks = course_blocks;
