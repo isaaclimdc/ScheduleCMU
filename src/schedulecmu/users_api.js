@@ -107,8 +107,9 @@ module.exports = function (app, User) {
                         res.send(404, {error: "We messed up somewhere...."});
                         console.log("save failed");
                     }
+                    res.send(user);
                 });
-            res.send(user);
+
         }
     });
   });
@@ -154,8 +155,9 @@ module.exports = function (app, User) {
                           res.send(404, {error: "We messed up somewhere...."});
                           console.log("save failed");
                       }
+                      res.send(user.schedules[schedulenum].course_blocks);
               });
-              res.send(user.schedules[schedulenum].course_blocks);
+
           }
 
       }
