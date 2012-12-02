@@ -93,7 +93,7 @@ module.exports = function (app, User) {
   });
 
   //To create a new schedule
-  app.post('/api/users/:user/schedules/', function (req, res) {
+  app.post('/api/users/:user/schedules', function (req, res) {
       User.findById(req.params.user, function(err, user){
         if(err || user == undefined) {
             res.send(404, {error: "We messed up somewhere...."});
@@ -111,7 +111,7 @@ module.exports = function (app, User) {
     });
   });
 
-  app.post('/api/users/:user/schedules/:schedulenum/', function (req, res) {
+  app.post('/api/users/:user/schedules/:schedulenum', function (req, res) {
     User.findById(req.params.user, function(err, user){
       if(err || user == undefined) {
           res.send(404, {error: "We messed up somewhere...."});
@@ -151,8 +151,9 @@ module.exports = function (app, User) {
                   if(err)
                       res.send(404, {error: "We messed up somewhere...."});
               });
-              res.send(user);
+              res.send(user.schedules[schedulenum].course_blocks);
           }
+
       }
    });
  });
