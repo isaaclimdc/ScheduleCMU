@@ -120,6 +120,7 @@ function setupPage() {
 
     var height;
     var contentHeight;
+    var columnFormat;
 
     /* Setup for DESKTOP client */
     if (window.isMobile === false) {
@@ -153,6 +154,11 @@ function setupPage() {
 
         /* Options for DESKTOP FullCalendar */
         height = 800;
+        columnFormat = {
+            month: 'dddd M/d',
+            week: 'dddd M/d',
+            day: 'dddd M/d'
+        };
     }
 
     /* Setup for MOBILE client */
@@ -160,6 +166,11 @@ function setupPage() {
         /* Options for MOBILE FullCalendar */
         contentHeight = $(document).height() - $('#gridviewheader').height();
         height = contentHeight;
+        columnFormat = {
+            month: 'ddd',
+            week: 'ddd',
+            day: 'ddd'
+        };
     }
 
     /* Only set up FullCalendar when all courses have been parsed. */
@@ -174,11 +185,7 @@ function setupPage() {
         defaultView: 'agendaWeek',
         editable: false,
         lazyFetching: true,
-        columnFormat: {
-            month: 'ddd',
-            week: 'ddd',
-            day: 'ddd'
-        },
+        columnFormat: columnFormat,
         timeFormat: {
             /* Don't display time in title in agenda view */
             agenda: ''
@@ -253,57 +260,25 @@ function addCourseToCalendar(course) {
     if (subsectIdxToAdd < 0)
         subsectIdxToAdd = 0;
 
+    /* Add "lectures" */
     var sectionsArr = course.sections;
     if (sectionsArr.length !== 0) {
         var section = sectionsArr[sectIdxToAdd];
         addClassesToCalendar(section, course, color, sem);
     }
+
+    /* Add "recitations" */
     var subsectionsArr = section.subsections;
     if (subsectionsArr.length !== 0) {
         var subsection = subsectionsArr[subsectIdxToAdd];
         addClassesToCalendar(subsection, course, color, sem);
     }
 
+    /* Add "events" */
     addEventsToCalendar(course, color);
 
+    /* Refresh FullCalendar */
     $('#calview').fullCalendar('refetchEvents');
-}
-
-function addEventsToCalendar(course, color) {
-    // var year = 2000 + Math.floor(sem / 10);
-    // var encodedSem = sem % 10;
-    // var month;
-    // if (encodedSem === 0)
-    //     month = 1    Spring starts January 
-    // else if (encodedSem === 1)
-    //     month = 6   /* Summer starts June */
-    // else if (encodedSem === 2)
-    //     month = 8   /* Fall starts August */
-
-    // var semEndDate = new Date(year, month+5, 1, 10, 0);
-
-    var courseEvents = course.course_events;
-
-    for (var i = 0; i < courseEvents.length; i++) {
-        var anEvent = courseEvents[i];
-
-        /* Logic in order to have recurring events */
-        // while (startDate <= semEndDate) {
-            window.events.push({
-                id: course._id,
-                title: course.num + "\n" + anEvent.title + "\n" + anEvent.loc,
-                color: color,
-                start: anEvent.start,
-                end: anEvent.end,
-                allDay: false,
-            });
-            console.log("Event added!");
-
-        //     /* Push forward by one week */
-        //     startDate.setDate(startDate.getDate() + 7);
-        //     endDate.setDate(endDate.getDate() + 7);
-        // }
-    }
 }
 
 /* Adds all classes of a course to FullCalendar */
@@ -353,6 +328,24 @@ function addClassesToCalendar(section, course, color, sem) {
     }
 }
 
+/* Add course events related to this course to FullCalendar */
+function addEventsToCalendar(course, color) {
+    var courseEvents = course.course_events;
+
+    for (var i = 0; i < courseEvents.length; i++) {
+        var anEvent = courseEvents[i];
+
+        window.events.push({
+            id: course._id,
+            title: course.num + "\n" + anEvent.title + "\n" + anEvent.loc,
+            color: color,
+            start: anEvent.start,
+            end: anEvent.end,
+            allDay: false,
+        });
+    }
+}
+
 /*** Accordion ***/
 
 /* Called when the user presses "return" at the add course box. Queries
@@ -399,6 +392,7 @@ function requestAndAddCourse() {
                 url : "/courses/" + courseID,
                 success : function(result, status) {
                     var course = result;
+                    console.log(course);
 
                     setPlaceholder(course.num + " added!");
 
@@ -764,8 +758,10 @@ function processEventForm() {
         var startArr = processTimeStr(startTime);
         var endArr = processTimeStr(endTime);
         var dateArr = $("#eventFormDate").val().split("/");
-        var startDate = new Date(parseInt(dateArr[2]), parseInt(dateArr[0]), parseInt(dateArr[1]), startArr[0], startArr[1]);
-        var endDate = new Date(parseInt(dateArr[2]), parseInt(dateArr[0]), parseInt(dateArr[1]), endArr[0], endArr[1]);
+
+        /* Who knew "January" == 0?? */
+        var startDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], startArr[0], startArr[1]);
+        var endDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], endArr[0], endArr[1]);
 
         /* Parse course num */
         courseNum = courseNum.substring(0, 2) + "-" + courseNum.substring(2);
@@ -774,7 +770,7 @@ function processEventForm() {
         performAjaxRequest({
             url : "/courses?number=" + courseNum,
             success : function(res, sta) {
-                console.log(res);
+                // console.log(res);
                 var courseID = res[0]._id;
 
                 /* POST the new event to this course ID */
@@ -791,6 +787,9 @@ function processEventForm() {
                     success : function(result, status) {
                         console.log(result);
 
+                        /* Refresh FullCalendar */
+                        $('#calview').fullCalendar('refetchEvents');
+
                         /* When done, close the fancybox dialog */
                         if (window.isMobile === false) 
                             $.fancybox.close(false);
@@ -798,8 +797,6 @@ function processEventForm() {
                 });
             }
         });
-
-        
     }
 }
 
