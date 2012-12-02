@@ -51,10 +51,10 @@ function loginToScheduleCMU(fbAuthResponse) {
 
             /* Unhide schedules page */
             $('#content').css("display", "block");
-            var user = result;
 
             /* User logged in to ScheduleCMU! Start processing schedules */
-            setupScheduleForUser(user);
+            var user = result;
+            fetchUserSchedule(user);
         },
         error : function(xhr, status, error) {
             console.log(error);

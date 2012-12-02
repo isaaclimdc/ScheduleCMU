@@ -14,10 +14,6 @@ window.listedCourses = [];
 window.events = [];
 
 
-$(document).ready(function() {
-    // loginToFB();
-});
-
 /* A convenient wrapper for $.ajax that automatically starts and stops
  * the spinner (spin.js), and does error checking. Requires an argument
  * opts: { url: string , success: fn, error (optional) : fn }
@@ -60,8 +56,40 @@ function performAjaxRequest(opts) {
     });
 }
 
-function setupScheduleForUser(user) {
+/**** Fetch Data ****/
+
+function fetchUserSchedule(user) {
+    // window.userBlocks =
+    // [
+    //     {"id" : "50b9916e01b1568d25000ad6", "section" : 1, "subsection" : 3},
+    //     {"id" : "50b9916f01b1568d25002117", "section" : 0, "subsection" : 0},
+    //     {"id" : "50b9916f01b1568d25001d40", "section" : 0, "subsection" : 0},
+    //     {"id" : "50b9916f01b1568d250012e9", "section" : 1, "subsection" : 3},
+    //     {"id" : "50b9916e01b1568d250004e4", "section" : 2, "subsection" : 0}
+    // ];
+
+    /* Set up the DOM first */
+    setupPage();
+    
+    var schedulesArr = user.schedules;
+
+    /* If there are existing schedules for this user, fetch them
+     * and populate the page
+     */
+    if (schedulesArr.length > 0) {
+        var latestSchedule = schedulesArr[0];
+        window.userBlocks = latestSchedule.course_blocks;
+        console.log("User Blocks: ", window.userBlocks);
+
+        fetchCourseData();
+    }
+}
+
+function setupPage() {
     $("#eventFormDate").datePicker();
+
+    var height;
+    var contentHeight;
 
     /* Setup for DESKTOP client */
     if (window.isMobile === false) {
@@ -91,86 +119,40 @@ function setupScheduleForUser(user) {
             e.stopPropagation();
         });
 
-        /* Only set up FullCalendar when all courses have been parsed. */
-        $("#calview").fullCalendar({
-            theme: false,
-            header: false,
-            weekends: false,
-            allDaySlot: false,
-            minTime: 8,
-            maxTime: 20,
-            height: 800,
-            defaultView: 'agendaWeek',
-            editable: false,
-            lazyFetching: true,
-            columnFormat: {
-                month: 'dddd',
-                week: 'dddd',
-                day: 'dddd'
-            },
-            timeFormat: {
-                /* Don't display time in title in agenda view */
-                agenda: ''
-            },
-            events: window.events
-        });
+        /* Options for DESKTOP FullCalendar */
+        height = 800;
     }
 
     /* Setup for MOBILE client */
     else {
-        var windowheight = $(document).height() - $('#gridviewheader').height();
-        $('#calview').fullCalendar({
-            theme: false,
-            header: false,
-            weekends: false,
-            allDaySlot: false,
-            minTime: 8,
-            height: windowheight,
-            contentHeight: windowheight,
-            defaultView: 'agendaWeek',
-            editable: false,
-            lazyFetching: true,
-            columnFormat: {
-                month: 'ddd',
-                week: 'ddd',
-                day: 'ddd'
-            },
-            timeFormat: {
-                /* Don't display time in title in agenda view */
-                agenda: ''
-            },
-            events: window.events
-        });
+        /* Options for MOBILE FullCalendar */
+        contentHeight = $(document).height() - $('#gridviewheader').height();
+        height = contentHeight;
     }
 
-    /* Populate the page with the user's courses */
-    fetchUserSchedule(user);
-}
-
-/**** Fetch Data ****/
-
-function fetchUserSchedule(user) {
-    // window.userBlocks =
-    // [
-    //     {"id" : "50b9916e01b1568d25000ad6", "section" : 1, "subsection" : 3},
-    //     {"id" : "50b9916f01b1568d25002117", "section" : 0, "subsection" : 0},
-    //     {"id" : "50b9916f01b1568d25001d40", "section" : 0, "subsection" : 0},
-    //     {"id" : "50b9916f01b1568d250012e9", "section" : 1, "subsection" : 3},
-    //     {"id" : "50b9916e01b1568d250004e4", "section" : 2, "subsection" : 0}
-    // ];
-
-    var schedulesArr = user.schedules;
-
-    /* If there are existing schedules for this user, fetch them
-     * and populate the page
-     */
-    if (schedulesArr.length > 0) {
-        var latestSchedule = schedulesArr[0];
-        window.userBlocks = latestSchedule.course_blocks;
-        console.log("User Blocks: ", window.userBlocks);
-
-        fetchCourseData();
-    }
+    /* Only set up FullCalendar when all courses have been parsed. */
+    $('#calview').fullCalendar({
+        theme: false,
+        header: false,
+        weekends: false,
+        allDaySlot: false,
+        minTime: 8,
+        height: height,
+        contentHeight: contentHeight,
+        defaultView: 'agendaWeek',
+        editable: false,
+        lazyFetching: true,
+        columnFormat: {
+            month: 'ddd',
+            week: 'ddd',
+            day: 'ddd'
+        },
+        timeFormat: {
+            /* Don't display time in title in agenda view */
+            agenda: ''
+        },
+        events: window.events
+    });
 }
 
 function fetchCourseData() {
