@@ -110,8 +110,8 @@
       req.body.threshold = null;
       req.body.state = 20; //No crowdsourcing for now!
       req.body.event_type = Number(req.body.event_type);
-      req.body.start = Date(req.body.start);
-      req.body.end = Date(req.body.end);
+      // req.body.start = req.body.start;
+      // req.body.end = req.body.end;
       req.body.recur = null; //For now
     }
 
