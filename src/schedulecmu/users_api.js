@@ -103,8 +103,10 @@ module.exports = function (app, User) {
                      name: req.body.name, course_blocks: []};
             user.schedules.push(s);
             user.save(function(err){
-                if (err)
-                    res.send(404, {error: "We messed up somewhere...."});
+                    if (err){
+                        res.send(404, {error: "We messed up somewhere...."});
+                        console.log("save failed");
+                    }
                 });
             res.send(user);
         }
@@ -148,8 +150,10 @@ module.exports = function (app, User) {
               user.schedules[schedulenum] = schedule;
               console.log(user);
               user.save(function(err){
-                  if(err)
-                      res.send(404, {error: "We messed up somewhere...."});
+                      if(err){
+                          res.send(404, {error: "We messed up somewhere...."});
+                          console.log("save failed");
+                      }
               });
               res.send(user.schedules[schedulenum].course_blocks);
           }
