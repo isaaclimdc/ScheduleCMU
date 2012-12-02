@@ -117,11 +117,12 @@ module.exports = function (app, User) {
           res.send(404, {error: "We messed up somewhere...."});
       }
       else {
-          if(user.schedules.length <= req.params.schedulenum){
+          var schedulenum = Number(req.params.schedulenum);
+          if(user.schedules.length <= schedulenum){
               res.send(401, {error: "Invalid schedule number"});
           }
           else{
-              var schedule = user.schedules[req.params.schedulenum];
+              var schedule = user.schedules[schedulenum];
               var new_block = req.body;
               console.log(new_block);
               var course_blocks = schedule.course_blocks;
@@ -141,7 +142,7 @@ module.exports = function (app, User) {
               console.log(course_blocks);
               schedule.course_blocks = course_blocks;
               console.log(schedule);
-              user.schedules[req.params.schedulenum] = schedule;
+              user.schedules[schedulenum] = schedule;
               console.log(user);
               user.save(function(err){
                   if(err)
