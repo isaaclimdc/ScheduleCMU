@@ -123,9 +123,11 @@ module.exports = function (app, User) {
           }
           else{
               var schedule = user.schedules[schedulenum];
+              console.log(schedule);
               var new_block = req.body;
               console.log(new_block);
               var course_blocks = schedule.course_blocks;
+              console.log(course_blocks);
               var existing = false;
               for(var i = 0; i < course_blocks.length; i++){
                   if(course_blocks[i].course_id == new_block.course_id){
