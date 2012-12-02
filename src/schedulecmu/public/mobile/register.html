@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;'/>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
 	<meta name="viewport" content="width=device-width" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="description" content="A brand new way to schedule classes at CMU, wherever you are." />
@@ -20,6 +20,29 @@
 	<link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
 </head> 
 <body>
+<!-- Facebook Auth Stuff -->
+<div id="fb-root"></div>
+<script>
+	window.fbAsyncInit = function() {
+	    FB.init({
+	        appId      : '102585986572914', // App ID
+	        channelUrl : 'channel.html', // Channel File
+	        status     : true, // check login status
+	        cookie     : true, // enable cookies to allow the server to access the session
+	        xfbml      : true  // parse XFBML
+	    });
+	};
+
+	// Load the SDK Asynchronously
+	(function(d){
+	    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+	    if (d.getElementById(id)) {return;}
+	    js = d.createElement('script'); js.id = id; js.async = true;
+	    js.src = "http://connect.facebook.net/en_US/all.js";
+	    ref.parentNode.insertBefore(js, ref);
+	}(document));
+</script>
+
 <!-- Register Page -->
 <div data-role="page" data-title="Register" id="register" data-theme="a">
 	<div data-role="content">
@@ -38,7 +61,7 @@
 <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 <script src="../scripts/fullcalendar.min.js"></script>
 <script src="../scripts/spin.min.js"></script>
-<script src="../scripts/schedule.js"></script>
+<script src="../scripts/login.js"></script>
 <script src="../scripts/mobile.js"></script>
 </body>
 </html>
