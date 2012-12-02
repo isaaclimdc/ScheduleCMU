@@ -155,6 +155,7 @@ module.exports = function (app, User) {
                           res.send(404, {error: "We messed up somewhere...."});
                           console.log("save failed");
                       }
+                      console.log("saved" + user);
                       res.send(user.schedules[schedulenum].course_blocks);
               });
 
