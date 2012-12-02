@@ -155,10 +155,16 @@ function setupPage() {
         /* Options for DESKTOP FullCalendar */
         height = 800;
         columnFormat = {
-            month: 'dddd M/d',
-            week: 'dddd M/d',
-            day: 'dddd M/d'
+            month: 'dddd',
+            week: 'dddd',
+            day: 'dddd'
         };
+        /* For debugging - shows dates too */
+        // columnFormat = {
+        //     month: 'dddd M/d',
+        //     week: 'dddd M/d',
+        //     day: 'dddd M/d'
+        // };
     }
 
     /* Setup for MOBILE client */
@@ -337,7 +343,7 @@ function addEventsToCalendar(course, color) {
 
         window.events.push({
             id: course._id,
-            title: course.num + "\n" + anEvent.title + "\n" + anEvent.loc,
+            title: course.num + " " + anEvent.title + "\n" + anEvent.loc,
             color: color,
             start: anEvent.start,
             end: anEvent.end,
