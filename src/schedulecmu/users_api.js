@@ -14,15 +14,15 @@ module.exports = function (app, User) {
     }
 
     function generateVC(andrew){
-	//generate a random two digit number
-	var VC = (Math.floor(Math.random()*89) + 10).toString();
-	//Map each character of the andrew id to its hex value
-	/*This resolves the problem of ever having the same verify code
-	 *for two users, since andrew ids are unique*/ 
-	for(var i = 0; i < andrew.length; i++){
-	    VC += (andrew.charCodeAt(i)).toString(16);
-	}
-	return VC;
+        //generate a random two digit number
+        var VC = (Math.floor(Math.random()*89) + 10).toString();
+        //Map each character of the andrew id to its hex value
+        /*This resolves the problem of ever having the same verify code
+         *for two users, since andrew ids are unique*/
+        for(var i = 0; i < andrew.length; i++){
+            VC += (andrew.charCodeAt(i)).toString(16);
+        }
+        return VC;
     }
 
 
@@ -31,13 +31,13 @@ module.exports = function (app, User) {
     var newU = new User(u);
 
     newU.save(function (err) {
-      if (err) {
-        console.log(err);
-        res.send(404, {error: "We screwed up somehow..."});
-      } else {
-        res.send(newU);
-      }
-    });
+        if (err) {
+            console.log(err);
+            res.send(404, {error: "We screwed up somehow..."});
+        } else {
+            res.send(newU);
+        }
+        });
 
     newU.sendVerifyEmail();
 
@@ -78,17 +78,72 @@ module.exports = function (app, User) {
       if(err || user == undefined) {
         res.send(404, {error: "We messed up somewhere...."});
       } else {
-        if (user.verify_code == req.body.verify_code) {
-          user.verify_code = null;
-          user.save(function(err){
-            if (err)
-              res.send(404, {error: "We messed up somewhere...."});
-          });
-          res.send(user);
-        } else {
-          res.send(401, {error: "Invalid verification code"});
-        }
+          if (user.verify_code == req.body.verify_code) {
+              user.verify_code = null;
+              user.save(function(err){
+                if (err)
+                  res.send(404, {error: "We messed up somewhere...."});
+              });
+              res.send(user);
+          } else {
+              res.send(401, {error: "Invalid verification code"});
+          }
       }
     });
   });
+
+  //To create a new schedule
+  app.post('/api/users/:user/schedules/', function (req, res) {
+      User.findById(req.params.user, function(err, user){
+        if(err || user == undefined) {
+            res.send(404, {error: "We messed up somewhere...."});
+        }
+        else {
+            var s = {semester: req.body.semester,
+                     name: req.body.name, course_blocks: []};
+            user.schedules.push(s);
+            user.save(function(err){
+                if (err)
+                    res.send(404, {error: "We messed up somewhere...."});
+                });
+            res.send(user);
+        }
+    });
+  });
+
+  app.post('/api/users/:user/schedules/:schedulenum/', function (req, res) {
+    User.findById(req.params.user, function(err, user){
+      if(err || user == undefined) {
+          res.send(404, {error: "We messed up somewhere...."});
+      }
+      else {
+          if(user.schedules.length <= req.params.schedulenum){
+              res.send(401, {error: "Invalid schedule number"});
+          }
+          else{
+              var schedule = user.schedules[req.params.schedulenum];
+              var new_block = req.body;
+              var course_blocks = schedule.course_blocks;
+              var existing = false;
+              for(var i = 0; i < course_blocks.length; i++){
+                  if(course_blocks[i].course_id == new_block.course_id){
+                      course_blocks[i] = new_block;
+                      existing = true;
+                      break;
+                  }
+              }
+              if(!existing) course_blocks.push[new_block];
+              schedule.course_blocks = course_blocks;
+              user.schedules[req.params.schedulenum] = schedule;
+              user.save(function(err){
+                  if(err)
+                      res.send(404, {error: "We messed up somewhere...."});
+              });
+              res.send(user);
+          }
+      }
+   });
+ });
 }
+
+
