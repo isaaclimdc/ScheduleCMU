@@ -115,16 +115,16 @@
 			<!-- EventBrowser -->
 			<div id="eventBrowser" style="display:none">
 				<h2>New course event</h2>
-				<form id="eventForm" onSubmit="processEventForm();">
+				<form id="eventForm">
 					<label for="eventFormCourseNum">Course Number (5 digits)</label>
 					<input type="text" id="eventFormCourseNum" placeholder="15451"</input>
 
 					<label for="eventFormType">Event Type</label>
 					<select id="eventFormType">
-					 	<option value="officehours">Office Hours</option>
-					  	<option value="reviewsession">Review Session</option>
-					  	<option value="extralab">Extra Lab</option>
-					  	<option value="other">Other</option>
+					 	<option value="0">Office Hours</option>
+					  	<option value="1">Review Session</option>
+					  	<option value="2">Extra Lab</option>
+					  	<option value="3">Other</option>
 					</select>
 
 					<label for="eventFormTitle">Event Title</label>

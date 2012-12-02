@@ -702,7 +702,7 @@ if (window.isMobile === false ) {
 
 function processEventForm() {
     var courseNum = $("#eventFormCourseNum").val();
-    var type = $("#eventFormType").val();
+    var type = parseInt($("#eventFormType").val());
     var title = $("#eventFormTitle").val();
     var location = $("#eventFormLocation").val();
     var dateStr = $("#eventFormDate").val();
@@ -720,13 +720,36 @@ function processEventForm() {
     };
 
     if (validateEventForm(results) === true) {
-        alert("valid!");
-
+        alert("Valid!");
         /* Process the valid data here */
         var dateArr = $("#eventFormDate").val().split("/");
-        console.log(dateArr);
-        var date = new Date(dateArr[2], dateArr[0], dateArr[1]);
-        console.log(date);
+        var date = new Date(parseInt(dateArr[2]), parseInt(dateArr[0]), parseInt(dateArr[1]));
+
+        courseNum = courseNum.substring(0, 2) + "-" + courseNum.substring(2);
+
+        performAjaxRequest({
+            url : "/courses?number=" + courseNum,
+            success : function(res, sta) {
+                console.log(res);
+                var courseID = res[0]._id;
+
+                performAjaxRequest({
+                    type : "POST",
+                    url : "/courses/" + courseID + "/events",
+                    data : {
+                        "event_type" : type,
+                        "title" : title,
+                        "loc" : location,
+                        "date_time" : date,
+                        "state" : 0,
+                        "threshold" : 20
+                    },
+                    success : function(result, status) {
+                        console.log(result);
+                    }
+                });
+            }
+        });
 
         /* When done, close the fancybox dialog */
         if (window.isMobile === false) 
@@ -754,7 +777,9 @@ function validateEventForm(res) {
         toChange.push("#eventFormDate");
     }
     else {
-        if (res.date.test("/[0-9]{2}\/[0-9]{1,2}\/[0-9]{4}/") === false) {
+        console.log(res.date);
+        var regx = /[0-9]{2}\/[0-9]{1,2}\/[0-9]{4}/;
+        if (regx.test(res.date) === false) {
             toChange.push("#eventFormDate");
         }
     }
