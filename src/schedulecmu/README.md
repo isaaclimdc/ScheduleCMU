@@ -52,4 +52,17 @@ GET /api/courses?...
 GET /api/courses/*courseID*
 GET /api/courses/*courseID*/sections/*sectionID*
 GET /api/courses/*courseID*/sections/*sectionID*/subsections/*subID*
+POST /api/courses/*couresID*/events
 
+
+Important URLs not yet complete:
+
+DELETE /api/users/*fbid*
+DELETE /api/users/*fbid*/schedules/*schedID*
+DELETE /api/users/*fbID*/schedules/*schedID*/blocks/*courseID*
+
+DELETE /api/courses/*courseID*/events/*eventID*
+PUT /api/courses/*courseID*/events/*eventID*
+
+The goal is to eventually support GET,POST,PUT,DELETE for every object
+and collection in the users API.
