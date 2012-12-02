@@ -719,20 +719,26 @@ function processEventForm() {
         "endTime": endTime
     };
 
+    /* Process the valid data here */
     if (validateEventForm(results) === true) {
-        alert("Valid!");
-        /* Process the valid data here */
+        /* Parse time and date */
+        var startArr = processTimeStr(startTime);
+        var endArr = processTimeStr(endTime);
         var dateArr = $("#eventFormDate").val().split("/");
-        var date = new Date(parseInt(dateArr[2]), parseInt(dateArr[0]), parseInt(dateArr[1]));
+        var startDate = new Date(parseInt(dateArr[2]), parseInt(dateArr[0]), parseInt(dateArr[1]), startArr[0], startArr[1]);
+        var endDate = new Date(parseInt(dateArr[2]), parseInt(dateArr[0]), parseInt(dateArr[1]), endArr[0], endArr[1]);
 
+        /* Parse course num */
         courseNum = courseNum.substring(0, 2) + "-" + courseNum.substring(2);
 
+        /* Get the course ID */
         performAjaxRequest({
             url : "/courses?number=" + courseNum,
             success : function(res, sta) {
                 console.log(res);
                 var courseID = res[0]._id;
 
+                /* POST the new event to this course ID */
                 performAjaxRequest({
                     type : "POST",
                     url : "/courses/" + courseID + "/events",
@@ -740,20 +746,21 @@ function processEventForm() {
                         "event_type" : type,
                         "title" : title,
                         "loc" : location,
-                        "date_time" : date,
-                        "state" : 0,
-                        "threshold" : 20
+                        "start" : startDate.toString(),
+                        "end" : endDate.toString()
                     },
                     success : function(result, status) {
                         console.log(result);
+
+                        /* When done, close the fancybox dialog */
+                        if (window.isMobile === false) 
+                            $.fancybox.close(false);
                     }
                 });
             }
         });
 
-        /* When done, close the fancybox dialog */
-        if (window.isMobile === false) 
-            $.fancybox.close(false);
+        
     }
 }
 
@@ -777,14 +784,10 @@ function validateEventForm(res) {
         toChange.push("#eventFormDate");
     }
     else {
-        console.log(res.date);
         var regx = /[0-9]{2}\/[0-9]{1,2}\/[0-9]{4}/;
         if (regx.test(res.date) === false) {
             toChange.push("#eventFormDate");
         }
-    }
-    if (parseInt(res.endTime) <= parseInt(res.startTime)) {
-        toChange.push("#eventFormEndTime");
     }
 
     if (toChange.length === 0)
