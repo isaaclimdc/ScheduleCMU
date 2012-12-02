@@ -99,7 +99,7 @@ module.exports = function (app, User) {
             res.send(404, {error: "We messed up somewhere...."});
         }
         else {
-            var s = {semester: req.body.semester,
+            var s = {semester: Number(req.body.semester),
                      name: req.body.name, course_blocks: []};
             user.schedules.push(s);
             user.save(function(err){

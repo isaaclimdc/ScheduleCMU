@@ -96,13 +96,13 @@ module.exports = function (mongoose, db) {
       subject: "Please verify your email address", // Subject line
       text: "Go to the following url to verify your email address \n " +
             "http://schedulecmu.aws.af.cm/verified.html#" +
-            this.verify_code + "_" + this._id +
+            this.verify_code  +
             "\n This is an auto-generated email. " +
             "Please do not reply to this mail.",
       html: "<div>Click on the link below to verify your email " +
             "address</div>" +
             "<a href='http://schedulecmu.aws.af.cm/verified.html#" +
-            this.verify_code + "_" + this._id + "'>VERIFY</a>" +
+            this.verify_code + "'>VERIFY</a>" +
             "<div> This is an auto-generated email. Please do not reply " +
             "to this mail. </div>"
     }
