@@ -103,26 +103,3 @@ function createNewUser() {
         }
     });
 }
-
-function verify() {
-    /* URL (from the email) in the form "../verify.html#59824c_1024948488" */
-    var hashArgs = window.location.hash.substring(1);
-    var verifyStartIdx = hashArgs.indexOf("_");
-    var verifyCode = hashArgs.substring(0, verifyStartIdx);
-    var fbID = hashArgs.substring(verifyStartIdx+1);
-    console.log("Verify: " + verifyCode);
-    console.log("FBID: " + fbID);
-
-    performAjaxRequest({
-        type : "POST",
-        url : "/users/" + fbID,
-        data : {
-            "_id" : fbID,
-            "verify_code" : verifyCode
-        },
-        success : function(result, status) {
-            console.log(result);
-        }
-    });
-}
-

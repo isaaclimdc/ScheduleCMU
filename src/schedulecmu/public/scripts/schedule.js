@@ -90,10 +90,28 @@ function fetchUserSchedule(user) {
      */
     if (schedulesArr.length > 0) {
         var latestSchedule = schedulesArr[0];
+
+        $('#semTitle').text(convertSemToReadable(latestSchedule.semester));
+        $('#scheduleVersion').text(latestSchedule.name);
+
         window.userBlocks = latestSchedule.course_blocks;
         console.log("User Blocks: ", window.userBlocks);
 
         fetchCourseData();
+    }
+    /* Otherwise, create a new schedule */
+    else {
+        performAjaxRequest({
+            type : "POST",
+            url : "/users/" + user._id + "/schedules/",
+            data : {
+                "semester" : 130,  /* Placeholder */
+                "name" : "Schedule 1"
+            },
+            success : function(result, status) {
+                console.log(result);
+            }
+        });
     }
 }
 
@@ -125,9 +143,11 @@ function setupPage() {
             e.preventDefault();
             searchForCourseInCourseBrowser();
         });
+        $("#eventForm").submit(function(e){
+            e.preventDefault();
+            processEventForm();
+        });
         $(".courseBrowserRow img").click(function(e) {
-            //do something
-            console.log("CAN'T GET THIS TO WORK!!");
             e.stopPropagation();
         });
 
@@ -169,7 +189,6 @@ function setupPage() {
 
 function fetchCourseData() {
     for (var i = 0; i < window.userBlocks.length; i++) {
-
         performAjaxRequest({
             url: "/courses/" + window.userBlocks[i].course_id,
             success: function(result, status) {
@@ -685,30 +704,32 @@ function processEventForm() {
     var courseNum = $("#eventFormCourseNum").val();
     var type = $("#eventFormType").val();
     var title = $("#eventFormTitle").val();
-    var date = $("#eventFormDate").val();
+    var location = $("#eventFormLocation").val();
+    var dateStr = $("#eventFormDate").val();
     var startTime = $("#eventFormStartTime").val();
     var endTime = $("#eventFormEndTime").val();
-    var location = $("#eventFormLocation").val();
-    var andrew = $("#eventFormAndrew").val();
 
     var results = {
         "courseNum" : courseNum,
         "type" : type,
         "title" : title,
-        "date" : date,
-        "startTime" : startTime,
-        "endTime": endTime,
         "location": location,
-        "andrew": andrew
+        "date" : dateStr,
+        "startTime" : startTime,
+        "endTime": endTime
     };
 
     if (validateEventForm(results) === true) {
         alert("valid!");
 
         /* Process the valid data here */
+        var dateArr = $("#eventFormDate").val().split("/");
+        console.log(dateArr);
+        var date = new Date(dateArr[2], dateArr[0], dateArr[1]);
+        console.log(date);
 
         /* When done, close the fancybox dialog */
-        if(window.isMobile === false) 
+        if (window.isMobile === false) 
             $.fancybox.close(false);
     }
 }
@@ -726,15 +747,19 @@ function validateEventForm(res) {
     if (res.title.length === 0) {
         toChange.push("#eventFormTitle");
     }
-    if (res.date.length)
-    if (parseInt(res.endTime) <= parseInt(res.startTime)) {
-        toChange.push("#eventFormEndTime");
-    }
     if (res.location.length === 0) {
         toChange.push("#eventFormLocation");
     }
-    if (res.andrew.length === 0) {
-        toChange.push("#eventFormAndrew");
+    if (res.date.length === 0) {
+        toChange.push("#eventFormDate");
+    }
+    else {
+        if (res.date.test("/[0-9]{2}\/[0-9]{1,2}\/[0-9]{4}/") === false) {
+            toChange.push("#eventFormDate");
+        }
+    }
+    if (parseInt(res.endTime) <= parseInt(res.startTime)) {
+        toChange.push("#eventFormEndTime");
     }
 
     if (toChange.length === 0)
@@ -1072,4 +1097,18 @@ function isNumber(n) {
 
 Array.prototype.removeObj = function(obj) {
     this.splice(this.indexOf(obj), 1);
+}
+
+function convertSemToReadable(sem) {
+    var year = 2000 + sem / 10;
+    var semNum = sem % 10;
+    var season;
+    if (semNum === 0)
+        season = "Spring";
+    else if (semNum === 1)
+        season = "Summer";
+    else if (semNum === 2)
+        season = "Fall";
+
+    return season + " " + year;
 }
