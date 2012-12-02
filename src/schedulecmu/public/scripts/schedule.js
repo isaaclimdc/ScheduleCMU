@@ -22,9 +22,25 @@ function performAjaxRequest(opts) {
     if (window.isMobile === false)
         startSpinner();
 
+    var type = (opts.type !== undefined) ? opts.type : "GET";
+
+    var url = (opts.customurl !== undefined) ? opts.customurl : (window.baseURL + opts.url);
+
+    var statusCode;
+    if (opts.statusCode !== undefined)
+        statusCode = opts.statusCode;
+    else
+        statusCode = {
+            200: function() {  },
+            404: function() { console.log("PAGE NOT FOUND!"); }
+        }
+
     $.ajax({
-        url: (opts.customurl !== undefined) ? opts.customurl : window.baseURL + opts.url,
-        success: function(result, status) {
+        type : type,
+        url : url,
+        data : opts.data,
+        statusCode : statusCode,
+        success : function(result, status) {
             /* Always log the request status */
             // console.log(status);
 
@@ -40,7 +56,7 @@ function performAjaxRequest(opts) {
             if (window.isMobile === false)
                  stopSpinner();
         },
-        error: function(xhr, status, error) {
+        error : function(xhr, status, error) {
             if (opts.error !== undefined)
                 opts.error(status, error);
             else
@@ -48,10 +64,6 @@ function performAjaxRequest(opts) {
             
             if (window.isMobile === false)
                  stopSpinner();
-        },
-        statusCode: {
-            200: function() {  },
-            404: function() { console.log("PAGE NOT FOUND!"); }
         }
     });
 }
@@ -599,6 +611,9 @@ function deleteCourse(p) {
         });
 
     /* POST HERE */
+
+    /* Refresh FullCalendar */
+    $('#calview').fullCalendar('refetchEvents');
 }
 
 /*** CourseBrowser ***/

@@ -44,8 +44,8 @@ function loginToScheduleCMU(fbAuthResponse) {
     var fbID = fbAuthResponse.userID;
     var accessToken = fbAuthResponse.accessToken;
 
-    $.ajax({
-        url : window.baseURL + "/users/" + fbID + "?auth_token=" + accessToken,
+    performAjaxRequest({
+        url : "/users/" + fbID + "?auth_token=" + accessToken,
         success : function(result, status) {
             console.log("Succesfully logged in!", result);
 
@@ -56,16 +56,13 @@ function loginToScheduleCMU(fbAuthResponse) {
             var user = result;
             fetchUserSchedule(user);
         },
-        error : function(xhr, status, error) {
-            console.log(error);
-        },
         statusCode: {
             200: function() {  },
             404: function() {
                 console.log("User not found");
-                var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+                // var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 
-                if (isMobile === false)
+                if (window.isMobile === false)
                     window.location.href = "register.html";
                 else
                     window.location.href = "../mobile/register.html";
@@ -86,9 +83,9 @@ function createNewUser() {
             /* Create a new user on the server. Automatically sends
              * a verification email to their andrew email
              */
-            $.ajax({
+            performAjaxRequest({
                 type : "POST",
-                url : window.baseURL + "/users/" + fbID,
+                url : "/users/" + fbID,
                 data : {
                     "andrew" : andrewID,
                     "auth_token" : accessToken
@@ -98,13 +95,6 @@ function createNewUser() {
 
                     /* Show them a "sent email" message */
                     $("#loginForm").append($("<p>").html("We've sent you a verification email!"));
-                },
-                error : function(xhr, status, error) {
-                    console.log(error);
-                },
-                statusCode: {
-                    200: function() {  },
-                    404: function() { console.log("Page not found"); }
                 }
             });
         }
@@ -123,22 +113,16 @@ function verify() {
     console.log("Verify: " + verifyCode);
     console.log("FBID: " + fbID);
 
-    $.ajax({
+    performAjaxRequest({
         type : "POST",
-        url : window.baseURL + "/users/" + fbID,
+        url : "/users/" + fbID,
         data : {
             "_id" : fbID,
             "verify_code" : verifyCode
         },
         success : function(result, status) {
             console.log(result);
-        },
-        error : function(xhr, status, error) {
-            console.log(error);
-        },
-        statusCode: {
-            200: function() {  },
-            404: function() { console.log("Page not found"); }
         }
     });
 }
+
