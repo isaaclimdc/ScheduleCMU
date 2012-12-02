@@ -13,7 +13,7 @@
 function verify(authResponse) {
     /* URL (from the email) in the form "../verify.html#59824c" */
     var verifyCode = window.location.hash.substring(1);
-    console.log("Verify: " + verifyCode);
+    console.log("Verify Code: " + verifyCode);
 
     $.ajax({
         type : "POST",
@@ -23,6 +23,9 @@ function verify(authResponse) {
         },
         success : function(result, status) {
             console.log(result);
+
+            /* Successfully verified, now login */
+            loginToScheduleCMU(authResponse);
         },
         error : function(xhr, status, error) {
             console.log(error);
