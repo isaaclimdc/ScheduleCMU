@@ -1,5 +1,6 @@
 // Additional JS functions here
 window.fbAsyncInit = function() {
+    console.log("HERE");
     FB.init({
         appId      : '102585986572914', // App ID
         channelUrl : 'channel.html', // Channel File

@@ -235,13 +235,25 @@ li {
     box-shadow: 0px 0px 5px #999999;
 }
 
+#fbLoginBtn {
+    /*margin-top: 20px;*/
+
+    width: 150px;
+    height: 23px;
+    background: url("../../images/fblogin.png") 0 0;
+}
+#fbLoginBtn:hover {
+    background: url("../../images/fblogin.png") 0 -24px;
+    cursor: pointer;
+}
+
 #copyright {
     font-size: 12px;
 }
 
 /* Marketing */
 #marketing #title {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 #marketing #titleRow {
     margin-bottom: 40px;
