@@ -1,15 +1,19 @@
-$(document).ready(function() {
-    verify();
-});
+/* Facebook response object:
+    {
+        status: 'connected',
+        authResponse: {
+            accessToken: '...',
+            expiresIn:'...',
+            signedRequest:'...',
+            userID:'...'
+        }
+    }
+*/
 
-function verify() {
-    /* URL (from the email) in the form "../verify.html#59824c_1024948488" */
-    var hashArgs = window.location.hash.substring(1);
-    var verifyStartIdx = hashArgs.indexOf("_");
-    var verifyCode = hashArgs.substring(0, verifyStartIdx);
-    var fbID = hashArgs.substring(verifyStartIdx+1);
+function verify(authResponse) {
+    /* URL (from the email) in the form "../verify.html#59824c" */
+    var verifyCode = window.location.hash.substring(1);
     console.log("Verify: " + verifyCode);
-    console.log("FBID: " + fbID);
 
     $.ajax({
         type : "POST",

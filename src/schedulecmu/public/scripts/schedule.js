@@ -9,13 +9,59 @@ window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.us
 window.baseURL = "http://schedulecmu.aws.af.cm/api";
 
 /* Initialization of arrays */
-window.userSections = [];
+window.userBlocks = [];
 window.listedCourses = [];
 window.events = [];
 
 
 $(document).ready(function() {
-    $("#eventFormDate").datepicker();
+    // loginToFB();
+});
+
+/* A convenient wrapper for $.ajax that automatically starts and stops
+ * the spinner (spin.js), and does error checking. Requires an argument
+ * opts: { url: string , success: fn, error (optional) : fn }
+ */
+function performAjaxRequest(opts) {
+    if (window.isMobile === false)
+        startSpinner();
+
+    $.ajax({
+        url: (opts.customurl !== undefined) ? opts.customurl : window.baseURL + opts.url,
+        success: function(result, status) {
+            /* Always log the request status */
+            // console.log(status);
+
+            /* Parse it if it's not a custom request */
+            if (opts.customurl === undefined) {
+                if (typeof(result) !== "object")
+                    result = $.parseJSON(result);
+            }
+
+            /* Perform user callback */
+            opts.success(result, status);
+
+            if (window.isMobile === false)
+                 stopSpinner();
+        },
+        error: function(xhr, status, error) {
+            if (opts.error !== undefined)
+                opts.error(status, error);
+            else
+                console.log("Error: " + status + " with HTTP error: " + error);
+            
+            if (window.isMobile === false)
+                 stopSpinner();
+        },
+        statusCode: {
+            200: function() {  },
+            404: function() { console.log("PAGE NOT FOUND!"); }
+        }
+    });
+}
+
+function setupScheduleForUser(user) {
+    $("#eventFormDate").datePicker();
 
     /* Setup for DESKTOP client */
     if (window.isMobile === false) {
@@ -98,91 +144,43 @@ $(document).ready(function() {
     }
 
     /* Populate the page with the user's courses */
-    fetchUserSchedule();
-});
-
-/* A convenient wrapper for $.ajax that automatically starts and stops
- * the spinner (spin.js), and does error checking. Requires an argument
- * opts: { url: string , success: fn, error (optional) : fn }
- */
-function performAjaxRequest(opts) {
-    if (window.isMobile === false)
-        startSpinner();
-
-    $.ajax({
-        url: (opts.customurl !== undefined) ? opts.customurl : window.baseURL + opts.url,
-        success: function(result, status) {
-            /* Always log the request status */
-            console.log(status);
-
-            /* Parse it if it's not a custom request */
-            if (opts.customurl === undefined) {
-                if (typeof(result) !== "object")
-                    result = $.parseJSON(result);
-            }
-
-            /* Perform user callback */
-            opts.success(result, status);
-
-            if (window.isMobile === false)
-                 stopSpinner();
-        },
-        error: function(xhr, status, error) {
-            if (opts.error !== undefined)
-                opts.error(status, error);
-            else
-                console.log("Error: " + status + " with HTTP error: " + error);
-            
-            if (window.isMobile === false)
-                 stopSpinner();
-        },
-        statusCode: {
-            200: function() {  },
-            404: function() { console.log("PAGE NOT FOUND!"); }
-        }
-    });
+    fetchUserSchedule(user);
 }
 
 /**** Fetch Data ****/
 
-function fetchUserSchedule() {
-    window.userSections =
-    [
-        {"id" : "50b9916e01b1568d25000ad6", "section" : 1, "subsection" : 3},
-        {"id" : "50b9916f01b1568d25002117", "section" : 0, "subsection" : 0},
-        {"id" : "50b9916f01b1568d25001d40", "section" : 0, "subsection" : 0},
-        {"id" : "50b9916f01b1568d250012e9", "section" : 1, "subsection" : 3},
-        {"id" : "50b9916e01b1568d250004e4", "section" : 2, "subsection" : 0}
-    ];
+function fetchUserSchedule(user) {
+    // window.userBlocks =
+    // [
+    //     {"id" : "50b9916e01b1568d25000ad6", "section" : 1, "subsection" : 3},
+    //     {"id" : "50b9916f01b1568d25002117", "section" : 0, "subsection" : 0},
+    //     {"id" : "50b9916f01b1568d25001d40", "section" : 0, "subsection" : 0},
+    //     {"id" : "50b9916f01b1568d250012e9", "section" : 1, "subsection" : 3},
+    //     {"id" : "50b9916e01b1568d250004e4", "section" : 2, "subsection" : 0}
+    // ];
 
-    performAjaxRequest({
-        url : 
-    })
+    var schedulesArr = user.schedules;
 
-    fetchCourseData();
+    /* If there are existing schedules for this user, fetch them
+     * and populate the page
+     */
+    if (schedulesArr.length > 0) {
+        var latestSchedule = schedulesArr[0];
+        window.userBlocks = latestSchedule.course_blocks;
+        console.log("User Blocks: ", window.userBlocks);
 
-    /* Uncomment below and delete above once this API is ready */
-    // performAjaxRequest({
-    //     url : "",
-    //     success : function(result, status) {
-    //         window.userSections = result;
-
-    //         if (localStorage["org.schedulecmu.usercourses"] === undefined)
-    //             fetchCourseData(false);
-    //         else
-    //             fetchCourseData(true);
-    //     }
-    // });
+        fetchCourseData();
+    }
 }
 
 function fetchCourseData() {
-    for (var i = 0; i < window.userSections.length; i++) {
+    for (var i = 0; i < window.userBlocks.length; i++) {
 
         performAjaxRequest({
-            url: "/courses/" + window.userSections[i].id,
+            url: "/courses/" + window.userBlocks[i].course_id,
             success: function(result, status) {
                 var course = result;
-                console.log(course);
+                // console.log(course);
 
                 if (course === null) {
                     return;
@@ -205,9 +203,9 @@ function addCourseToCalendar(course) {
     var sem = parseInt("122"); /* Override for debugging */
     var sectionsToAdd;
     var color;
-    for (var i = 0; i < window.userSections.length; i++) {
-        if (window.userSections[i].id === course._id) {
-            sectionsToAdd = window.userSections[i];
+    for (var i = 0; i < window.userBlocks.length; i++) {
+        if (window.userBlocks[i].course_id === course._id) {
+            sectionsToAdd = window.userBlocks[i];
         }
     }
 
@@ -320,26 +318,42 @@ function requestAndAddCourse() {
     performAjaxRequest({
         url : urlReq,
         success : function(result, status) {
-            var addCourseBox = $('#addCourseBox').val("").attr("placeholder", "Searching...");
+            var addCourseBox = $('#addCourseBox').val("");
+
+            /* Helper to set the placeholder of the addCourseBox */
+            function setPlaceholder(str) {
+                return addCourseBox.attr("placeholder", str);
+            }
+
+            setPlaceholder("Searching...");
 
             if (result.length === 0) {
-                addCourseBox.attr("placeholder", "Course not found!");
+                setPlaceholder("Course not found!");
                 return;
             }
 
+            /* ID of the course we want to add */
             var courseID = result[0]._id;
+
+            /* Check if this course is already in the existing courses */
+            for (var i = 0; i < window.userBlocks.length; i++) {
+                if (window.userBlocks[i].course_id === courseID) {
+                    setPlaceholder("Course already added");
+                    return;
+                }
+            }
 
             performAjaxRequest({
                 url : "/courses/" + courseID,
                 success : function(result, status) {
                     var course = result;
 
-                    addCourseBox.attr("placeholder", course.num + " added!");
+                    setPlaceholder(course.num + " added!");
 
                     window.listedCourses.push(course);
 
-                    window.userSections.push({
-                        "id" : course._id,
+                    window.userBlocks.push({
+                        "course_id" : course._id,
                         "section" : 0,
                         "subsection" : 0
                     });
@@ -552,10 +566,10 @@ function rowSelected(tr) {
     var clickedIndex = row.parent().parent().parent().parent().index();
 
     var course = window.listedCourses[clickedIndex];
-    for (var i = 0; i < window.userSections.length; i++) {
-        if (window.userSections[i].id === course._id) {
-            window.userSections[i].section = sectIdx;
-            window.userSections[i].subsection = subsectIdx;
+    for (var i = 0; i < window.userBlocks.length; i++) {
+        if (window.userBlocks[i].course_id === course._id) {
+            window.userBlocks[i].section = sectIdx;
+            window.userBlocks[i].subsection = subsectIdx;
             break;
         }
     }
@@ -588,9 +602,8 @@ function deleteCourse(p) {
     // Send updated course list to server
     window.listedCourses.splice(clickedIndex, 1);
 
-    window.userSections = $.grep(window.userSections, function(elt, idx) {
-        if (elt.id === course._id) {
-            // i = idx;
+    window.userBlocks = $.grep(window.userBlocks, function(elt, idx) {
+        if (elt.course_id === course._id) {
             return false;
         }
         return true;
