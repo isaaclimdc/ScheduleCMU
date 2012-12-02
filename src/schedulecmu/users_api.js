@@ -1,9 +1,13 @@
 express = require('express');
 
 module.exports = function (app, User) {
-  app.post('/api/users/:user', function (req, res) {
-    if (req.body.andrew == undefined) {
-      res.send(404, {error: "Andrew ID required to create user."});
+  app.put('/api/users/:user', function (req, res) {
+    if (req.body.data == undefine) {
+      res.send(400, {error: "No user received."});
+      return;
+    }
+    if (req.body.data.andrew == undefined) {
+      res.send(400, {error: "Andrew ID required to create user."});
       return;
     }
 
@@ -26,21 +30,20 @@ module.exports = function (app, User) {
     }
 
 
-    // TODO later - generate random verify_code and send verification email.
-    var u = {_id: req.params.user, andrew: req.body.andrew, verify_code: generateVC(req.body.andrew)};
+    var u = {_id: req.params.user,
+             andrew: req.body.data.andrew,
+             verify_code: generateVC(req.body.data.andrew)};
     var newU = new User(u);
 
     newU.save(function (err) {
-        if (err) {
-            console.log(err);
-            res.send(404, {error: "We screwed up somehow..."});
-        } else {
-            res.send(newU);
-        }
-        });
-
-    newU.sendVerifyEmail();
-
+      if (err) {
+        console.log(err);
+        res.send(404, {error: "We screwed up somehow..."});
+      } else {
+        res.send(newU);
+        newU.sendVerifyEmail();
+      }
+    });
   });
 
 
@@ -94,76 +97,80 @@ module.exports = function (app, User) {
 
   //To create a new schedule
   app.post('/api/users/:user/schedules', function (req, res) {
-      User.findById(req.params.user, function(err, user){
-        if(err || user == undefined) {
-            res.send(404, {error: "We messed up somewhere...."});
-        }
-        else {
-            var s = {semester: Number(req.body.semester),
-                     name: req.body.name, course_blocks: []};
-            user.schedules.push(s);
-            user.save(function(err){
-                    if (err){
-                        res.send(404, {error: "We messed up somewhere...."});
-                        console.log("save failed");
-                    }
-                    res.send(user);
-                });
+    if (req.body.data == undefined) {
+      res.send(400, {error: "No schedule received."});
+      return;
+    }
 
+    User.findById(req.params.user, function(err, user){
+      if(err) {
+        console.log(err);
+        res.send(500, {error: "No database connection."});
+        return;
+      }
+      if (user == undefined) {
+        res.send(404, {error: "User not found."});
+        return;
+      }
+        
+      user.schedules.push({semester: req.body.data.semester,
+                           name: req.body.data.name});
+      user.save(function(err){
+        if (err){
+          console.log(err);
+          res.send(400, {error: "Incorrect schedule syntax."});
+        } else {
+          res.send(user);
         }
+      });
     });
   });
 
-  app.post('/api/users/:user/schedules/:schedulenum', function (req, res) {
+  app.put('/api/users/:user/schedules/:schedule/blocks/:block',
+           function (req, res) {
+    if (req.body.data == undefined) {
+      res.send(400, {error: "No block received."});
+      return;
+    }
+    req.body.data._id = req.params.block;
+
     User.findById(req.params.user, function(err, user){
-      if(err || user == undefined) {
-          res.send(404, {error: "We messed up somewhere...."});
+      if(err) {
+        console.log(err);
+        res.send(500, {error: "No database connection."});
+        return;
       }
-      else {
-          console.log(user);
-          var schedulenum = Number(req.params.schedulenum);
-          if(user.schedules.length <= schedulenum){
-              res.send(401, {error: "Invalid schedule number"});
-          }
-          else{
-              var schedule = user.schedules[schedulenum];
-              console.log(schedule);
-              var new_block = req.body;
-              console.log(new_block);
-              var course_blocks = schedule.course_blocks;
-              console.log(course_blocks);
-              var existing = false;
-              for(var i = 0; i < course_blocks.length; i++){
-                  if(course_blocks[i].course_id == new_block.course_id){
-                      course_blocks[i] = new_block;
-                      existing = true;
-                      break;
-                      console.log("exists");
-                  }
-              }
-              if(!existing){
-                  console.log("doesn't");
-                  course_blocks.push(new_block);
-              }
-              console.log(course_blocks);
-              schedule.course_blocks = course_blocks;
-              console.log(schedule);
-              user.schedules[schedulenum] = schedule;
-              console.log(user);
-              user.save(function(err){
-                      if(err){
-                          res.send(404, {error: "We messed up somewhere...."});
-                          console.log("save failed");
-                      }
-                      console.log("saved" + user);
-                      res.send(user.schedules[schedulenum].course_blocks);
-              });
-
-          }
-
+      if (user == undefined) {
+        res.send(404, {error: "User not found."});
+        return;
       }
-   });
- });
+
+      var schedule = user.schedules.id(req.params.schedule);
+      if (schedule == undefined) {
+        res.send(404, {error: "Schedule not found."});
+        return;
+      }
+
+      var block = schedule.course_blocks.id(req.params.block);
+      if (block == undefined) {
+        schedule.course_blocks.push(req.body.data);
+      } else {
+        // Test if this works - modifies parent schedule...
+        block.section_id = req.body.data.section_id;
+        block.subsection_id = req.body.data.subsection_id;
+      }
+
+      user.save(function(err){
+        if(err){
+          res.send(400, {error: "Invalid block syntax."});
+          console.log(err);
+        } else {
+          res.send(schedule.course_blocks);
+        }
+      });
+    });
+  });
+
 }
 
 

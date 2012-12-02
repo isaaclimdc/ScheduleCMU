@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var app = express();
 
 app.use(express.bodyParser());
+app.use(express.methodOverride());
 
 var db = require('./db.js').dbConnect(mongoose);
 var Course = require('./course_model.js')(mongoose, db);

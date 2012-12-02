@@ -5,14 +5,12 @@ var app_access = "102585986572914|a_j0-_3SoiGwgLvcemx0gYE3jQo"
 
 module.exports = function (mongoose, db) {
   var Schema = mongoose.Schema;
-  var UserSchema = new Schema({
-    // the _id field should store the fbid of the user
+
+  var BlockSchema = new Schema({
     _id: {type: String},
-    andrew: {type: String, match: /^[A-Za-z0-9]{3,8}$/},
-    auth_token: {type: String, default: null},
-    auth_expiry: {type: Number, default: null},
-    verify_code: {type: String, default: null},
-    schedules: [ScheduleSchema]
+    course_id: {type: String},
+    section_id: {type: String},
+    subsection_id: {type: String, default: null}
   });
 
   var ScheduleSchema = new Schema({
@@ -21,10 +19,14 @@ module.exports = function (mongoose, db) {
     course_blocks: [BlockSchema]
   });
 
-  var BlockSchema = new Schema({
-    course_id: {type: String},
-    section_id: {type: String},
-    subsection_id: {type: String, default: null}
+  var UserSchema = new Schema({
+    // the _id field should store the fbid of the user
+    _id: {type: String},
+    andrew: {type: String, match: /^[A-Za-z0-9]{3,8}$/},
+    auth_token: {type: String, default: null},
+    auth_expiry: {type: Number, default: null},
+    verify_code: {type: String, default: null},
+    schedules: [ScheduleSchema]
   });
 
   UserSchema.methods.authenticate = function (auth_token, cb) {

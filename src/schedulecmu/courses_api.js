@@ -102,14 +102,15 @@
 
 
   app.post('/api/courses/:course/events', function(req, res) {
-    if (req.body == null) {
+    if (req.body.data == undefined) {
+      //400
       res.send("um no.");
     } else {
       // Values for validity of the event
-      req.body.threshold = 0;
-      req.body.state = 20; //No crowdsourcing for now!
+      req.body.data.threshold = 0;
+      req.body.data.state = 20; //No crowdsourcing for now!
 
-      req.body.recur = null; //For now
+      req.body.data.recur = null; //For now
     }
 
 	  Course.findById(req.params.course, function(err, course) {
@@ -117,7 +118,7 @@
         console.log(err);
         res.send(404);
       } else {
-        course.course_events.push(req.body);
+        course.course_events.push(req.body.data);
         course.save(function (err) {
           if (err) {
             console.log(err);
