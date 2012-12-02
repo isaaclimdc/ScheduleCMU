@@ -115,7 +115,7 @@
       req.body.recur = null; //For now
     }
 
-	  Course.findById(course, function(err, course) {
+	  Course.findById(req.params.course, function(err, course) {
       if (err) {
         console.log(err);
         res.send(404);
