@@ -226,10 +226,6 @@ li {
     text-align: center;
 }
 
-#fbLoginBtn {
-    color: white;
-}
-
 #introVideo {
     display: block;
     margin-left: auto;
@@ -239,21 +235,31 @@ li {
     box-shadow: 0px 0px 5px #999999;
 }
 
+#fbLoginBtn {
+    /*margin-top: 20px;*/
+
+    width: 150px;
+    height: 23px;
+    background: url("../../images/fblogin.png") 0 0;
+}
+#fbLoginBtn:hover {
+    background: url("../../images/fblogin.png") 0 -24px;
+    cursor: pointer;
+}
+
 #copyright {
     font-size: 12px;
 }
 
 /* Marketing */
 #marketing #title {
-    text-align: center;
     margin-top: 20px;
+}
+#marketing #titleRow {
+    margin-bottom: 40px;
 }
 #marketing h4 {
     margin-bottom: 10px;
-}
-#marketing a:not(#fbLoginBtn) {
-    color: red;
-    font-weight: bold;
 }
 #marketing li {
     list-style-type: circle;
@@ -280,7 +286,7 @@ li {
     text-align: center;
 }
 #loginForm form {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 #loginForm label {
     float: right;

@@ -1,4 +1,4 @@
-https = require("https");
+request = require("request");
 
 // SHH IT'S A SECRET
 var app_access = "102585986572914|a_j0-_3SoiGwgLvcemx0gYE3jQo"
@@ -28,6 +28,9 @@ module.exports = function (mongoose, db) {
   });
 
   UserSchema.methods.authenticate = function (auth_token, cb) {
+    // Makes the user accessible in future callbacks
+    var curUser = this;
+
     var currentTime = new Date().getTime() / 1000;
     if (this.auth_token == auth_token && currentTime < this.auth_expiry) {
       if (this.verify_code == null)
@@ -53,18 +56,22 @@ module.exports = function (mongoose, db) {
         return;
       }
 
-      if (this._id == body.data.user_id && body.data.is_valid) {
-        this.auth_token = auth_token;
-        this.auth_expiry = body.data.expires_at;
-        this.save(function (err) {
+      console.log(body);
+      console.log(this);
+
+      if (curUser._id == body.data.user_id && body.data.is_valid) {
+        curUser.auth_token = auth_token;
+        curUser.auth_expiry = body.data.expires_at;
+        curUser.save(function (err) {
           console.log(err);
           // Not the end of the world
         });
-        if (this.verify_code == null)
+        if (curUser.verify_code == null)
           cb("valid");
         else
           cb("verify");
       } else {
+        console.log("Invalid");
         cb("invalid");
       }
     });
