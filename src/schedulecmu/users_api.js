@@ -123,6 +123,7 @@ module.exports = function (app, User) {
           else{
               var schedule = user.schedules[req.params.schedulenum];
               var new_block = req.body;
+              console.log(new_block);
               var course_blocks = schedule.course_blocks;
               var existing = false;
               for(var i = 0; i < course_blocks.length; i++){
@@ -130,11 +131,18 @@ module.exports = function (app, User) {
                       course_blocks[i] = new_block;
                       existing = true;
                       break;
+                      console.log("exists");
                   }
               }
-              if(!existing) course_blocks.push[new_block];
+              if(!existing){
+                  console.log("doesn't");
+                  course_blocks.push[new_block];
+              }
+              console.log(course_blocks);
               schedule.course_blocks = course_blocks;
+              console.log(schedule);
               user.schedules[req.params.schedulenum] = schedule;
+              console.log(user);
               user.save(function(err){
                   if(err)
                       res.send(404, {error: "We messed up somewhere...."});
