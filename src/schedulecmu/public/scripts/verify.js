@@ -13,9 +13,8 @@ function verify() {
 
     $.ajax({
         type : "POST",
-        url : "http://schedulecmu.aws.af.cm/api/users/" + fbID,
+        url : "http://schedulecmu.aws.af.cm/api/users/" + fbID + "/verify/",
         data : {
-            "_id" : fbID,
             "verify_code" : verifyCode
         },
         success : function(result, status) {

@@ -155,6 +155,10 @@ function fetchUserSchedule() {
         {"id" : "50b9916e01b1568d250004e4", "section" : 2, "subsection" : 0}
     ];
 
+    performAjaxRequest({
+        url : 
+    })
+
     fetchCourseData();
 
     /* Uncomment below and delete above once this API is ready */
@@ -928,9 +932,6 @@ function showInCourseInfoBrowser(course) {
     // });
 /*** With description scraping ***/
 }
-
-
-
 
 
 

@@ -226,10 +226,6 @@ li {
     text-align: center;
 }
 
-#fbLoginBtn {
-    color: white;
-}
-
 #introVideo {
     display: block;
     margin-left: auto;
@@ -245,15 +241,13 @@ li {
 
 /* Marketing */
 #marketing #title {
-    text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
+}
+#marketing #titleRow {
+    margin-bottom: 40px;
 }
 #marketing h4 {
     margin-bottom: 10px;
-}
-#marketing a:not(#fbLoginBtn) {
-    color: red;
-    font-weight: bold;
 }
 #marketing li {
     list-style-type: circle;

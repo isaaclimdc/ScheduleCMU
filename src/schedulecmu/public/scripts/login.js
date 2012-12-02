@@ -35,7 +35,6 @@ function login() {
     FB.login(function(response) {
         if (response.authResponse) {
             /* Connected! */
-            window.
             loginToScheduleCMU(response.authResponse);
         }
         else {
@@ -61,7 +60,9 @@ function loginToScheduleCMU(fbAuthResponse) {
     $.ajax({
         url : window.baseURL + "/users/" + fbID + "?auth_token=" + accessToken,
         success : function(result, status) {
-            console.log(result);
+            console.log("Succesful log in!", result);
+
+            window.location.href = "schedule.html";
         },
         error : function(xhr, status, error) {
             console.log(error);
@@ -110,7 +111,7 @@ function createNewUser() {
                     "auth_token" : accessToken
                 },
                 success : function(result, status) {
-                    console.log(result);
+                    console.log("New user created!", result);
 
                     /* Show them a "sent email" message */
                     $("#loginForm").append($("<p>").html("We've sent you a verification email!"));
