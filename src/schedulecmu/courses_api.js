@@ -2,15 +2,15 @@
   app.get('/api/courses', function(req, res) {
     var query = Course.find({});
     if (req.query.dept) {
-        query = query.$where('this.num.match(/^' + req.query.dept + '/)'); 
+        query = query.$where('this.num.match(/^' + req.query.dept + '/)');
     }
     if (req.query.name) {
 
     }
     if (req.query.number) {
 	if(req.query.number.length == 5)
-	    req.query.number = S.substring(0,2) + '-' + S.substring(2); 
-	query = query.where('num', req.query.number);  
+	    req.query.number = S.substring(0,2) + '-' + S.substring(2);
+	query = query.where('num', req.query.number);
     }
     if (req.query.semester) {
       query = query.where('semester', parseInt(req.query.semester));
@@ -107,8 +107,12 @@
     if (req.body == null) {
       res.send("um no.");
     } else {
-      res.body.threshold = null;
-      res.body.state = 20; //No crowdsourcing for now!
+      req.body.threshold = null;
+      req.body.state = 20; //No crowdsourcing for now!
+      req.body.event_type = Number(req.body.event_type);
+      req.body.start = Date(req.body.start);
+      req.body.end = Date(req.body.end);
+      req.body.recur = null; //For now
     }
 
 	  Course.findById(course, function(err, course) {
