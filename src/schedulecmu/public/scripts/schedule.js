@@ -351,7 +351,6 @@ function requestAndAddCourse() {
                         "section" : 0,
                         "subsection" : 0
                     });
-                    console.log("Added to userBlocks", window.userBlocks);
 
                     if (window.isMobile === false)
                         addCourseToAccordion(course);
@@ -603,17 +602,18 @@ function deleteCourse(p) {
         }
         return true;
     });
-    console.log("After deleting", window.userBlocks);
 
     $("#calview").fullCalendar("clientEvents",
         function(eventToRemove) {
             if (eventToRemove.id === course._id) {
-                console.log("removed event with id " + eventToRemove.id);
                 window.events.removeObj(eventToRemove);
             }
         });
 
     /* POST HERE */
+
+    /* Refresh FullCalendar */
+    $('#calview').fullCalendar('refetchEvents');
 }
 
 /*** CourseBrowser ***/
