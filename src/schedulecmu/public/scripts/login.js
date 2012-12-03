@@ -58,11 +58,7 @@ function loginToScheduleCMU(fbAuthResponse) {
             200: function() {  },
             404: function() {
                 console.log("User not found");
-
-                if (window.isMobile === false)
-                    window.location.href = "register.html";
-                else
-                    window.location.href = "../mobile/register.html";
+                window.location.href = "register.html";
             }
         }
     });
@@ -94,7 +90,9 @@ function createNewUser() {
                     console.log("New user created!", result);
 
                     /* Show them a "sent email" message */
-                    $("#loginForm #submitBtn").remove();
+                    if(window.isMobile === false) {
+                        $("#loginForm #submitBtn").remove();
+                    }
                     $('#loginForm form').append($("<p>").html("We've sent you a verification email!"));
                 }
             });
