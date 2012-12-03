@@ -864,10 +864,10 @@ function processEventForm() {
                                         }
                                     });
 
-                                addCourseToCalendar(course);
-
                                 /* Refresh FullCalendar */
-                                $('#calview').fullCalendar('refetchEvents');
+                                $('#calview').fullCalendar('removeEventSource', window.events);
+                                addCourseToCalendar(course);
+                                $('#calview').fullCalendar('addEventSource', window.events);
 
                                 /* When done, close the fancybox dialog */
                                 if (window.isMobile === false) 
