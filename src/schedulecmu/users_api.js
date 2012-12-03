@@ -2,7 +2,7 @@ express = require('express');
 
 module.exports = function (app, User) {
   app.put('/api/users/:user', function (req, res) {
-    if (req.body.data == undefine) {
+    if (req.body.data == undefined) {
       res.send(400, {error: "No user received."});
       return;
     }
