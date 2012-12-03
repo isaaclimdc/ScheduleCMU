@@ -8,12 +8,13 @@
 
     }
     if (req.query.number) {
-	if(req.query.number.length == 5)
-	    req.query.number = S.substring(0,2) + '-' + S.substring(2);
-	query = query.where('num', req.query.number);
+        var num = req.query.number;
+        	if(num.length == 5)
+	           num = num.substring(0,2) + '-' + num.substring(2);
+	        query = query.where('num', num);
     }
     if (req.query.semester) {
-      query = query.where('semester', parseInt(req.query.semester));
+        query = query.where('semester', Number(req.query.semester));
     }
     // TODO figure out how to check for minis (best way)
     // Optional::
