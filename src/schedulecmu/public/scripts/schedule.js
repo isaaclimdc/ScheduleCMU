@@ -85,10 +85,6 @@ function fetchUserSchedule(user) {
     
     var schedulesArr = user.schedules;
 
-    /* Save the current user info globally for use throughout */
-    window.userID = user._id;
-    window.
-
     /* If there are existing schedules for this user, fetch them
      * and populate the page
      */
@@ -98,6 +94,9 @@ function fetchUserSchedule(user) {
         $('#semTitle').text(convertSemToReadable(latestSchedule.semester));
         $('#scheduleVersion').text(latestSchedule.name);
 
+        /* Save the current user info globally for use throughout */
+        window.userID = user._id;
+        window.schedID = latestSchedule._id;
         window.userBlocks = latestSchedule.course_blocks;
         console.log("User Blocks: ", window.userBlocks);
 
@@ -124,14 +123,14 @@ function fetchUserSchedule(user) {
 }
 
 function setupPage() {
-    $("#eventFormDate").datePicker();
-
     var height;
     var contentHeight;
     var columnFormat;
 
     /* Setup for DESKTOP client */
     if (window.isMobile === false) {
+        $("#eventFormDate").datePicker();
+        
         /* Set up Accordion */
         window.accordionOpts = {
             heightStyle: "content",
@@ -408,17 +407,20 @@ function requestAndAddCourse() {
                 url : "/courses/" + courseID,
                 success : function(result, status) {
                     var course = result;
+                    var courseID = course._id;
                     console.log(course);
 
                     setPlaceholder(course.num + " added!");
 
                     window.listedCourses.push(course);
 
-                    window.userBlocks.push({
-                        "course_id" : course._id,
+                    var newBlock = {
+                        "course_id" : courseID,
                         "section" : 0,
                         "subsection" : 0
-                    });
+                    };
+
+                    window.userBlocks.push(newBlock);
 
                     if (window.isMobile === false)
                         addCourseToAccordion(course);
@@ -427,8 +429,17 @@ function requestAndAddCourse() {
 
                     /* Finally, POST to User account */
                     performAjaxRequest({
-                        url : "/users/*fbid*/schedules/*schedID*/blocks/*courseID*"
-                    })
+                        type : "POST",
+                        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + courseID,
+                        data : {
+                            data : newBlock,
+                            "auth_token" : null,
+                            "_method" : "PUT"
+                        },
+                        success : function(result, status) {
+                            console.log("Successfully changed block!", result);
+                        }
+                    });
                 }
             });   
         }
@@ -633,15 +644,29 @@ function rowSelected(tr) {
     var clickedIndex = row.parent().parent().parent().parent().index();
 
     var course = window.listedCourses[clickedIndex];
+    var newBlock;
     for (var i = 0; i < window.userBlocks.length; i++) {
         if (window.userBlocks[i].course_id === course._id) {
             window.userBlocks[i].section = sectIdx;
             window.userBlocks[i].subsection = subsectIdx;
+            newBlock = window.userBlocks[i];
             break;
         }
     }
 
     /* PUT to server */
+    performAjaxRequest({
+        type : "POST",
+        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + course._id,
+        data : {
+            data : newBlock,
+            "auth_token" : null,
+            "_method" : "PUT"
+        },
+        success : function(result, status) {
+            console.log("Successfully changed block!", result);
+        }
+    });
 
     /* Re-render Events on FullCalendar */
     $("#calview").fullCalendar("clientEvents",
