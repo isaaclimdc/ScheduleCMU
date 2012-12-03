@@ -184,7 +184,6 @@ module.exports = function (app, User) {
                   res.send('');
               }
             });
-          }
       });
   });
 
