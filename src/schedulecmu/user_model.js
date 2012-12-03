@@ -8,9 +8,8 @@ module.exports = function (mongoose, db) {
 
   var BlockSchema = new Schema({
     _id: {type: String},
-    course_id: {type: String},
-    section_id: {type: String},
-    subsection_id: {type: String, default: null}
+    section: {type: Number},
+    subsection: {type: Number, default: null}
   });
 
   var ScheduleSchema = new Schema({

@@ -155,9 +155,8 @@ module.exports = function (app, User) {
       if (block == undefined) {
         schedule.course_blocks.push(req.body.data);
       } else {
-        // Test if this works - modifies parent schedule...
-        block.section_id = req.body.data.section_id;
-        block.subsection_id = req.body.data.subsection_id;
+        block.section = Number(req.body.data.section);
+        block.subsection = Number(req.body.data.subsection);
       }
 
       user.save(function(err){
