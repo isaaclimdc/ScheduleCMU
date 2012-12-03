@@ -175,7 +175,6 @@ function setupPage() {
             week: 'ddd',
             day: 'ddd'
         };
-        console.log("MOBILE:", contentHeight, height);
     }
 
     /* Only set up FullCalendar when all courses have been parsed. */
@@ -203,7 +202,7 @@ function setupPage() {
 function fetchCourseData() {
     for (var i = 0; i < window.userBlocks.length; i++) {
         performAjaxRequest({
-            url: "/courses/" + window.userBlocks[i].course_id,
+            url: "/courses/" + window.userBlocks[i]._id,
             success: function(result, status) {
                 var course = result;
                 console.log(course);
@@ -230,7 +229,7 @@ function addCourseToCalendar(course) {
     var sectionsToAdd;
     var color;
     for (var i = 0; i < window.userBlocks.length; i++) {
-        if (window.userBlocks[i].course_id === course._id) {
+        if (window.userBlocks[i]._id === course._id) {
             sectionsToAdd = window.userBlocks[i];
         }
     }
@@ -388,7 +387,7 @@ function requestAndAddCourse() {
 
             /* Check if this course is already in the existing courses */
             for (var i = 0; i < window.userBlocks.length; i++) {
-                if (window.userBlocks[i].course_id === courseID) {
+                if (window.userBlocks[i]._id === courseID) {
                     setPlaceholder("Course already added");
                     return;
                 }
@@ -407,7 +406,7 @@ function requestAndAddCourse() {
                     window.listedCourses.push(course);
 
                     var newBlock = {
-                        "course_id" : courseID,
+                        "_id" : courseID,
                         "section" : 0,
                         "subsection" : 0
                     };
@@ -429,7 +428,7 @@ function requestAndAddCourse() {
                             "_method" : "PUT"
                         },
                         success : function(result, status) {
-                            console.log("Successfully changed block!", result);
+                            console.log("Successfully added block!", result);
                         }
                     });
                 }
@@ -636,9 +635,11 @@ function rowSelected(tr) {
     var clickedIndex = row.parent().parent().parent().parent().index();
 
     var course = window.listedCourses[clickedIndex];
+
+    /* Update the local copy of the block */
     var newBlock;
     for (var i = 0; i < window.userBlocks.length; i++) {
-        if (window.userBlocks[i].course_id === course._id) {
+        if (window.userBlocks[i]._id === course._id) {
             window.userBlocks[i].section = sectIdx;
             window.userBlocks[i].subsection = subsectIdx;
             newBlock = window.userBlocks[i];
@@ -646,7 +647,7 @@ function rowSelected(tr) {
         }
     }
 
-    /* PUT to server */
+    /* PUT this updated block to server */
     performAjaxRequest({
         type : "POST",
         url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + course._id,
@@ -689,7 +690,7 @@ function deleteCourse(p) {
     window.listedCourses.splice(clickedIndex, 1);
 
     window.userBlocks = $.grep(window.userBlocks, function(elt, idx) {
-        if (elt.course_id === course._id) {
+        if (elt._id === course._id) {
             return false;
         }
         return true;
@@ -702,7 +703,8 @@ function deleteCourse(p) {
             }
         });
 
-    /* POST HERE */
+    /* TODO: DELETE the course from the servere here */
+
 
     /* Refresh FullCalendar */
     $('#calview').fullCalendar('refetchEvents');
