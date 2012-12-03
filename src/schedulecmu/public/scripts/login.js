@@ -31,8 +31,6 @@ function loginToFB() {
     });
 }
 
-// window.baseURL = "http://schedulecmu.aws.af.cm/api";
-
 function loginToScheduleCMU(fbAuthResponse) {
     /* Test that we have a working auth */
     var userName;
@@ -60,7 +58,6 @@ function loginToScheduleCMU(fbAuthResponse) {
             200: function() {  },
             404: function() {
                 console.log("User not found");
-                // var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 
                 if (window.isMobile === false)
                     window.location.href = "register.html";
@@ -87,8 +84,11 @@ function createNewUser() {
                 type : "POST",
                 url : "/users/" + fbID,
                 data : {
-                    "andrew" : andrewID,
-                    "auth_token" : accessToken
+                    "data" : {
+                        "andrew" : andrewID
+                    },
+                    "auth_token" : accessToken,
+                    "_method" : "PUT"
                 },
                 success : function(result, status) {
                     console.log("New user created!", result);

@@ -85,6 +85,10 @@ function fetchUserSchedule(user) {
     
     var schedulesArr = user.schedules;
 
+    /* Save the current user info globally for use throughout */
+    window.userID = user._id;
+    window.
+
     /* If there are existing schedules for this user, fetch them
      * and populate the page
      */
@@ -105,8 +109,12 @@ function fetchUserSchedule(user) {
             type : "POST",
             url : "/users/" + user._id + "/schedules/",
             data : {
-                "semester" : 130,  /* Placeholder */
-                "name" : "Schedule 1"
+                "data" : {
+                    "semester" : 130,  /* Placeholder */
+                    "name" : "Schedule 1"
+                },
+                "auth_token" : null,   /* TODO: Put auth token here */
+                "_method" : "POST"
             },
             success : function(result, status) {
                 console.log(result);
@@ -395,6 +403,7 @@ function requestAndAddCourse() {
                 }
             }
 
+            /* GET full Course object */
             performAjaxRequest({
                 url : "/courses/" + courseID,
                 success : function(result, status) {
@@ -415,6 +424,11 @@ function requestAndAddCourse() {
                         addCourseToAccordion(course);
 
                     addCourseToCalendar(course);
+
+                    /* Finally, POST to User account */
+                    performAjaxRequest({
+                        url : "/users/*fbid*/schedules/*schedID*/blocks/*courseID*"
+                    })
                 }
             });   
         }
@@ -627,6 +641,8 @@ function rowSelected(tr) {
         }
     }
 
+    /* PUT to server */
+
     /* Re-render Events on FullCalendar */
     $("#calview").fullCalendar("clientEvents",
         function(eventToRemove) {
@@ -785,11 +801,15 @@ function processEventForm() {
                     type : "POST",
                     url : "/courses/" + courseID + "/events",
                     data : {
-                        "event_type" : type,
-                        "title" : title,
-                        "loc" : location,
-                        "start" : startDate,
-                        "end" : endDate
+                        data : {
+                            "event_type" : type,
+                            "title" : title,
+                            "loc" : location,
+                            "start" : startDate,
+                            "end" : endDate
+                        },
+                        "auth_token" : null,  /* TODO: Auth token */
+                        "_method" : "POST"
                     },
                     success : function(result, status) {
                         console.log(result);
@@ -1060,111 +1080,7 @@ function showInCourseInfoBrowser(course) {
 /*** With description scraping ***/
 }
 
-/**** Login (FB Auth) ****/
 
-/* Facebook response object:
-    {
-        status: 'connected',
-        authResponse: {
-            accessToken: '...',
-            expiresIn:'...',
-            signedRequest:'...',
-            userID:'...'
-        }
-    }
- */
-
-function loginToFB() {
-    FB.login(function(response) {
-        if (response.authResponse) {
-            /* Connected! */
-            loginToScheduleCMU(response.authResponse);
-        }
-        else {
-            /* Cancelled */
-            console.log("Facebook login cancelled");
-            window.location.href = "index.html";
-        }
-    });
-}
-
-function loginToScheduleCMU(fbAuthResponse) {
-    /* Test that we have a working auth */
-    var userName;
-    FB.api('/me', function(response) {
-        userName = response.name;
-        console.log("Logged in with Facebook as " + userName + ".");
-    });
-
-    var fbID = fbAuthResponse.userID;
-    var accessToken = fbAuthResponse.accessToken;
-
-    performAjaxRequest({
-        url : "/users/" + fbID + "?auth_token=" + accessToken,
-        success : function(result, status) {
-            console.log("Succesfully logged in!", result);
-
-            /* Unhide schedules page */
-            $('#content').css("display", "block");
-
-            /* User logged in to ScheduleCMU! Start processing schedules */
-            var user = result;
-            fetchUserSchedule(user);
-        },
-        statusCode: {
-            200: function() {  },
-            404: function() {
-                console.log("User not found");
-
-                if (window.isMobile === false)
-                    window.location.href = "register.html";
-                else
-                    window.location.href = "../mobile/register.html";
-            }
-        }
-    });
-}
-
-$(document).ready(function() {
-    $("#loginForm form").submit(function(e){
-        e.preventDefault();
-        createNewUser();
-    });
-});
-
-function createNewUser() {
-    FB.getLoginStatus(function(response) {
-        var andrewID = $("#andrewBox").val();
-
-        if (response.status === 'connected') {
-            var accessToken = response.authResponse.accessToken;
-            var fbID = response.authResponse.userID;
-            console.log(fbID);
-
-            /* Create a new user on the server. Automatically sends
-             * a verification email to their andrew email
-             */
-            performAjaxRequest({
-                type : "POST",
-                url : "/users/" + fbID,
-                data : {
-                    "data" : {"andrew" : andrewID}
-                    "auth_token" : accessToken
-                    "_method" : "PUT"
-                },
-                success : function(result, status) {
-                    console.log("New user created!", result);
-
-                    /* Show them a "sent email" message */
-                    $("#loginForm").append($("<p>").html("We've sent you a verification email!"));
-                }
-            });
-        }
-        else {
-            console.log("You are not logged in to Facebook");
-        }
-    });
-}
 
 
 

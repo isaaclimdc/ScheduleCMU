@@ -15,6 +15,8 @@ function verify(authResponse) {
     var verifyCode = window.location.hash.substring(1);
     console.log("Verify Code: " + verifyCode);
 
+    var fbID = authResponse.userID;
+
     $.ajax({
         type : "POST",
         url : "http://schedulecmu.aws.af.cm/api/users/" + fbID + "/verify/",
@@ -24,8 +26,14 @@ function verify(authResponse) {
         success : function(result, status) {
             console.log(result);
 
+            var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+
             /* Successfully verified, now login */
-            loginToScheduleCMU(authResponse);
+            // loginToScheduleCMU(authResponse);
+            if (window.isMobile === false)
+                window.location.href = "desktop/schedule.html";
+            else
+                window.location.href = "mobile/schedule.html";
         },
         error : function(xhr, status, error) {
             console.log(error);
