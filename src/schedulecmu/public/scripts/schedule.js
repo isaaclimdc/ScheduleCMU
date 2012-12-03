@@ -758,16 +758,33 @@ function searchForCourseInCourseBrowser() {
 }
 
 function addToCourseBrowser(course) {
-    var row = $('<div>').addClass("courseBrowserRow");
-    row.attr("onClick", "showInfoFromBrowser(this)");
-    row.append($('<h1>').text(course.num));
-    row.append($('<h2>').text(course.name));
-    row.append($('<h3>').text(makeUnitsStr(course.units)));
-    row.append($('<img>').attr({
-        "src" : "../images/plus.png",
-        "onClick" : "addCourseFromBrowser(this)"
-    }));
-
+    var row;
+    if(window.isMobile === false) {
+        row = $('<div>').addClass("courseBrowserRow");
+        row.attr("onClick", "showInfoFromBrowser(this)");
+        row.append($('<h1>').text(course.num));
+        row.append($('<h2>').text(course.name));
+        row.append($('<h3>').text(makeUnitsStr(course.units)));
+        row.append($('<img>').attr({
+            "src" : "../images/plus.png",
+            "onClick" : "addCourseFromBrowser(this)"
+        }));
+    }
+    else {
+        row = $('<li>');
+        var rowInside = $('<a>');
+        rowInside.attr("href", "");
+        rowInside.attr('onclick', 'showInfoFromBrowser(this)');
+        rowInside.append($('<h1>').text(course.num));
+        rowInside.append($('<h2>').text(course.name));
+        rowInside.append($('<h3>').text(makeUnitsStr(course.units)));
+        var rowTwo = $('<a>');
+        rowTwo.attr("href", "");
+        rowTwo.attr("onclick", 'addCoursFromBrowser(this)');
+        rowTwo.append('Add Course');
+        row.append(rowInside);
+        row.append(rowTwo);
+    }
     $('#courseBrowserBody').append(row);
 }
 
