@@ -725,9 +725,9 @@ function searchForCourseInCourseBrowser() {
     /* Can be "15251" or "15-251". Parsed server-side */
     var urlReq;
     if (inputStr.length <= 2)
-        urlReq = "/courses?number=" + inputStr;
+        urlReq = "/courses?dept=" + inputStr;    /* Search by Dept */
     else
-        urlReq = "/courses?number=" + inputStr;
+        urlReq = "/courses?number=" + inputStr;  /* Search by course num */
 
     /* Query our server */
     performAjaxRequest({
