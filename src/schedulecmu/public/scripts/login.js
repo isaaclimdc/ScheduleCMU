@@ -94,7 +94,8 @@ function createNewUser() {
                     console.log("New user created!", result);
 
                     /* Show them a "sent email" message */
-                    $("#loginForm").append($("<p>").html("We've sent you a verification email!"));
+                    $("#loginForm #submitBtn").remove();
+                    $('#loginForm form').append($("<p>").html("We've sent you a verification email!"));
                 }
             });
         }

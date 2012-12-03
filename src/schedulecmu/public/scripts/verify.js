@@ -29,11 +29,10 @@ function verify(authResponse) {
             var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 
             /* Successfully verified, now login */
-            // loginToScheduleCMU(authResponse);
-            if (window.isMobile === false)
+            if (isMobile === false)
                 window.location.href = "desktop/schedule.html";
             else
-                window.location.href = "mobile/schedule.html";
+                window.location.href = "mobile/mobile.html";
         },
         error : function(xhr, status, error) {
             console.log(error);
