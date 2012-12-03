@@ -112,7 +112,7 @@ module.exports = function (app, User) {
         res.send(404, {error: "User not found."});
         return;
       }
-        
+
       user.schedules.push({semester: req.body.data.semester,
                            name: req.body.data.name});
       user.save(function(err){
@@ -170,6 +170,86 @@ module.exports = function (app, User) {
     });
   });
 
+
+  app.delete('/api/users/:user', function(req, res) {
+      User.findById(req.params.user, function(err, user){
+          if(err || (user == undefined)){
+              res.send(404, {error: "User is not defined"});
+          }
+          user.remove(function(err){
+              if(err){
+                  res.send(404, {error: "We messed up somewhere"});
+              } else{
+                  console.log(req.params.user + " was removed successfully");
+                  res.send('');
+              }
+            });
+          }
+      });
+  });
+
+  app.delete('/api/users/:user/schedules/:schedule', function(req, res) {
+      User.findById(req.params.user, function(err, user){
+          if(err || (user == undefined)){
+              res.send(404, {error: "User is not defined"});
+          }
+          var schedule = user.schedules.id(req.params.schedule);
+          if(schedule == undefined){
+              res.send(404, {error: "Schedule not found"});
+          }
+          //Not sure if this would work
+          schedule.remove(function(err){
+              if(err){
+                  res.send(404, {error: "We messed up somewhere"});
+              }
+              else{
+                  user.save(function(err){
+                      if(err){
+                          res.send(404, {error: "We messed up somewhere"});
+                      }
+                      else{
+                          res.send(user);
+                      }
+                  });
+              }
+         });
+      });
+  });
+
+  app.delete('/api/users/:user/schedules/:schedule/blocks/:block',
+             function(req, res) {
+                 User.findById(req.params.user, function(err, user){
+                     if(err || (user == undefined)){
+                         res.send(404, {error: "User is not defined"});
+                     }
+                     var schedule = user.schedules.id(req.params.schedule);
+                     if(schedule == undefined){
+                         res.send(404, {error: "Schedule not found"});
+                     }
+
+                     var block = schedule.course_blocks.id(req.params.block);
+                     if(schedule == undefined){
+                         res.send(404, {error: "Course not found in schedule"});
+                     }
+
+                     //Not sure if this would work
+                     block.remove(function(err){
+                          if(err){
+                              res.send(404, {error: "We messed up somewhere"});
+                          }
+                          else{
+                              user.save(function(err){
+                                      if(err){
+                                        res.send(404, {error: "We messed up somewhere"});
+                                      }
+                                      else{
+                                          res.send(user);
+                                      }
+                                  });
+                          }
+                     });
+                });
+             });
 }
 
 
