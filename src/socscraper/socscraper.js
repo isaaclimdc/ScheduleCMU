@@ -296,7 +296,7 @@ jsdom.env(
             else {
                 /* This row starts a new Course */
 
-                // Before doing anything, push currentCourse
+                // Before doing anything, push currentSection into currentCourse, then finish currentCourse.
                 if (currentSection !== undefined) {
                     currentCourse.sections.push(currentSection);
                     currentSection = undefined;
@@ -335,6 +335,7 @@ jsdom.env(
 function Course() {
     this.num;
     this.name;
+    this.description;
     this.units;
     this.semester;
     this.sections = [];
