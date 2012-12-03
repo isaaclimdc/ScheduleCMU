@@ -25,7 +25,7 @@
 	window.fbAsyncInit = function() {
 	    FB.init({
 	        appId      : '102585986572914', // App ID
-	        channelUrl : 'channel.html', // Channel File
+	        channelUrl : '../desktop/channel.html', // Channel File
 	        status     : true, // check login status
 	        cookie     : true, // enable cookies to allow the server to access the session
 	        xfbml      : true  // parse XFBML
@@ -60,7 +60,7 @@
 			<div class="ui-block-a"></div>
 			<div class="ui-block-b">
 				<img src="../images/icon_extract.png" alt="ScheduleCMU" />
-				<a href="#" onclick="login();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
+				<a href="#" onclick="loginToFB();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
 
 				<!-- Temporary Button -->
 				<a href="#gridview" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">See Calendar</a>
@@ -167,7 +167,7 @@
 		<h2>Browse courses</h2>
 		<form id="courseBrowserForm">
 			<input type="text" placeholder='e.g. "15451", "Computer Science", or "Western Music History"'></input>
-			<input type="submit" value="Search"></input>
+			<a href="" data-role="button" onclick="searchForCourseInCourseBrowser();">Search</a>
 		</form>
 		<div id="courseBrowserBody"></div>
 	</div>
@@ -231,7 +231,7 @@
 				<label for="eventFormAndrew">Your Andrew ID</label>
 				<input type="text" id="eventFormAndrew" placeholder="acarnegie"</input>
 			</div>
-			<a data-role="button" data-transition="pop" href="#eventlist">Submit</a>
+			<a data-role="button" onclick="processEventForm();" data-transition="pop" href="#eventlist">Submit</a>
 		</form>
 	</div>
 </div>
@@ -266,6 +266,13 @@
 				</a>
 			</li>
 		</ul>
+	</div>
+</div>
+
+<!-- Course Info Pop Up -->
+<div data-role="page" data-overlay-theme="b" id="courseInfoBrowser">
+	<div data-role="header"><h2>Course Info</h2></div>
+	<div data-role="content">
 	</div>
 </div>
 
