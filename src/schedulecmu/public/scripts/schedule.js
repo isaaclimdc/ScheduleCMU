@@ -1145,11 +1145,12 @@ function createNewUser() {
              * a verification email to their andrew email
              */
             performAjaxRequest({
-                type : "PUT",
+                type : "POST",
                 url : "/users/" + fbID,
                 data : {
-                    "andrew" : andrewID,
+                    "data" : {"andrew" : andrewID}
                     "auth_token" : accessToken
+                    "_method" : "PUT"
                 },
                 success : function(result, status) {
                     console.log("New user created!", result);
