@@ -735,6 +735,8 @@ function searchForCourseInCourseBrowser() {
         success: function(result, status) {
             console.log(result);
 
+            $('#courseBrowserBody').empty();
+
             window.mostRecentSearchResults = result;
 
             for (var i = 0; i < result.length; i++) {
