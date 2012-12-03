@@ -71,15 +71,6 @@ function performAjaxRequest(opts) {
 /**** Fetch Data ****/
 
 function fetchUserSchedule(user) {
-    // window.userBlocks =
-    // [
-    //     {"id" : "50b9916e01b1568d25000ad6", "section" : 1, "subsection" : 3},
-    //     {"id" : "50b9916f01b1568d25002117", "section" : 0, "subsection" : 0},
-    //     {"id" : "50b9916f01b1568d25001d40", "section" : 0, "subsection" : 0},
-    //     {"id" : "50b9916f01b1568d250012e9", "section" : 1, "subsection" : 3},
-    //     {"id" : "50b9916e01b1568d250004e4", "section" : 2, "subsection" : 0}
-    // ];
-
     /* Set up the DOM first */
     setupPage();
     
@@ -130,7 +121,7 @@ function setupPage() {
     /* Setup for DESKTOP client */
     if (window.isMobile === false) {
         $("#eventFormDate").datePicker();
-        
+
         /* Set up Accordion */
         window.accordionOpts = {
             heightStyle: "content",
@@ -184,6 +175,7 @@ function setupPage() {
             week: 'ddd',
             day: 'ddd'
         };
+        console.log("MOBILE:", contentHeight, height);
     }
 
     /* Only set up FullCalendar when all courses have been parsed. */
