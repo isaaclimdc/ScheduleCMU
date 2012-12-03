@@ -240,8 +240,6 @@ li {
 }
 
 #fbLoginBtn {
-    /*margin-top: 20px;*/
-
     width: 150px;
     height: 23px;
     background: url("../../images/fblogin.png") 0 0;

@@ -212,15 +212,21 @@ function fetchCourseData() {
                 }
 
                 window.listedCourses.push(course);
-                
-                addCourseToAccordion(course);
-                addCourseToCalendar(course);
+                addCourse(course);
             }
         });
     }
 }
 
 /**** FullCalendar ****/
+
+/* Wrapper to do all that we need! */
+function addCourse(course) {
+    if (window.isMobile === false)
+        addCourseToAccordion(course);
+
+    addCourseToCalendar(course);
+}
 
 /* Adds a single course to FullCalendar */
 function addCourseToCalendar(course) {
@@ -370,69 +376,67 @@ function requestAndAddCourse() {
         success : function(result, status) {
             var addCourseBox = $('#addCourseBox').val("");
 
-            /* Helper to set the placeholder of the addCourseBox */
-            function setPlaceholder(str) {
-                return addCourseBox.attr("placeholder", str);
-            }
-
-            setPlaceholder("Searching...");
+            setPlaceholder(addCourseBox, "Searching...");
 
             if (result.length === 0) {
-                setPlaceholder("Course not found!");
+                setPlaceholder(addCourseBox, "Course not found!");
                 return;
             }
 
             /* ID of the course we want to add */
-            var courseID = result[0]._id;
+            var course = result[0];
+            var courseID = course._id;
 
             /* Check if this course is already in the existing courses */
             for (var i = 0; i < window.userBlocks.length; i++) {
                 if (window.userBlocks[i]._id === courseID) {
-                    setPlaceholder("Course already added");
+                    setPlaceholder(addCourseBox, "Course already added");
                     return;
                 }
             }
 
             /* GET full Course object */
+            fetchCourseWithID(courseID, function() {
+                setPlaceholder(addCourseBox, course.num + " added!");
+            });
+        }
+    });
+}
+
+/* GETs the full Course object with the supplied id */
+function fetchCourseWithID(courseID, onSuccess) {
+    performAjaxRequest({
+        url : "/courses/" + courseID,
+        success : function(result, status) {
+            var course = result;
+            var courseID = course._id;
+            console.log(course);
+
+            var newBlock = {
+                "_id" : courseID,
+                "section" : 0,
+                "subsection" : 0
+            };
+
+            window.listedCourses.push(course);
+            window.userBlocks.push(newBlock);
+            addCourse(course);
+            
+            /* Finally, POST to User account */
             performAjaxRequest({
-                url : "/courses/" + courseID,
+                type : "POST",
+                url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + courseID,
+                data : {
+                    data : newBlock,
+                    "auth_token" : null,
+                    "_method" : "PUT"
+                },
                 success : function(result, status) {
-                    var course = result;
-                    var courseID = course._id;
-                    console.log(course);
+                    console.log("Successfully added block!", result);
 
-                    setPlaceholder(course.num + " added!");
-
-                    window.listedCourses.push(course);
-
-                    var newBlock = {
-                        "_id" : courseID,
-                        "section" : 0,
-                        "subsection" : 0
-                    };
-
-                    window.userBlocks.push(newBlock);
-
-                    if (window.isMobile === false)
-                        addCourseToAccordion(course);
-
-                    addCourseToCalendar(course);
-
-                    /* Finally, POST to User account */
-                    performAjaxRequest({
-                        type : "POST",
-                        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + courseID,
-                        data : {
-                            data : newBlock,
-                            "auth_token" : null,
-                            "_method" : "PUT"
-                        },
-                        success : function(result, status) {
-                            console.log("Successfully added block!", result);
-                        }
-                    });
+                    onSuccess();
                 }
-            });   
+            });
         }
     });
 }
@@ -754,18 +758,31 @@ function addToCourseBrowser(course) {
     row.append($('<h3>').text(makeUnitsStr(course.units)));
     row.append($('<img>').attr({
         "src" : "../images/plus.png",
-        "onClick" : "addToAccordionFromBrowser(this)"
+        "onClick" : "addCourseFromBrowser(this)"
     }));
 
     $('#courseBrowserBody').append(row);
 }
 
-function addToAccordionFromBrowser(img) {
+function addCourseFromBrowser(img) {
     var clickedIndex = $(img).parent().index();
     var course = window.mostRecentSearchResults[clickedIndex];
-    window.listedCourses.push(course);
+    var courseID = course._id;
 
-    addCourseToAccordion(course);
+    var courseBrowserBox = $('#courseBrowserForm input').val("");
+    
+    /* Check if this course is already in the existing courses */
+    for (var i = 0; i < window.userBlocks.length; i++) {
+        if (window.userBlocks[i]._id === courseID) {
+            setPlaceholder(courseBrowserBox, "Course already added!");
+            return;
+        }
+    }
+
+    /* Otherwise, get full course object */
+    fetchCourseWithID(courseID, function() {
+        setPlaceholder(courseBrowserBox, course.num + " added!");
+    });
 }
 
 /*** EventBrowser ***/
@@ -963,7 +980,13 @@ function showInfoFromBrowser(infoLink) {
         }
     });
 
-    showInCourseInfoBrowser(course);
+    /* GET the full course object for display */
+    performAjaxRequest({
+        url : "/courses/" + course._id,
+        success : function(result, status) {
+            showInCourseInfoBrowser(result);
+        }
+    });
 }
 
 function showInCourseInfoBrowser(course) {
@@ -1243,4 +1266,9 @@ function convertSemToReadable(sem) {
         season = "Fall";
 
     return season + " " + year;
+}
+
+/* Helper to set the placeholder of box, which is a jQuery object */
+function setPlaceholder(box, str) {
+    return $(box).attr("placeholder", str);
 }
