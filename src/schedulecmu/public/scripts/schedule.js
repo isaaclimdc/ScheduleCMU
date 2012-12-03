@@ -175,6 +175,13 @@ function setupPage() {
             week: 'ddd',
             day: 'ddd'
         };
+
+        $("#addCourseBox").keyup(function(event){
+            if(event.keyCode == 13){
+                e.preventDefault();
+                requestAndAddCourse();
+            }
+        });
     }
 
     /* Only set up FullCalendar when all courses have been parsed. */
