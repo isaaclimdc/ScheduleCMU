@@ -231,6 +231,10 @@ function fetchCourseData() {
 function addCourse(course) {
     addCourseToAccordion(course);
     addCourseToCalendar(course);
+    if(window.isMobile) {
+        $('#gridview').page('refresh');
+        $('#lsitview').page('refresh');
+    }
 }
 
 /* Adds a single course to FullCalendar */
