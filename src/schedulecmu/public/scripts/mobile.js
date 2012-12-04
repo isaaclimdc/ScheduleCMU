@@ -1,12 +1,3 @@
-function refreshPage()
-{
-    $.mobile.changePage(window.location.href, {
-        allowSamePageTransition: true,
-        transition: 'none',
-        reloadPage: true
-    });
-}
-
 $(document).ready(function() {
 	var docW = $(document).width();
 	if(docW <= 750) {
@@ -17,11 +8,19 @@ $(document).ready(function() {
 
 	$('#listview').bind('pageshow', function() {
         console.log('List View');
-        refreshPage();
+        $.mobile.changePage('#listview', {
+	        allowSamePageTransition: true,
+	        transition: 'none',
+	        reloadPage: true
+	    });
     });
 
     $('#gridview').bind('pageshow', function() {
         console.log('Grid View');
-        refreshPage();
+        $.mobile.changePage('#gridview', {
+	        allowSamePageTransition: true,
+	        transition: 'none',
+	        reloadPage: true
+	    });
     });
 });
