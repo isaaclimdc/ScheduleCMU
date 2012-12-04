@@ -60,7 +60,7 @@
 			<div class="ui-block-a"></div>
 			<div class="ui-block-b">
 				<img src="../images/icon_extract.png" alt="ScheduleCMU" />
-				<a href="#gridview" onclick="loginToFB();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
+				<a href="#gridview" onclick="loginToFB();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="myapp-right" data-iconpos="right">Login with Facebook</a>	
 			</div>
 		</div>
 	</div>
@@ -71,13 +71,13 @@
 	<!--HEADER-->
 	<div data-role="header" data-position="fixed">
 	  <div class="ui-btn-left" class="viewswitch" data-role="controlgroup" data-type="horizontal">
-	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="minus">left 1</a>
-	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="grid">left 2</a>
+	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-list">left 1</a>
+	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-cal">left 2</a>
 	  </div>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
-	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-cal">right 2</a>
+	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-event">right 2</a>
 	  </div>
 	</div>
 
@@ -93,13 +93,13 @@
 <div data-role="page" data-title="ScheduleCMU" id="gridview">
 	<div data-role="header" id="gridviewheader" data-position="fixed">
 	  <div class="ui-btn-left" class="viewswitch" data-role="controlgroup" data-type="horizontal">
-	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="minus">left 1</a>
-	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="grid">left 2</a>
+	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-list">left 1</a>
+	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-cal">left 2</a>
 	  </div>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
-	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-cal">right 2</a>
+	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-event">right 2</a>
 	  </div>
 	</div>
 	<div id="calview" data-role="content">
@@ -115,7 +115,7 @@
 			<input type="text" placeholder='e.g. "15451", "Computer Science", or "Western Music History"'></input>
 			<a href="" data-role="button" onclick="searchForCourseInCourseBrowser();">Search</a>
 		</form>
-		<ul id="courseBrowserBody" data-role="listview" data-split-icon="plus">
+		<ul id="courseBrowserBody" data-role="listview" data-split-icon="myapp-plus">
 			<!-- To be populated with a listview of courses matching the query -->
 		</ul>
 	</div>

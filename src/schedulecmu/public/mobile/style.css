@@ -37,29 +37,23 @@ body {
 	margin-right: auto;
 }
 
-.ui-icon-myapp-share {
-    background: url("../images/mobileShareBtn_small.png") no-repeat rgba(0, 0, 0, 0) !important;
-}
 .ui-icon-myapp-browse {
-    background: url("../images/mobileSearchBtn_small.png") no-repeat rgba(0, 0, 0, 0) !important;
+    background: url("../images/mobileMagnify.png") no-repeat rgba(0, 0, 0, 0) !important;
+}
+.ui-icon-myapp-event {
+    background: url("../images/mobileClock.png") no-repeat rgba(0, 0, 0, 0) !important;
 }
 .ui-icon-myapp-cal {
-    background: url("../images/mobileCalBtn_small.png") no-repeat rgba(0, 0, 0, 0) !important;
+    background: url("../images/mobileCal.png") no-repeat rgba(0, 0, 0, 0) !important;
 }
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2) {
-    .ui-icon-myapp-share {
-        background: url("../images/mobileShareBtn_large.png") no-repeat rgba(0, 0, 0, 0) !important;
-        background-size: 18px 18px;
-    }
-    .ui-icon-myapp-browse {
-        background: url("../images/mobileSearchBtn_large.png") no-repeat rgba(0, 0, 0, 0) !important;
-        background-size: 18px 18px;
-    }
-    .ui-icon-myapp-cal {
-        background: url("../images/mobileCalBtn_large.png") no-repeat rgba(0, 0, 0, 0) !important;
-        background-size: 18px 18px;
-    }
+.ui-icon-myapp-list {
+    background: url("../images/mobileGradcap.png") no-repeat rgba(0, 0, 0, 0) !important;
+}
+.ui-icon-myapp-plus {
+    background: url("../images/mobilePlus.png") no-repeat rgba(0, 0, 0, 0) !important;
+}
+.ui-icon-myapp-right {
+    background: url("../images/mobileArrow.png") no-repeat rgba(0, 0, 0, 0) !important;
 }
 
 /* IDs */
