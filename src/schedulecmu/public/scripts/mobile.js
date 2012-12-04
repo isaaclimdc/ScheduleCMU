@@ -1,3 +1,12 @@
+function refreshPage()
+{
+    $.mobile.changePage(window.location.href, {
+        allowSamePageTransition: true,
+        transition: 'none',
+        reloadPage: true
+    });
+}
+
 $(document).ready(function() {
 	var docW = $(document).width();
 	if(docW <= 750) {
@@ -7,7 +16,7 @@ $(document).ready(function() {
 	}
 
 	$('.viewswitch').click(function() {
-        $('#gridview').page('refresh');
-        $('#lsitview').page('refresh');
+        $('#gridview').refreshPage();
+        $('#lsitview').refreshPage();
 	});
 });
