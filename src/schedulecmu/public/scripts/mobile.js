@@ -8,9 +8,6 @@ function refreshPage()
 }
 
 $(document).ready(function() {
-	$('#gridview').refreshPage();
-    $('#lsitview').refreshPage();
-
 	var docW = $(document).width();
 	if(docW <= 750) {
 		$('#loginGrid').children('.ui-block-a').css('display','none');
@@ -18,8 +15,13 @@ $(document).ready(function() {
 		$('#loginGrid').removeClass('ui-grid-b');
 	}
 
-	$('.viewswitch').click(function() {
-        $('#gridview').refreshPage();
-        $('#lsitview').refreshPage();
-	});
+	$('#listview').bind('pageshow', function() {
+        console.log('List View');
+        refreshPage();
+    });
+
+    $('#gridview').bind('pageshow', function() {
+        console.log('Grid View');
+        refreshPage();
+    });
 });
