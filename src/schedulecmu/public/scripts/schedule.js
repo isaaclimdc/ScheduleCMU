@@ -717,7 +717,7 @@ function deleteCourse(p) {
         data : {
             _method : "DELETE",
             auth_token : null
-        }
+        },
         success : function(result, status) {
             console.log(result);
         }
