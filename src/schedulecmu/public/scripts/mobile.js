@@ -5,4 +5,9 @@ $(document).ready(function() {
 		$('#loginGrid').children('.ui-block-b').removeClass('ui-block-b');
 		$('#loginGrid').removeClass('ui-grid-b');
 	}
+
+	$('.viewswitch').click(function() {
+        $('#gridview').page('refresh');
+        $('#lsitview').page('refresh');
+	});
 });

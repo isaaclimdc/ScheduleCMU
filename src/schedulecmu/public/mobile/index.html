@@ -70,7 +70,7 @@
 <div data-role="page" data-title="ScheduleCMU" id="listview">
 	<!--HEADER-->
 	<div data-role="header" data-position="fixed">
-	  <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+	  <div class="ui-btn-left" class="viewswitch" data-role="controlgroup" data-type="horizontal">
 	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="minus">left 1</a>
 	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="grid">left 2</a>
 	  </div>
@@ -78,7 +78,6 @@
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
 	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-cal">right 2</a>
-	    <a href="#socialPop" data-rel="dialog" data-transition="pop" data-icon-theme="a" data-role="button" data-iconpos="notext" data-icon="myapp-share">right 2</a>
 	  </div>
 	</div>
 
@@ -93,7 +92,7 @@
 <!-- Calendar Grid Page -->
 <div data-role="page" data-title="ScheduleCMU" id="gridview">
 	<div data-role="header" id="gridviewheader" data-position="fixed">
-	  <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+	  <div class="ui-btn-left" class="viewswitch" data-role="controlgroup" data-type="horizontal">
 	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="minus">left 1</a>
 	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="grid">left 2</a>
 	  </div>
@@ -101,7 +100,6 @@
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
 	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-cal">right 2</a>
-	    <a href="#socialPop" data-rel="dialog" data-transition="pop" data-icon-theme="a" data-role="button" data-iconpos="notext" data-icon="myapp-share">right 2</a>
 	  </div>
 	</div>
 	<div id="calview" data-role="content">
@@ -117,7 +115,9 @@
 			<input type="text" placeholder='e.g. "15451", "Computer Science", or "Western Music History"'></input>
 			<a href="" data-role="button" onclick="searchForCourseInCourseBrowser();">Search</a>
 		</form>
-		<ul id="courseBrowserBody" data-role="listview" data-split-icon="plus" data-split-theme="d"></ul>
+		<ul id="courseBrowserBody" data-role="listview" data-split-icon="plus">
+			<!-- To be populated with a listview of courses matching the query -->
+		</ul>
 	</div>
 </div>
 
@@ -181,39 +181,6 @@
 			</div>
 			<a data-role="button" onclick="processEventForm();" data-transition="pop" href="#eventlist">Submit</a>
 		</form>
-	</div>
-</div>
-
-<!-- Social Pop Up -->
-<div data-role="page" data-overlay-theme="b" id="socialPop">
-	<div data-role="header"><h2>Share</h2></div>
-	<div data-role="content">
-		<ul data-role="listview">
-			<li onclick="exportGoogleCal();">
-				<a href="">
-					<img src="../images/google_m.png"/>
-					<h3>Export to Google Calendar</h3>
-				</a>
-			</li>
-			<li onclick="downloadAppleCal();">
-				<a href="">
-					<img src="../images/applecal_m.png"/>
-					<h3>Download for Apple Calendar</h3>
-				</a>
-			</li>
-			<li onclick="shareFacebook();">
-				<a href="">
-					<img src="../images/facebook_m.png"/>
-					<h3>Share on Facebook</h3>
-				</a>
-			</li>
-			<li onclick="shareTwitter();">
-				<a href="">
-					<img src="../images/twitter_m.png"/>
-					<h3>Share on Twitter</h3>
-				</a>
-			</li>
-		</ul>
 	</div>
 </div>
 

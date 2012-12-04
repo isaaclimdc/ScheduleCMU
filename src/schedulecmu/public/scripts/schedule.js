@@ -775,14 +775,14 @@ function addToCourseBrowser(course) {
     else {
         row = $('<li>');
         var rowInside = $('<a>');
-        rowInside.attr("href", "");
+        rowInside.attr("href", "#courseInfo");
         rowInside.attr('onclick', 'showInfoFromBrowser(this)');
         rowInside.append($('<h1>').text(course.num));
         rowInside.append($('<h2>').text(course.name));
         rowInside.append($('<h3>').text(makeUnitsStr(course.units)));
         var rowTwo = $('<a>');
-        rowTwo.attr("href", "");
-        rowTwo.attr("onclick", 'addCoursFromBrowser(this)');
+        rowTwo.attr("href", "#listview");
+        rowTwo.attr("onclick", 'addCourseFromBrowser(this)');
         rowTwo.append('Add Course');
         row.append(rowInside);
         row.append(rowTwo);
