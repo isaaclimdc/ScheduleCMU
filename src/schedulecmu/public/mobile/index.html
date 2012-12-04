@@ -60,7 +60,7 @@
 			<div class="ui-block-a"></div>
 			<div class="ui-block-b">
 				<img src="../images/icon_extract.png" alt="ScheduleCMU" />
-				<a href="#" onclick="loginToFB();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
+				<a href="#gridview" onclick="loginToFB();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
 
 				<!-- Temporary Button -->
 				<a href="#gridview" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">See Calendar</a>
@@ -95,7 +95,6 @@
 			<li data-role="divider">Change View</li>
 			<li><a href="#listview">Courses</a></li>
 			<li><a href="#gridview">Calendar</a></li>
-			<li><a href="#eventlist">Events</a></li>
 		</ul>
 	</div>
 </div>
@@ -119,43 +118,6 @@
 			<li data-role="divider">Change View</li>
 			<li><a href="#listview">Courses</a></li>
 			<li><a href="#gridview">Calendar</a></li>
-			<li><a href="#eventlist">Events</a></li>
-		</ul>
-	</div>
-</div>
-
-<!-- Event List Page -->
-<div data-role="page" data-title="ScheduleCMU" id="eventlist">
-	<!--HEADER-->
-	<div data-role="header" data-position="fixed">
-	  <a href="#popupMenu" data-icon-theme="a" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
-	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
-	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
-	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-cal">right 2</a>
-	    <a href="#socialPop" data-rel="dialog" data-transition="pop" data-icon-theme="a" data-role="button" data-iconpos="notext" data-icon="myapp-share">right 2</a>
-	  </div>
-	</div>
-
-	<div data-role="content">
-		<div id="accordion" data-role="collapsible-set">
-			<div data-role="collapsible" data-content-theme="a" data-collapsed="false">
-				<h3>15-237</h3>
-				<p>I'm the collapsible set content for section 1.</p>
-			</div>
-			<div data-role="collapsible" data-content-theme="a">
-				<h3>73-100</h3>
-				<p>I'm the collapsible set content for section 2.</p>
-			</div>		
-		</div>
-	</div>
-
-	<div data-role="popup" id="popupMenu">
-		<ul data-role="listview" data-inset="true" style="min-width:210px;">
-			<li data-role="divider">Change View</li>
-			<li><a href="#listview">Courses</a></li>
-			<li><a href="#gridview">Calendar</a></li>
-			<li><a href="#eventlist">Events</a></li>
 		</ul>
 	</div>
 </div>

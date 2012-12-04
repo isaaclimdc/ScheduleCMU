@@ -1060,11 +1060,14 @@ function showInCourseInfoBrowser(course) {
     /* Done, append the whole body */
     browser.append(body);
 
-    /* Done. Append it anywhere in content */
-    $("#content").append(browser);
+    if(window.isMobile === false) {
+        /* Done. Append it anywhere in content */
+        $("#content").append(browser);
 
-    /* Open it */
-    $("#courseInfoLink").click();
+        /* Open it */
+        $("#courseInfoLink").click();
+    }
+
 /*** Without description scraping ***/
 
 /*** With description scraping ***/
