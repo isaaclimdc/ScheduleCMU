@@ -229,9 +229,7 @@ function fetchCourseData() {
 
 /* Wrapper to do all that we need! */
 function addCourse(course) {
-    if (window.isMobile === false)
-        addCourseToAccordion(course);
-
+    addCourseToAccordion(course);
     addCourseToCalendar(course);
 }
 
