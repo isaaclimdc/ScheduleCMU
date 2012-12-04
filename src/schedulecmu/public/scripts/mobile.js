@@ -8,6 +8,9 @@ function refreshPage()
 }
 
 $(document).ready(function() {
+	$('#gridview').refreshPage();
+    $('#lsitview').refreshPage();
+
 	var docW = $(document).width();
 	if(docW <= 750) {
 		$('#loginGrid').children('.ui-block-a').css('display','none');

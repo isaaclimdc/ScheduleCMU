@@ -176,12 +176,10 @@ function setupPage() {
             day: 'ddd'
         };
 
-        $("#addCourseBox").keyup(function(event){
-            if(event.keyCode == 13){
-                e.preventDefault();
-                requestAndAddCourse();
-            }
-        });
+        $("#addCourseBox").submit(function(e) {
+            e.preventDefault();
+            requestAndAddCourse();
+        })
     }
 
     /* Only set up FullCalendar when all courses have been parsed. */
@@ -231,10 +229,6 @@ function fetchCourseData() {
 function addCourse(course) {
     addCourseToAccordion(course);
     addCourseToCalendar(course);
-    if(window.isMobile) {
-        $('#gridview').page('refresh');
-        $('#lsitview').page('refresh');
-    }
 }
 
 /* Adds a single course to FullCalendar */
