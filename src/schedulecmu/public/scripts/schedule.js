@@ -712,15 +712,16 @@ function deleteCourse(p) {
 
     /* TODO: DELETE the course from the server here */
     performAjaxRequest({
+        type : "POST",
         url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + course._id,
         data : {
-            _method : "DELETE"
+            _method : "DELETE",
+            auth_token : null
         }
         success : function(result, status) {
             console.log(result);
         }
-    })
-
+    });
 
     /* Refresh FullCalendar */
     $('#calview').fullCalendar('refetchEvents');
