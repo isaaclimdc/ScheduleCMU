@@ -782,6 +782,9 @@ function addToCourseBrowser(course) {
         row.append(rowTwo);
     }
     $('#courseBrowserBody').append(row);
+    if(window.isMobile) {
+        $('#courseBrowserBody').listview('refresh');
+    }
 }
 
 function addCourseFromBrowser(img) {
