@@ -74,7 +74,10 @@
 <div data-role="page" data-title="ScheduleCMU" id="listview">
 	<!--HEADER-->
 	<div data-role="header" data-position="fixed">
-	  <a href="#popupMenu" data-icon-theme="a" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
+	  <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="minus">left 1</a>
+	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="grid">left 2</a>
+	  </div>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
@@ -89,20 +92,15 @@
 			<!-- To be populated with course info -->
 		</div>
 	</div>
-
-	<div data-role="popup" id="popupMenu">
-		<ul data-role="listview" data-inset="true" style="min-width:210px;">
-			<li data-role="divider">Change View</li>
-			<li><a href="#listview">Courses</a></li>
-			<li><a href="#gridview">Calendar</a></li>
-		</ul>
-	</div>
 </div>
 
 <!-- Calendar Grid Page -->
 <div data-role="page" data-title="ScheduleCMU" id="gridview">
 	<div data-role="header" id="gridviewheader" data-position="fixed">
-	  <a href="#popupMenu" data-icon-theme="a" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
+	  <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="minus">left 1</a>
+	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="grid">left 2</a>
+	  </div>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
@@ -112,13 +110,6 @@
 	</div>
 	<div id="calview" data-role="content">
 		<!-- To be populated with a fullCalendar object -->
-	</div>
-	<div data-role="popup" id="popupMenu">
-		<ul data-role="listview" data-inset="true" style="min-width:210px;">
-			<li data-role="divider">Change View</li>
-			<li><a href="#listview">Courses</a></li>
-			<li><a href="#gridview">Calendar</a></li>
-		</ul>
 	</div>
 </div>
 
