@@ -187,7 +187,7 @@ module.exports = function (app, User) {
       });
   });
 
-  app.delete('/api/users/:user/schedules/:schedule', function(req, res) {
+  app.del('/api/users/:user/schedules/:schedule', function(req, res) {
       User.findById(req.params.user, function(err, user){
           if(err || (user == undefined)){
               res.send(404, {error: "User is not defined"});
