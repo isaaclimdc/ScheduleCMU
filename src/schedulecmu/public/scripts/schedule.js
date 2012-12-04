@@ -710,7 +710,16 @@ function deleteCourse(p) {
             }
         });
 
-    /* TODO: DELETE the course from the servere here */
+    /* TODO: DELETE the course from the server here */
+    performAjaxRequest({
+        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + course._id,
+        data : {
+            _method : "DELETE"
+        }
+        success : function(result, status) {
+            console.log(result);
+        }
+    })
 
 
     /* Refresh FullCalendar */
