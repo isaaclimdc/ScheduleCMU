@@ -682,20 +682,20 @@ function deleteCourseDesktop(p) {
     group.remove();
     $("#accordion").accordion('destroy').accordion(window.accordionOpts);
 
-    var course = window.listedCourses[clickedIndex];
-    deleteCourse(course);
+    deleteCourse(clickedIndex);
 }
 
 /* Called when "delete" is clicked on mobile */
 function deleteCourseMobile(p) {
     /* Maddie: Get clickedIndex somehow */
 
-    var course = window.listedCourses[clickedIndex];
-    deleteCourse(course);
+    deleteCourse(clickedIndex);
 }
 
 /* Deletes a single course */
-function deleteCourse(course) {
+function deleteCourse(clickedIndex) {
+    var course = window.listedCourses[clickedIndex];
+
     /* Update local lists */
     window.listedCourses.splice(clickedIndex, 1);
     window.userBlocks = $.grep(window.userBlocks, function(elt, idx) {
