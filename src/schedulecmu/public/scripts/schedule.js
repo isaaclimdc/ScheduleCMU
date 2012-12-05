@@ -1046,6 +1046,14 @@ function showInCourseInfoBrowser(course) {
     body.append($("<h3>").text("Corequisites"));
     body.append($("<p>").text("Lorem Ipsum"));
 
+    /* Append other course details */
+    // body.append($("<h3>").text("Description"));
+    // body.append($("<p>").text(course.details.description));
+    // body.append($("<h3>").text("Prerequisites"));
+    // body.append($("<p>").text(course.details.prereqs));
+    // body.append($("<h3>").text("Corequisites"));
+    // body.append($("<p>").text(course.details.coreqs));
+
     /* Done, append the whole body */
     browser.append(body);
 
@@ -1056,88 +1064,6 @@ function showInCourseInfoBrowser(course) {
         /* Open it */
         $("#courseInfoLink").click();
     }
-
-/*** Without description scraping ***/
-
-/*** With description scraping ***/
-    /* TODO: We need to transfer all this server-side */
-    // var num = course.num.replace("-", "");
-
-    // var semStr;
-    // var semNum = course.semester % 10;
-    // if (semNum === 0)
-    //     semStr = "S";  /* Spring */
-    // else if (semNum === 1)
-    //     semStr = "M";  /* Summer */
-    // else if (semNum === 2)
-    //     semStr = "F";  /* Fall */
-    // semStr += course.semester / 10;
-    // console.log(semStr);
-    // 
-    // performAjaxRequest({
-    //     customurl : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
-    //     success : function(result, status) {
-    //         /* Pulling out the desc, prereq, coreq text */
-    //         var page = $(result);
-    //         var allP = page.find("p");
-    //         var descHdr = $(allP[2]).children("font");
-    //         var desc = $(descHdr[0]).text();
-    //         var prereqs = $(descHdr[2]).text();
-    //         var coreqHdr = $(allP[3]).children("font")[0];
-    //         var coreqs = $($(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
-
-    //         /* Create the modal view and populate with the desired course */
-    //         var browser = $('#courseInfoBrowser');
-    //         if (browser.length === 0) {
-    //             browser = $("<div>").attr({
-    //                 "id": "courseInfoBrowser",
-    //                 "style": "display:none"
-    //             });
-    //         }
-    //         else {
-    //             browser.empty();
-    //         }
-
-    //         var header = $("<div>").attr("id", "courseInfoHeader");
-    //         var headerNum = $("<h2>").text(course.num);
-    //         var headerName = $("<h3>").text(course.name);
-    //         var headerUnits = $("<h4>").text(makeUnitsStr(course.units));
-
-    //         header.append(headerNum);
-    //         header.append(headerName);
-    //         header.append(headerUnits);
-    //         header.append($("<hr>"));
-
-    //         browser.append(header);
-
-    //         var body = $("<div>").attr("id", "courseInfoBody");
-    //         var table = $("<table>");
-
-    //         /* Here fullDetails = true because we want all details */
-    //         insertCourseIntoTable(course, table, true);
-
-    //         /* Append the completed table */
-    //         body.append(table);
-
-    //         /* Append other course details */
-    //         body.append($("<h3>").text("Description"));
-    //         body.append($("<p>").text(desc));
-    //         body.append($("<h3>").text("Prerequisites"));
-    //         body.append($("<p>").text(prereqs));
-    //         body.append($("<h3>").text("Corequisites"));
-    //         body.append($("<p>").text(coreqs));
-
-    //         /* Done, append the whole body */
-    //         browser.append(body);
-
-    //         /* Done. Append it anywhere in content */
-    //         $("#content").append(browser);
-
-    //         /* Open it */
-    //         $("#courseInfoLink").click();
-    //     }
-    // });
-/*** With description scraping ***/
 }
 
 
