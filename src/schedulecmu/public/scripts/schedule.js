@@ -215,6 +215,12 @@ function fetchCourseData() {
 function addCourse(course) {
     addCourseToAccordion(course);
     addCourseToCalendar(course);
+
+    if (window.isMobile === true) {
+        $("#accordion").collapsibleset('refresh');
+        $(".del").button();
+        $(".info").button();
+    }
 }
 
 /* Adds a single course to FullCalendar */
@@ -442,7 +448,8 @@ function addCourseToAccordion(course) {
 
     /* Create contentHdr */
     var contentHdr = $("<div>").addClass("contentHdr");
-    contentHdr.append($("<p>").text(courseName));
+    var name = $("<p>").text(courseName).css("font-weight", "bold");
+    contentHdr.append(name);
     var units = $("<p>").addClass("units").text(makeUnitsStr(courseUnits));
 
     if (window.isMobile === false) {
@@ -458,12 +465,23 @@ function addCourseToAccordion(course) {
         info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
     }
     else {
-        del = $("<div>").attr("onClick", "deleteCourse(this);").text("delete");
-        info = $("<div>").attr("onClick", "showInfoFromMobile(this);").text("info");
-        del.attr('data-role','button').attr('data-mini','true');
-        del.attr('data-icon','myapp-del').attr('data-inline','true').attr('data-iconpos','notext');
-        info.attr('data-role','button').attr('data-mini','true');
-        info.attr('data-icon','myapp-info').attr('data-inline','true').attr('data-iconpos','notext');
+        del = $("<div>").attr({
+            "onClick" : "deleteCourse(this);",
+            "data-role" : "button",
+            "data-mini" : "true",
+            "data-icon" : "myapp-del",
+            "data-inline" : "true",
+            "data-iconpos" : "notext"
+        }).text("delete").addClass("del");
+
+        info = $("<div>").attr({
+            "onClick" : "showInfoFromMobile(this);",
+            "data-role" : "button",
+            "data-mini" : "true",
+            "data-icon" : "myapp-info",
+            "data-inline" : "true",
+            "data-iconpos" : "notext"
+        }).text("info").addClass("info");
     }
     contentHdr.append(units);
     contentHdr.append(del);
@@ -498,8 +516,6 @@ function addCourseToAccordion(course) {
         group.append(title);
         group.append(content);
         accordion.append(group);
-
-        // accordion.collapsibleset('refresh');
     }
 
     /* Re-render Events on FullCalendar */
