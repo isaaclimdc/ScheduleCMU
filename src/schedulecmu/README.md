@@ -41,8 +41,11 @@ Available URLs
 
 GET /api/users/*fbid*
 PUT /api/users/*fbid*
+DELETE /api/users/*fbid*
 POST /api/users/*fbid*/schedules
+DELETE /api/users/*fbid*/schedules/*schedID*
 PUT /api/users/*fbid*/schedules/*schedID*/blocks/*courseID*
+DELETE /api/users/*fbID*/schedules/*schedID*/blocks/*courseID*
 
 POST /api/users/*fbid*/verify
   This is different in that the body need only contain "verify_code"
@@ -57,12 +60,7 @@ POST /api/courses/*couresID*/events
 
 Important URLs not yet complete:
 
-DELETE /api/users/*fbid*
-DELETE /api/users/*fbid*/schedules/*schedID*
-DELETE /api/users/*fbID*/schedules/*schedID*/blocks/*courseID*
-
 DELETE /api/courses/*courseID*/events/*eventID*
 PUT /api/courses/*courseID*/events/*eventID*
 
-The goal is to eventually support GET,POST,PUT,DELETE for every object
-and collection in the users API.
+The goal is to eventually support GET, POST, PUT, DELETE for every object and collection in the users API.

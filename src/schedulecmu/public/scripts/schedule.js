@@ -76,41 +76,21 @@ function fetchUserSchedule(user) {
     
     var schedulesArr = user.schedules;
 
-    /* If there are existing schedules for this user, fetch them
-     * and populate the page
+    /* Guaranteed to have at least 1 schedule, created in login.js.
+     * Eventually we want to let the user select which schedule to
+     * edit here.
      */
-    if (schedulesArr.length > 0) {
-        var latestSchedule = schedulesArr[0];
+    var latestSchedule = schedulesArr[0];
 
-        $('#semTitle').text(convertSemToReadable(latestSchedule.semester));
-        $('#scheduleVersion').text(latestSchedule.name);
+    $('#semTitle').text(convertSemToReadable(latestSchedule.semester));
+    $('#scheduleVersion').text(latestSchedule.name);
 
-        /* Save the current user info globally for use throughout */
-        window.userID = user._id;
-        window.schedID = latestSchedule._id;
-        window.userBlocks = latestSchedule.course_blocks;
-        console.log("User Blocks: ", window.userBlocks);
+    /* Save the current user info globally for use throughout */
+    window.userID = user._id;
+    window.schedID = latestSchedule._id;
+    window.userBlocks = latestSchedule.course_blocks;
 
-        fetchCourseData();
-    }
-    /* Otherwise, create a new schedule */
-    else {
-        performAjaxRequest({
-            type : "POST",
-            url : "/users/" + user._id + "/schedules/",
-            data : {
-                "data" : {
-                    "semester" : 130,  /* Placeholder */
-                    "name" : "Schedule 1"
-                },
-                "auth_token" : null,   /* TODO: Put auth token here */
-                "_method" : "POST"
-            },
-            success : function(result, status) {
-                console.log(result);
-            }
-        });
-    }
+    fetchCourseData();
 }
 
 function setupPage() {
@@ -176,12 +156,10 @@ function setupPage() {
             day: 'ddd'
         };
 
-        $("#addCourseBox").keyup(function(event){
-            if(event.keyCode == 13){
-                e.preventDefault();
-                requestAndAddCourse();
-            }
-        });
+        $("#addCourseBox").submit(function(e) {
+            e.preventDefault();
+            requestAndAddCourse();
+        })
     }
 
     /* Only set up FullCalendar when all courses have been parsed. */
@@ -229,9 +207,7 @@ function fetchCourseData() {
 
 /* Wrapper to do all that we need! */
 function addCourse(course) {
-    if (window.isMobile === false)
-        addCourseToAccordion(course);
-
+    addCourseToAccordion(course);
     addCourseToCalendar(course);
 }
 
@@ -714,8 +690,18 @@ function deleteCourse(p) {
             }
         });
 
-    /* TODO: DELETE the course from the servere here */
-
+    /* DELETE the course from the server */
+    performAjaxRequest({
+        type : "POST",
+        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + course._id,
+        data : {
+            _method : "DELETE",
+            auth_token : null
+        },
+        success : function(result, status) {
+            console.log(result);
+        }
+    });
 
     /* Refresh FullCalendar */
     $('#calview').fullCalendar('refetchEvents');
@@ -773,19 +759,22 @@ function addToCourseBrowser(course) {
     else {
         row = $('<li>');
         var rowInside = $('<a>');
-        rowInside.attr("href", "");
+        rowInside.attr("href", "#courseInfo");
         rowInside.attr('onclick', 'showInfoFromBrowser(this)');
         rowInside.append($('<h1>').text(course.num));
         rowInside.append($('<h2>').text(course.name));
         rowInside.append($('<h3>').text(makeUnitsStr(course.units)));
         var rowTwo = $('<a>');
-        rowTwo.attr("href", "");
-        rowTwo.attr("onclick", 'addCoursFromBrowser(this)');
+        rowTwo.attr("href", "#listview");
+        rowTwo.attr("onclick", 'addCourseFromBrowser(this)');
         rowTwo.append('Add Course');
         row.append(rowInside);
         row.append(rowTwo);
     }
     $('#courseBrowserBody').append(row);
+    if(window.isMobile) {
+        $('#courseBrowserBody').listview('refresh');
+    }
 }
 
 function addCourseFromBrowser(img) {

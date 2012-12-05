@@ -60,12 +60,8 @@
 			<div class="ui-block-a"></div>
 			<div class="ui-block-b">
 				<img src="../images/icon_extract.png" alt="ScheduleCMU" />
-				<a href="#gridview" onclick="loginToFB();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">Login with Facebook</a>	
-
-				<!-- Temporary Button -->
-				<a href="#gridview" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="arrow-r" data-iconpos="right">See Calendar</a>
+				<a href="#gridview" onclick="loginToFB();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="myapp-right" data-iconpos="right">Login with Facebook</a>	
 			</div>
-		
 		</div>
 	</div>
 </div>
@@ -74,12 +70,14 @@
 <div data-role="page" data-title="ScheduleCMU" id="listview">
 	<!--HEADER-->
 	<div data-role="header" data-position="fixed">
-	  <a href="#popupMenu" data-icon-theme="a" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
+	  <div class="ui-btn-left" class="viewswitch" data-role="controlgroup" data-type="horizontal">
+	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-list">left 1</a>
+	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-cal">left 2</a>
+	  </div>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
-	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-cal">right 2</a>
-	    <a href="#socialPop" data-rel="dialog" data-transition="pop" data-icon-theme="a" data-role="button" data-iconpos="notext" data-icon="myapp-share">right 2</a>
+	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-event">right 2</a>
 	  </div>
 	</div>
 
@@ -89,55 +87,43 @@
 			<!-- To be populated with course info -->
 		</div>
 	</div>
-
-	<div data-role="popup" id="popupMenu">
-		<ul data-role="listview" data-inset="true" style="min-width:210px;">
-			<li data-role="divider">Change View</li>
-			<li><a href="#listview">Courses</a></li>
-			<li><a href="#gridview">Calendar</a></li>
-		</ul>
-	</div>
 </div>
 
 <!-- Calendar Grid Page -->
 <div data-role="page" data-title="ScheduleCMU" id="gridview">
 	<div data-role="header" id="gridviewheader" data-position="fixed">
-	  <a href="#popupMenu" data-icon-theme="a" data-icon="arrow-d" data-iconpos="right" data-rel="popup">View</a>
+	  <div class="ui-btn-left" class="viewswitch" data-role="controlgroup" data-type="horizontal">
+	    <a href="#listview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-list">left 1</a>
+	    <a href="#gridview" data-transition="flip" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-cal">left 2</a>
+	  </div>
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
-	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-cal">right 2</a>
-	    <a href="#socialPop" data-rel="dialog" data-transition="pop" data-icon-theme="a" data-role="button" data-iconpos="notext" data-icon="myapp-share">right 2</a>
+	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-event">right 2</a>
 	  </div>
 	</div>
 	<div id="calview" data-role="content">
 		<!-- To be populated with a fullCalendar object -->
 	</div>
-	<div data-role="popup" id="popupMenu">
-		<ul data-role="listview" data-inset="true" style="min-width:210px;">
-			<li data-role="divider">Change View</li>
-			<li><a href="#listview">Courses</a></li>
-			<li><a href="#gridview">Calendar</a></li>
-		</ul>
-	</div>
 </div>
 
 <!-- Browse Pop Up -->
 <div data-role="page" data-overlay-theme="b" id="browsePop">
-	<div data-role="header"><h2>Browse Courses</h2></div>
+	<div data-role="header"><h2>Browse</h2></div>
 	<div data-role="content">
-		<h2>Browse courses</h2>
 		<form id="courseBrowserForm">
 			<input type="text" placeholder='e.g. "15451", "Computer Science", or "Western Music History"'></input>
 			<a href="" data-role="button" onclick="searchForCourseInCourseBrowser();">Search</a>
 		</form>
-		<ul id="courseBrowserBody" data-role="listview" data-split-icon="plus" data-split-theme="d"></ul>
+		<ul id="courseBrowserBody" data-role="listview" data-split-icon="myapp-plus">
+			<!-- To be populated with a listview of courses matching the query -->
+		</ul>
 	</div>
 </div>
 
 <!-- New Event Pop-Up -->
 <div data-role="page" data-overlay-theme="b" id="eventPop">
-	<div data-role="header"><h2>New course event</h2></div>
+	<div data-role="header"><h2>New Event</h2></div>
 	<div data-role="content">
 		<form id="eventForm" onSubmit="processEventForm();">
 			<div data-role="fieldcontain">
@@ -147,10 +133,10 @@
 			<div data-role="fieldcontain">
 				<label for="eventFormType">Event Type</label>
 				<select id="eventFormType">
-				 	<option value="officehours">Office Hours</option>
-				  	<option value="reviewsession">Review Session</option>
-				  	<option value="extralab">Extra Lab</option>
-				  	<option value="other">Other</option>
+				 	<option value="0">Office Hours</option>
+				  	<option value="1">Review Session</option>
+				  	<option value="2">Extra Lab</option>
+				  	<option value="3">Other</option>
 				</select>
 			</div>
 			<div data-role="fieldcontain">
@@ -168,25 +154,59 @@
 			<div data-role="fieldcontain">
 				<label for="eventFormStartTime">Starts</label>
 				<select id="eventFormStartTime">
-				 	<option value="1000">10:00a</option>
-				  	<option value="1030">10:30a</option>
-				  	<option value="1130">11:30a</option>
-				  	<option value="1200">12:00p</option>
-				  	<option value="1230">12:30p</option>
-				  	<option value="1300">1:00p</option>
-				  	<option value="1330">1:30p</option>
+				 	<option value="10:00a">10:00a</option>
+				  	<option value="10:30a">10:30a</option>
+				  	<option value="11:30a">11:30a</option>
+				  	<option value="12:00p">12:00p</option>
+				  	<option value="12:30p">12:30p</option>
+				  	<option value="1:00p">1:00p</option>
+				  	<option value="1:30p">1:30p</option>
+				  	<option value="2:00p">2:00p</option>
+				  	<option value="2:30p">2:30p</option>
+				  	<option value="3:00p">3:00p</option>
+				  	<option value="3:30p">3:30p</option>
+				  	<option value="4:00p">4:00p</option>
+				  	<option value="4:30p">4:30p</option>
+				  	<option value="5:00p">5:00p</option>
+				  	<option value="5:30p">5:30p</option>
+				  	<option value="6:00p">6:00p</option>
+				  	<option value="6:30p">6:30p</option>
+				  	<option value="7:00p">7:00p</option>
+				  	<option value="7:30p">7:30p</option>
+				  	<option value="8:00p">8:00p</option>
+				  	<option value="8:30p">8:30p</option>
+				  	<option value="9:00p">9:00p</option>
+				  	<option value="9:30p">9:30p</option>
+				  	<option value="10:00p">10:00p</option>
 				</select>
 			</div>
 			<div data-role="fieldcontain">
 				<label for="eventFormEndTime">Ends</label>
 				<select id="eventFormEndTime">
-				 	<option value="1000">10:00a</option>
-				  	<option value="1030">10:30a</option>
-				  	<option value="1130">11:30a</option>
-				  	<option value="1200">12:00p</option>
-				  	<option value="1230">12:30p</option>
-				  	<option value="1300">1:00p</option>
-				  	<option value="1330">1:30p</option>
+				 	<option value="10:00a">10:00a</option>
+				  	<option value="10:30a">10:30a</option>
+				  	<option value="11:30a">11:30a</option>
+				  	<option value="12:00p">12:00p</option>
+				  	<option value="12:30p">12:30p</option>
+				  	<option value="1:00p">1:00p</option>
+				  	<option value="1:30p">1:30p</option>
+				  	<option value="2:00p">2:00p</option>
+				  	<option value="2:30p">2:30p</option>
+				  	<option value="3:00p">3:00p</option>
+				  	<option value="3:30p">3:30p</option>
+				  	<option value="4:00p">4:00p</option>
+				  	<option value="4:30p">4:30p</option>
+				  	<option value="5:00p">5:00p</option>
+				  	<option value="5:30p">5:30p</option>
+				  	<option value="6:00p">6:00p</option>
+				  	<option value="6:30p">6:30p</option>
+				  	<option value="7:00p">7:00p</option>
+				  	<option value="7:30p">7:30p</option>
+				  	<option value="8:00p">8:00p</option>
+				  	<option value="8:30p">8:30p</option>
+				  	<option value="9:00p">9:00p</option>
+				  	<option value="9:30p">9:30p</option>
+				  	<option value="10:00p">10:00p</option>
 				</select>					
 			</div>
 			<div data-role="fieldcontain">
@@ -198,42 +218,9 @@
 	</div>
 </div>
 
-<!-- Social Pop Up -->
-<div data-role="page" data-overlay-theme="b" id="socialPop">
-	<div data-role="header"><h2>Share</h2></div>
-	<div data-role="content">
-		<ul data-role="listview">
-			<li onclick="exportGoogleCal();">
-				<a href="">
-					<img src="../images/google_m.png"/>
-					<h3>Export to Google Calendar</h3>
-				</a>
-			</li>
-			<li onclick="downloadAppleCal();">
-				<a href="">
-					<img src="../images/applecal_m.png"/>
-					<h3>Download for Apple Calendar</h3>
-				</a>
-			</li>
-			<li onclick="shareFacebook();">
-				<a href="">
-					<img src="../images/facebook_m.png"/>
-					<h3>Share on Facebook</h3>
-				</a>
-			</li>
-			<li onclick="shareTwitter();">
-				<a href="">
-					<img src="../images/twitter_m.png"/>
-					<h3>Share on Twitter</h3>
-				</a>
-			</li>
-		</ul>
-	</div>
-</div>
-
 <!-- Course Info Pop Up -->
 <div data-role="page" data-overlay-theme="b" id="courseInfo">
-	<div data-role="header"><h2>Course Info</h2></div>
+	<div data-role="header"><h2>Info</h2></div>
 	<div data-role="content" id="courseInfoBrowser">
 	</div>
 </div>
