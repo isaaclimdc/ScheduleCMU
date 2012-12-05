@@ -238,26 +238,26 @@ jsdom.env(
             console.log("Sem string is: ", semStr);
             
             /* Call AJAX Synchronously to get the response text */
-            var html = $.ajax({
+            var html = window.$.ajax({
                 url : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
                 async : false
             }).responseText;
 
-            console.log(html);
+            // console.log(html);
 
             /* Pulling out the desc, prereq, coreq text */
             var desc;   /* We need these */
             var prereqs;
             var coreqs;
 
-            var page = $(html);
+            var page = window.$(html);
             var allP = page.find("p");
-            var descHdr = $(allP[2]).children("font");
-            desc = $(descHdr[0]).text();
-            prereqs = $(descHdr[2]).text();
+            var descHdr = window.$(allP[2]).children("font");
+            desc = window.$(descHdr[0]).text();
+            prereqs = window.$(descHdr[2]).text();
             
-            var coreqHdr = $(allP[3]).children("font")[0];
-            coreqs = $($(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
+            var coreqHdr = window.$(allP[3]).children("font")[0];
+            coreqs = window.$(window.$(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
 
             /* Return this data as an object */
             return {
