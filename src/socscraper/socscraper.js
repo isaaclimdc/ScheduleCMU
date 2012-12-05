@@ -9,7 +9,7 @@
  */
 
 // Comment out for local file
-var scheduleToScrape = "testing/spring13.html";
+var scheduleToScrape = "spring13.html";
 // Comment out for network file
 // var scheduleToScrape = "https://enr-apps.as.cmu.edu/assets/SOC/sched_layout_fall.htm";
 
@@ -30,17 +30,17 @@ var total = 0;
 var totalSaved = 0;
 
 function dumpAndAdd(arr, course) {
-    total++;
-    var modeled = new CourseModel(course);
-    modeled.save(function(err) {
-        if (err) {
-            console.log(err);
-            return;
-        }
+  total++;
+  var modeled = new CourseModel(course);
+  modeled.save(function(err) {
+    if (err) {
+      console.log(err);
+      return;
+    }
     inspect(course);
     arr.push(course);
     totalSaved++;
-    });
+  });
 }
 
 jsdom.env(
@@ -98,7 +98,7 @@ jsdom.env(
             return window.$(elt).html();
         }
 
-        /* Convert a string like "Semester: Spring 2013" into a number 130. */
+        /* Convert a string like "Semester: Spring 2013" into a number 131. */
         function extractSemester(str) {
             var words = str.split(" ");
             var year = parseInt(words[words.length-1]);
@@ -136,24 +136,17 @@ jsdom.env(
 
             //TODO change how we store units?
             function processUnits(unitsStr) {
-                return unitsStr;
+              return unitsStr;
             }
 
             // Create a new Course
             var newCourse = new Course();
 
             // Get number, name, units, semester
-            var courseNum = extractHTML(cols[0]);
-            newCourse.num = processCourseNum(courseNum);
+            newCourse.num = processCourseNum(extractHTML(cols[0]));
             newCourse.name = extractHTML(cols[1]);
             newCourse.units = processUnits(extractHTML(cols[2]));
-            newCourse.semester = window.globalSem;
-
-            var details = fetchDetails(courseNum);
-
-            newCourse.description = details.desc;
-            newCourse.prereqs = details.prereqs;
-            newCourse.coreqs = details.coreqs;
+            newCourse.semester = globalSem;
 
             return newCourse;
         }
@@ -225,54 +218,7 @@ jsdom.env(
             return newSection;
         }
 
-        function fetchDetails(num, onSuccess) {
-            var semStr;
-            var semNum = window.globalSem % 10;
-            if (semNum === 0)
-                semStr = "S";  /* Spring */
-            else if (semNum === 1)
-                semStr = "M";  /* Summer */
-            else if (semNum === 2)
-                semStr = "F";  /* Fall */
-            semStr += window.globalSem / 10;
-            console.log("Sem string is: ", semStr);
-            
-            /* Call AJAX Synchronously to get the response text */
-            var html = window.$.ajax({
-                url : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
-                async : false
-            }).responseText;
-
-            console.log(html);
-
-            /* Pulling out the desc, prereq, coreq text */
-            var desc;   /* We need these */
-            var prereqs;
-            var coreqs;
-
-            var page = window.$(html);
-            var allP = page.find("p");
-            var descHdr = window.$(allP[2]).children("font");
-            desc = window.$(descHdr[0]).text();
-            prereqs = window.$(descHdr[2]).text();
-            
-            var coreqHdr = window.$(allP[3]).children("font")[0];
-            coreqs = window.$(window.$(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
-
-            /* Return this data as an object */
-            var res = {
-                "desc" : desc,
-                "prereqs" : prereqs,
-                "coreqs" : coreqs
-            };
-            console.log(res);
-            
-            return res; 
-        }
-
-        /****************************/
-        /**** Parser STARTS here ****/
-        /****************************/
+        /* Parser START */
 
         /* Print the title */
         var title = window.$("title").text();
@@ -280,7 +226,7 @@ jsdom.env(
 
         /* Get semester */
         var semStr = window.$(window.$("b")[1]).text();
-        window.globalSem = extractSemester(semStr);
+        var globalSem = extractSemester(semStr);
         console.log(semStr);
 
         /* Use Regex to add missing <tr> tags */
