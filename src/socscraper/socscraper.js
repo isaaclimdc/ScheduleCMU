@@ -98,7 +98,7 @@ jsdom.env(
             return window.$(elt).html();
         }
 
-        /* Convert a string like "Semester: Spring 2013" into a number 131. */
+        /* Convert a string like "Semester: Spring 2013" into a number 130. */
         function extractSemester(str) {
             var words = str.split(" ");
             var year = parseInt(words[words.length-1]);
@@ -136,17 +136,24 @@ jsdom.env(
 
             //TODO change how we store units?
             function processUnits(unitsStr) {
-              return unitsStr;
+                return unitsStr;
             }
 
             // Create a new Course
             var newCourse = new Course();
 
             // Get number, name, units, semester
-            newCourse.num = processCourseNum(extractHTML(cols[0]));
+            var courseNum = extractHTML(cols[0]);
+            newCourse.num = processCourseNum(courseNum);
             newCourse.name = extractHTML(cols[1]);
             newCourse.units = processUnits(extractHTML(cols[2]));
             newCourse.semester = globalSem;
+
+            var details = fetchDetails(courseNum);
+
+            newCourse.description = details.desc;
+            newCourse.prereqs = details.prereqs;
+            newCourse.coreqs = details.coreqs;
 
             return newCourse;
         }
@@ -218,7 +225,51 @@ jsdom.env(
             return newSection;
         }
 
-        /* Parser START */
+        function fetchDetails(num, onSuccess) {
+            var semStr;
+            var semNum = window.globalSem % 10;
+            if (semNum === 0)
+                semStr = "S";  /* Spring */
+            else if (semNum === 1)
+                semStr = "M";  /* Summer */
+            else if (semNum === 2)
+                semStr = "F";  /* Fall */
+            semStr += window.globalSem / 10;
+            console.log("Sem string is: ", semStr);
+            
+            /* Call AJAX Synchronously to get the response text */
+            var html = $.ajax({
+                url : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
+                async : false
+            }).responseText;
+
+            console.log(html);
+
+            /* Pulling out the desc, prereq, coreq text */
+            var desc;   /* We need these */
+            var prereqs;
+            var coreqs;
+
+            var page = $(html);
+            var allP = page.find("p");
+            var descHdr = $(allP[2]).children("font");
+            desc = $(descHdr[0]).text();
+            prereqs = $(descHdr[2]).text();
+            
+            var coreqHdr = $(allP[3]).children("font")[0];
+            coreqs = $($(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
+
+            /* Return this data as an object */
+            return {
+                "desc" : desc,
+                "prereqs" : prereqs,
+                "coreqs" : coreqs
+            }
+        }
+
+        /****************************/
+        /**** Parser STARTS here ****/
+        /****************************/
 
         /* Print the title */
         var title = window.$("title").text();
@@ -226,7 +277,7 @@ jsdom.env(
 
         /* Get semester */
         var semStr = window.$(window.$("b")[1]).text();
-        var globalSem = extractSemester(semStr);
+        window.globalSem = extractSemester(semStr);
         console.log(semStr);
 
         /* Use Regex to add missing <tr> tags */
