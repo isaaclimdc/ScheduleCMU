@@ -439,8 +439,19 @@ function addCourseToAccordion(course) {
     var contentHdr = $("<div>").addClass("contentHdr");
     contentHdr.append($("<p>").text(courseName));
     var units = $("<p>").addClass("units").text(makeUnitsStr(courseUnits));
-    var del = $("<p>").addClass("del").attr("onClick", "deleteCourseDesktop(this);").text("delete");
-    var info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
+    var del; var info;
+    if(window.isMobile === false) {
+        del = $("<p>").addClass("del").attr("onClick", "deleteCourseDesktop(this);").text("delete");
+        info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
+    }
+    else {
+        del = $("<div>").attr("onClick", "deleteCourseDesktop(this);").text("delete");
+        info = $("<div>").attr("onClick", "showInfoFromAccordion(this);").text("info");
+        del.attr('data-role','button').attr('data-mini','true');
+        del.attr('data-icon','myapp-del').attr('data-inline','true').attr('data-iconpos','notext');
+        info.attr('data-role','button').attr('data-mini','true');
+        info.attr('data-icon','myapp-info').attr('data-inline','true').attr('data-iconpos','notext');
+    }
     contentHdr.append(units);
     contentHdr.append(del);
     contentHdr.append(info);
