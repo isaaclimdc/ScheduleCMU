@@ -157,7 +157,6 @@ function setupPage() {
         };
 
         $("#addCourseForm").submit(function(e){
-            console.log("prevting default...");
             e.preventDefault();
             requestAndAddCourse();
         });
@@ -416,6 +415,10 @@ function fetchCourseWithID(courseID, onSuccess) {
                     console.log("Successfully added block!", result);
 
                     onSuccess();
+
+                    if (window.isMobile === true) {
+                        $('#addCourseBox').blur();
+                    }
                 }
             });
         }
@@ -496,7 +499,7 @@ function addCourseToAccordion(course) {
         group.append(content);
         accordion.append(group);
 
-        accordion.collapsibleset('refresh');
+        // accordion.collapsibleset('refresh');
     }
 
     /* Re-render Events on FullCalendar */

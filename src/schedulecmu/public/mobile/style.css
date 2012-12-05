@@ -28,7 +28,7 @@ body {
     height: 30px;
     width: auto !important;
     margin: 2px 44% 1px 44%;
-    float: center;
+    margin-left: 48%;
 }
 
 .center {
@@ -39,15 +39,27 @@ body {
 
 .ui-icon-myapp-browse {
     background: url("../images/mobileMagnify.png") no-repeat rgba(0, 0, 0, 0) !important;
+    -moz-border-radius: 0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
 }
 .ui-icon-myapp-event {
-    background: url("../images/mobileClock.png") no-repeat rgba(0, 0, 0, 0) !important;
+    background: url("../images/mobileEvents.png") no-repeat rgba(0, 0, 0, 0) !important;
+    -moz-border-radius: 0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
 }
 .ui-icon-myapp-cal {
     background: url("../images/mobileCal.png") no-repeat rgba(0, 0, 0, 0) !important;
+    -moz-border-radius: 0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
 }
 .ui-icon-myapp-list {
-    background: url("../images/mobileGradcap.png") no-repeat rgba(0, 0, 0, 0) !important;
+    background: url("../images/mobileList.png") no-repeat rgba(0, 0, 0, 0) !important;
+    -moz-border-radius: 0px;
+    -webkit-border-radius:0px;
+    border-radius:0px;
 }
 .ui-icon-myapp-plus {
     background: url("../images/mobilePlus.png") no-repeat rgba(0, 0, 0, 0) !important;
@@ -60,6 +72,25 @@ body {
 }
 .ui-icon-myapp-info {
     background: url("../images/mobileInfo.png") no-repeat rgba(0, 0, 0, 0) !important;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    .ui-icon-myapp-browse {
+        background: url("../images/mobileMagnify@2x.png") no-repeat rgba(0, 0, 0, 0) !important;
+        background-size: 18px 18px;
+    }
+    .ui-icon-myapp-cal {
+        background: url("../images/mobileCal@2x.png") no-repeat rgba(0, 0, 0, 0) !important;
+        background-size: 18px 18px;
+    }
+    .ui-icon-myapp-event {
+        background: url("../images/mobileEvents@2x.png") no-repeat rgba(0, 0, 0, 0) !important;
+        background-size: 24px 17px;
+    }
+    .ui-icon-myapp-list {
+        background: url("../images/mobileList@2x.png") no-repeat rgba(0, 0, 0, 0) !important;
+        background-size: 18px 18px;
+    }
 }
 
 /* IDs */
