@@ -59,6 +59,10 @@ function loginToScheduleCMU(fbAuthResponse) {
             /* Fetch an existing schedule */
             if (schedulesArr.length > 0) {
                 fetchUserSchedule(user);
+
+                if (window.isMobile === true) {
+                    $.mobile.changePage( "#gridview", { transition: "slide"} );
+                }
             }
 
             /* If no existing schedule, create a new one */
@@ -83,6 +87,10 @@ function loginToScheduleCMU(fbAuthResponse) {
                     success : function(result, status) {
                         /* Fetch this schedule */
                         fetchUserSchedule(result);
+
+                        if (window.isMobile === true) {
+                            $.mobile.changePage( "#gridview", { transition: "slide"} );
+                        }
                     }
                 });
             }

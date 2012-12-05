@@ -60,7 +60,7 @@
 			<div class="ui-block-a"></div>
 			<div class="ui-block-b">
 				<img src="../images/icon_extract.png" alt="ScheduleCMU" />
-				<a href="#gridview" onclick="loginToFB();" data-role="button" data-transition="slide" data-icon-theme="a" data-icon="myapp-right" data-iconpos="right">Login with Facebook</a>	
+				<a href="#" onclick="loginToFB();" data-role="button"  data-icon-theme="a" data-icon="myapp-right" data-iconpos="right">Login with Facebook</a>	
 			</div>
 		</div>
 	</div>
@@ -82,7 +82,7 @@
 	</div>
 
 	<div data-role="content">
-		<input type="text" name="addCourse" id="addCourseBox" placeholder="Add New Course" />
+		<form id="addCourseForm"><input type="text" name="addCourse" id="addCourseBox" placeholder="Add New Course" /></form>
 		<div id="accordion" data-role="collapsible-set">
 			<!-- To be populated with course info -->
 		</div>
@@ -225,12 +225,11 @@
 	</div>
 </div>
 
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 <script src="../scripts/fullcalendar.min.js"></script>
 <script src="../scripts/spin.min.js"></script>
 <script src="../scripts/schedule.js"></script>
 <script src="../scripts/login.js"></script>
-<script src="../scripts/mobile.js"></script>
 </body>
 </html>

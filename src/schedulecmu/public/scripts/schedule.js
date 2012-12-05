@@ -118,14 +118,6 @@ function setupPage() {
             e.preventDefault();
             requestAndAddCourse();
         });
-        document.onkeyup=function(e) {
-            if(e.which == 13){
-                $('#addCourseBox').blur();
-                requestAndAddCourse();
-
-                return false;
-            }
-        }
         $("#courseBrowserForm").submit(function(e){
             e.preventDefault();
             searchForCourseInCourseBrowser();
@@ -164,10 +156,16 @@ function setupPage() {
             day: 'ddd'
         };
 
-        $("#addCourseBox").submit(function(e) {
+        $("#addCourseForm").submit(function(e){
             e.preventDefault();
             requestAndAddCourse();
-        })
+        });
+
+        if ($(document).width() <= 750) {
+            $('#loginGrid').children('.ui-block-a').css('display','none');
+            $('#loginGrid').children('.ui-block-b').removeClass('ui-block-b');
+            $('#loginGrid').removeClass('ui-grid-b');
+        }
     }
 
     /* Only set up FullCalendar when all courses have been parsed. */
@@ -447,8 +445,11 @@ function addCourseToAccordion(course) {
     var contentHdr = $("<div>").addClass("contentHdr");
     contentHdr.append($("<p>").text(courseName));
     var units = $("<p>").addClass("units").text(makeUnitsStr(courseUnits));
-    var del; var info;
-    if(window.isMobile === false) {
+
+    var del;
+    var info;
+
+    if (window.isMobile === false) {
         del = $("<p>").addClass("del").attr("onClick", "deleteCourse(this);").text("delete");
         info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
     }
@@ -478,7 +479,7 @@ function addCourseToAccordion(course) {
     content.append(contentHdr);
     content.append(table);
 
-    if(window.isMobile === false) {
+    if (window.isMobile === false) {
         /* Append title h3 then content div into a group */
         var group = $("<div>").addClass("group");
         group.append(title);
@@ -493,6 +494,10 @@ function addCourseToAccordion(course) {
         group.append(title);
         group.append(content);
         accordion.append(group);
+
+        del.button('refresh');
+        info.button('refresh');
+        accordion.collapsibleset('refresh');
     }
 
     /* Re-render Events on FullCalendar */
@@ -773,7 +778,7 @@ function searchForCourseInCourseBrowser() {
 
 function addToCourseBrowser(course) {
     var row;
-    if(window.isMobile === false) {
+    if (window.isMobile === false) {
         row = $('<div>').addClass("courseBrowserRow");
         row.attr("onClick", "showInfoFromBrowser(this)");
         row.append($('<h1>').text(course.num));
@@ -783,6 +788,8 @@ function addToCourseBrowser(course) {
             "src" : "../images/plus.png",
             "onClick" : "addCourseFromBrowser(this)"
         }));
+
+        $('#courseBrowserBody').append(row);
     }
     else {
         row = $('<li>');
@@ -798,9 +805,9 @@ function addToCourseBrowser(course) {
         rowTwo.append('Add Course');
         row.append(rowInside);
         row.append(rowTwo);
-    }
-    $('#courseBrowserBody').append(row);
-    if(window.isMobile) {
+        row.css("margin-top", "30px");
+
+        $('#courseBrowserBody').append(row);
         $('#courseBrowserBody').listview('refresh');
     }
 }
