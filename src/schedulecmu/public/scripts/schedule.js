@@ -157,6 +157,7 @@ function setupPage() {
         };
 
         $("#addCourseForm").submit(function(e){
+            console.log("prevting default...");
             e.preventDefault();
             requestAndAddCourse();
         });
@@ -495,8 +496,6 @@ function addCourseToAccordion(course) {
         group.append(content);
         accordion.append(group);
 
-        del.button('refresh');
-        info.button('refresh');
         accordion.collapsibleset('refresh');
     }
 
@@ -687,30 +686,36 @@ function rowSelected(tr) {
 
 /* Deletes a single course */
 function deleteCourse(p) {
-    /* Get to enclosing group (3 levels up) */
-    var group;
-    var clickedIndex;
+    var courseID;
 
     if (window.isMobile === false) {
-        group = $(p).parent().parent().parent();
-        clickedIndex = $(group).index();
-        group.remove();
+        /* Get to enclosing group (3 levels up) */
+        var group = $(p).parent().parent().parent();
+        courseID = $($(group).children("h3")[0]).attr("id");
 
-        // Remove the group then refresh accordion
+        /* Remove the group then refresh accordion */
+        group.remove();
         $("#accordion").accordion('destroy').accordion(window.accordionOpts);
     }
     else {
-        group = $(p).parent().parent().parent().parent();
-        clickedIndex = $(group).index() - 1;
+        /* Get to enclosing group (4 levels up) */
+        var group = $(p).parent().parent().parent().parent();
+        courseID = $($(group).children("h3")[0]).attr("id");
+
+        /* Remove the group */
         group.remove();
     }
 
-    var course = window.listedCourses[clickedIndex];
-
     /* Update local lists */
-    window.listedCourses.splice(clickedIndex, 1);
+    window.listedCourses = $.grep(window.listedCourses, function(elt, idx) {
+        if (elt._id === courseID) {
+            return false;
+        }
+        return true;
+    });
+
     window.userBlocks = $.grep(window.userBlocks, function(elt, idx) {
-        if (elt._id === course._id) {
+        if (elt._id === courseID) {
             return false;
         }
         return true;
@@ -719,7 +724,7 @@ function deleteCourse(p) {
     /* Refresh FullCalendar */
     $("#calview").fullCalendar("clientEvents",
         function(eventToRemove) {
-            if (eventToRemove.id === course._id) {
+            if (eventToRemove.id === courseID) {
                 window.events.removeObj(eventToRemove);
             }
         });
@@ -729,7 +734,7 @@ function deleteCourse(p) {
     /* DELETE the course from the server */
     performAjaxRequest({
         type : "POST",
-        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + course._id,
+        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + courseID,
         data : {
             _method : "DELETE",
             auth_token : null
@@ -982,10 +987,16 @@ if(window.isMobile === false ) {
 
 function showInfoFromAccordion(infoLink) {
     /* Get to enclosing group (3 levels up) */
-    var clickedIndex = $(infoLink).parent().parent().parent().index();
+    var group = $(infoLink).parent().parent().parent();
+    var courseID = $($(group).children("h3")[0]).attr("id");
 
     /* Get this course from the global window.listedCourses */
-    var course = window.listedCourses[clickedIndex];
+    var course;
+    $.grep(window.listedCourses, function(elt, idx) {
+        if (elt._id === courseID) {
+            course = elt;
+        }
+    });
 
     showInCourseInfoBrowser(course);
 }
@@ -1013,11 +1024,17 @@ function showInfoFromBrowser(infoLink) {
 }
 
 function showInfoFromMobile(infoLink) {
-    /* Get to enclosing group (4 levels up) */
-    var clickedIndex = $(infoLink).parent().parent().parent().parent().index() - 1;
+    /* Get to enclosing group (3 levels up) */
+    var group = $(infoLink).parent().parent().parent().parent();
+    var courseID = $($(group).children("h3")[0]).attr("id");
 
     /* Get this course from the global window.listedCourses */
-    var course = window.listedCourses[clickedIndex];
+    var course;
+    $.grep(window.listedCourses, function(elt, idx) {
+        if (elt._id === courseID) {
+            course = elt;
+        }
+    });
 
     showInCourseInfoBrowser(course);
 }
