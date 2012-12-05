@@ -9,7 +9,7 @@
  */
 
 // Comment out for local file
-var scheduleToScrape = "spring13.html";
+var scheduleToScrape = "testing/spring13.html";
 // Comment out for network file
 // var scheduleToScrape = "https://enr-apps.as.cmu.edu/assets/SOC/sched_layout_fall.htm";
 
