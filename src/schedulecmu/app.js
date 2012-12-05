@@ -14,6 +14,17 @@ var User = require('./user_model.js')(mongoose, db);
 require('./courses_api.js')(app, Course);
 require('./users_api.js')(app, User);
 
+app.get('/', function (req, res) {
+    var userAgent = req.headers['user-agent'];
+    var isMobile = /mobile/i.test(userAgent);
+    if (isMobile === true) {
+        res.sendfile('public/mobile/index.html');
+    }
+    else {
+        res.sendfile('public/desktop/index.html');
+    }
+});
+
 /* Serve static files from the public directory */
 app.use(express.static('public'));
 /* AppFog will pass the listen port as an env var called VCAP_APP_PORT */
