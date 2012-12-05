@@ -435,13 +435,17 @@ function addCourseToAccordion(course) {
     /* Create <h3> for title */
     var title = $("<h3>").text(courseNum);
     title.attr("id", course._id);
-    title.css("background-color", color);
+    
 
     /* Create contentHdr */
     var contentHdr = $("<div>").addClass("contentHdr");
-    contentHdr.css("background-color", color);
     contentHdr.append($("<p>").text(courseName));
     var units = $("<p>").addClass("units").text(makeUnitsStr(courseUnits));
+
+    if (window.isMobile === false) {
+        title.css("background-color", color);
+        contentHdr.css("background-color", color);
+    }
 
     var del;
     var info;
