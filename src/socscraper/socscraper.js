@@ -147,7 +147,7 @@ jsdom.env(
             newCourse.num = processCourseNum(courseNum);
             newCourse.name = extractHTML(cols[1]);
             newCourse.units = processUnits(extractHTML(cols[2]));
-            newCourse.semester = globalSem;
+            newCourse.semester = window.globalSem;
 
             var details = fetchDetails(courseNum);
 
