@@ -638,7 +638,13 @@ function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
 
 /* Called when a row in the accordion is selected */
 function rowSelected(tr) {
-    var row = $(tr)
+    var row = $('tr');
+
+    var allRows = $('tr').parents('table').children('tr');
+    allRows.css('background-color','white');
+
+    row.css('background-color','#ededed');
+
     var sectIdx = parseInt(row.attr("sect"));
     var subsectIdx = parseInt(row.attr("subsect"));
 
