@@ -445,8 +445,8 @@ function addCourseToAccordion(course) {
         info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
     }
     else {
-        del = $("<div>").attr("onClick", "deleteCourseDesktop(this);").text("delete");
-        info = $("<div>").attr("onClick", "showInfoFromAccordion(this);").text("info");
+        del = $("<div>").attr("onClick", "deleteCourseMobile(this);").text("delete");
+        info = $("<div>").attr("onClick", "showInfoFromMobile(this);").text("info");
         del.attr('data-role','button').attr('data-mini','true');
         del.attr('data-icon','myapp-del').attr('data-inline','true').attr('data-iconpos','notext');
         info.attr('data-role','button').attr('data-mini','true');

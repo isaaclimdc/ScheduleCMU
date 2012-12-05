@@ -55,6 +55,12 @@ body {
 .ui-icon-myapp-right {
     background: url("../images/mobileArrow.png") no-repeat rgba(0, 0, 0, 0) !important;
 }
+.ui-icon-myapp-del {
+    background: url("../images/mobileDel.png") no-repeat rgba(0, 0, 0, 0) !important;
+}
+.ui-icon-myapp-info {
+    background: url("../images/mobileInfo.png") no-repeat rgba(0, 0, 0, 0) !important;
+}
 
 /* IDs */
 
