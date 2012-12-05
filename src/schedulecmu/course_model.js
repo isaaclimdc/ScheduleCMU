@@ -62,7 +62,7 @@ function getCourseModel(mongoose, db) {
         coreqs : {type: String, default: null}
     },
     sections: [SectionSchema],
-    course_events: [EventSchema],
+    course_events: [EventSchema]
   });
 
   return db.model('Course', CourseSchema);
