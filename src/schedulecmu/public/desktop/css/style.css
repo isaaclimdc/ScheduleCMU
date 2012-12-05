@@ -384,36 +384,6 @@ li {
     border-bottom: none;
     background-color: #D96C6E;
 }
-.ui-accordion .group:nth-child(1) .ui-accordion-header {
-    background-color: #D96C6E;
-}
-.ui-accordion .group:nth-child(2) .ui-accordion-header {
-    background-color: #BEFF7A;
-}
-.ui-accordion .group:nth-child(3) .ui-accordion-header {
-    background-color: #9ECFFF;
-}
-.ui-accordion .group:nth-child(4) .ui-accordion-header {
-    background-color: #FFF257;
-}
-.ui-accordion .group:nth-child(5) .ui-accordion-header {
-    background-color: #C891FF;
-}
-.ui-accordion .group:nth-child(6) .ui-accordion-header {
-    background-color: #FFBE69;
-}
-.ui-accordion .group:nth-child(7) .ui-accordion-header {
-    background-color: #FF9EC5;
-}
-.ui-accordion .group:nth-child(8) .ui-accordion-header {
-    background-color: #CFCFCF;
-}
-.ui-accordion .group:nth-child(9) .ui-accordion-header {
-    background-color: #69FF6B;
-}
-.ui-accordion .group:nth-child(10) .ui-accordion-header {
-    background-color: #8FFFFD;
-}
 
 .ui-accordion .ui-accordion-content {
     margin-top: -8px;
@@ -429,36 +399,6 @@ li {
 .ui-accordion .group .contentHdr {
     padding-top: 5px;
     background-color: #D96C6E;
-}
-.ui-accordion .group:nth-child(1) .contentHdr {
-    background-color: #D96C6E;
-}
-.ui-accordion .group:nth-child(2) .contentHdr {
-    background-color: #BEFF7A;
-}
-.ui-accordion .group:nth-child(3) .contentHdr {
-    background-color: #9ECFFF;
-}
-.ui-accordion .group:nth-child(4) .contentHdr {
-    background-color: #FFF257;
-}
-.ui-accordion .group:nth-child(5) .contentHdr {
-    background-color: #C891FF;
-}
-.ui-accordion .group:nth-child(6) .contentHdr {
-    background-color: #FFBE69;
-}
-.ui-accordion .group:nth-child(7) .contentHdr {
-    background-color: #FF9EC5;
-}
-.ui-accordion .group:nth-child(8) .contentHdr {
-    background-color: #CFCFCF;
-}
-.ui-accordion .group:nth-child(9) .contentHdr {
-    background-color: #69FF6B;
-}
-.ui-accordion .group:nth-child(10) .contentHdr {
-    background-color: #8FFFFD;
 }
 
 #accordion p {

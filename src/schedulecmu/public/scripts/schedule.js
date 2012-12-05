@@ -222,27 +222,18 @@ function addCourse(course) {
 function addCourseToCalendar(course) {
     // var sem = parseInt(course.semester);
     var sem = parseInt("122"); /* Override for debugging */
+    
     var sectionsToAdd;
-    var color;
     for (var i = 0; i < window.userBlocks.length; i++) {
         if (window.userBlocks[i]._id === course._id) {
             sectionsToAdd = window.userBlocks[i];
         }
     }
 
+    var color;
     for (var i = 0; i < window.listedCourses.length; i++) {
         if (window.listedCourses[i]._id === course._id) {
-            if (i == 0) color = "#D96C6E";
-            else if (i == 1) color = "#BEFF7A";
-            else if (i == 2) color = "#9ECFFF";
-            else if (i == 3) color = "#FFF257";
-            else if (i == 4) color = "#C891FF";
-            else if (i == 5) color = "#FFBE69";
-            else if (i == 6) color = "#FF9EC5";
-            else if (i == 7) color = "#CFCFCF";
-            else if (i == 8) color = "#69FF6B";
-            else if (i == 9) color = "#8FFFFD";
-            else color = "#D96C6E";
+            color = getColorFromIndex(i);
         }
     }
 
@@ -438,12 +429,17 @@ function addCourseToAccordion(course) {
 
     var accordion = $("#accordion");
 
+    var idx = window.listedCourses.indexOf(course);
+    var color = getColorFromIndex(idx);
+
     /* Create <h3> for title */
     var title = $("<h3>").text(courseNum);
     title.attr("id", course._id);
+    title.css("background-color", color);
 
     /* Create contentHdr */
     var contentHdr = $("<div>").addClass("contentHdr");
+    contentHdr.css("background-color", color);
     contentHdr.append($("<p>").text(courseName));
     var units = $("<p>").addClass("units").text(makeUnitsStr(courseUnits));
 
@@ -1254,4 +1250,23 @@ function convertSemToReadable(sem) {
 /* Helper to set the placeholder of box, which is a jQuery object */
 function setPlaceholder(box, str) {
     return $(box).attr("placeholder", str);
+}
+
+/* The predefined colors for the accordion and calendar */
+function getColorFromIndex(idx) {
+    var color;
+
+    if (idx == 0) color = "#D96C6E";
+    else if (idx == 1) color = "#BEFF7A";
+    else if (idx == 2) color = "#9ECFFF";
+    else if (idx == 3) color = "#FFF257";
+    else if (idx == 4) color = "#C891FF";
+    else if (idx == 5) color = "#FFBE69";
+    else if (idx == 6) color = "#FF9EC5";
+    else if (idx == 7) color = "#CFCFCF";
+    else if (idx == 8) color = "#69FF6B";
+    else if (idx == 9) color = "#8FFFFD";
+    else color = "#D96C6E";
+
+    return color;
 }
