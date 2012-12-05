@@ -132,4 +132,85 @@
     });
   });
 
+  app.del('/api/courses/:course/events/:event', function(req, res) {
+      Course.findById(req.params.course, function(err, course){
+          if(err || (course == undefined)){
+              res.send(404, {error: "Course is not defined"});
+          }
+          var event = course.course_events.id(req.params.event);
+          if(event == undefined){
+              res.send(404, {error: "Schedule not found"});
+          }
+
+          event.remove(function(err){
+              if(err){
+                  res.send(404, {error: "We messed up somewhere"});
+              }
+              else{
+                  course.save(function(err){
+                      if(err){
+                          res.send(404, {error: "We messed up somewhere"});
+                      }
+                      else{
+                          res.send(course);
+                      }
+                  });
+              }
+
+         });
+     });
+  });
+
+
+  app.put('/api/courses/:course/events/:event',
+          function (req, res) {
+              if (req.body.data == undefined) {
+                  res.send(400, {error: "No event received."});
+                  return;
+              }
+              req.body.data._id = req.params.event;
+
+              Course.findById(req.params.course, function(err, course){
+                  if(err) {
+                      console.log(err);
+                      res.send(500, {error: "No database connection."});
+                      return;
+                  }
+                  if (course == undefined) {
+                      res.send(404, {error: "Course not found."});
+                      return;
+                  }
+
+                  var event = course.course_events.id(req.params.event);
+                  if (event == undefined) {
+                      course.course_events.push(req.body.data);
+                  } else {
+                      if(req.body.data.event_type)
+                          event.event_type = Number(req.body.data.event_type);
+                      if(req.body.data.title)
+                          event.title = req.body.data.title;
+                      if(req.body.data.loc)
+                          event.loc = req.body.data.loc;
+                      if(req.body.data.state)
+                          event.state = req.body.data.state;
+                      if(req.body.data.threshold)
+                          event.threshold = req.body.data.threshold;
+                      if(req.body.data.recur)
+                          event.recur = req.body.data.recur;
+                  }
+
+                  course.save(function(err){
+                          if(err){
+                              res.send(400, {error: "Invalid event syntax."});
+                              console.log(err);
+                          } else {
+                              res.send(course.course_events);
+                          }
+                  });
+              });
+   });
+
+
+
+
 }
