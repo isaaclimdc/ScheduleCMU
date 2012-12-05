@@ -34,10 +34,10 @@ function loginToFB() {
 function loginToScheduleCMU(fbAuthResponse) {
     /* Test that we have a working auth */
     var userName;
-    FB.api('/me', function(response) {
-        userName = response.name;
-        console.log("Logged in with Facebook as " + userName + ".");
-    });
+    // FB.api('/me', function(response) {
+    //     userName = response.name;
+    //     console.log("Logged in with Facebook as " + userName + ".");
+    // });
 
     var fbID = fbAuthResponse.userID;
     var accessToken = fbAuthResponse.accessToken;
@@ -50,14 +50,45 @@ function loginToScheduleCMU(fbAuthResponse) {
             /* Unhide schedules page */
             $('#content').css("display", "block");
 
-            /* User logged in to ScheduleCMU! Start processing schedules */
+            /* User logged in to ScheduleCMU! Start
+             * processing schedules
+             */
             var user = result;
-            fetchUserSchedule(user);
+            var schedulesArr = user.schedules;
+
+            /* Fetch an existing schedule */
+            if (schedulesArr.length > 0) {
+                fetchUserSchedule(user);
+            }
+
+            /* If no existing schedule, create a new one */
+            else {
+                performAjaxRequest({
+                    type : "POST",
+                    url : "/users/" + user._id + "/schedules/",
+                    data : {
+                        /* Placeholder for now. Eventually
+                         * we should generate this based on
+                         * which is the nearest "current"
+                         * semester.
+                         */
+                        "data" : {
+                            "semester" : 130,  
+                            "name" : "Schedule 1"
+                        },
+                        /* TODO: Put auth token here */
+                        "auth_token" : null,
+                        "_method" : "POST"
+                    },
+                    success : function(result, status) {
+                        /* Fetch this schedule */
+                        fetchUserSchedule(result);
+                    }
+                });
+            }
         },
         statusCode: {
-            200: function() {  },
             404: function() {
-                console.log("User not found");
                 window.location.href = "register.html";
             }
         }

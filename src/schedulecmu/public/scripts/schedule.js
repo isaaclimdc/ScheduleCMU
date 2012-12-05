@@ -76,41 +76,21 @@ function fetchUserSchedule(user) {
     
     var schedulesArr = user.schedules;
 
-    /* If there are existing schedules for this user, fetch them
-     * and populate the page
+    /* Guaranteed to have at least 1 schedule, created in login.js.
+     * Eventually we want to let the user select which schedule to
+     * edit here.
      */
-    if (schedulesArr.length > 0) {
-        var latestSchedule = schedulesArr[0];
+    var latestSchedule = schedulesArr[0];
 
-        $('#semTitle').text(convertSemToReadable(latestSchedule.semester));
-        $('#scheduleVersion').text(latestSchedule.name);
+    $('#semTitle').text(convertSemToReadable(latestSchedule.semester));
+    $('#scheduleVersion').text(latestSchedule.name);
 
-        /* Save the current user info globally for use throughout */
-        window.userID = user._id;
-        window.schedID = latestSchedule._id;
-        window.userBlocks = latestSchedule.course_blocks;
-        console.log("User Blocks: ", window.userBlocks);
+    /* Save the current user info globally for use throughout */
+    window.userID = user._id;
+    window.schedID = latestSchedule._id;
+    window.userBlocks = latestSchedule.course_blocks;
 
-        fetchCourseData();
-    }
-    /* Otherwise, create a new schedule */
-    else {
-        performAjaxRequest({
-            type : "POST",
-            url : "/users/" + user._id + "/schedules/",
-            data : {
-                "data" : {
-                    "semester" : 130,  /* Placeholder */
-                    "name" : "Schedule 1"
-                },
-                "auth_token" : null,   /* TODO: Put auth token here */
-                "_method" : "POST"
-            },
-            success : function(result, status) {
-                console.log(result);
-            }
-        });
-    }
+    fetchCourseData();
 }
 
 function setupPage() {
@@ -710,7 +690,7 @@ function deleteCourse(p) {
             }
         });
 
-    /* TODO: DELETE the course from the server here */
+    /* DELETE the course from the server */
     performAjaxRequest({
         type : "POST",
         url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + course._id,
