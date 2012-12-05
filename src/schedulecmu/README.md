@@ -56,7 +56,8 @@ GET /api/courses?...
 GET /api/courses/*courseID*
 GET /api/courses/*courseID*/sections/*sectionID*
 GET /api/courses/*courseID*/sections/*sectionID*/subsections/*subID*
-POST /api/courses/*couresID*/events
+POST /api/courses/*courseID*/events
+DELETE /api/courses/*courseID*/events
 DELETE /api/courses/*courseID*/events/*eventID*
 PUT /api/courses/*courseID*/events/*eventID*
 

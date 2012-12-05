@@ -132,6 +132,23 @@
     });
   });
 
+  app.del('/api/courses/:course/events', function(req, res) {
+      Course.findById(req.params.course, function(err, course){
+          if(err || (course == undefined)){
+              res.send(404, {error: "Course is not defined"});                                                                                                       }
+          course.course_events = [];
+          course.save(function(err){
+              if(err){
+                  res.send(404, {error: "We messed up somewhere"});
+              }
+              else{
+                  res.send(course);
+              }
+          });
+      });
+   });
+
+
   app.del('/api/courses/:course/events/:event', function(req, res) {
       Course.findById(req.params.course, function(err, course){
           if(err || (course == undefined)){
