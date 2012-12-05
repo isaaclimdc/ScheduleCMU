@@ -439,7 +439,7 @@ function addCourseToAccordion(course) {
     var contentHdr = $("<div>").addClass("contentHdr");
     contentHdr.append($("<p>").text(courseName));
     var units = $("<p>").addClass("units").text(makeUnitsStr(courseUnits));
-    var del = $("<p>").addClass("del").attr("onClick", "deleteCourse(this);").text("delete");
+    var del = $("<p>").addClass("del").attr("onClick", "deleteCourseDesktop(this);").text("delete");
     var info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
     contentHdr.append(units);
     contentHdr.append(del);
@@ -661,8 +661,8 @@ function rowSelected(tr) {
     $('#calview').fullCalendar('addEventSource', window.events);
 }
 
-/* Called when "delete" is clicked */
-function deleteCourse(p) {
+/* Called when "delete" is clicked on desktop */
+function deleteCourseDesktop(p) {
     /* Get to enclosing group (3 levels up) */
     var group = $(p).parent().parent().parent();
     var clickedIndex = $(group).index();
@@ -672,10 +672,21 @@ function deleteCourse(p) {
     $("#accordion").accordion('destroy').accordion(window.accordionOpts);
 
     var course = window.listedCourses[clickedIndex];
+    deleteCourse(course);
+}
 
-    // Send updated course list to server
+/* Called when "delete" is clicked on mobile */
+function deleteCourseMobile(p) {
+    /* Maddie: Get clickedIndex somehow */
+
+    var course = window.listedCourses[clickedIndex];
+    deleteCourse(course);
+}
+
+/* Deletes a single course */
+function deleteCourse(course) {
+    /* Update local lists */
     window.listedCourses.splice(clickedIndex, 1);
-
     window.userBlocks = $.grep(window.userBlocks, function(elt, idx) {
         if (elt._id === course._id) {
             return false;
@@ -683,12 +694,15 @@ function deleteCourse(p) {
         return true;
     });
 
+    /* Refresh FullCalendar */
     $("#calview").fullCalendar("clientEvents",
         function(eventToRemove) {
             if (eventToRemove.id === course._id) {
                 window.events.removeObj(eventToRemove);
             }
         });
+
+    $('#calview').fullCalendar('refetchEvents');
 
     /* DELETE the course from the server */
     performAjaxRequest({
@@ -702,9 +716,6 @@ function deleteCourse(p) {
             console.log(result);
         }
     });
-
-    /* Refresh FullCalendar */
-    $('#calview').fullCalendar('refetchEvents');
 }
 
 /*** CourseBrowser ***/
@@ -936,31 +947,6 @@ function validateEventForm(res) {
     }
 }
 
-/**** ShareView ****/
-
-if (window.isMobile === false ) {
-    $("#shareLink").fancybox({
-        "scrolling" : "no",
-        "titleShow" : false,
-    });
-}
-
-function exportGoogleCal() {
-    alert("Exporting to Google Calendar...");
-}
-
-function downloadAppleCal() {
-    alert("Downloading for Apple Calendar...");
-}
-
-function shareFacebook() {
-    alert("Sharing on Facebook...");
-}
-
-function shareTwitter() {
-    alert("Sharing on Twitter...");
-}
-
 /**** CourseInfo ****/
 
 if(window.isMobile === false ) {
@@ -1000,6 +986,15 @@ function showInfoFromBrowser(infoLink) {
             showInCourseInfoBrowser(result);
         }
     });
+}
+
+function showInfoFromMobile(infoLink) {
+    /* Maddie: Get clickedIndex here too */
+
+    /* Get this course from the global window.listedCourses */
+    var course = window.listedCourses[clickedIndex];
+
+    showInCourseInfoBrowser(course);
 }
 
 function showInCourseInfoBrowser(course) {
