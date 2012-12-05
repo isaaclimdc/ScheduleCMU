@@ -243,7 +243,7 @@ jsdom.env(
                 async : false
             }).responseText;
 
-            // console.log(html);
+            console.log(html);
 
             /* Pulling out the desc, prereq, coreq text */
             var desc;   /* We need these */
@@ -260,11 +260,14 @@ jsdom.env(
             coreqs = window.$(window.$(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
 
             /* Return this data as an object */
-            return {
+            var res = {
                 "desc" : desc,
                 "prereqs" : prereqs,
                 "coreqs" : coreqs
-            }
+            };
+            console.log(res);
+            
+            return res; 
         }
 
         /****************************/
