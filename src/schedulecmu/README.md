@@ -16,6 +16,7 @@ $ af update schedulecmu
 
 
 How to use the API:
+---------
 
 All POST,PUT,DELETE requests follow the format
 {
@@ -56,11 +57,31 @@ GET /api/courses/*courseID*
 GET /api/courses/*courseID*/sections/*sectionID*
 GET /api/courses/*courseID*/sections/*sectionID*/subsections/*subID*
 POST /api/courses/*couresID*/events
-
-
-Important URLs not yet complete:
-
 DELETE /api/courses/*courseID*/events/*eventID*
 PUT /api/courses/*courseID*/events/*eventID*
 
-The goal is to eventually support GET, POST, PUT, DELETE for every object and collection in the users API.
+
+
+How to use schedule.js
+---------
+
+Important function calls in schedules.js
+--
+
+/* Populate the page with the user's courses */
+fetchUserSchedule()
+
+/* User presses enter in add course box */
+requestAndAddCourse()
+
+/* User clicks on row in the Accordion to change sections */
+rowSelected()
+
+/* User clicks on "delete" in the Accordion */
+deleteCourse()
+
+/* User clicks on "info" in the Accordion */
+showInfoFromAccordion()
+
+/* User searches in the CourseBrowser */
+searchForCourseInCourseBrowser()
