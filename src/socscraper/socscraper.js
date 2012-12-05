@@ -9,7 +9,7 @@
  */
 
 // Comment out for local file
-var scheduleToScrape = "spring13.html";
+var scheduleToScrape = "testing/spring13.html";
 // Comment out for network file
 // var scheduleToScrape = "https://enr-apps.as.cmu.edu/assets/SOC/sched_layout_fall.htm";
 
@@ -30,17 +30,17 @@ var total = 0;
 var totalSaved = 0;
 
 function dumpAndAdd(arr, course) {
-  total++;
-  var modeled = new CourseModel(course);
-  modeled.save(function(err) {
-    if (err) {
-      console.log(err);
-      return;
-    }
+    total++;
+    var modeled = new CourseModel(course);
+    modeled.save(function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
     inspect(course);
     arr.push(course);
     totalSaved++;
-  });
+    });
 }
 
 jsdom.env(
