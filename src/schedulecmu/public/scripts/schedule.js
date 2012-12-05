@@ -642,7 +642,11 @@ function rowSelected(tr) {
     if (isNaN(subsectIdx))
         subsectIdx = -1;
 
-    var clickedIndex = row.parent().parent().parent().parent().index();
+    var clickedIndex;
+    if(window.isMobile === false)
+        clickedIndex = row.parent().parent().parent().parent().index();
+    else
+        clickedIndex = row.parent().parent().parent().parent().parent().index();
 
     var course = window.listedCourses[clickedIndex];
 
