@@ -28,8 +28,8 @@ function getCourseModel(mongoose, db) {
       days: [{type: String, match: /^[MTWRFSU]$/}], //Optional
       occurence: {type: Number, default: null}, //Various dropdown options - daily, weekly, monthly, etc
       frequency: {type: Number, default: null} //Repeats every n days / weeks / months - depending on the ocurence field
-  }});
-
+    }
+  });
 
 
   var ClassSchema = new Schema({
@@ -54,11 +54,15 @@ function getCourseModel(mongoose, db) {
     num: {type: String, match: /^[0-9]{1,2}-[0-9]{3}$/},
     name: String,
     semester: Number,
-    description: {type: String, default: null},
-    URL: {type: String, default: null},
     units: String,
+    details : {
+        description: {type: String, default: null},
+        url: {type: String, default: null},
+        prereqs : {type: String, default: null},
+        coreqs : {type: String, default: null}
+    },
     sections: [SectionSchema],
-    course_events: [EventSchema]
+    course_events: [EventSchema],
   });
 
   return db.model('Course', CourseSchema);

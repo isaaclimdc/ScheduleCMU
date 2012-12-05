@@ -200,14 +200,14 @@
                   }
 
                   course.save(function(err){
-                          if(err){
-                              res.send(400, {error: "Invalid event syntax."});
-                              console.log(err);
-                          } else {
-                              res.send(course.course_events);
-                          }
-                  });
-              });
+                      if(err){
+                          res.send(400, {error: "Invalid event syntax."});
+                          console.log(err);
+                      } else {
+                          res.send(course.course_events);
+                  }
+             });
+       });
    });
 
 
