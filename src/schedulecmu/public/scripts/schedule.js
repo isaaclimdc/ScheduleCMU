@@ -118,6 +118,14 @@ function setupPage() {
             e.preventDefault();
             requestAndAddCourse();
         });
+        document.onkeyup=function(e) {
+            if(e.which == 13){
+                $('#addCourseBox').blur();
+                requestAndAddCourse();
+
+                return false;
+            }
+        }
         $("#courseBrowserForm").submit(function(e){
             e.preventDefault();
             searchForCourseInCourseBrowser();
@@ -441,11 +449,11 @@ function addCourseToAccordion(course) {
     var units = $("<p>").addClass("units").text(makeUnitsStr(courseUnits));
     var del; var info;
     if(window.isMobile === false) {
-        del = $("<p>").addClass("del").attr("onClick", "deleteCourseDesktop(this);").text("delete");
+        del = $("<p>").addClass("del").attr("onClick", "deleteCourse(this);").text("delete");
         info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
     }
     else {
-        del = $("<div>").attr("onClick", "deleteCourseMobile(this);").text("delete");
+        del = $("<div>").attr("onClick", "deleteCourse(this);").text("delete");
         info = $("<div>").attr("onClick", "showInfoFromMobile(this);").text("info");
         del.attr('data-role','button').attr('data-mini','true');
         del.attr('data-icon','myapp-del').attr('data-inline','true').attr('data-iconpos','notext');
@@ -672,28 +680,26 @@ function rowSelected(tr) {
     $('#calview').fullCalendar('addEventSource', window.events);
 }
 
-/* Called when "delete" is clicked on desktop */
-function deleteCourseDesktop(p) {
-    /* Get to enclosing group (3 levels up) */
-    var group = $(p).parent().parent().parent();
-    var clickedIndex = $(group).index();
-
-    // Remove the group then refresh accordion
-    group.remove();
-    $("#accordion").accordion('destroy').accordion(window.accordionOpts);
-
-    deleteCourse(clickedIndex);
-}
-
-/* Called when "delete" is clicked on mobile */
-function deleteCourseMobile(p) {
-    /* Maddie: Get clickedIndex somehow */
-
-    deleteCourse(clickedIndex);
-}
-
 /* Deletes a single course */
-function deleteCourse(clickedIndex) {
+function deleteCourse(p) {
+    /* Get to enclosing group (3 levels up) */
+    var group;
+    var clickedIndex;
+
+    if (window.isMobile === false) {
+        group = $(p).parent().parent().parent();
+        clickedIndex = $(group).index();
+        group.remove();
+
+        // Remove the group then refresh accordion
+        $("#accordion").accordion('destroy').accordion(window.accordionOpts);
+    }
+    else {
+        group = $(p).parent().parent().parent().parent();
+        clickedIndex = $(group).index() - 1;
+        group.remove();
+    }
+
     var course = window.listedCourses[clickedIndex];
 
     /* Update local lists */
@@ -978,7 +984,7 @@ function showInfoFromAccordion(infoLink) {
 }
 
 function showInfoFromBrowser(infoLink) {
-    /* Get to enclosing group (3 levels up) */
+    /* Get to enclosing group (1 level up) */
     var clickedIndex = $(infoLink).index();
 
     /* Get this course from the global window.listedCourses */
@@ -1000,7 +1006,8 @@ function showInfoFromBrowser(infoLink) {
 }
 
 function showInfoFromMobile(infoLink) {
-    /* Maddie: Get clickedIndex here too */
+    /* Get to enclosing group (4 levels up) */
+    var clickedIndex = $(infoLink).parent().parent().parent().parent().index() - 1;
 
     /* Get this course from the global window.listedCourses */
     var course = window.listedCourses[clickedIndex];
