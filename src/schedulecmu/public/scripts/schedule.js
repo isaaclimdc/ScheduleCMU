@@ -658,10 +658,16 @@ function rowSelected(selected) {
 
     if (window.isMobile === true) {
         $.each(row.parents('table').find('tr'), function(idx, elt) {
-            $(elt).css('background-color','');
+            $(elt).css({
+                'background-color' : '',
+                'font-weight' : ''
+            });
         });
         
-        row.css('background-color','#ededed');
+        row.css({
+            'background-color' : '#ededed',
+            'font-weight' : 'bold'
+        });
     }
 
     var sectIdx = parseInt(row.attr("sect"));
