@@ -653,11 +653,14 @@ function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
 }
 
 /* Called when a row in the accordion is selected */
-function rowSelected(tr) {
-    var row = $('tr');
-    if(window.isMobile) {
-        var allRows = $('tr').parents('table').children('tr');
-        allRows.css('background-color','white');
+function rowSelected(selected) {
+    var row = $(selected);
+
+    if (window.isMobile === true) {
+        $.each(row.parents('table').find('tr'), function(idx, elt) {
+            $(elt).css('background-color','');
+        });
+        
         row.css('background-color','#ededed');
     }
 
