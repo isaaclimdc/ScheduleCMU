@@ -129,7 +129,10 @@ function createNewUser() {
                     console.log("New user created!", result);
 
                     /* Show them a "sent email" message */
-                    $("#registerForm #submitBtn").remove();
+                    if (window.isMobile === false) {
+                        $("#registerForm #submitBtn").remove();
+                    }
+
                     $('#registerForm').append($("<p>").html("We've sent you a verification email!"));
                 }
             });

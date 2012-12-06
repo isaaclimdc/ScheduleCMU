@@ -32,7 +32,7 @@ function verify(authResponse) {
             if (isMobile === false)
                 window.location.href = "desktop/schedule.html";
             else
-                window.location.href = "mobile/mobile.html";
+                window.location.href = "mobile/index.html";
         },
         error : function(xhr, status, error) {
             console.log(error);

@@ -856,6 +856,11 @@ function addToCourseBrowser(course) {
         $('#courseBrowserBody').append(row);
         $('#courseBrowserBody').listview('refresh');
     }
+
+    /* Done, close keyboard */
+    if (window.isMobile === true) {
+        $('#courseBrowserSearchBox').blur();
+    }
 }
 
 function addCourseFromBrowser(img) {
@@ -1103,8 +1108,6 @@ function showInfoFromMobile(infoLink) {
 }
 
 function showInCourseInfoBrowser(course) {
-
-/*** Without description scraping ***/
     /* Create the modal view and populate with the desired course */
     var browser = $('#courseInfoBrowser');
     if (browser.length === 0) {
@@ -1157,7 +1160,11 @@ function showInCourseInfoBrowser(course) {
     /* Done, append the whole body */
     browser.append(body);
 
-    if(window.isMobile === false) {
+    if (window.isMobile === true) {
+        /* Open it */
+        $("#courseInfoLink").click();
+    }
+    else {
         /* Done. Append it anywhere in content */
         $("#content").append(browser);
 

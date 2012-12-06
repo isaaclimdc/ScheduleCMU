@@ -81,7 +81,7 @@
 	</div>
 
 	<div data-role="content">
-		<form id="addCourseForm" data-ajax="false" action="#">
+		<form id="addCourseForm" data-ajax="false">
 			<input type="text" id="addCourseBox" placeholder="e.g. 15451, 76101..."></input>
 			<!-- <input type="submit">Add course</input> -->
 		</form>
@@ -113,9 +113,9 @@
 <div data-role="page" data-overlay-theme="b" id="browsePop" data-close-btn-theme="c">
 	<div data-role="header"><h2>Browse</h2></div>
 	<div data-role="content">
-		<form id="courseBrowserForm">
-			<input type="text" placeholder='e.g. "15451" or "76"...'></input>
-			<a href="" data-role="button" onclick="searchForCourseInCourseBrowser();">Search</a>
+		<form id="courseBrowserForm" data-ajax="false">
+			<input type="text" id="courseBrowserSearchBox" placeholder='e.g. "15451" or "76"...'></input>
+			<input type="submit" value="Search for courses"></input>
 		</form>
 		<ul id="courseBrowserBody" data-role="listview" data-split-icon="myapp-plus" data-split-theme="c">
 			<!-- To be populated with a listview of courses matching the query -->
@@ -127,7 +127,7 @@
 <div data-role="page" data-overlay-theme="b" id="eventPop">
 	<div data-role="header"><h2>New Event</h2></div>
 	<div data-role="content">
-		<form id="eventForm" data-ajax="false" action="#">
+		<form id="eventForm" data-ajax="false">
 			<div data-role="fieldcontain">
 				<label for="eventFormCourseNum">Course Number (5 digits)</label>
 				<input type="text" id="eventFormCourseNum" placeholder="15451"</input>
@@ -224,6 +224,7 @@
 	<div data-role="content" id="courseInfoBrowser">
 	</div>
 </div>
+<a href="#courseInfo" data-rel="dialog" data-transition="pop" id="courseInfoLink"></a>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
