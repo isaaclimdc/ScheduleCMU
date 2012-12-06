@@ -1093,9 +1093,9 @@ function showInfoFromBrowser(infoLink) {
 
 function showInfoFromMobile(infoLink) {
     /* Get to enclosing group (3 levels up) */
-    var group = $(infoLink).parent().parent().parent().parent();
+    var group = $(infoLink).parent().parent().parent().parent().parent();
     var courseID = $($(group).children("h3")[0]).attr("id");
-
+console.log(courseID);
     /* Get this course from the global window.listedCourses */
     var course;
     $.grep(window.listedCourses, function(elt, idx) {
@@ -1108,6 +1108,7 @@ function showInfoFromMobile(infoLink) {
 }
 
 function showInCourseInfoBrowser(course) {
+    console.log(course);
     /* Create the modal view and populate with the desired course */
     var browser = $('#courseInfoBrowser');
     if (browser.length === 0) {
