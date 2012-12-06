@@ -470,6 +470,7 @@ function addCourseToAccordion(course) {
     else {
         del = $("<div>").attr({
             "onClick" : "deleteCourse(this);",
+            "id" : course._id,
             "data-role" : "button",
             "data-mini" : "true",
             "data-icon" : "myapp-del",
@@ -479,6 +480,7 @@ function addCourseToAccordion(course) {
 
         info = $("<div>").attr({
             "onClick" : "showInfoFromMobile(this);",
+            "id" : course._id,
             "data-role" : "button",
             "data-mini" : "true",
             "data-icon" : "myapp-info",
@@ -840,8 +842,11 @@ function addToCourseBrowser(course) {
     else {
         row = $('<li>');
         var rowInside = $('<a>');
-        rowInside.attr("href", "#courseInfo");
-        rowInside.attr('onclick', 'showInfoFromBrowser(this)');
+        rowInside.attr({
+            "href" : "#courseInfo",
+            "onclick" : "showInfoFromBrowser(this)",
+            "id" : course._id
+        });
         rowInside.append($('<h1>').text(course.num));
         rowInside.append($('<h2>').text(course.name));
         rowInside.append($('<h3>').text(makeUnitsStr(course.units)));
@@ -1093,9 +1098,8 @@ function showInfoFromBrowser(infoLink) {
 
 function showInfoFromMobile(infoLink) {
     /* Get to enclosing group (3 levels up) */
-    var group = $(infoLink).parent().parent().parent().parent().parent();
-    var courseID = $($(group).children("h3")[0]).attr("id");
-console.log(courseID);
+    var courseID = $(infoLink).attr("id");
+    console.log(courseID);
     /* Get this course from the global window.listedCourses */
     var course;
     $.grep(window.listedCourses, function(elt, idx) {
