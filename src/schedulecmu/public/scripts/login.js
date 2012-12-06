@@ -11,7 +11,7 @@
  */
 
 $(document).ready(function() {
-    $("#loginForm form").submit(function(e){
+    $("#registerForm").submit(function(e){
         e.preventDefault();
         createNewUser();
     });
@@ -129,10 +129,8 @@ function createNewUser() {
                     console.log("New user created!", result);
 
                     /* Show them a "sent email" message */
-                    if(window.isMobile === false) {
-                        $("#loginForm #submitBtn").remove();
-                    }
-                    $('#loginForm form').append($("<p>").html("We've sent you a verification email!"));
+                    $("#registerForm #submitBtn").remove();
+                    $('#registerForm').append($("<p>").html("We've sent you a verification email!"));
                 }
             });
         }

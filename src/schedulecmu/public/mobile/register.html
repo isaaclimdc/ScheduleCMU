@@ -47,12 +47,12 @@
 <div data-role="page" data-title="Register" id="register" data-theme="a">
 	<div data-role="content">
 		<h2>Almost there! We just need your Andrew ID</h2>
-		<form id="registerForm" onSubmit="createNewUser();">
+		<form id="registerForm" data-ajax="false" action="#">
 			<div class="fieldcontain">
-				<input type="text" id="andrewBox" placeholder="Andrew ID"></input>
+				<input type="text" id="andrewBox" placeholder="Andrew ID" autocapitalize="off"></input>
 				<span class="andrew2">@andrew.cmu.edu</span>
 			</div>
-			<input type="submit" value="Send verification email">
+			<input type="submit" value="Send verification email" id="submitBtn">
 		</form>
 	</div>
 </div>
@@ -63,6 +63,5 @@
 <script src="../scripts/spin.min.js"></script>
 <script src="../scripts/schedule.js"></script>
 <script src="../scripts/login.js"></script>
-<script src="../scripts/mobile.js"></script>
 </body>
 </html>
