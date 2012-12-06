@@ -113,19 +113,6 @@ function setupPage() {
             $("#accordion").accordion(window.accordionOpts);
         });
 
-        // When the user presses enter in forms
-        $("#addCourseForm").submit(function(e){
-            e.preventDefault();
-            requestAndAddCourse();
-        });
-        $("#courseBrowserForm").submit(function(e){
-            e.preventDefault();
-            searchForCourseInCourseBrowser();
-        });
-        $("#eventForm").submit(function(e){
-            e.preventDefault();
-            processEventForm();
-        });
         $(".courseBrowserRow img").click(function(e) {
             e.stopPropagation();
         });
@@ -156,9 +143,10 @@ function setupPage() {
             day: 'ddd'
         };
 
-        $("#addCourseForm").submit(function(e){
-            e.preventDefault();
-            requestAndAddCourse();
+        $('#gridview').live('pagebeforeshow', function(e) {
+            console.log('Grid View');
+            /* Refresh FullCalendar */
+            $('#calview').fullCalendar('refetchEvents');
         });
 
         if ($(document).width() <= 750) {
@@ -188,6 +176,20 @@ function setupPage() {
         ignoreTimezone: false,
         events: window.events
     });
+
+    /* Override submission of forms */
+    $("#addCourseForm").submit(function(e){
+        e.preventDefault();
+        requestAndAddCourse();
+    });
+    $("#courseBrowserForm").submit(function(e){
+        e.preventDefault();
+        searchForCourseInCourseBrowser();
+    });
+    $("#eventForm").submit(function(e){
+        e.preventDefault();
+        processEventForm();
+    });
 }
 
 function fetchCourseData() {
@@ -216,6 +218,7 @@ function addCourse(course) {
     addCourseToAccordion(course);
     addCourseToCalendar(course);
 
+    /* Refresh jQuery mobile */
     if (window.isMobile === true) {
         $("#accordion").collapsibleset('refresh');
         $(".del").button();
@@ -886,6 +889,7 @@ if (window.isMobile === false ) {
 }
 
 function processEventForm() {
+    console.log("Processing event form...");
     var courseNum = $("#eventFormCourseNum").val();
     var type = parseInt($("#eventFormType").val());
     var title = $("#eventFormTitle").val();
@@ -909,11 +913,28 @@ function processEventForm() {
         /* Parse time and date */
         var startArr = processTimeStr(startTime);
         var endArr = processTimeStr(endTime);
-        var dateArr = $("#eventFormDate").val().split("/");
+        var startDate;
+        var endDate;
 
-        /* Who knew "January" == 0?? */
-        var startDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], startArr[0], startArr[1]);
-        var endDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], endArr[0], endArr[1]);
+        console.log(courseNum, type, title, location, dateStr, startTime, endTime);
+
+        if (window.isMobile === true) {
+            /* If mobile, in the form "2012-12-06" */
+            var d = new Date(dateStr);
+            d.setHours(d.getHours()+12);  /* So we're not at the midnight border */
+
+            startDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), startArr[0], startArr[1]);
+            endDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), endArr[0], endArr[1]);
+        }
+        else {
+            var dateArr = dateStr.split("/");
+
+            /* Who knew "January" == 0?? */
+            startDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], startArr[0], startArr[1]);
+            endDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], endArr[0], endArr[1]);
+        }
+
+        console.log(startDate, endDate);
 
         /* Parse course num */
         courseNum = courseNum.substring(0, 2) + "-" + courseNum.substring(2);
@@ -960,9 +981,13 @@ function processEventForm() {
                                 addCourseToCalendar(course);
                                 $('#calview').fullCalendar('addEventSource', window.events);
 
-                                /* When done, close the fancybox dialog */
-                                if (window.isMobile === false) 
+                                /* When done, close the dialog */
+                                if (window.isMobile === false) {
                                     $.fancybox.close(false);
+                                }
+                                else {
+                                    $('.ui-dialog').dialog('close');
+                                }
 
                                 return;
                             }
@@ -996,7 +1021,7 @@ function validateEventForm(res) {
     if (res.date.length === 0) {
         toChange.push("#eventFormDate");
     }
-    else {
+    else if (window.isMobile === false) {
         var regx = /[0-9]{2}\/[0-9]{1,2}\/[0-9]{4}/;
         if (regx.test(res.date) === false) {
             toChange.push("#eventFormDate");

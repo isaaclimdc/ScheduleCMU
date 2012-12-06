@@ -110,14 +110,14 @@
 </div>
 
 <!-- Browse Pop Up -->
-<div data-role="page" data-overlay-theme="b" id="browsePop">
+<div data-role="page" data-overlay-theme="b" id="browsePop" data-close-btn-theme="c">
 	<div data-role="header"><h2>Browse</h2></div>
 	<div data-role="content">
 		<form id="courseBrowserForm">
-			<input type="text" placeholder='e.g. "15451", "Computer Science", or "Western Music History"'></input>
+			<input type="text" placeholder='e.g. "15451" or "76"...'></input>
 			<a href="" data-role="button" onclick="searchForCourseInCourseBrowser();">Search</a>
 		</form>
-		<ul id="courseBrowserBody" data-role="listview" data-split-icon="myapp-plus">
+		<ul id="courseBrowserBody" data-role="listview" data-split-icon="myapp-plus" data-split-theme="c">
 			<!-- To be populated with a listview of courses matching the query -->
 		</ul>
 	</div>
@@ -127,7 +127,7 @@
 <div data-role="page" data-overlay-theme="b" id="eventPop">
 	<div data-role="header"><h2>New Event</h2></div>
 	<div data-role="content">
-		<form id="eventForm" onSubmit="processEventForm();">
+		<form id="eventForm" data-ajax="false" action="#">
 			<div data-role="fieldcontain">
 				<label for="eventFormCourseNum">Course Number (5 digits)</label>
 				<input type="text" id="eventFormCourseNum" placeholder="15451"</input>
@@ -151,13 +151,14 @@
 			</div>
 			<div data-role="fieldcontain">
 				<label for="eventFormDate">Date</label>
-				<input type="date" name="date" id="eventFormDate" value=""  />
+				<input type="date" name="date" id="eventFormDate" value=""></input>
 			</div>
 			<div data-role="fieldcontain">
 				<label for="eventFormStartTime">Starts</label>
 				<select id="eventFormStartTime">
 				 	<option value="10:00a">10:00a</option>
 				  	<option value="10:30a">10:30a</option>
+				  	<option value="11:00a">11:00a</option>
 				  	<option value="11:30a">11:30a</option>
 				  	<option value="12:00p">12:00p</option>
 				  	<option value="12:30p">12:30p</option>
@@ -187,6 +188,7 @@
 				<select id="eventFormEndTime">
 				 	<option value="10:00a">10:00a</option>
 				  	<option value="10:30a">10:30a</option>
+				  	<option value="11:00a">11:00a</option>
 				  	<option value="11:30a">11:30a</option>
 				  	<option value="12:00p">12:00p</option>
 				  	<option value="12:30p">12:30p</option>
@@ -211,11 +213,7 @@
 				  	<option value="10:00p">10:00p</option>
 				</select>					
 			</div>
-			<div data-role="fieldcontain">
-				<label for="eventFormAndrew">Your Andrew ID</label>
-				<input type="text" id="eventFormAndrew" placeholder="acarnegie"</input>
-			</div>
-			<a data-role="button" onclick="processEventForm();" data-transition="pop" href="#eventlist">Submit</a>
+			<input type="submit" value="Submit"></input>
 		</form>
 	</div>
 </div>
