@@ -41,6 +41,7 @@ function loginToScheduleCMU(fbAuthResponse) {
 
     var fbID = fbAuthResponse.userID;
     var accessToken = fbAuthResponse.accessToken;
+    window.accessToken = accessToken;
 
     performAjaxRequest({
         url : "/users/" + fbID + "?auth_token=" + accessToken,
