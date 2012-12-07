@@ -1,8 +1,11 @@
- module.exports = function (app, Course) {
+module.exports = function (app, Course, depts) {
   app.get('/api/courses', function(req, res) {
     var query = Course.find({});
     if (req.query.dept) {
-        query = query.$where('this.num.match(/^' + req.query.dept + '/)').sort('num');
+        var dept = req.query.dept;
+        if(!dept.match(/^[0-9]{2}$/)
+           dept = depts[dept];
+        query = query.$where('this.num.match(/^' + dept + '/)').sort('num');
     }
     if (req.query.name) {
 

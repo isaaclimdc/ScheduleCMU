@@ -8,10 +8,11 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 
 var db = require('./db.js').dbConnect(mongoose);
+var depts = require('./dept.js').depts;
 var Course = require('./course_model.js')(mongoose, db);
 var User = require('./user_model.js')(mongoose, db);
 
-require('./courses_api.js')(app, Course);
+require('./courses_api.js')(app, Course, depts);
 require('./users_api.js')(app, User);
 
 app.get('/', function (req, res) {
