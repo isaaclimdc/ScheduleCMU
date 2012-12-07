@@ -139,10 +139,15 @@ function setupPage() {
             day: 'ddd'
         };
 
-        $('#gridview').live('pagebeforeshow', function(e) {
-            console.log('Grid View');
+        $('#gridview').live('pageshow', function(e) {
+            console.log('Grid View shown!');
             /* Refresh FullCalendar */
             $('#calview').fullCalendar('refetchEvents');
+        });
+
+        /* Refresh jQuery mobile */
+        $('#listview').live('pagebeforeshow', function(e) {
+            refreshJQMElements();
         });
 
         if ($(document).width() <= 750) {
@@ -213,13 +218,6 @@ function fetchCourseData() {
 function addCourse(course) {
     addCourseToAccordion(course);
     addCourseToCalendar(course);
-
-    /* Refresh jQuery mobile */
-    if (window.isMobile === true) {
-        $("#accordion").collapsibleset('refresh');
-        $(".del").button();
-        $(".info").button();
-    }
 }
 
 /* Adds a single course to FullCalendar */
@@ -406,6 +404,7 @@ function fetchCourseWithID(courseID, onSuccess) {
             window.listedCourses.push(course);
             window.userBlocks.push(newBlock);
             addCourse(course);
+            refreshJQMElements();
             
             /* Finally, POST to User account */
             performAjaxRequest({
@@ -716,21 +715,9 @@ function rowSelected(selected) {
             "_method" : "PUT"
         },
         success : function(result, status) {
-            console.log("Successfully changed block!", result);
+            refreshCalendar(course);
         }
     });
-
-    /* Re-render Events on FullCalendar */
-    $("#calview").fullCalendar("clientEvents",
-        function(eventToRemove) {
-            if (eventToRemove.id === courseID) {
-                window.events.removeObj(eventToRemove);
-            }
-        });
-
-    $('#calview').fullCalendar('removeEventSource', window.events);
-    addCourseToCalendar(course);
-    $('#calview').fullCalendar('addEventSource', window.events);
 }
 
 /* Deletes a single course */
@@ -772,6 +759,9 @@ function deleteCourse(clickedLink) {
         });
 
     $('#calview').fullCalendar('refetchEvents');
+
+    /* Refresh jQuery Mobile */
+    refreshJQMElements();
 
     /* DELETE the course from the server */
     performAjaxRequest({
@@ -1003,7 +993,6 @@ if (window.isMobile === false ) {
 }
 
 function processEventForm() {
-    console.log("Processing event form...");
     var courseNum = $("#eventFormCourseNum").val();
     var type = parseInt($("#eventFormType").val());
     var title = $("#eventFormTitle").val();
@@ -1030,8 +1019,6 @@ function processEventForm() {
         var startDate;
         var endDate;
 
-        console.log(courseNum, type, title, location, dateStr, startTime, endTime);
-
         if (window.isMobile === true) {
             /* If mobile, in the form "2012-12-06" */
             var d = new Date(dateStr);
@@ -1048,8 +1035,6 @@ function processEventForm() {
             endDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], endArr[0], endArr[1]);
         }
 
-        console.log(startDate, endDate);
-
         /* Parse course num */
         courseNum = courseNum.substring(0, 2) + "-" + courseNum.substring(2);
 
@@ -1057,7 +1042,16 @@ function processEventForm() {
         performAjaxRequest({
             url : "/courses?number=" + courseNum,
             success : function(res, sta) {
-                // console.log(res);
+                if (res.length === 0) {
+                    /* Course not found */
+                    var box = $("#eventFormCourseNum").css("border", "2px solid red").val("");
+                    setPlaceholder(box, "Course not found!");
+
+                    if (window.isMobile === true)
+                        $.mobile.silentScroll(0);
+                    return;
+                }
+
                 var courseID = res[0]._id;
 
                 /* POST the new event to this course ID */
@@ -1076,24 +1070,14 @@ function processEventForm() {
                         "_method" : "POST"
                     },
                     success : function(result, status) {
-                        console.log(result);
+                        var updatedCourse = result;
 
                         for (var i = 0; i < window.listedCourses.length; i++) {
-                            if (courseID === window.listedCourses[i]._id) {
-                                var course = window.listedCourses[i];
-
-                                /* Delete and re-add this course */
-                                $("#calview").fullCalendar("clientEvents",
-                                    function(eventToRemove) {
-                                        if (eventToRemove.id === courseID) {
-                                            window.events.removeObj(eventToRemove);
-                                        }
-                                    });
+                            if (window.listedCourses[i]._id === courseID) {
+                                window.listedCourses[i] = updatedCourse;
 
                                 /* Refresh FullCalendar */
-                                $('#calview').fullCalendar('removeEventSource', window.events);
-                                addCourseToCalendar(course);
-                                $('#calview').fullCalendar('addEventSource', window.events);
+                                refreshCalendar(updatedCourse);
 
                                 /* When done, close the dialog */
                                 if (window.isMobile === false) {
@@ -1107,9 +1091,12 @@ function processEventForm() {
                             }
                         }
 
-                        /* Otherwise, course not found in listedCourses */
+                        /* Course not found in listedCourses */
                         var box = $("#eventFormCourseNum").css("border", "2px solid red").val("");
                         setPlaceholder(box, "Please add this course first!");
+
+                        if (window.isMobile === true)
+                            $.mobile.silentScroll(0);
                     }
                 });
             }
@@ -1326,4 +1313,24 @@ function fetchListedCourseWithID(courseID) {
             return course;
     }
     return null;
+}
+
+function refreshJQMElements() {
+    $("#accordion").collapsibleset('refresh');
+    $(".del").button();
+    $(".info").button();
+}
+
+function refreshCalendar(courseChanged) {
+    /* Re-render Events on FullCalendar */
+    $("#calview").fullCalendar("clientEvents",
+        function(eventToRemove) {
+            if (eventToRemove.id === courseChanged._id) {
+                window.events.removeObj(eventToRemove);
+            }
+        });
+
+    $('#calview').fullCalendar('removeEventSource', window.events);
+    addCourseToCalendar(courseChanged);
+    $('#calview').fullCalendar('addEventSource', window.events);
 }
