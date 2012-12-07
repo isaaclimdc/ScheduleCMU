@@ -96,7 +96,7 @@
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
-	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-event">right 2</a>
+	    <a href="#" onClick="showEventForm();" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-event">right 2</a>
 	  </div>
 	</div>
 
@@ -121,7 +121,7 @@
 	  <img class="makeitsmall" src="../images/icon_extract.png" alt="ScheduleCMU" />
 	  <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 	    <a href="#browsePop" data-transition="pop" data-rel="dialog" data-role="button" data-icon-theme="a" data-iconpos="notext" data-icon="myapp-browse">right 1</a>
-	    <a href="#eventPop" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-event">right 2</a>
+	    <a href="#" onClick="showEventForm();" data-transition="pop" data-role="button" data-icon-theme="a" data-iconpos="notext" data-rel="dialog" data-icon="myapp-event">right 2</a>
 	  </div>
 	</div>
 	<div id="calview" data-role="content">
@@ -149,8 +149,9 @@
 	<div data-role="content">
 		<form id="eventForm" data-ajax="false">
 			<div data-role="fieldcontain">
-				<label for="eventFormCourseNum">Course Number (5 digits)</label>
-				<input type="text" id="eventFormCourseNum" placeholder="15451"</input>
+				<label for="eventFormCourseNum">Course Number</label>
+				<select id="eventFormCourseNum">
+				</select>
 			</div>
 			<div data-role="fieldcontain">
 				<label for="eventFormType">Event Type</label>
@@ -233,18 +234,20 @@
 				  	<option value="10:00p">10:00p</option>
 				</select>					
 			</div>
-			<input type="submit" value="Submit"></input>
+			<button type="submit" data-theme="b">Submit</button>
+			<!-- <input type="submit" value="Submit"></input> -->
 		</form>
 	</div>
 </div>
+<a href="#eventPop" data-rel="dialog" data-transition="pop" id="eventsLink"></a>
 
 <!-- Course Info Pop Up -->
-<div data-role="page" data-overlay-theme="b" id="courseInfo">
+<div data-role="page" data-overlay-theme="b" id="courseInfoPop">
 	<div data-role="header"><h2>Info</h2></div>
 	<div data-role="content" id="courseInfoBrowser">
 	</div>
 </div>
-<a href="#courseInfo" data-rel="dialog" data-transition="pop" id="courseInfoLink"></a>
+<a href="#courseInfoPop" data-rel="dialog" data-transition="pop" id="courseInfoLink"></a>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>

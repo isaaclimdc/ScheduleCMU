@@ -113,10 +113,6 @@ function setupPage() {
             $("#accordion").accordion(window.accordionOpts);
         });
 
-        $(".courseBrowserRow img").click(function(e) {
-            e.stopPropagation();
-        });
-
         /* Options for DESKTOP FullCalendar */
         height = 800;
         columnFormat = {
@@ -143,10 +139,15 @@ function setupPage() {
             day: 'ddd'
         };
 
-        $('#gridview').live('pagebeforeshow', function(e) {
-            console.log('Grid View');
+        $('#gridview').live('pageshow', function(e) {
+            console.log('Grid View shown!');
             /* Refresh FullCalendar */
             $('#calview').fullCalendar('refetchEvents');
+        });
+
+        /* Refresh jQuery mobile */
+        $('#listview').live('pagebeforeshow', function(e) {
+            refreshJQMElements();
         });
 
         if ($(document).width() <= 750) {
@@ -217,13 +218,6 @@ function fetchCourseData() {
 function addCourse(course) {
     addCourseToAccordion(course);
     addCourseToCalendar(course);
-
-    /* Refresh jQuery mobile */
-    if (window.isMobile === true) {
-        $("#accordion").collapsibleset('refresh');
-        $(".del").button();
-        $(".info").button();
-    }
 }
 
 /* Adds a single course to FullCalendar */
@@ -355,6 +349,8 @@ function requestAndAddCourse() {
     /* Remove all whitespace from query string */
     var inputStr = $("#addCourseBox").val();
     inputStr = inputStr.replace(/\s/g,'');
+    if (inputStr.length === 0)
+        return;
 
     /* Can be "15251" or "15-251". Parsed server-side */
     var urlReq = "/courses?number=" + inputStr;
@@ -375,6 +371,7 @@ function requestAndAddCourse() {
             /* ID of the course we want to add */
             var course = result[0];
             var courseID = course._id;
+            console.log(course, courseID);
 
             /* Check if this course is already in the existing courses */
             for (var i = 0; i < window.userBlocks.length; i++) {
@@ -410,6 +407,8 @@ function fetchCourseWithID(courseID, onSuccess) {
             window.listedCourses.push(course);
             window.userBlocks.push(newBlock);
             addCourse(course);
+            if (window.isMobile === true)
+                refreshJQMElements();
             
             /* Finally, POST to User account */
             performAjaxRequest({
@@ -420,8 +419,8 @@ function fetchCourseWithID(courseID, onSuccess) {
                     "auth_token" : null,
                     "_method" : "PUT"
                 },
-                success : function(result, status) {
-                    console.log("Successfully added block!", result);
+                success : function(result2, status) {
+                    console.log("Successfully added block!", result2);
 
                     onSuccess();
 
@@ -446,8 +445,6 @@ function addCourseToAccordion(course) {
 
     /* Create <h3> for title */
     var title = $("<h3>").text(courseNum);
-    title.attr("id", course._id);
-    
 
     /* Create contentHdr */
     var contentHdr = $("<div>").addClass("contentHdr");
@@ -464,12 +461,21 @@ function addCourseToAccordion(course) {
     var info;
 
     if (window.isMobile === false) {
-        del = $("<p>").addClass("del").attr("onClick", "deleteCourse(this);").text("delete");
-        info = $("<p>").addClass("info").attr("onClick", "showInfoFromAccordion(this);").text("info");
+        del = $("<p>").addClass("del").text("delete");
+        del.attr({
+            "onClick" : "deleteCourse(this);",
+            "id" : course._id
+        });
+        info = $("<p>").addClass("info").text("info");
+        info.attr({
+            "onClick" : "showInfo(this, true);",
+            "id" : course._id
+        });
     }
     else {
         del = $("<div>").attr({
             "onClick" : "deleteCourse(this);",
+            "id" : course._id,
             "data-role" : "button",
             "data-mini" : "true",
             "data-icon" : "myapp-del",
@@ -478,7 +484,8 @@ function addCourseToAccordion(course) {
         }).text("delete").addClass("del");
 
         info = $("<div>").attr({
-            "onClick" : "showInfoFromMobile(this);",
+            "onClick" : "showInfo(this, true);",
+            "id" : course._id,
             "data-role" : "button",
             "data-mini" : "true",
             "data-icon" : "myapp-info",
@@ -507,6 +514,7 @@ function addCourseToAccordion(course) {
     if (window.isMobile === false) {
         /* Append title h3 then content div into a group */
         var group = $("<div>").addClass("group");
+        group.attr("id", course._id);
         group.append(title);
         group.append(content);
 
@@ -515,7 +523,13 @@ function addCourseToAccordion(course) {
         accordion.append(group).accordion('destroy').accordion(window.accordionOpts);
     }
     else {
-        var group = $("<div data-role='collapsible' data-content-theme='a'>");
+        var group = $("<div>");
+        group.attr({
+            "id" : course._id,
+            "data-role" : "collapsible",
+            "data-content-theme" : "a"
+        });
+        group.addClass("group");
         group.append(title);
         group.append(content);
         accordion.append(group);
@@ -679,18 +693,15 @@ function rowSelected(selected) {
     if (isNaN(subsectIdx))
         subsectIdx = -1;
 
-    var clickedIndex;
-    if(window.isMobile === false)
-        clickedIndex = row.parent().parent().parent().parent().index();
-    else
-        clickedIndex = row.parent().parent().parent().parent().parent().index();
-
-    var course = window.listedCourses[clickedIndex];
+    /* Extract course from course ID */
+    var group = row.parents(".group")[0];
+    var courseID = $(group).attr("id");
+    var course = fetchListedCourseWithID(courseID);
 
     /* Update the local copy of the block */
     var newBlock;
     for (var i = 0; i < window.userBlocks.length; i++) {
-        if (window.userBlocks[i]._id === course._id) {
+        if (window.userBlocks[i]._id === courseID) {
             window.userBlocks[i].section = sectIdx;
             window.userBlocks[i].subsection = subsectIdx;
             newBlock = window.userBlocks[i];
@@ -701,50 +712,31 @@ function rowSelected(selected) {
     /* PUT this updated block to server */
     performAjaxRequest({
         type : "POST",
-        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + course._id,
+        url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + courseID,
         data : {
             data : newBlock,
             "auth_token" : null,
             "_method" : "PUT"
         },
         success : function(result, status) {
-            console.log("Successfully changed block!", result);
+            refreshCalendar(course);
         }
     });
-
-    /* Re-render Events on FullCalendar */
-    $("#calview").fullCalendar("clientEvents",
-        function(eventToRemove) {
-            if (eventToRemove.id === course._id) {
-                window.events.removeObj(eventToRemove);
-            }
-        });
-
-    $('#calview').fullCalendar('removeEventSource', window.events);
-    addCourseToCalendar(course);
-    $('#calview').fullCalendar('addEventSource', window.events);
 }
 
 /* Deletes a single course */
-function deleteCourse(p) {
-    var courseID;
+function deleteCourse(clickedLink) {
+    /* Extract course id from the "id" field */
+    var courseID = $(clickedLink).attr("id");
+
+    /* Get this course from the global window.listedCourses */
+    // var course = fetchListedCourseWithID(courseID);
+
+    var toDelete = $('#accordion').children("#" + courseID)[0];
+    $(toDelete).remove();
 
     if (window.isMobile === false) {
-        /* Get to enclosing group (3 levels up) */
-        var group = $(p).parent().parent().parent();
-        courseID = $($(group).children("h3")[0]).attr("id");
-
-        /* Remove the group then refresh accordion */
-        group.remove();
         $("#accordion").accordion('destroy').accordion(window.accordionOpts);
-    }
-    else {
-        /* Get to enclosing group (4 levels up) */
-        var group = $(p).parent().parent().parent().parent();
-        courseID = $($(group).children("h3")[0]).attr("id");
-
-        /* Remove the group */
-        group.remove();
     }
 
     /* Update local lists */
@@ -771,6 +763,10 @@ function deleteCourse(p) {
         });
 
     $('#calview').fullCalendar('refetchEvents');
+
+    /* Refresh jQuery Mobile */
+    if (window.isMobile === true)
+        refreshJQMElements();
 
     /* DELETE the course from the server */
     performAjaxRequest({
@@ -809,7 +805,14 @@ function searchForCourseInCourseBrowser() {
     performAjaxRequest({
         url: urlReq,
         success: function(result, status) {
-            console.log(result);
+            var box = $("#courseBrowserSearchBox").val("");
+
+            if (result.length === 0) {
+                setPlaceholder(box, "No courses found!");
+                return;
+            }
+
+            setPlaceholder(box, 'Courses found containing "' + inputStr + '"');
 
             $('#courseBrowserBody').empty();
 
@@ -826,12 +829,15 @@ function addToCourseBrowser(course) {
     var row;
     if (window.isMobile === false) {
         row = $('<div>').addClass("courseBrowserRow");
-        row.attr("onClick", "showInfoFromBrowser(this)");
+        row.attr({
+            "onClick" : "showInfo(this, false);",
+            "id" : course._id
+        });
         row.append($('<h1>').text(course.num));
         row.append($('<h2>').text(course.name));
         row.append($('<h3>').text(makeUnitsStr(course.units)));
         row.append($('<img>').attr({
-            "src" : "../images/plus.png",
+            "src" : "../images/mobilePlus.png",
             "onClick" : "addCourseFromBrowser(this)"
         }));
 
@@ -840,8 +846,10 @@ function addToCourseBrowser(course) {
     else {
         row = $('<li>');
         var rowInside = $('<a>');
-        rowInside.attr("href", "#courseInfo");
-        rowInside.attr('onclick', 'showInfoFromBrowser(this)');
+        rowInside.attr({
+            "onClick" : "showInfo(this, false);",
+            "id" : course._id
+        });
         rowInside.append($('<h1>').text(course.num));
         rowInside.append($('<h2>').text(course.name));
         rowInside.append($('<h3>').text(makeUnitsStr(course.units)));
@@ -851,7 +859,6 @@ function addToCourseBrowser(course) {
         rowTwo.append('Add Course');
         row.append(rowInside);
         row.append(rowTwo);
-        row.css("margin-top", "30px");
 
         $('#courseBrowserBody').append(row);
         $('#courseBrowserBody').listview('refresh');
@@ -882,232 +889,53 @@ function addCourseFromBrowser(img) {
     fetchCourseWithID(courseID, function() {
         setPlaceholder(courseBrowserBox, course.num + " added!");
     });
+
+    if (window.isMobile === false) {
+        $.fancybox.close(false);
+    }
 }
 
-/*** EventBrowser ***/
+
+/**** CourseInfo ****/
 
 if (window.isMobile === false ) {
-    $("#eventsLink").fancybox({
+    $("#courseInfoLink").fancybox({
         "scrolling" : "no",
         "titleShow" : false,
     });
 }
 
-function processEventForm() {
-    console.log("Processing event form...");
-    var courseNum = $("#eventFormCourseNum").val();
-    var type = parseInt($("#eventFormType").val());
-    var title = $("#eventFormTitle").val();
-    var location = $("#eventFormLocation").val();
-    var dateStr = $("#eventFormDate").val();
-    var startTime = $("#eventFormStartTime").val();
-    var endTime = $("#eventFormEndTime").val();
+function showInfo(clickedLink, isExisting) {
+    /* Extract course id from the "id" field */
+    var courseID = $(clickedLink).attr("id");
+    console.log(courseID);
 
-    var results = {
-        "courseNum" : courseNum,
-        "type" : type,
-        "title" : title,
-        "location": location,
-        "date" : dateStr,
-        "startTime" : startTime,
-        "endTime": endTime
-    };
-
-    /* Process the valid data here */
-    if (validateEventForm(results) === true) {
-        /* Parse time and date */
-        var startArr = processTimeStr(startTime);
-        var endArr = processTimeStr(endTime);
-        var startDate;
-        var endDate;
-
-        console.log(courseNum, type, title, location, dateStr, startTime, endTime);
-
-        if (window.isMobile === true) {
-            /* If mobile, in the form "2012-12-06" */
-            var d = new Date(dateStr);
-            d.setHours(d.getHours()+12);  /* So we're not at the midnight border */
-
-            startDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), startArr[0], startArr[1]);
-            endDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), endArr[0], endArr[1]);
-        }
-        else {
-            var dateArr = dateStr.split("/");
-
-            /* Who knew "January" == 0?? */
-            startDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], startArr[0], startArr[1]);
-            endDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], endArr[0], endArr[1]);
+    if (isExisting === true) {
+        /* Get this course from the global list then display it */
+        var course = fetchListedCourseWithID(courseID);
+        showInfoInCourseBrowser(course);
+    }
+    else {
+        /* Transition between fancyboxes */
+        if (window.isMobile === false) {
+            $("#courseInfoLink").fancybox({
+                "afterClose": function() {
+                    $("#browseLink").click();
+                }
+            });
         }
 
-        console.log(startDate, endDate);
-
-        /* Parse course num */
-        courseNum = courseNum.substring(0, 2) + "-" + courseNum.substring(2);
-
-        /* Get the course ID */
+        /* GET the full course object for display */
         performAjaxRequest({
-            url : "/courses?number=" + courseNum,
-            success : function(res, sta) {
-                // console.log(res);
-                var courseID = res[0]._id;
-
-                /* POST the new event to this course ID */
-                performAjaxRequest({
-                    type : "POST",
-                    url : "/courses/" + courseID + "/events",
-                    data : {
-                        data : {
-                            "event_type" : type,
-                            "title" : title,
-                            "loc" : location,
-                            "start" : startDate,
-                            "end" : endDate
-                        },
-                        "auth_token" : null,  /* TODO: Auth token */
-                        "_method" : "POST"
-                    },
-                    success : function(result, status) {
-                        console.log(result);
-
-                        for (var i = 0; i < window.listedCourses.length; i++) {
-                            if (courseID === window.listedCourses[i]._id) {
-                                var course = window.listedCourses[i];
-
-                                /* Delete and re-add this course */
-                                $("#calview").fullCalendar("clientEvents",
-                                    function(eventToRemove) {
-                                        if (eventToRemove.id === courseID) {
-                                            window.events.removeObj(eventToRemove);
-                                        }
-                                    });
-
-                                /* Refresh FullCalendar */
-                                $('#calview').fullCalendar('removeEventSource', window.events);
-                                addCourseToCalendar(course);
-                                $('#calview').fullCalendar('addEventSource', window.events);
-
-                                /* When done, close the dialog */
-                                if (window.isMobile === false) {
-                                    $.fancybox.close(false);
-                                }
-                                else {
-                                    $('.ui-dialog').dialog('close');
-                                }
-
-                                return;
-                            }
-                        }
-
-                        /* Otherwise, course not found in listedCourses */
-                        $("#eventFormCourseNum").css("border", "2px solid red").val("Please add this course first!");
-                    }
-                });
+            url : "/courses/" + courseID,
+            success : function(result, status) {
+                showInfoInCourseBrowser(result);
             }
         });
     }
 }
 
-/* Perform form data validation */
-function validateEventForm(res) {
-    var toChange = [];
-
-    if (isNumber(parseInt(res.courseNum)) === false) {
-        toChange.push("#eventFormCourseNum");
-    }
-    if (res.courseNum.length !== 5) {
-        toChange.push("#eventFormCourseNum");
-    }
-    if (res.title.length === 0) {
-        toChange.push("#eventFormTitle");
-    }
-    if (res.location.length === 0) {
-        toChange.push("#eventFormLocation");
-    }
-    if (res.date.length === 0) {
-        toChange.push("#eventFormDate");
-    }
-    else if (window.isMobile === false) {
-        var regx = /[0-9]{2}\/[0-9]{1,2}\/[0-9]{4}/;
-        if (regx.test(res.date) === false) {
-            toChange.push("#eventFormDate");
-        }
-    }
-
-    if (toChange.length === 0)
-        return true;
-    else {
-        $.map(toChange, function(val, i) {
-            $(val).css("border", "2px solid red");
-        });
-
-        return false;
-    }
-}
-
-/**** CourseInfo ****/
-
-if(window.isMobile === false ) {
-    $("#courseInfoLink").fancybox({
-        "scrolling" : "no",
-        "titleShow" : false,
-    });
-}
-
-function showInfoFromAccordion(infoLink) {
-    /* Get to enclosing group (3 levels up) */
-    var group = $(infoLink).parent().parent().parent();
-    var courseID = $($(group).children("h3")[0]).attr("id");
-
-    /* Get this course from the global window.listedCourses */
-    var course;
-    $.grep(window.listedCourses, function(elt, idx) {
-        if (elt._id === courseID) {
-            course = elt;
-        }
-    });
-
-    showInCourseInfoBrowser(course);
-}
-
-function showInfoFromBrowser(infoLink) {
-    /* Get to enclosing group (1 level up) */
-    var clickedIndex = $(infoLink).index();
-
-    /* Get this course from the global window.listedCourses */
-    var course = window.mostRecentSearchResults[clickedIndex];
-
-    $("#courseInfoLink").fancybox({
-        "afterClose": function() {
-            $("#browseLink").click();
-        }
-    });
-
-    /* GET the full course object for display */
-    performAjaxRequest({
-        url : "/courses/" + course._id,
-        success : function(result, status) {
-            showInCourseInfoBrowser(result);
-        }
-    });
-}
-
-function showInfoFromMobile(infoLink) {
-    /* Get to enclosing group (3 levels up) */
-    var group = $(infoLink).parent().parent().parent().parent().parent();
-    var courseID = $($(group).children("h3")[0]).attr("id");
-console.log(courseID);
-    /* Get this course from the global window.listedCourses */
-    var course;
-    $.grep(window.listedCourses, function(elt, idx) {
-        if (elt._id === courseID) {
-            course = elt;
-        }
-    });
-
-    showInCourseInfoBrowser(course);
-}
-
-function showInCourseInfoBrowser(course) {
+function showInfoInCourseBrowser(course) {
     console.log(course);
     /* Create the modal view and populate with the desired course */
     var browser = $('#courseInfoBrowser');
@@ -1143,14 +971,6 @@ function showInCourseInfoBrowser(course) {
     body.append(table);
 
     /* Append other course details */
-    body.append($("<h3>").text("Description"));
-    body.append($("<p>").text("Lorem Ipsum"));
-    body.append($("<h3>").text("Prerequisites"));
-    body.append($("<p>").text("Lorem Ipsum"));
-    body.append($("<h3>").text("Corequisites"));
-    body.append($("<p>").text("Lorem Ipsum"));
-
-    /* Append other course details */
     // body.append($("<h3>").text("Description"));
     // body.append($("<p>").text(course.details.description));
     // body.append($("<h3>").text("Prerequisites"));
@@ -1175,7 +995,169 @@ function showInCourseInfoBrowser(course) {
 }
 
 
+/*** EventBrowser ***/
 
+if (window.isMobile === false ) {
+    $("#eventsLink").fancybox({
+        "scrolling" : "no",
+        "titleShow" : false,
+    });
+}
+
+/* Populate the courseNum box with the user's listed courses */
+function showEventForm() {
+    console.log("Showing event form..");
+    var courseNumSelect = $('#eventFormCourseNum');
+    courseNumSelect.empty();
+
+    for (var i = 0; i < window.listedCourses.length; i++) {
+        var courseNum = window.listedCourses[i].num;
+        var newOption = $('<option>').attr("value", courseNum);
+        newOption.text(courseNum);
+        courseNumSelect.append(newOption);
+    }
+
+    /* Open it */
+    $('#eventsLink').click();
+}
+
+function processEventForm() {
+    var courseNum = $("#eventFormCourseNum").val();
+    var type = parseInt($("#eventFormType").val());
+    var title = $("#eventFormTitle").val();
+    var location = $("#eventFormLocation").val();
+    var dateStr = $("#eventFormDate").val();
+    var startTime = $("#eventFormStartTime").val();
+    var endTime = $("#eventFormEndTime").val();
+
+    var results = {
+        "courseNum" : courseNum,
+        "type" : type,
+        "title" : title,
+        "location": location,
+        "date" : dateStr,
+        "startTime" : startTime,
+        "endTime": endTime
+    };
+
+    /* Process the valid data here */
+    if (validateEventForm(results) === true) {
+        /* Parse time and date */
+        var startArr = processTimeStr(startTime);
+        var endArr = processTimeStr(endTime);
+        var startDate;
+        var endDate;
+
+        if (window.isMobile === true) {
+            /* If mobile, in the form "2012-12-06" */
+            var d = new Date(dateStr);
+            d.setHours(d.getHours()+12);  /* So we're not at the midnight border */
+
+            startDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), startArr[0], startArr[1]);
+            endDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), endArr[0], endArr[1]);
+        }
+        else {
+            var dateArr = dateStr.split("/");
+
+            /* Who knew "January" == 0?? */
+            startDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], startArr[0], startArr[1]);
+            endDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], endArr[0], endArr[1]);
+        }
+
+        /* Get the course ID */
+        performAjaxRequest({
+            url : "/courses?number=" + courseNum,
+            success : function(res, sta) {
+                if (res.length === 0) {
+                    /* Course not found */
+                    var box = $("#eventFormCourseNum").css("border", "2px solid red").val("");
+                    setPlaceholder(box, "Course not found!");
+
+                    if (window.isMobile === true)
+                        $.mobile.silentScroll(0);
+                    return;
+                }
+
+                var courseID = res[0]._id;
+
+                /* POST the new event to this course ID */
+                performAjaxRequest({
+                    type : "POST",
+                    url : "/courses/" + courseID + "/events",
+                    data : {
+                        data : {
+                            "event_type" : type,
+                            "title" : title,
+                            "loc" : location,
+                            "start" : startDate,
+                            "end" : endDate
+                        },
+                        "auth_token" : null,  /* TODO: Auth token */
+                        "_method" : "POST"
+                    },
+                    success : function(result, status) {
+                        var updatedCourse = result;
+                        console.log(updatedCourse);
+
+                        // for (var i = 0; i < window.listedCourses.length; i++) {
+                        //     if (window.listedCourses[i]._id === courseID) {
+                        //         window.listedCourses[i] = updatedCourse;
+
+                                /* Refresh FullCalendar */
+                                refreshCalendar(updatedCourse);
+
+                                /* When done, close the dialog */
+                                clearForm("#eventForm");
+                                if (window.isMobile === false) {
+                                    $.fancybox.close(false);
+                                }
+                                else {
+                                    $('.ui-dialog').dialog('close');
+                                }
+
+                        //         return;
+                        //     }
+                        // }
+                    }
+                });
+            }
+        });
+    }
+}
+
+/* Perform form data validation */
+function validateEventForm(res) {
+    var toChange = [];
+
+    if (res.courseNum.length !== 6) {
+        toChange.push("#eventFormCourseNum");
+    }
+    if (res.title.length === 0) {
+        toChange.push("#eventFormTitle");
+    }
+    if (res.location.length === 0) {
+        toChange.push("#eventFormLocation");
+    }
+    if (res.date.length === 0) {
+        toChange.push("#eventFormDate");
+    }
+    else if (window.isMobile === false) {
+        var regx = /[0-9]{2}\/[0-9]{1,2}\/[0-9]{4}/;
+        if (regx.test(res.date) === false) {
+            toChange.push("#eventFormDate");
+        }
+    }
+
+    if (toChange.length === 0)
+        return true;
+    else {
+        $.map(toChange, function(val, i) {
+            $(val).css("border", "2px solid red");
+        });
+
+        return false;
+    }
+}
 
 
 
@@ -1340,4 +1322,37 @@ function getColorFromIndex(idx) {
     else color = "#D96C6E";
 
     return color;
+}
+
+function fetchListedCourseWithID(courseID) {
+    for (var i = 0; i < window.listedCourses.length; i++) {
+        var course = window.listedCourses[i];
+        if (course._id === courseID)
+            return course;
+    }
+    return null;
+}
+
+function refreshJQMElements() {
+    $("#accordion").collapsibleset('refresh');
+    $(".del").button();
+    $(".info").button();
+}
+
+function refreshCalendar(courseChanged) {
+    /* Re-render Events on FullCalendar */
+    $("#calview").fullCalendar("clientEvents",
+        function(eventToRemove) {
+            if (eventToRemove.id === courseChanged._id) {
+                window.events.removeObj(eventToRemove);
+            }
+        });
+
+    $('#calview').fullCalendar('removeEventSource', window.events);
+    addCourseToCalendar(courseChanged);
+    $('#calview').fullCalendar('addEventSource', window.events);
+}
+
+function clearForm(form) {
+    $(form).find("input").val("");
 }
