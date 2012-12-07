@@ -805,7 +805,14 @@ function searchForCourseInCourseBrowser() {
     performAjaxRequest({
         url: urlReq,
         success: function(result, status) {
-            console.log(result);
+            var box = $("#courseBrowserSearchBox").val("");
+
+            if (result.length === 0) {
+                setPlaceholder(box, "No courses found!");
+                return;
+            }
+
+            setPlaceholder(box, 'Courses found containing "' + inputStr + '"');
 
             $('#courseBrowserBody').empty();
 
