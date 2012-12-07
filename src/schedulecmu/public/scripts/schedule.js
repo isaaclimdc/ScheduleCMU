@@ -61,7 +61,7 @@ function performAjaxRequest(opts) {
                 opts.error(status, error);
             else
                 console.log("Error: " + status + " with HTTP error: " + error);
-            
+
             if (window.isMobile === false)
                  stopSpinner();
         }
@@ -73,7 +73,7 @@ function performAjaxRequest(opts) {
 function fetchUserSchedule(user) {
     /* Set up the DOM first */
     setupPage();
-    
+
     var schedulesArr = user.schedules;
 
     /* Guaranteed to have at least 1 schedule, created in login.js.
@@ -224,7 +224,7 @@ function addCourse(course) {
 function addCourseToCalendar(course) {
     // var sem = parseInt(course.semester);
     var sem = parseInt("122"); /* Override for debugging */
-    
+
     var sectionsToAdd;
     for (var i = 0; i < window.userBlocks.length; i++) {
         if (window.userBlocks[i]._id === course._id) {
@@ -409,7 +409,7 @@ function fetchCourseWithID(courseID, onSuccess) {
             addCourse(course);
             if (window.isMobile === true)
                 refreshJQMElements();
-            
+
             /* Finally, POST to User account */
             performAjaxRequest({
                 type : "POST",
@@ -580,9 +580,9 @@ function insertCourseIntoTable(course, table, fullDetails) {
     }
 }
 
-/* Process the classes of a "section" (both lecture and recitation).  
+/* Process the classes of a "section" (both lecture and recitation).
  * section is a Section object, and table is a jQuery object.
- * fullDetails is a boolean whether to append all details or not. 
+ * fullDetails is a boolean whether to append all details or not.
  * This function appends to the DOM in-place.
  */
 function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
@@ -596,7 +596,7 @@ function processClasses(section, table, fullDetails, sectIdx, subsectIdx) {
 
         /* Append the section number */
         row.append(newCol(section.num));
-        
+
         var daysStr = "";
         for (var i = 0; i < classesArr.length; i++) {
             /* Concat into a single string like "MWF" */
@@ -680,7 +680,7 @@ function rowSelected(selected) {
                 'font-weight' : ''
             });
         });
-        
+
         row.css({
             'background-color' : '#ededed',
             'font-weight' : 'bold'
@@ -792,15 +792,20 @@ if (window.isMobile === false) {
 
 function searchForCourseInCourseBrowser() {
     var inputStr = $("#courseBrowserForm input").val();
-    inputStr = inputStr.replace(/\s/g,'');
 
     /* Can be "15251" or "15-251". Parsed server-side */
     var urlReq;
     if (inputStr.length <= 2)
-        urlReq = "/courses?dept=" + inputStr;    /* Search by Dept */
-    else
-        urlReq = "/courses?number=" + inputStr;  /* Search by course num */
-
+        urlReq = "/courses?dept=" + inputStr;    /* Search by dept number*/
+    else{
+        if(inputStr.slice(0,1).match(/^[0-9]/))
+            urlReq = "/courses?number=" + inputStr;  /* Search by course num */
+        else{
+            urlReq="/courses?dept="+(inputStr.replace(" ","_")
+                                     .replace("&","*")
+                                     .replace(":","@")); /* Search by dept name*/
+        }
+    }
     /* Query our server */
     performAjaxRequest({
         url: urlReq,
@@ -876,7 +881,7 @@ function addCourseFromBrowser(img) {
     var courseID = course._id;
 
     var courseBrowserBox = $('#courseBrowserForm input').val("");
-    
+
     /* Check if this course is already in the existing courses */
     for (var i = 0; i < window.userBlocks.length; i++) {
         if (window.userBlocks[i]._id === courseID) {
