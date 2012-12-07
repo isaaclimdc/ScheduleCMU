@@ -2,7 +2,7 @@
   app.get('/api/courses', function(req, res) {
     var query = Course.find({});
     if (req.query.dept) {
-        query = query.$where('this.num.match(/^' + req.query.dept + '/)');
+        query = query.$where('this.num.match(/^' + req.query.dept + '/)').sort('-num');
     }
     if (req.query.name) {
 

@@ -21,6 +21,8 @@ function getCourseModel(mongoose, db) {
      * for all events */
     threshold: {type: Number, min: 0, default: 20},
 
+    created_by: {type: String}, //Stores the user id
+
     recur: {
       recurring: {type: Boolean, default: false},
       startDate: {type: Date, default: null},
