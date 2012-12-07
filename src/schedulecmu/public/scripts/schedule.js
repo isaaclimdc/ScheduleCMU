@@ -349,6 +349,8 @@ function requestAndAddCourse() {
     /* Remove all whitespace from query string */
     var inputStr = $("#addCourseBox").val();
     inputStr = inputStr.replace(/\s/g,'');
+    if (inputStr.length === 0)
+        return;
 
     /* Can be "15251" or "15-251". Parsed server-side */
     var urlReq = "/courses?number=" + inputStr;
