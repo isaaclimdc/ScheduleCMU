@@ -38,10 +38,10 @@ function getUEventModel(mongoose, db) {
         created_by: {type: String},
 
         /* yes stores the user ids of those who voted yes - for karma purposes*/
-        yes = [{type: String}],
+        yes: [{type: String}],
 
         /* no stores the user ids of those who voted no - for karma purposes */
-        no = [{type: String}]
+        no: [{type: String}]
    });
 
     return db.model('UEvent', UEventSchema);
