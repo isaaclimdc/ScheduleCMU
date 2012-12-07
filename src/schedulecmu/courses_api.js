@@ -4,7 +4,7 @@ module.exports = function (app, Course, depts) {
     if (req.query.dept) {
         var dept = req.query.dept;
         if(!dept.match(/^[0-9]{2}$/))
-           dept = depts[dept];
+            dept = depts[dept.replace('_', ' ')];
         query = query.$where('this.num.match(/^' + dept + '/)').sort('num');
     }
     if (req.query.name) {
