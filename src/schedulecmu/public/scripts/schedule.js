@@ -371,6 +371,7 @@ function requestAndAddCourse() {
             /* ID of the course we want to add */
             var course = result[0];
             var courseID = course._id;
+            console.log(course, courseID);
 
             /* Check if this course is already in the existing courses */
             for (var i = 0; i < window.userBlocks.length; i++) {
@@ -418,8 +419,8 @@ function fetchCourseWithID(courseID, onSuccess) {
                     "auth_token" : null,
                     "_method" : "PUT"
                 },
-                success : function(result, status) {
-                    console.log("Successfully added block!", result);
+                success : function(result2, status) {
+                    console.log("Successfully added block!", result2);
 
                     onSuccess();
 
@@ -996,6 +997,23 @@ if (window.isMobile === false ) {
     });
 }
 
+/* Populate the courseNum box with the user's listed courses */
+function showEventForm() {
+    console.log("Showing event form..");
+    var courseNumSelect = $('#eventFormCourseNum');
+    courseNumSelect.empty();
+
+    for (var i = 0; i < window.listedCourses.length; i++) {
+        var courseNum = window.listedCourses[i].num;
+        var newOption = $('<option>').attr("value", courseNum);
+        newOption.text(courseNum);
+        courseNumSelect.append(newOption);
+    }
+
+    /* Open it */
+    $('#eventsLink').click();
+}
+
 function processEventForm() {
     var courseNum = $("#eventFormCourseNum").val();
     var type = parseInt($("#eventFormType").val());
@@ -1039,9 +1057,6 @@ function processEventForm() {
             endDate = new Date(dateArr[2], dateArr[0]-1, dateArr[1], endArr[0], endArr[1]);
         }
 
-        /* Parse course num */
-        courseNum = courseNum.substring(0, 2) + "-" + courseNum.substring(2);
-
         /* Get the course ID */
         performAjaxRequest({
             url : "/courses?number=" + courseNum,
@@ -1075,15 +1090,17 @@ function processEventForm() {
                     },
                     success : function(result, status) {
                         var updatedCourse = result;
+                        console.log(updatedCourse);
 
-                        for (var i = 0; i < window.listedCourses.length; i++) {
-                            if (window.listedCourses[i]._id === courseID) {
-                                window.listedCourses[i] = updatedCourse;
+                        // for (var i = 0; i < window.listedCourses.length; i++) {
+                        //     if (window.listedCourses[i]._id === courseID) {
+                        //         window.listedCourses[i] = updatedCourse;
 
                                 /* Refresh FullCalendar */
                                 refreshCalendar(updatedCourse);
 
                                 /* When done, close the dialog */
+                                clearForm("#eventForm");
                                 if (window.isMobile === false) {
                                     $.fancybox.close(false);
                                 }
@@ -1091,16 +1108,9 @@ function processEventForm() {
                                     $('.ui-dialog').dialog('close');
                                 }
 
-                                return;
-                            }
-                        }
-
-                        /* Course not found in listedCourses */
-                        var box = $("#eventFormCourseNum").css("border", "2px solid red").val("");
-                        setPlaceholder(box, "Please add this course first!");
-
-                        if (window.isMobile === true)
-                            $.mobile.silentScroll(0);
+                        //         return;
+                        //     }
+                        // }
                     }
                 });
             }
@@ -1112,10 +1122,7 @@ function processEventForm() {
 function validateEventForm(res) {
     var toChange = [];
 
-    if (isNumber(parseInt(res.courseNum)) === false) {
-        toChange.push("#eventFormCourseNum");
-    }
-    if (res.courseNum.length !== 5) {
+    if (res.courseNum.length !== 6) {
         toChange.push("#eventFormCourseNum");
     }
     if (res.title.length === 0) {
@@ -1337,4 +1344,8 @@ function refreshCalendar(courseChanged) {
     $('#calview').fullCalendar('removeEventSource', window.events);
     addCourseToCalendar(courseChanged);
     $('#calview').fullCalendar('addEventSource', window.events);
+}
+
+function clearForm(form) {
+    $(form).find("input").val("");
 }

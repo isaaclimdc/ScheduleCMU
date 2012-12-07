@@ -92,7 +92,8 @@
 							<img src="../images/browseBtn.png" />
 						</div>
 					</a>
-					<a href="#eventBrowser" id="eventsLink">
+					<a href="#eventBrowser" id="eventsLink"></a>
+					<a href="#" onClick="showEventForm();">
 						<div id="addEventsBtn">
 							<img src="../images/addEventsBtn.png" />
 						</div>
@@ -117,8 +118,9 @@
 			<div id="eventBrowser" style="display:none">
 				<h2>New course event</h2>
 				<form id="eventForm">
-					<label for="eventFormCourseNum">Course Number (5 digits)</label>
-					<input type="text" id="eventFormCourseNum" placeholder="15451"</input>
+					<label for="eventFormCourseNum">Course Number</label>
+					<select id="eventFormCourseNum">
+					</select>
 
 					<label for="eventFormType">Event Type</label>
 					<select id="eventFormType">
@@ -135,7 +137,7 @@
 					<input type="text" id="eventFormLocation" placeholder="GHC 4102"</input>
 
 					<label for="eventFormDate">Event Date</label>
-					<input type="date" id="eventFormDate" />
+					<input type="date" id="eventFormDate"></input>
 
 					<label for="eventFormStartTime">Starts</label>
 					<select id="eventFormStartTime">
