@@ -406,7 +406,8 @@ function fetchCourseWithID(courseID, onSuccess) {
             window.listedCourses.push(course);
             window.userBlocks.push(newBlock);
             addCourse(course);
-            refreshJQMElements();
+            if (window.isMobile === true)
+                refreshJQMElements();
             
             /* Finally, POST to User account */
             performAjaxRequest({
@@ -763,7 +764,8 @@ function deleteCourse(clickedLink) {
     $('#calview').fullCalendar('refetchEvents');
 
     /* Refresh jQuery Mobile */
-    refreshJQMElements();
+    if (window.isMobile === true)
+        refreshJQMElements();
 
     /* DELETE the course from the server */
     performAjaxRequest({
