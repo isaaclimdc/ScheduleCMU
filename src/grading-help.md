@@ -6,7 +6,7 @@ Group members
 Nivedita Chopra (niveditc)
 Madeline Horowitz (mhorowit)
 Isaac Lim (idl)
-Naman Bharadwaj (nbharadw, not in 237, but approved by Kosbie)
+Naman Bharadwaj (nbharadw, not in 237, but approved by Prof. Kosbie)
 
 
 Time spent

@@ -1,8 +1,12 @@
-Our teams members are:
+ScheduleCMU README
+=============
+
+Group members
+--------------
 Nivedita Chopra (niveditc)
+Madeline Horowitz (mhorowit)
 Isaac Lim (idl)
-Madeline Rae Horowitz (mhorowit)
-Naman Bharadwaj (nbharadw) - not in 237 but approved by Prof. Kosbie
+Naman Bharadwaj (nbharadw, not in 237, but approved by Prof. Kosbie)
 
 Introduction to our app:
 With ScheduleCMU, we intend to bring about a drastic change in the way the CMU community creates and views academic schedules. Our app, created from scratch, allows CMU students to plan and view their academic schedules in a user-friendly manner.
