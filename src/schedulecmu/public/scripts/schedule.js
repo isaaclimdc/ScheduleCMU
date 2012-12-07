@@ -416,7 +416,7 @@ function fetchCourseWithID(courseID, onSuccess) {
                 url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + courseID,
                 data : {
                     data : newBlock,
-                    "auth_token" : null,
+                    "auth_token" : window.accessToken,
                     "_method" : "PUT"
                 },
                 success : function(result2, status) {
@@ -715,7 +715,7 @@ function rowSelected(selected) {
         url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + courseID,
         data : {
             data : newBlock,
-            "auth_token" : null,
+            "auth_token" : window.accessToken,
             "_method" : "PUT"
         },
         success : function(result, status) {
@@ -774,7 +774,7 @@ function deleteCourse(clickedLink) {
         url : "/users/" + window.userID + "/schedules/" + window.schedID + "/blocks/" + courseID,
         data : {
             _method : "DELETE",
-            auth_token : null
+            auth_token : window.accessToken
         },
         success : function(result, status) {
             console.log(result);
@@ -1097,7 +1097,7 @@ function processEventForm() {
                             "start" : startDate,
                             "end" : endDate
                         },
-                        "auth_token" : null,  /* TODO: Auth token */
+                        "auth_token" : window.accessToken,
                         "_method" : "POST"
                     },
                     success : function(result, status) {
