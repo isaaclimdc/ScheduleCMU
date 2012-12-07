@@ -3,7 +3,7 @@ import re
 def parse(file):
     f = open(file)
     s = f.read()
-    regex = re.compile('<OPTION\s\sVALUE=[^1]{51}')#<\\OPTION>')
+    regex = re.compile('<OPTION\s\sVALUE=[^$]{51}')#<\\OPTION>')
     m = regex.findall(s)
     l = [x[21:] for x in m]
     l1 = [(x[0:-4],x[-3:-1]) for x in l]
