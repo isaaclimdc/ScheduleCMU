@@ -1,30 +1,30 @@
 {
-  "name": "schedulecmu",
-  "description": "a simple mobile/web class scheduler for cmu students",
-  "version": "0.0.1",
-  "author": "schedulecmu <support@schedulecmu.org>",
-  "contributors": [
-    {
-      "name": "Naman Bharadwaj",
-      "email": "nbharadw@andrew.cmu.edu"
-    },
-    {
-      "name": "Nivedita Chopra",
-      "email": "niveditc@andrew.cmu.edu"
-    },
-    {
-      "name": "Madeline Horowitz",
-      "email": "mhorowit@andrew.cmu.edu"
-    },
-    {
-      "name": "Isaac Lim",
-      "email": "idl@andrew.cmu.edu"
+    "name": "schedulecmu",
+    "description": "a simple mobile/web class scheduler for cmu students",
+    "version": "0.0.1",
+    "author": "schedulecmu <support@schedulecmu.org>",
+    "contributors": [
+        {
+            "name": "Naman Bharadwaj",
+            "email": "nbharadw@andrew.cmu.edu"
+        },
+        {
+            "name": "Nivedita Chopra",
+            "email": "niveditc@andrew.cmu.edu"
+        },
+        {
+            "name": "Madeline Horowitz",
+            "email": "mhorowit@andrew.cmu.edu"
+        },
+        {
+            "name": "Isaac Lim",
+            "email": "idl@andrew.cmu.edu"
+        }
+    ],
+    "dependencies": {
+        "express": "3.0.1",
+        "mongoose": "3.4.0",
+        "nodemailer": "0.3.35",
+        "request": "2.12.0"
     }
-  ],
-  "dependencies": {
-    "express": "3.0.1",
-    "mongoose": "3.4.0",
-    "nodemailer": "0.3.35",
-    "request": "2.12.0"
-  }
 }

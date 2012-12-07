@@ -20,10 +20,10 @@ app.get('/', function (req, res) {
     var userAgent = req.headers['user-agent'];
     var isMobile = /mobile/i.test(userAgent);
     if (isMobile === true) {
-      res.redirect('/mobile/');
+        res.redirect('/mobile/');
     }
     else {
-      res.redirect('/desktop/');
+        res.redirect('/desktop/');
     }
 });
 
