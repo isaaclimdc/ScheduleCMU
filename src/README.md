@@ -15,3 +15,5 @@ We made a tool that works well on both mobile devices and desktop clients. It al
 We have hosted our app on AppFog and it can be accessed at http://schedulecmu.aws.af.cm/ on both desktop and a mobile device.
 
 
+
+
