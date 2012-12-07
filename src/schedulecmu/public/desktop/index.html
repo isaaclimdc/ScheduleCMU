@@ -18,6 +18,41 @@
 </head>
 
 <body>
+	<div id="fb-root"></div>
+	<script>
+		window.fbAsyncInit = function() {
+		    FB.init({
+		        appId      : '102585986572914', // App ID
+		        channelUrl : 'channel.html', // Channel File
+		        status     : true, // check login status
+		        cookie     : true, // enable cookies to allow the server to access the session
+		        xfbml      : true  // parse XFBML
+		    });
+		};
+
+		function fbLogin() {
+			FB.login(function(response) {
+				if (response.status === 'connected') {
+		        	/* Connected! */
+		        	console.log("Logged in");
+		      	}
+		      	else {
+		        	/* Not yet authorized */
+		        	console.log("Not logged in");
+		      	}
+		    });
+		}
+
+		// Load the SDK Asynchronously
+		(function(d){
+		    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		    if (d.getElementById(id)) {return;}
+		    js = d.createElement('script'); js.id = id; js.async = true;
+		    js.src = "http://connect.facebook.net/en_US/all.js";
+		    ref.parentNode.insertBefore(js, ref);
+		}(document));
+	</script>
+
 	<script type="text/javascript">
 		if (screen.width <= 699) {
 			document.location = "../mobile/index.html";
@@ -48,7 +83,7 @@
 			</div>
 
 			<div class="three columns">
-				<a href="schedule.html"><div id="fbLoginBtn"></div></a>
+				<a href="schedule.html" onClick="fbLogin();"><div id="fbLoginBtn"></div></a>
 			</div>
 		</div>
 		
