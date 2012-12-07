@@ -40,8 +40,14 @@ module.exports = function (mongoose, db) {
         /* makes the user accessible in future callbacks */
         var curUser = this;
 
+        if (auth_token == null || auth_token == '') {
+            cb('invalid');
+            return;
+        }
+
         var currentTime = new Date().getTime() / 1000;
-        if (this.auth_token == auth_token && currentTime < this.auth_expiry) {
+        if (this.auth_token == auth_token &&
+            currentTime < this.auth_expiry) {
             if (this.verify_code == null)
                 cb("valid");
             else
