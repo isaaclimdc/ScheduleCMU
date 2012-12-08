@@ -17,7 +17,9 @@ Our design process
 3) Coding up both front-end clients (mobile+desktop), and the back-end
 4) User tests (see below)
 5) Incorporating feedback received from user tests (see below)
-6) Final touches before releasing public beta
+6) Bigger round of user tests
+7) One more round of incorporating feedback received
+8) Final touches before releasing public beta
 
 
 Discussion on user tests
@@ -37,7 +39,8 @@ a 4, and the remaining 40% gave it a 5. We’re happy that our users seem to
 like the user experience that we came up with, since this was one of our
 initial goals for this project. We incorporated their feedback including things
 like using dialogs for the course browser and event adder on mobile, instead
-of having separate pages. On desktop, 
+of having separate pages. On desktop, we replaced many icons and UI elements
+that our testers complained about being unintuitive, among many other things.
 
 Also, CourseEvents was relatively well-received, with 60% of the responders 
 giving the usefulness of this feature a 4, and the rest a 3. This is an 

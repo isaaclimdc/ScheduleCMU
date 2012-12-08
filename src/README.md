@@ -9,6 +9,15 @@ Isaac Lim (idl)
 Naman Bharadwaj (nbharadw, not in 237, but approved by Prof. Kosbie)
 
 
+Contents
+--------------
+1) Overall readme - README.md
+2) Grading help - GRADING_HELP.md
+3) Our design process - DESIGN_PROCESS.md
+1) ScheduleCMU Desktop Client - schedulecmu/public/desktop
+2) ScheduleCMU Mobile Client - schedulecmu/public/mobile
+
+
 Introduction
 --------------
 With ScheduleCMU, we intend to bring about a drastic change in the way the
@@ -38,3 +47,23 @@ a mobile device at:
 http://schedulecmu.aws.af.cm/
 
 Eventually we plan to host this at http://schedulecmu.org.
+
+
+Features
+-------------
+Front-end:
+- Desktop client
+- Mobile client
+    - iOS: can be saved as a webclip and used independently of Safari
+    - Android: the packaged APK
+- Search for courses and add them
+- CourseEvents
+- Facebook authentication with Andrew email verification
+
+Back-end:
+- MongoDB database
+- RESTful API
+- Scraper of Schedule of Classes (to populate database)
+
+(See GRADING_HELP.md for a more technical list of the features and techniques
+ used to implement these features)
