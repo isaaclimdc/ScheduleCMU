@@ -180,6 +180,11 @@ li {
     height: 100%;
 }
 
+.about img {
+    width: 100%;
+    height: auto !important;
+}
+
 /*********** IDs ***********/
 
 /* Header */
