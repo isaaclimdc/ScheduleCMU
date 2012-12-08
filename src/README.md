@@ -14,8 +14,11 @@ Contents
 1) Overall readme - README.md
 2) Grading help - GRADING_HELP.md
 3) Our design process - DESIGN_PROCESS.md
-1) ScheduleCMU Desktop Client - schedulecmu/public/desktop
-2) ScheduleCMU Mobile Client - schedulecmu/public/mobile
+4) ScheduleCMU Desktop Client - schedulecmu/public/desktop
+5) ScheduleCMU Mobile Client - schedulecmu/public/mobile
+6) All scripts - schedulecmu/public/scripts
+7) Schedule of Classes Scraper - socscraper/
+8) Various MongoDB and Node.js files - schedulecmu/
 
 
 Introduction
