@@ -31,6 +31,10 @@ module.exports = function (mongoose, db) {
         auth_expiry: {type: Number, default: null},
         verify_code: {type: String, default: null},
 
+        /* reflects the user's activity */
+        karma : {type: Number, default: 10},
+
+        /* stores the schedules that the user makes */
         schedules: [ScheduleSchema]
     });
 

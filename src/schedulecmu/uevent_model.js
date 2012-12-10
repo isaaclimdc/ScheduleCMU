@@ -42,7 +42,15 @@ function getUEventModel(mongoose, db) {
 
         /* no stores the user ids of those who voted no - for karma purposes */
         no: [{type: String}]
-   });
+    });
+
+    UEventSchema.methods.update_event = function(){
+
+    }
+
+    UEventSchema.methods.remove_event = function(){
+
+    }
 
     return db.model('UEvent', UEventSchema);
 }
