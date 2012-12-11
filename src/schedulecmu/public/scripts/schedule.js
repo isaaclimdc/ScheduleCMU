@@ -199,7 +199,7 @@ function fetchCourseData() {
             url: "/courses/" + window.userBlocks[i]._id,
             success: function(result, status) {
                 var course = result;
-                console.log(course);
+                // console.log(course);
 
                 if (course === null) {
                     return;
@@ -270,6 +270,9 @@ function addCourseToCalendar(course) {
 
     /* Add "events" */
     addEventsToCalendar(course, color);
+
+    /* Done adding course. Resize FullCalendar if needed */
+    // var latest = getLatestEvent();
 
     /* Refresh FullCalendar */
     $('#calview').fullCalendar('refetchEvents');
@@ -1360,4 +1363,14 @@ function refreshCalendar(courseChanged) {
 
 function clearForm(form) {
     $(form).find("input").val("");
+}
+
+function getLatestEvent() {
+    var latest = 0;
+    for (var i = 0; i < window.events.length; i++) {
+        var end = window.events[i].end.getHours();
+        if (end > latest)
+            latest = end;
+    }
+    return latest;
 }
