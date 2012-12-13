@@ -86,10 +86,10 @@ module.exports = function (app, User) {
             }
 
             user.authenticate(req.body.auth_token, function (state) {
-                if (state === "verify")
-                    res.send(403, {error: "Email verification not complete."});
-                else if (state === "invalid")
+                if (state === "invalid")
                     res.send(401, {error: "Invalid auth_token."});
+                else if (state === "valid")
+                    res.send(user);
                 else {
                     if (user.verify_code == req.body.verify_code) {
                         user.verify_code = null;

@@ -32,6 +32,7 @@ var totalSaved = 0;
 function dumpAndAdd(arr, course) {
   total++;
   var modeled = new CourseModel(course);
+/*
   modeled.save(function(err) {
     if (err) {
       console.log(err);
@@ -41,6 +42,7 @@ function dumpAndAdd(arr, course) {
     arr.push(course);
     totalSaved++;
   });
+    */
 }
 
 jsdom.env(
