@@ -25,6 +25,7 @@ var jsdom = require("jsdom");
 var inspect = require("eyes").inspector({
     maxLength: 100000000000    // Computers nowadays have big memories right?
 });
+var request = require('request');
 
 var total = 0;
 var totalSaved = 0;
@@ -225,23 +226,22 @@ jsdom.env(
             console.log(urlStr);
             
             /* Call AJAX Synchronously to get the response text */
-            window.$.support.cors = true;
-            window.$.ajax({
-                url : urlStr,
-                success : function(result, status) {
-                    console.log("Success!: ", result);
+            request(urlStr, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log("Success!: ", body);
+                    console.log("Response: ", response);
 
                     /* Pulling out the desc, prereq, coreq text */
                     var desc;   /* We need these */
                     var prereqs;
                     var coreqs;
 
-                    var page = window.$(result);
+                    var page = window.$(body);
                     var allP = page.find("p");
                     var descHdr = window.$(allP[2]).children("font");
                     desc = window.$(descHdr[0]).text();
                     prereqs = window.$(descHdr[2]).text();
-                    
+
                     var coreqHdr = window.$(allP[3]).children("font")[0];
                     coreqs = window.$(window.$(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
 
@@ -254,8 +254,8 @@ jsdom.env(
 
                     console.log("Finished fetch");
                     onSuccess(res);
-                },
-                error : function(xhr, status, error) {
+                }
+                else {
                     console.log("Error: ", error);
                 }
             });
