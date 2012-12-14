@@ -105,25 +105,24 @@ module.exports = function (mongoose, db) {
 
         var mailOptions = {
             /* sender address */
-            from: "ScheduleCMU.org <schedulecmu@gmail.com>",
+            from: "ScheduleCMU <schedulecmu@gmail.com>",
 
             /* list of receivers */
             to: this.andrew + "@andrew.cmu.edu",
 
             /* subject line */
-            subject: "Verify your account at ScheduleCMU",
+            subject: "Welcome to ScheduleCMU",
 
             /* plaintext version of the message body */
-            text: "Hi " + this.andrew + ",\nPlease go to the following url to verify" +
-            "your email address:\nhttp://www.schedulecmu.org/verify.html#" + this.verify_code +
-            "\nThis is an auto-generated email. Please do not reply to this mail.",
+            text: "Hi " + this.andrew + ",\nYou're almost there! Just verify" +
+            "your email address at:\nhttp://www.schedulecmu.org/verify.html#" + this.verify_code +
+            " to embark on an awesome scheduling experience",
 
             /* html version of the message body */
-            html: "Hi " + this.andrew + ",<p>Please click <span>" +
+            html: "Hi " + this.andrew + ",<p>You're almost there! Click <span>" +
             "<a href='http://www.schedulecmu.org/verify.html#" + this.verify_code +
-            "'>here</a></span> to verify your account.</p><p>-- ScheduleCMU Admin</p>" +
-            "<p style='font-size: 10px;'>This is an auto-generated email." +
-            " Please do not reply to this mail.</p>"
+            "'>here</a></span> to embark on an awesome scheduling experience.</p><p>-- ScheduleCMU Admin</p>" +
+            "<p style='font-size: 10px;'>"
         }
 
         /* send mail with defined transport object */
