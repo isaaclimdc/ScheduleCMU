@@ -105,7 +105,7 @@ module.exports = function (mongoose, db) {
 
         var mailOptions = {
             /* sender address */
-            from: "ScheduleCMU.org <admin@schedulecmu.org>",
+            from: "ScheduleCMU.org <schedulecmu@gmail.com>",
 
             /* list of receivers */
             to: this.andrew + "@andrew.cmu.edu",
