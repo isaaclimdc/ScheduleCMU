@@ -12,8 +12,14 @@ module.exports = function (app, UEvent, User, Course) {
                     var schedule = user.schedules[0];
                     var events = [];
                     for(block in schedule){
-                        var cur = UEvent.find({'course_num' : block._id});
-                        events = events.concat(cur);
+                        UEvent.lean(true).find({'course_num' : block._id}, function (err, uevents){
+                            if(err || (user == undefined)){
+                                console.log(err);
+                                res.send(404, {error: 'Event not found'});
+                            } else {
+                                events = events.concat(uevents);
+                            }
+                            });
                     }
                     res.send(events);
                 }
