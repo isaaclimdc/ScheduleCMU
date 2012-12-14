@@ -243,7 +243,7 @@ jsdom.env(
                 async : false
             }).responseText;
 
-            // console.log(html);
+            console.log(html);
 
             /* Pulling out the desc, prereq, coreq text */
             var desc;   /* We need these */
