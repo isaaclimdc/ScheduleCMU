@@ -206,6 +206,8 @@ jsdom.env(
         }
 
         function fetchDetails(num, onSuccess) {
+            console.log("Entered fetch");
+
             var semStr;
             var semNum = window.globalSem % 10;
             if (semNum === 0)
@@ -244,6 +246,7 @@ jsdom.env(
                         "coreqs" : coreqs
                     };
 
+                    console.log("Finished fetch");
                     onSuccess(res);
                 }
             });
@@ -263,6 +266,8 @@ jsdom.env(
                     arr.push(course);
                     totalSaved++;
                 });
+
+                console.log("Finished dump");
             });
         }
 
