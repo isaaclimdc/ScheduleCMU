@@ -19,7 +19,7 @@ function verify(authResponse) {
 
     $.ajax({
         type : "POST",
-        url : "http://schedulecmu.aws.af.cm/api/users/" + fbID + "/verify/",
+        url : "http://www.schedulecmu.org/api/users/" + fbID + "/verify/",
         data : {
             "verify_code" : verifyCode,
             "auth_token" : authResponse.accessToken
