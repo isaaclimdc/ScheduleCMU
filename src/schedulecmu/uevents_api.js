@@ -4,7 +4,7 @@ module.exports = function (app, UEvent, User, Course) {
     /* To get all the events that a user has to verify */
     app.get('/api/events', function(req, res){
         if(req.query.user){
-            User.findById(req.params.user, function(err, user){
+            User.findById(req.query.user, function(err, user){
                 if(err || (user == undefined)){
                     console.log(err);
                     res.send(404, {error: 'User not found'});
@@ -12,8 +12,14 @@ module.exports = function (app, UEvent, User, Course) {
                     var schedule = user.schedules[0];
                     var events = [];
                     for(block in schedule){
-                        var cur = UEvent.find({'course_num' : block._id});
-                        events = events.concat(cur);
+                        UEvent.lean(true).find({'course_num' : block._id}, function (err, uevents){
+                            if(err || (user == undefined)){
+                                console.log(err);
+                                res.send(404, {error: 'Event not found'});
+                            } else {
+                                events = events.concat(uevents);
+                            }
+                            });
                     }
                     res.send(events);
                 }
@@ -25,7 +31,6 @@ module.exports = function (app, UEvent, User, Course) {
     /* To post a new uevent */
     app.post('/api/events', function(req, res){
         if (req.body.data == undefined) {
-            console.log(err);
             res.send(400, {error: "No event received."});
         } else {
             var event = req.body.data;
