@@ -47,9 +47,7 @@ events to a course that you are signed up for.
 We have hosted our app on AppFog and it can be accessed on both desktop and
 a mobile device at:
 
-http://schedulecmu.aws.af.cm/
-
-Eventually we plan to host this at http://schedulecmu.org.
+ http://www.schedulecmu.org
 
 
 Features

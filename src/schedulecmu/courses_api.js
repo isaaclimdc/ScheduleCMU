@@ -158,7 +158,7 @@ module.exports = function (app, Course, depts) {
             var event = course.course_events.id(req.params.event);
             if(event == undefined){
                 console.log(err);
-                res.send(404, {error: "Schedule not found"});
+                res.send(404, {error: "Event not found"});
             }
 
             event.remove(function(err){
