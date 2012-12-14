@@ -4,7 +4,7 @@ module.exports = function (app, UEvent, User, Course) {
     /* To get all the events that a user has to verify */
     app.get('/api/events', function(req, res){
         if(req.query.user){
-            User.findById(req.params.user, function(err, user){
+            User.findById(req.query.user, function(err, user){
                 if(err || (user == undefined)){
                     console.log(err);
                     res.send(404, {error: 'User not found'});
