@@ -82,7 +82,7 @@ function loginToScheduleCMU(fbAuthResponse) {
                             "name" : "Schedule 1"
                         },
                         /* TODO: Put auth token here */
-                        "auth_token" : null,
+                        "auth_token" : accessToken,
                         "_method" : "POST"
                     },
                     success : function(result, status) {
