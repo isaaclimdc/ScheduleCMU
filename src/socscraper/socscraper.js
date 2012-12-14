@@ -218,6 +218,8 @@ jsdom.env(
                 semStr = "F";  /* Fall */
             semStr += window.globalSem / 10;
             console.log("Sem string is: ", semStr);
+
+            num = num.replace("-", "");
             
             /* Call AJAX Synchronously to get the response text */
             window.$.ajax({
@@ -248,6 +250,9 @@ jsdom.env(
 
                     console.log("Finished fetch");
                     onSuccess(res);
+                },
+                error : function(xhr, status, error) {
+                    console.log(error);
                 }
             });
         }
