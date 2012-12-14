@@ -44,12 +44,30 @@ function getUEventModel(mongoose, db) {
         no: [{type: String}]
     });
 
-    UEventSchema.methods.update_event = function(){
-
+    UEventSchema.methods.update_event = function(Course){
+        Course.findById(this.course_num, function(err, course){
+            if(err || (course == undefined)){
+                res.send(404, {error: "Course not found"});
+                return;
+            } else {
+                var event = new Event(this.event_info);
+                course.course_events.push(event);
+                course.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                            res.send(404, {error: "We messed up somewhere"});
+                        } else {
+                            res.send(event);
+                            this.remove();
+                        }
+                    });
+            }
+        });
     }
 
     UEventSchema.methods.remove_event = function(){
-
+        this.remove();
+        res.send("Event was removed");
     }
 
     return db.model('UEvent', UEventSchema);

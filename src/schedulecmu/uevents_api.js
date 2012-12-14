@@ -102,9 +102,8 @@ module.exports = function (app, UEvent, User, Course) {
                 }
             });
         }
-    });
-
-});
+   });
+}
 
 
 
