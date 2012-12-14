@@ -91,12 +91,14 @@ function fetchUserSchedule(user) {
     window.userBlocks = latestSchedule.course_blocks;
 
     fetchCourseData();
+    // fetchEventsToVote();
 }
 
 function setupPage() {
     var height;
     var contentHeight;
     var columnFormat;
+    var clickCB;
 
     /* Setup for DESKTOP client */
     if (window.isMobile === false) {
@@ -126,6 +128,10 @@ function setupPage() {
         //     week: 'dddd M/d',
         //     day: 'dddd M/d'
         // };
+        clickCB = function(calEvent, jsEvent, view) {
+            var idx = fetchListedCourseWithID(calEvent.id).idx;
+            $("#accordion").accordion("option", "active", idx);
+        }
     }
 
     /* Setup for MOBILE client */
@@ -175,7 +181,8 @@ function setupPage() {
             agenda: ''
         },
         ignoreTimezone: false,
-        events: window.events
+        events: window.events,
+        eventClick: clickCB
     });
 
     /* Override submission of forms */
@@ -190,6 +197,15 @@ function setupPage() {
     $("#eventForm").submit(function(e){
         e.preventDefault();
         processEventForm();
+    });
+}
+
+function fetchEventsToVote() {
+    performAjaxRequest({
+        url : "/events?user=" + window.userID,
+        success : function(result, status) {
+
+        }
     });
 }
 
@@ -699,7 +715,7 @@ function rowSelected(selected) {
     /* Extract course from course ID */
     var group = row.parents(".group")[0];
     var courseID = $(group).attr("id");
-    var course = fetchListedCourseWithID(courseID);
+    var course = fetchListedCourseWithID(courseID).course;
 
     /* Update the local copy of the block */
     var newBlock;
@@ -733,7 +749,7 @@ function deleteCourse(clickedLink) {
     var courseID = $(clickedLink).attr("id");
 
     /* Get this course from the global window.listedCourses */
-    // var course = fetchListedCourseWithID(courseID);
+    // var course = fetchListedCourseWithID(courseID).course;
 
     var toDelete = $('#accordion').children("#" + courseID)[0];
     $(toDelete).remove();
@@ -920,7 +936,7 @@ function showInfo(clickedLink, isExisting) {
 
     if (isExisting === true) {
         /* Get this course from the global list then display it */
-        var course = fetchListedCourseWithID(courseID);
+        var course = fetchListedCourseWithID(courseID).course;
         showInfoInCourseBrowser(course);
     }
     else {
@@ -1107,25 +1123,17 @@ function processEventForm() {
                         var updatedCourse = result;
                         console.log(updatedCourse);
 
-                        // for (var i = 0; i < window.listedCourses.length; i++) {
-                        //     if (window.listedCourses[i]._id === courseID) {
-                        //         window.listedCourses[i] = updatedCourse;
+                        /* Refresh FullCalendar */
+                        refreshCalendar(updatedCourse);
 
-                                /* Refresh FullCalendar */
-                                refreshCalendar(updatedCourse);
-
-                                /* When done, close the dialog */
-                                clearForm("#eventForm");
-                                if (window.isMobile === false) {
-                                    $.fancybox.close(false);
-                                }
-                                else {
-                                    $('.ui-dialog').dialog('close');
-                                }
-
-                        //         return;
-                        //     }
-                        // }
+                        /* When done, close the dialog */
+                        clearForm("#eventForm");
+                        if (window.isMobile === false) {
+                            $.fancybox.close(false);
+                        }
+                        else {
+                            $('.ui-dialog').dialog('close');
+                        }
                     }
                 });
             }
@@ -1336,7 +1344,7 @@ function fetchListedCourseWithID(courseID) {
     for (var i = 0; i < window.listedCourses.length; i++) {
         var course = window.listedCourses[i];
         if (course._id === courseID)
-            return course;
+            return {idx : i, course : course};
     }
     return null;
 }
