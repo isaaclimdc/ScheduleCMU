@@ -15,6 +15,7 @@ var UEvent = require('./uevent_model.js')(mongoose, db);
 
 require('./courses_api.js')(app, Course, depts);
 require('./users_api.js')(app, User);
+require('./uevents_api.js')(app, UEvent, User, Course);
 
 app.get('/', function (req, res) {
     var userAgent = req.headers['user-agent'];
