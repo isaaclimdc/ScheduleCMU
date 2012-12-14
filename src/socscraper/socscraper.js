@@ -225,6 +225,7 @@ jsdom.env(
             console.log(urlStr);
             
             /* Call AJAX Synchronously to get the response text */
+            window.$.support.cors = true;
             window.$.ajax({
                 url : urlStr,
                 success : function(result, status) {
