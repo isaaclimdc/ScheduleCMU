@@ -115,12 +115,12 @@ module.exports = function (mongoose, db) {
 
             /* plaintext version of the message body */
             text: "Hi " + this.andrew + ",\nPlease go to the following url to verify" +
-            "your email address:\nhttp://schedulecmu.aws.af.cm/verify.html#" + this.verify_code +
+            "your email address:\nhttp://www.schedulecmu.org/verify.html#" + this.verify_code +
             "\nThis is an auto-generated email. Please do not reply to this mail.",
 
             /* html version of the message body */
             html: "Hi " + this.andrew + ",<p>Please click <span>" +
-            "<a href='http://schedulecmu.aws.af.cm/verify.html#" + this.verify_code +
+            "<a href='http://www.schedulecmu.org/verify.html#" + this.verify_code +
             "'>here</a></span> to verify your account.</p><p>-- ScheduleCMU Admin</p>" +
             "<p style='font-size: 10px;'>This is an auto-generated email." +
             " Please do not reply to this mail.</p>"
