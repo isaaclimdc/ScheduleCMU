@@ -25,7 +25,6 @@ module.exports = function (app, UEvent, User, Course) {
     /* To post a new uevent */
     app.post('/api/events', function(req, res){
         if (req.body.data == undefined) {
-            console.log(err);
             res.send(400, {error: "No event received."});
         } else {
             var event = req.body.data;
