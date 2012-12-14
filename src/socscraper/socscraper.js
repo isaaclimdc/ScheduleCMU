@@ -29,67 +29,6 @@ var inspect = require("eyes").inspector({
 var total = 0;
 var totalSaved = 0;
 
-function fetchDetails(num, onSuccess) {
-    var semStr;
-    var semNum = window.globalSem % 10;
-    if (semNum === 0)
-        semStr = "S";  /* Spring */
-    else if (semNum === 1)
-        semStr = "M";  /* Summer */
-    else if (semNum === 2)
-        semStr = "F";  /* Fall */
-    semStr += window.globalSem / 10;
-    console.log("Sem string is: ", semStr);
-    
-    /* Call AJAX Synchronously to get the response text */
-    window.$.ajax({
-        url : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
-        success : function(result, status) {
-            console.log(result);
-
-            /* Pulling out the desc, prereq, coreq text */
-            var desc;   /* We need these */
-            var prereqs;
-            var coreqs;
-
-            var page = window.$(result);
-            var allP = page.find("p");
-            var descHdr = window.$(allP[2]).children("font");
-            desc = window.$(descHdr[0]).text();
-            prereqs = window.$(descHdr[2]).text();
-            
-            var coreqHdr = window.$(allP[3]).children("font")[0];
-            coreqs = window.$(window.$(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
-
-            /* Return this data as an object */
-            var res = {
-                "description" : desc,
-                "prereqs" : prereqs,
-                "coreqs" : coreqs
-            };
-
-            onSuccess(res);
-        }
-    });
-}
-
-function dumpAndAdd(arr, course) {
-    total++;
-    fetchDetails(course.num, function(res) {
-        course.details = res;
-        var modeled = new CourseModel(course);
-        modeled.save(function(err) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            inspect(course);
-            arr.push(course);
-            totalSaved++;
-        });
-    });
-}
-
 jsdom.env(
     scheduleToScrape,
     ['http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'],
@@ -264,6 +203,67 @@ jsdom.env(
             }
 
             return newSection;
+        }
+
+        function fetchDetails(num, onSuccess) {
+            var semStr;
+            var semNum = window.globalSem % 10;
+            if (semNum === 0)
+                semStr = "S";  /* Spring */
+            else if (semNum === 1)
+                semStr = "M";  /* Summer */
+            else if (semNum === 2)
+                semStr = "F";  /* Fall */
+            semStr += window.globalSem / 10;
+            console.log("Sem string is: ", semStr);
+            
+            /* Call AJAX Synchronously to get the response text */
+            window.$.ajax({
+                url : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
+                success : function(result, status) {
+                    console.log(result);
+
+                    /* Pulling out the desc, prereq, coreq text */
+                    var desc;   /* We need these */
+                    var prereqs;
+                    var coreqs;
+
+                    var page = window.$(result);
+                    var allP = page.find("p");
+                    var descHdr = window.$(allP[2]).children("font");
+                    desc = window.$(descHdr[0]).text();
+                    prereqs = window.$(descHdr[2]).text();
+                    
+                    var coreqHdr = window.$(allP[3]).children("font")[0];
+                    coreqs = window.$(window.$(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
+
+                    /* Return this data as an object */
+                    var res = {
+                        "description" : desc,
+                        "prereqs" : prereqs,
+                        "coreqs" : coreqs
+                    };
+
+                    onSuccess(res);
+                }
+            });
+        }
+
+        function dumpAndAdd(arr, course) {
+            total++;
+            fetchDetails(course.num, function(res) {
+                course.details = res;
+                var modeled = new CourseModel(course);
+                modeled.save(function(err) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    inspect(course);
+                    arr.push(course);
+                    totalSaved++;
+                });
+            });
         }
 
         /****************************/
