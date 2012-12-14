@@ -9,7 +9,7 @@
  */
 
 // Comment out for local file
-var scheduleToScrape = "./testing/spring13.html";
+var scheduleToScrape = "testing/spring13.html";
 // Comment out for network file
 // var scheduleToScrape = "https://enr-apps.as.cmu.edu/assets/SOC/sched_layout_fall.htm";
 
@@ -25,23 +25,10 @@ var jsdom = require("jsdom");
 var inspect = require("eyes").inspector({
     maxLength: 100000000000    // Computers nowadays have big memories right?
 });
+var request = require('request');
 
 var total = 0;
 var totalSaved = 0;
-
-function dumpAndAdd(arr, course) {
-  total++;
-  var modeled = new CourseModel(course);
-  modeled.save(function(err) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    inspect(course);
-    arr.push(course);
-    totalSaved++;
-  });
-}
 
 jsdom.env(
     scheduleToScrape,
@@ -98,7 +85,7 @@ jsdom.env(
             return window.$(elt).html();
         }
 
-        /* Convert a string like "Semester: Spring 2013" into a number 131. */
+        /* Convert a string like "Semester: Spring 2013" into a number 130. */
         function extractSemester(str) {
             var words = str.split(" ");
             var year = parseInt(words[words.length-1]);
@@ -136,17 +123,18 @@ jsdom.env(
 
             //TODO change how we store units?
             function processUnits(unitsStr) {
-              return unitsStr;
+                return unitsStr;
             }
 
             // Create a new Course
             var newCourse = new Course();
 
             // Get number, name, units, semester
-            newCourse.num = processCourseNum(extractHTML(cols[0]));
+            var courseNum = extractHTML(cols[0]);
+            newCourse.num = processCourseNum(courseNum);
             newCourse.name = extractHTML(cols[1]);
             newCourse.units = processUnits(extractHTML(cols[2]));
-            newCourse.semester = globalSem;
+            newCourse.semester = window.globalSem;
 
             return newCourse;
         }
@@ -218,7 +206,83 @@ jsdom.env(
             return newSection;
         }
 
-        /* Parser START */
+        function fetchDetails(num, onSuccess) {
+            console.log("Entered fetch");
+
+            var semStr;
+            var semNum = window.globalSem % 10;
+            if (semNum === 0)
+                semStr = "S";  /* Spring */
+            else if (semNum === 1)
+                semStr = "M";  /* Summer */
+            else if (semNum === 2)
+                semStr = "F";  /* Fall */
+            semStr += window.globalSem / 10;
+            console.log("Sem string is: ", semStr);
+
+            num = num.replace("-", "");
+
+            var urlStr = "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail";
+            console.log(urlStr);
+            
+            /* Call AJAX Synchronously to get the response text */
+            request(urlStr, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log("Success!: ", body);
+                    console.log("Response: ", response);
+
+                    /* Pulling out the desc, prereq, coreq text */
+                    var desc;   /* We need these */
+                    var prereqs;
+                    var coreqs;
+
+                    var page = window.$(body);
+                    var allP = page.find("p");
+                    var descHdr = window.$(allP[2]).children("font");
+                    desc = window.$(descHdr[0]).text();
+                    prereqs = window.$(descHdr[2]).text();
+
+                    var coreqHdr = window.$(allP[3]).children("font")[0];
+                    coreqs = window.$(window.$(coreqHdr).children("font")[0]).text().replace(/\s/g,'');
+
+                    /* Return this data as an object */
+                    var res = {
+                        "description" : desc,
+                        "prereqs" : prereqs,
+                        "coreqs" : coreqs
+                    };
+
+                    console.log("Finished fetch");
+                    onSuccess(res);
+                }
+                else {
+                    console.log("Error: ", error);
+                }
+            });
+        }
+
+        function dumpAndAdd(arr, course) {
+            total++;
+            fetchDetails(course.num, function(res) {
+                course.details = res;
+                var modeled = new CourseModel(course);
+                modeled.save(function(err) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    }
+                    inspect(course);
+                    arr.push(course);
+                    totalSaved++;
+                });
+
+                console.log("Finished dump");
+            });
+        }
+
+        /****************************/
+        /**** Parser STARTS here ****/
+        /****************************/
 
         /* Print the title */
         var title = window.$("title").text();
@@ -226,7 +290,7 @@ jsdom.env(
 
         /* Get semester */
         var semStr = window.$(window.$("b")[1]).text();
-        var globalSem = extractSemester(semStr);
+        window.globalSem = extractSemester(semStr);
         console.log(semStr);
 
         /* Use Regex to add missing <tr> tags */
