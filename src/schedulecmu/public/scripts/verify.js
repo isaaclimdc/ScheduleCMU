@@ -21,7 +21,8 @@ function verify(authResponse) {
         type : "POST",
         url : "http://schedulecmu.aws.af.cm/api/users/" + fbID + "/verify/",
         data : {
-            "verify_code" : verifyCode
+            "verify_code" : verifyCode,
+            "auth_token" : authResponse.accessToken
         },
         success : function(result, status) {
             console.log(result);
