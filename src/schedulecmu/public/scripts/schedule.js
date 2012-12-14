@@ -6,7 +6,8 @@
 window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 
 /* Base URL for the API */
-window.baseURL = "http://schedulecmu.aws.af.cm/api";
+// window.baseURL = "http://schedulecmu.aws.af.cm/api";
+window.baseURL = "http://www.schedulecmu.org/api";
 
 /* Initialization of arrays */
 window.userBlocks = [];
@@ -197,15 +198,6 @@ function setupPage() {
     $("#eventForm").submit(function(e){
         e.preventDefault();
         processEventForm();
-    });
-}
-
-function fetchEventsToVote() {
-    performAjaxRequest({
-        url : "/events?user=" + window.userID,
-        success : function(result, status) {
-
-        }
     });
 }
 
@@ -1345,6 +1337,15 @@ function fetchListedCourseWithID(courseID) {
         var course = window.listedCourses[i];
         if (course._id === courseID)
             return {idx : i, course : course};
+    }
+    return null;
+}
+
+function fetchUserBlockWithID(courseID) {
+    for (var i = 0; i < window.userBlocks.length; i++) {
+        var block = window.userBlocks[i];
+        if (block._id === courseID)
+            return {idx : i, block : block};
     }
     return null;
 }
