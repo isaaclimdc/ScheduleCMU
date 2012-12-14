@@ -220,12 +220,15 @@ jsdom.env(
             console.log("Sem string is: ", semStr);
 
             num = num.replace("-", "");
+
+            var urlStr = "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail";
+            console.log(urlStr);
             
             /* Call AJAX Synchronously to get the response text */
             window.$.ajax({
-                url : "https://enr-apps.as.cmu.edu/open/SOC/SOCServlet?CourseNo=" + num + "&SEMESTER=" + semStr + "&Formname=Course_Detail",
+                url : urlStr,
                 success : function(result, status) {
-                    console.log(result);
+                    console.log("Success!: ", result);
 
                     /* Pulling out the desc, prereq, coreq text */
                     var desc;   /* We need these */
@@ -252,7 +255,7 @@ jsdom.env(
                     onSuccess(res);
                 },
                 error : function(xhr, status, error) {
-                    console.log(error);
+                    console.log("Error: ", error);
                 }
             });
         }
