@@ -5,7 +5,8 @@ module.exports = function (app, Course, depts) {
             var dept = req.query.dept;
             if(!dept.match(/^[0-9]{2}$/))
                 dept = depts[dept.replace('_', ' ').
-                             replace('*', '&').replace('@',':')];
+                             replace('*', '&').replace('@',':')
+                             .toLowerCase()];
             query = query.$where('this.num.match(/^' + dept + '/)')
                     .sort('num');
         }
