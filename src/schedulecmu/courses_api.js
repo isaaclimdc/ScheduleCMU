@@ -1,12 +1,62 @@
 module.exports = function (app, Course, depts) {
     app.get('/api/courses', function(req, res) {
+            console.log('A');
         var query = Course.find({});
+            console.log('B');
+        function getDept(s){
+            var s1 = s.replace('+', ' ')
+                      .toLowerCase();
+            var tokens = s1.split(' ');
+            var results = [];
+            for (var i = 0; i < tokens.length; i++){
+                if(depts[tokens[i]]){
+                    console.log(depts[tokens[i]]);
+                    console.log((depts[tokens[i]])[0]);
+                    console.log(((depts[tokens[i]])[0])[0]);
+                    for(var j = 0; j < (depts[tokens[i]]).length; j++)
+                        results.push((depts[tokens[i]])[j]);
+                    console.log(results);
+                }
+            }
+            console.log("results = " + results);
+            results.sort(function(a, b){
+                    if(a[0] < b[0]) return -1;
+                    else return 1;
+                });
+            console.log("results = " + results);
+            var number;
+            if(results[0]){
+                var temp = results[0];
+                var finals = [];
+                for (var i = 1; i < results.length; i++){
+                    if (temp[0] == (results[i])[0])
+                        temp[1] += (results[i])[1];
+                    else{
+                        finals.push(temp);
+                        temp = results[i];
+                    }
+                }
+                finals.push(temp);
+                console.log("finals = " + finals);
+                finals.sort(function(a, b){
+                        if(a[1] > b[1]) return -1;
+                        else return 1;
+                    });
+                number = (finals[0])[0];
+                console.log(number);
+            }
+            else number = '999';
+            return number;
+        }
+
+
         if (req.query.dept) {
+            console.log('D');
             var dept = req.query.dept;
+            console.log('E');
             if(!dept.match(/^[0-9]{2}$/))
-                dept = depts[dept.replace('_', ' ').
-                             replace('*', '&').replace('@',':')
-                             .toLowerCase()];
+                dept = getDept(dept);
+            console.log('F');
             query = query.$where('this.num.match(/^' + dept + '/)')
                     .sort('num');
         }

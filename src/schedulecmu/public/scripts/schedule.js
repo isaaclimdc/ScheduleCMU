@@ -812,9 +812,9 @@ function searchForCourseInCourseBrowser() {
         if(inputStr.slice(0,1).match(/^[0-9]/))
             urlReq = "/courses?number=" + inputStr;  /* Search by course num */
         else{
-            urlReq="/courses?dept="+(inputStr.replace(" ","_")
-                                     .replace("&","*")
-                                     .replace(":","@")); /* Search by dept name*/
+            urlReq="/courses?dept="+(inputStr.replace(" ","+")
+                                     .replace("&","+")
+                                     .replace(":","+")); /* Search by dept name*/
         }
     }
     /* Query our server */
