@@ -1,0 +1,9 @@
+Here's a list of the feautures we're intending to work on:
+
+1) Adding course descriptions to the course browser
+
+2) Course events - verification system
+
+3) Syncing with Google Calendar, etc.
+
+4) Adding social features
