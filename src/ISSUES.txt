@@ -1,0 +1,39 @@
+This is intended to be a comprehensive list of issues raised by users as
+expressed in the survey, to the developers or on social media.
+
+Outstanding issues are on top. Issues that have been dealt with are moved to the
+bottom section with a comment on the version in which it was fixed or the reason
+for not fixing it.
+
+Developer comments on the outstanding issues can be made in parentheses with
+developer initials after the comment.
+
+
+OUTSTANDING ISSUES
+
+1) Back button in course browser. Clicking the cross should exit instead of
+functioning as a back button.
+
+2) Even when a course is deleted immediately after adding, the input box says
+"Course X added successfully" (This is an easy fix - just didn't want to mess
+with the front-end code - NC)
+
+2) No dates on the calendar, so course events are not utilized to their full
+potential.
+
+3) No logout.
+
+4) Lack of multiple schedules.
+
+5) Popup blocking (I'm not sure if this has been dealt with - NC)
+
+6) Search by course name.
+
+
+ISSUES THAT HAVE BEEN DEALT WITH
+
+1) Verification email no longer goes to spam folder - fixed in v1.1
+
+2) Multiple classes in the same time period show up nicely - fixed in v1.1
+
+3)
