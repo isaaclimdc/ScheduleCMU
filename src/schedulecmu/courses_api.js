@@ -41,12 +41,9 @@ module.exports = function (app, Course, depts) {
 
 
         if (req.query.dept) {
-            console.log('D');
             var dept = req.query.dept;
-            console.log('E');
             if(!dept.match(/^[0-9]{2}$/))
                 dept = getDept(dept);
-            console.log('F');
             query = query.$where('this.num.match(/^' + dept + '/)')
                     .sort('num');
         }
